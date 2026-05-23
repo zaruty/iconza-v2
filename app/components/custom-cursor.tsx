@@ -1,14 +1,20 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef({ x: -100, y: -100 });
   const targetRef = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number | null>(null);
+  const [enabled, setEnabled] = useState(false);
+
   useEffect(() => {
     const fineMq = window.matchMedia("(pointer: fine)");
     if (!fineMq.matches) return;
+
+    setEnabled(true);
     document.body.classList.add("custom-cursor-active");
+
     const handleMove = (e: MouseEvent) => {
       targetRef.current.x = e.clientX;
       targetRef.current.y = e.clientY;
@@ -20,18 +26,21 @@ export function CustomCursor() {
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
     };
     const animate = () => {
-      positionRef.current.x += (targetRef.current.x - positionRef.current.x) * 0.25;
-      positionRef.current.y += (targetRef.current.y - positionRef.current.y) * 0.25;
+      positionRef.current.x +=
+        (targetRef.current.x - positionRef.current.x) * 0.25;
+      positionRef.current.y +=
+        (targetRef.current.y - positionRef.current.y) * 0.25;
       if (cursorRef.current) {
-        cursorRef.current.style.transform = 
-          `translate3d(${positionRef.current.x - 12}px, ${positionRef.current.y - 12}px, 0)`;
+        cursorRef.current.style.transform = `translate3d(${positionRef.current.x - 12}px, ${positionRef.current.y - 12}px, 0)`;
       }
       rafRef.current = requestAnimationFrame(animate);
     };
+
     window.addEventListener("mousemove", handleMove);
     document.documentElement.addEventListener("mouseleave", handleLeave);
     document.documentElement.addEventListener("mouseenter", handleEnter);
     rafRef.current = requestAnimationFrame(animate);
+
     return () => {
       window.removeEventListener("mousemove", handleMove);
       document.documentElement.removeEventListener("mouseleave", handleLeave);
@@ -40,6 +49,9 @@ export function CustomCursor() {
       document.body.classList.remove("custom-cursor-active");
     };
   }, []);
+
+  if (!enabled) return null;
+
   return (
     <>
       <div ref={cursorRef} className="gemini-cursor" aria-hidden="true" />
@@ -71,19 +83,20 @@ export function CustomCursor() {
           animation: brilho-gemini 4s ease infinite;
         }
         @keyframes brilho-gemini {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           .gemini-cursor {
             animation: none;
             background: #a05af5;
-          }
-        }
-        @media (pointer: coarse) {
-          .gemini-cursor {
-            display: none;
           }
         }
       `}</style>

@@ -70,7 +70,7 @@ export default function Home() {
       <AuroraBackground />
 
       {/* NAV */}
-      <header className="glass-panel fixed inset-x-0 top-0 z-50 border-b border-iconza-lilac/10">
+      <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-iconza-lilac/10">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
           <a
             href="#"
@@ -91,21 +91,21 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="relative z-10">
+      <main className="site-content relative z-10">
         {/* HERO */}
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
-          <div className="absolute inset-0 z-[1]">
+          <div className="pointer-events-none absolute inset-0 z-0">
             <NeuralCanvas />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(7,3,15,0.25)]" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
+          <div className="relative z-20 mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-iconza-lilac sm:text-sm">
               Plataforma educacional
             </p>
             <h1 className="font-display text-4xl leading-tight font-semibold text-iconza-pink sm:text-5xl md:text-6xl lg:text-7xl">
               Crie ícones{" "}
-              <span className="bg-gradient-to-r from-iconza-lavender to-iconza-lilac bg-clip-text text-transparent">
+              <span className="text-iconza-lavender sm:bg-gradient-to-r sm:from-iconza-lavender sm:to-iconza-lilac sm:bg-clip-text sm:text-transparent">
                 com IA
               </span>
             </h1>
@@ -228,7 +228,7 @@ export default function Home() {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 border-t border-iconza-lilac/10 px-4 py-8 sm:px-6">
+      <footer className="site-content relative z-10 border-t border-iconza-lilac/10 px-4 py-8 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="flex items-center gap-2 text-iconza-pink/50">
             <CrownLogo className="h-4 w-6 text-iconza-lilac/60" />

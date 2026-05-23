@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#07030f",
+};
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -30,7 +37,9 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${cormorant.variable} ${dmSans.variable} h-full bg-transparent antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-transparent font-sans">{children}</body>
+      <body className="relative isolate min-h-full flex flex-col bg-iconza-bg font-sans text-iconza-pink">
+        {children}
+      </body>
     </html>
   );
 }

@@ -22,9 +22,16 @@ html {
 }
 
 body {
-  background-color: transparent;
+  background-color: var(--iconza-bg);
   color: var(--iconza-pink);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-content {
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
 }
 
 @media (pointer: fine) {
@@ -38,4 +45,12 @@ body {
   background: rgba(7, 3, 15, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+@media (max-width: 767px) {
+  .glass-panel {
+    background: rgba(7, 3, 15, 0.82);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
