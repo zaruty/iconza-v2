@@ -2,12 +2,13 @@
 export default function AuroraBackground() {
   return (
     <div className="aurora-wrapper" aria-hidden="true">
-      <div className="gemini-blob gemini-blue"></div>
-      <div className="gemini-blob gemini-purple"></div>
-      <div className="gemini-blob gemini-pink"></div>
-      <div className="gemini-blob gemini-yellow"></div>
-      <div className="aurora-center-shadow"></div>
-      <div className="aurora-vignette"></div>
+      <div className="aurora-ambient" />
+      <div className="aurora-glow aurora-glow-blue" />
+      <div className="aurora-glow aurora-glow-lilac" />
+      <div className="aurora-glow aurora-glow-rose" />
+      <div className="aurora-glow aurora-glow-warm" />
+      <div className="aurora-glow aurora-glow-teal" />
+      <div className="aurora-vignette" />
       <style jsx>{`
         .aurora-wrapper {
           position: fixed;
@@ -18,133 +19,264 @@ export default function AuroraBackground() {
           overflow: hidden;
           pointer-events: none;
           z-index: 0;
-          background: #07030f;
           isolation: isolate;
+          background:
+            radial-gradient(
+              ellipse 130% 90% at 50% -10%,
+              rgba(45, 25, 70, 0.55) 0%,
+              transparent 55%
+            ),
+            radial-gradient(
+              ellipse 90% 70% at 90% 80%,
+              rgba(20, 35, 65, 0.35) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              ellipse 80% 60% at 10% 90%,
+              rgba(55, 30, 60, 0.25) 0%,
+              transparent 45%
+            ),
+            #07030f;
         }
-        .gemini-blob {
+
+        /* Camada ambiental difusa — luz indireta espalhada */
+        .aurora-ambient {
+          position: absolute;
+          inset: -25%;
+          background:
+            radial-gradient(
+              ellipse 70% 55% at 30% 35%,
+              rgba(168, 146, 200, 0.14) 0%,
+              transparent 65%
+            ),
+            radial-gradient(
+              ellipse 65% 50% at 70% 55%,
+              rgba(100, 150, 230, 0.12) 0%,
+              transparent 60%
+            ),
+            radial-gradient(
+              ellipse 60% 45% at 50% 75%,
+              rgba(196, 176, 224, 0.1) 0%,
+              transparent 55%
+            );
+          filter: blur(90px);
+          animation: ambient-breathe 38s ease-in-out infinite;
+        }
+
+        .aurora-glow {
           position: absolute;
           border-radius: 50%;
-          filter: blur(110px);
+          filter: blur(160px);
           mix-blend-mode: screen;
-          opacity: 0.65;
-          will-change: transform;
+          will-change: transform, opacity;
         }
-        @media (max-width: 767px) {
-          .gemini-blob {
-            mix-blend-mode: normal;
-            opacity: 0.45;
-            filter: blur(80px);
-          }
-          .aurora-center-shadow {
-            background: radial-gradient(
-              ellipse 70% 60% at center,
-              rgba(7, 3, 15, 0.35) 0%,
-              rgba(7, 3, 15, 0.15) 45%,
-              transparent 75%
-            ) !important;
-          }
-          .aurora-vignette {
-            background: radial-gradient(
-              ellipse at center,
-              transparent 0%,
-              transparent 55%,
-              rgba(7, 3, 15, 0.25) 90%,
-              rgba(7, 3, 15, 0.5) 100%
-            ) !important;
-          }
-        }
-        /* AZUL — orbita canto superior esquerdo */
-        .gemini-blue {
-          width: 45vw;
-          height: 45vw;
-          background: radial-gradient(circle, #4285f4 0%, transparent 70%);
-          top: -15%;
-          left: -15%;
-          animation: orbit-blue 20s infinite ease-in-out alternate;
-        }
-        /* ROXO — orbita canto superior direito */
-        .gemini-purple {
-          width: 42vw;
-          height: 42vw;
-          background: radial-gradient(circle, #a05af5 0%, transparent 70%);
-          top: -10%;
-          right: -15%;
-          animation: orbit-purple 24s infinite ease-in-out alternate-reverse;
-        }
-        /* ROSA — orbita canto inferior esquerdo */
-        .gemini-pink {
-          width: 50vw;
-          height: 50vw;
-          background: radial-gradient(circle, #e37482 0%, transparent 70%);
-          bottom: -20%;
-          left: -10%;
-          animation: orbit-pink 22s infinite ease-in-out alternate;
-        }
-        /* AMARELO — orbita canto inferior direito */
-        .gemini-yellow {
-          width: 40vw;
-          height: 40vw;
-          background: radial-gradient(circle, #fbbc04 0%, transparent 70%);
-          bottom: -10%;
-          right: -10%;
-          animation: orbit-yellow 18s infinite ease-in-out alternate-reverse;
-        }
-        /* SOMBRA CENTRAL — escurece o miolo da tela para legibilidade */
-        .aurora-center-shadow {
-          position: absolute;
-          inset: 0;
+
+        /* Azul suave — canto superior esquerdo */
+        .aurora-glow-blue {
+          width: 85vw;
+          height: 85vw;
+          max-width: 1100px;
+          max-height: 1100px;
           background: radial-gradient(
-            ellipse 60% 50% at center,
-            rgba(7, 3, 15, 0.6) 0%,
-            rgba(7, 3, 15, 0.3) 40%,
+            circle,
+            rgba(100, 155, 240, 0.32) 0%,
+            rgba(100, 155, 240, 0.08) 35%,
+            transparent 68%
+          );
+          top: -30%;
+          left: -25%;
+          opacity: 0.7;
+          animation: drift-blue 42s ease-in-out infinite alternate;
+        }
+
+        /* Lilás ICONZA — canto superior direito */
+        .aurora-glow-lilac {
+          width: 80vw;
+          height: 80vw;
+          max-width: 1050px;
+          max-height: 1050px;
+          background: radial-gradient(
+            circle,
+            rgba(168, 146, 200, 0.35) 0%,
+            rgba(168, 146, 200, 0.1) 38%,
             transparent 70%
           );
-          pointer-events: none;
+          top: -20%;
+          right: -28%;
+          opacity: 0.65;
+          animation: drift-lilac 48s ease-in-out infinite alternate-reverse;
         }
-        /* VINHETA DAS BORDAS — mantém profundidade */
+
+        /* Rosa pálido — inferior esquerdo */
+        .aurora-glow-rose {
+          width: 90vw;
+          height: 90vw;
+          max-width: 1200px;
+          max-height: 1200px;
+          background: radial-gradient(
+            circle,
+            rgba(210, 150, 170, 0.28) 0%,
+            rgba(196, 176, 224, 0.08) 40%,
+            transparent 72%
+          );
+          bottom: -35%;
+          left: -20%;
+          opacity: 0.6;
+          animation: drift-rose 52s ease-in-out infinite alternate;
+        }
+
+        /* Calor sutil — inferior direito */
+        .aurora-glow-warm {
+          width: 75vw;
+          height: 75vw;
+          max-width: 980px;
+          max-height: 980px;
+          background: radial-gradient(
+            circle,
+            rgba(230, 190, 130, 0.18) 0%,
+            rgba(243, 200, 160, 0.06) 42%,
+            transparent 70%
+          );
+          bottom: -25%;
+          right: -22%;
+          opacity: 0.55;
+          animation: drift-warm 45s ease-in-out infinite alternate-reverse;
+        }
+
+        /* Toque esmeralda — centro lateral, muito sutil */
+        .aurora-glow-teal {
+          width: 70vw;
+          height: 70vw;
+          max-width: 900px;
+          max-height: 900px;
+          background: radial-gradient(
+            circle,
+            rgba(90, 180, 165, 0.15) 0%,
+            rgba(90, 180, 165, 0.04) 45%,
+            transparent 72%
+          );
+          top: 35%;
+          left: 30%;
+          opacity: 0.45;
+          animation: drift-teal 55s ease-in-out infinite alternate;
+        }
+
+        /* Vinheta leve — profundidade sem apagar */
         .aurora-vignette {
           position: absolute;
           inset: 0;
           background: radial-gradient(
             ellipse at center,
             transparent 0%,
-            transparent 50%,
-            rgba(7, 3, 15, 0.4) 90%,
-            rgba(7, 3, 15, 0.75) 100%
+            transparent 62%,
+            rgba(7, 3, 15, 0.12) 82%,
+            rgba(7, 3, 15, 0.32) 100%
           );
           pointer-events: none;
         }
-        /* ANIMACOES — cada blob se move APENAS pela sua borda */
-        /* Azul: ronda topo-esquerda (nunca passa do centro) */
-        @keyframes orbit-blue {
-          0%   { transform: translate(0, 0) scale(1); }
-          33%  { transform: translate(8vw, 5vh) scale(1.1); }
-          66%  { transform: translate(5vw, 15vh) scale(0.95); }
-          100% { transform: translate(0, 10vh) scale(1.05); }
+
+        @keyframes ambient-breathe {
+          0%,
+          100% {
+            opacity: 0.75;
+            transform: scale(1) translate(0, 0);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.04) translate(1vw, -1vh);
+          }
         }
-        /* Roxo: ronda topo-direita */
-        @keyframes orbit-purple {
-          0%   { transform: translate(0, 0) scale(1); }
-          33%  { transform: translate(-8vw, 6vh) scale(1.1); }
-          66%  { transform: translate(-3vw, 12vh) scale(0.95); }
-          100% { transform: translate(-5vw, 8vh) scale(1.15); }
+
+        @keyframes drift-blue {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.55;
+          }
+          50% {
+            transform: translate(12vw, 10vh) scale(1.08);
+            opacity: 0.75;
+          }
+          100% {
+            transform: translate(6vw, 18vh) scale(0.96);
+            opacity: 0.6;
+          }
         }
-        /* Rosa: ronda baixo-esquerda */
-        @keyframes orbit-pink {
-          0%   { transform: translate(0, 0) scale(1); }
-          33%  { transform: translate(10vw, -8vh) scale(0.95); }
-          66%  { transform: translate(5vw, -15vh) scale(1.1); }
-          100% { transform: translate(12vw, -5vh) scale(1); }
+
+        @keyframes drift-lilac {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.5;
+          }
+          50% {
+            transform: translate(-14vw, 8vh) scale(1.06);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translate(-8vw, 16vh) scale(1.02);
+            opacity: 0.55;
+          }
         }
-        /* Amarelo: ronda baixo-direita */
-        @keyframes orbit-yellow {
-          0%   { transform: translate(0, 0) scale(1); }
-          33%  { transform: translate(-10vw, -6vh) scale(1.1); }
-          66%  { transform: translate(-5vw, -14vh) scale(0.95); }
-          100% { transform: translate(-12vw, -3vh) scale(1.05); }
+
+        @keyframes drift-rose {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.45;
+          }
+          50% {
+            transform: translate(10vw, -12vh) scale(1.05);
+            opacity: 0.65;
+          }
+          100% {
+            transform: translate(16vw, -6vh) scale(0.97);
+            opacity: 0.5;
+          }
         }
+
+        @keyframes drift-warm {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translate(-12vw, -10vh) scale(1.07);
+            opacity: 0.58;
+          }
+          100% {
+            transform: translate(-6vw, -16vh) scale(0.95);
+            opacity: 0.42;
+          }
+        }
+
+        @keyframes drift-teal {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.35;
+          }
+          50% {
+            transform: translate(8vw, -8vh) scale(1.04);
+            opacity: 0.5;
+          }
+          100% {
+            transform: translate(-6vw, 6vh) scale(0.98);
+            opacity: 0.38;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .aurora-glow {
+            mix-blend-mode: normal;
+            filter: blur(110px);
+          }
+          .aurora-ambient {
+            filter: blur(70px);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .gemini-blob { animation: none; }
+          .aurora-ambient,
+          .aurora-glow {
+            animation: none;
+          }
         }
       `}</style>
     </div>

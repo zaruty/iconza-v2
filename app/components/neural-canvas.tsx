@@ -10,9 +10,9 @@ type Particle = {
   radius: number;
 };
 
-const PARTICLE_COUNT = 72;
-const CONNECTION_DISTANCE = 140;
-const PARTICLE_COLOR = "rgba(196, 176, 224, 0.55)";
+const PARTICLE_COUNT = 42;
+const CONNECTION_DISTANCE = 130;
+const PARTICLE_COLOR = "rgba(196, 176, 224, 0.32)";
 
 export function NeuralCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -44,9 +44,9 @@ export function NeuralCanvas() {
         particles = Array.from({ length: PARTICLE_COUNT }, () => ({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
-          radius: Math.random() * 1.4 + 0.6,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.28,
+          radius: Math.random() * 1.1 + 0.5,
         }));
       }
     };
@@ -77,8 +77,8 @@ export function NeuralCanvas() {
           if (dist < CONNECTION_DISTANCE) {
             const alpha = 1 - dist / CONNECTION_DISTANCE;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(168, 146, 200, ${alpha * 0.18})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(168, 146, 200, ${alpha * 0.1})`;
+            ctx.lineWidth = 0.5;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.stroke();

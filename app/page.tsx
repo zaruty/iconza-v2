@@ -96,7 +96,6 @@ export default function Home() {
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
           <div className="pointer-events-none absolute inset-0 z-0">
             <NeuralCanvas />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(7,3,15,0.25)]" />
           </div>
 
           <div className="relative z-20 mx-auto max-w-3xl text-center">
