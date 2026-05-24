@@ -2,13 +2,27 @@
 export default function AuroraBackground() {
   return (
     <div className="aurora-wrapper" aria-hidden="true">
-      <div className="aurora-ambient" />
-      <div className="aurora-glow aurora-glow-blue" />
-      <div className="aurora-glow aurora-glow-lilac" />
-      <div className="aurora-glow aurora-glow-rose" />
-      <div className="aurora-glow aurora-glow-warm" />
-      <div className="aurora-glow aurora-glow-teal" />
+      {/* Núcleos volumétricos — focos localizados */}
+      <div className="volumetric volumetric-blue">
+        <div className="nucleus nucleus-blue" />
+        <div className="halo halo-blue" />
+      </div>
+      <div className="volumetric volumetric-lilac">
+        <div className="nucleus nucleus-lilac" />
+        <div className="halo halo-lilac" />
+      </div>
+      <div className="volumetric volumetric-gold">
+        <div className="nucleus nucleus-gold" />
+        <div className="halo halo-gold" />
+      </div>
+
+      {/* Névoa conectiva — une os núcleos sem lavar o centro */}
+      <div className="aurora-fog" />
+
+      {/* Legibilidade + bordas escuras */}
+      <div className="aurora-readability" />
       <div className="aurora-vignette" />
+
       <style jsx>{`
         .aurora-wrapper {
           position: fixed;
@@ -20,261 +34,296 @@ export default function AuroraBackground() {
           pointer-events: none;
           z-index: 0;
           isolation: isolate;
-          background:
-            radial-gradient(
-              ellipse 130% 90% at 50% -10%,
-              rgba(45, 25, 70, 0.55) 0%,
-              transparent 55%
-            ),
-            radial-gradient(
-              ellipse 90% 70% at 90% 80%,
-              rgba(20, 35, 65, 0.35) 0%,
-              transparent 50%
-            ),
-            radial-gradient(
-              ellipse 80% 60% at 10% 90%,
-              rgba(55, 30, 60, 0.25) 0%,
-              transparent 45%
-            ),
-            #07030f;
+          background: #07030f;
         }
 
-        /* Camada ambiental difusa — luz indireta espalhada */
-        .aurora-ambient {
+        .volumetric {
           position: absolute;
-          inset: -25%;
-          background:
-            radial-gradient(
-              ellipse 70% 55% at 30% 35%,
-              rgba(168, 146, 200, 0.14) 0%,
-              transparent 65%
-            ),
-            radial-gradient(
-              ellipse 65% 50% at 70% 55%,
-              rgba(100, 150, 230, 0.12) 0%,
-              transparent 60%
-            ),
-            radial-gradient(
-              ellipse 60% 45% at 50% 75%,
-              rgba(196, 176, 224, 0.1) 0%,
-              transparent 55%
-            );
-          filter: blur(90px);
-          animation: ambient-breathe 38s ease-in-out infinite;
+          pointer-events: none;
         }
 
-        .aurora-glow {
+        .nucleus,
+        .halo {
           position: absolute;
           border-radius: 50%;
-          filter: blur(160px);
           mix-blend-mode: screen;
           will-change: transform, opacity;
         }
 
-        /* Azul suave — canto superior esquerdo */
-        .aurora-glow-blue {
-          width: 85vw;
-          height: 85vw;
-          max-width: 1100px;
-          max-height: 1100px;
+        /* ── AZUL PROFUNDO — lateral esquerdo ── */
+        .volumetric-blue {
+          left: -18%;
+          top: 22%;
+          width: 70vw;
+          height: 85vh;
+          max-width: 900px;
+        }
+        .nucleus-blue {
+          width: 38%;
+          height: 38%;
+          left: 28%;
+          top: 32%;
           background: radial-gradient(
             circle,
-            rgba(100, 155, 240, 0.32) 0%,
-            rgba(100, 155, 240, 0.08) 35%,
+            rgba(35, 75, 210, 0.55) 0%,
+            rgba(35, 75, 210, 0.22) 28%,
+            rgba(35, 75, 210, 0.06) 55%,
+            transparent 72%
+          );
+          filter: blur(70px);
+          animation: pulse-blue 36s ease-in-out infinite;
+        }
+        .halo-blue {
+          width: 100%;
+          height: 100%;
+          left: 0;
+          top: 0;
+          background: radial-gradient(
+            ellipse 55% 65% at 42% 48%,
+            rgba(45, 90, 220, 0.2) 0%,
+            rgba(45, 90, 220, 0.06) 35%,
             transparent 68%
           );
-          top: -30%;
-          left: -25%;
+          filter: blur(140px);
           opacity: 0.7;
-          animation: drift-blue 42s ease-in-out infinite alternate;
+          animation: drift-blue 44s ease-in-out infinite alternate;
         }
 
-        /* Lilás ICONZA — canto superior direito */
-        .aurora-glow-lilac {
+        /* ── ROSA / LILÁS — centro inferior ── */
+        .volumetric-lilac {
+          left: 50%;
+          bottom: -8%;
           width: 80vw;
-          height: 80vw;
-          max-width: 1050px;
-          max-height: 1050px;
+          height: 65vh;
+          max-width: 1000px;
+          transform: translateX(-50%);
+        }
+        .nucleus-lilac {
+          width: 42%;
+          height: 42%;
+          left: 50%;
+          top: 18%;
+          transform: translateX(-50%);
           background: radial-gradient(
             circle,
-            rgba(168, 146, 200, 0.35) 0%,
-            rgba(168, 146, 200, 0.1) 38%,
+            rgba(190, 130, 185, 0.48) 0%,
+            rgba(168, 146, 200, 0.2) 30%,
+            rgba(168, 146, 200, 0.05) 58%,
+            transparent 75%
+          );
+          filter: blur(75px);
+          animation: pulse-lilac 40s ease-in-out infinite;
+          animation-delay: -12s;
+        }
+        .halo-lilac {
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            ellipse 60% 55% at 50% 35%,
+            rgba(180, 140, 200, 0.18) 0%,
+            rgba(168, 146, 200, 0.05) 40%,
             transparent 70%
           );
-          top: -20%;
-          right: -28%;
+          filter: blur(160px);
           opacity: 0.65;
-          animation: drift-lilac 48s ease-in-out infinite alternate-reverse;
+          animation: drift-lilac 50s ease-in-out infinite alternate-reverse;
         }
 
-        /* Rosa pálido — inferior esquerdo */
-        .aurora-glow-rose {
-          width: 90vw;
-          height: 90vw;
-          max-width: 1200px;
-          max-height: 1200px;
+        /* ── DOURADO SUAVE — topo direito ── */
+        .volumetric-gold {
+          right: -12%;
+          top: -12%;
+          width: 60vw;
+          height: 60vw;
+          max-width: 820px;
+          max-height: 820px;
+        }
+        .nucleus-gold {
+          width: 36%;
+          height: 36%;
+          right: 22%;
+          top: 22%;
           background: radial-gradient(
             circle,
-            rgba(210, 150, 170, 0.28) 0%,
-            rgba(196, 176, 224, 0.08) 40%,
+            rgba(220, 175, 90, 0.42) 0%,
+            rgba(220, 175, 90, 0.16) 32%,
+            rgba(220, 175, 90, 0.04) 58%,
+            transparent 74%
+          );
+          filter: blur(65px);
+          animation: pulse-gold 32s ease-in-out infinite;
+          animation-delay: -8s;
+        }
+        .halo-gold {
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            circle at 62% 38%,
+            rgba(230, 190, 110, 0.16) 0%,
+            rgba(230, 190, 110, 0.04) 42%,
             transparent 72%
           );
-          bottom: -35%;
-          left: -20%;
+          filter: blur(130px);
           opacity: 0.6;
-          animation: drift-rose 52s ease-in-out infinite alternate;
+          animation: drift-gold 38s ease-in-out infinite alternate;
         }
 
-        /* Calor sutil — inferior direito */
-        .aurora-glow-warm {
-          width: 75vw;
-          height: 75vw;
-          max-width: 980px;
-          max-height: 980px;
-          background: radial-gradient(
-            circle,
-            rgba(230, 190, 130, 0.18) 0%,
-            rgba(243, 200, 160, 0.06) 42%,
-            transparent 70%
-          );
-          bottom: -25%;
-          right: -22%;
-          opacity: 0.55;
-          animation: drift-warm 45s ease-in-out infinite alternate-reverse;
+        /* Névoa espacial — conecta os focos sem brilho global */
+        .aurora-fog {
+          position: absolute;
+          inset: -15%;
+          background:
+            radial-gradient(
+              ellipse 40% 50% at 18% 55%,
+              rgba(50, 90, 210, 0.06) 0%,
+              transparent 60%
+            ),
+            radial-gradient(
+              ellipse 50% 40% at 50% 78%,
+              rgba(168, 146, 200, 0.05) 0%,
+              transparent 55%
+            ),
+            radial-gradient(
+              ellipse 35% 35% at 82% 18%,
+              rgba(220, 180, 100, 0.04) 0%,
+              transparent 50%
+            );
+          filter: blur(100px);
+          opacity: 0.9;
+          animation: fog-drift 55s ease-in-out infinite;
         }
 
-        /* Toque esmeralda — centro lateral, muito sutil */
-        .aurora-glow-teal {
-          width: 70vw;
-          height: 70vw;
-          max-width: 900px;
-          max-height: 900px;
-          background: radial-gradient(
-            circle,
-            rgba(90, 180, 165, 0.15) 0%,
-            rgba(90, 180, 165, 0.04) 45%,
-            transparent 72%
-          );
-          top: 35%;
-          left: 30%;
-          opacity: 0.45;
-          animation: drift-teal 55s ease-in-out infinite alternate;
-        }
-
-        /* Vinheta leve — profundidade sem apagar */
-        .aurora-vignette {
+        /* Centro levemente escurecido — legibilidade do texto */
+        .aurora-readability {
           position: absolute;
           inset: 0;
           background: radial-gradient(
-            ellipse at center,
-            transparent 0%,
-            transparent 62%,
-            rgba(7, 3, 15, 0.12) 82%,
-            rgba(7, 3, 15, 0.32) 100%
+            ellipse 52% 44% at 50% 46%,
+            rgba(7, 3, 15, 0.32) 0%,
+            rgba(7, 3, 15, 0.12) 45%,
+            transparent 72%
           );
           pointer-events: none;
         }
 
-        @keyframes ambient-breathe {
+        /* Bordas escuras — contraste preto vs luz */
+        .aurora-vignette {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(
+              ellipse at center,
+              transparent 0%,
+              transparent 48%,
+              rgba(7, 3, 15, 0.18) 72%,
+              rgba(7, 3, 15, 0.48) 100%
+            ),
+            linear-gradient(
+              to right,
+              rgba(7, 3, 15, 0.35) 0%,
+              transparent 18%,
+              transparent 82%,
+              rgba(7, 3, 15, 0.3) 100%
+            );
+          pointer-events: none;
+        }
+
+        @keyframes pulse-blue {
           0%,
           100% {
-            opacity: 0.75;
-            transform: scale(1) translate(0, 0);
+            opacity: 0.7;
+            transform: scale(1);
           }
           50% {
             opacity: 1;
-            transform: scale(1.04) translate(1vw, -1vh);
+            transform: scale(1.06);
+          }
+        }
+
+        @keyframes pulse-lilac {
+          0%,
+          100% {
+            opacity: 0.65;
+            transform: translateX(-50%) scale(1);
+          }
+          50% {
+            opacity: 0.95;
+            transform: translateX(-50%) scale(1.08);
+          }
+        }
+
+        @keyframes pulse-gold {
+          0%,
+          100% {
+            opacity: 0.6;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.9;
+            transform: scale(1.05);
           }
         }
 
         @keyframes drift-blue {
           0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.55;
-          }
-          50% {
-            transform: translate(12vw, 10vh) scale(1.08);
-            opacity: 0.75;
+            transform: translate(0, 0);
           }
           100% {
-            transform: translate(6vw, 18vh) scale(0.96);
-            opacity: 0.6;
+            transform: translate(4vw, 6vh);
           }
         }
 
         @keyframes drift-lilac {
           0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.5;
-          }
-          50% {
-            transform: translate(-14vw, 8vh) scale(1.06);
-            opacity: 0.7;
+            transform: translate(0, 0);
           }
           100% {
-            transform: translate(-8vw, 16vh) scale(1.02);
-            opacity: 0.55;
+            transform: translate(-3vw, -5vh);
           }
         }
 
-        @keyframes drift-rose {
+        @keyframes drift-gold {
           0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.45;
-          }
-          50% {
-            transform: translate(10vw, -12vh) scale(1.05);
-            opacity: 0.65;
+            transform: translate(0, 0);
           }
           100% {
-            transform: translate(16vw, -6vh) scale(0.97);
-            opacity: 0.5;
+            transform: translate(-5vw, 4vh);
           }
         }
 
-        @keyframes drift-warm {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.4;
+        @keyframes fog-drift {
+          0%,
+          100% {
+            opacity: 0.85;
+            transform: scale(1);
           }
           50% {
-            transform: translate(-12vw, -10vh) scale(1.07);
-            opacity: 0.58;
-          }
-          100% {
-            transform: translate(-6vw, -16vh) scale(0.95);
-            opacity: 0.42;
-          }
-        }
-
-        @keyframes drift-teal {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 0.35;
-          }
-          50% {
-            transform: translate(8vw, -8vh) scale(1.04);
-            opacity: 0.5;
-          }
-          100% {
-            transform: translate(-6vw, 6vh) scale(0.98);
-            opacity: 0.38;
+            opacity: 1;
+            transform: scale(1.02);
           }
         }
 
         @media (max-width: 767px) {
-          .aurora-glow {
+          .nucleus,
+          .halo {
             mix-blend-mode: normal;
-            filter: blur(110px);
           }
-          .aurora-ambient {
-            filter: blur(70px);
+          .nucleus-blue,
+          .nucleus-lilac,
+          .nucleus-gold {
+            filter: blur(55px);
+          }
+          .halo-blue,
+          .halo-lilac,
+          .halo-gold {
+            filter: blur(100px);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .aurora-ambient,
-          .aurora-glow {
+          .nucleus,
+          .halo,
+          .aurora-fog {
             animation: none;
           }
         }
