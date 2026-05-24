@@ -40,21 +40,29 @@ export default function AdminDashboardPage() {
           label="Usuários ativos"
           value="—"
           hint="Integração analytics pendente"
+          category="people"
+          icon="users"
         />
         <AdminStatCard
           label="Aulas publicadas"
           value="—"
           hint="Módulo de aulas em desenvolvimento"
+          category="content"
+          icon="lessons"
         />
         <AdminStatCard
           label="Universos"
           value="5"
           hint="ICONMIND, ICONLOVE, ICONETHNIA, ICONFOOD, ICONART"
+          category="content"
+          icon="universes"
         />
         <AdminStatCard
           label="Receita mensal"
           value="—"
           hint="Módulo monetização em breve"
+          category="business"
+          icon="monetization"
         />
       </section>
 

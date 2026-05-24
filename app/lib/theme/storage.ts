@@ -26,5 +26,5 @@ export function getThemeColor(scope: ThemeScope, theme: ThemeMode): string {
   if (scope === "app") {
     return theme === "light" ? "#FAFAFA" : "#0a1228";
   }
-  return theme === "light" ? "#F5F5F4" : "#0f0f10";
+  return theme === "light" ? "#F5F5F4" : "#0f0f11";
 }

@@ -12,6 +12,8 @@ import {
   type AdminSidebarNavItem,
   type AdminSidebarSubItem,
 } from "@/app/lib/admin/sidebar-nav";
+import type { AdminCategoryColorKey } from "@/app/lib/admin/category-colors";
+import { sidebarSectionToCategory } from "@/app/lib/admin/category-colors";
 import { AdminNavIcon } from "./admin-icons";
 
 type AdminSidebarProps = {
@@ -35,6 +37,7 @@ function SidebarLink({
   collapsed,
   status,
   sub = false,
+  category,
   onNavigate,
 }: {
   href: string;
@@ -45,6 +48,7 @@ function SidebarLink({
   collapsed: boolean;
   status?: AdminModuleStatus;
   sub?: boolean;
+  category: AdminCategoryColorKey;
   onNavigate: () => void;
 }) {
   const className = [
@@ -61,6 +65,7 @@ function SidebarLink({
     <Link
       href={disabled ? "/admin/dashboard" : href}
       className={className}
+      data-category={category}
       aria-current={active ? "page" : undefined}
       data-tooltip={collapsed ? label : undefined}
       onClick={onNavigate}
@@ -78,6 +83,7 @@ function SidebarLink({
 
 type NavGroupProps = {
   item: AdminSidebarNavItem;
+  category: AdminCategoryColorKey;
   collapsed: boolean;
   pathname: string;
   onNavigate: () => void;
@@ -86,6 +92,7 @@ type NavGroupProps = {
 
 function NavGroup({
   item,
+  category,
   collapsed,
   pathname,
   onNavigate,
@@ -106,6 +113,7 @@ function NavGroup({
       <button
         type="button"
         className={`admin-nav__link admin-nav__link--group ${groupActive ? "is-active" : ""} ${collapsed ? "admin-nav__link--collapsed" : ""}`}
+        data-category={category}
         onClick={() => {
           if (collapsed) {
             onExpandFromCollapsed();
@@ -217,7 +225,10 @@ export function AdminSidebar({
         </div>
 
         <nav className="admin-nav">
-          {ADMIN_SIDEBAR_SECTIONS.map((section) => (
+          {ADMIN_SIDEBAR_SECTIONS.map((section) => {
+            const category = sidebarSectionToCategory(section.id);
+
+            return (
             <div key={section.id} className="admin-nav__section">
               {!collapsed ? (
                 <p className="admin-nav__section-label font-subtitle">{section.label}</p>
@@ -229,6 +240,7 @@ export function AdminSidebar({
                     <NavGroup
                       key={item.id}
                       item={item}
+                      category={category}
                       collapsed={collapsed}
                       pathname={pathname}
                       onNavigate={onClose}
@@ -252,12 +264,14 @@ export function AdminSidebar({
                     disabled={disabled}
                     collapsed={collapsed}
                     status={item.status}
+                    category={category}
                     onNavigate={onClose}
                   />
                 );
               })}
             </div>
-          ))}
+            );
+          })}
         </nav>
 
         {!collapsed ? (
