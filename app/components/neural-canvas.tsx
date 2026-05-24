@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+
 type Particle = {
   x: number;
   y: number;
@@ -8,30 +9,50 @@ type Particle = {
   radius: number;
   brightness: number;
 };
+
 const PARTICLE_COUNT = 90;
 const CONNECTION_DISTANCE = 145;
 const PARTICLE_COLOR = "rgba(220, 200, 240, 0.85)";
 const PARTICLE_GLOW = "rgba(196, 176, 224, 0.9)";
 const LINE_COLOR = "rgba(168, 146, 200,";
+
 export function NeuralCanvas() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
+    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!container || !canvas) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
     let animationId = 0;
     let particles: Particle[] = [];
+    let width = 0;
+    let height = 0;
+
+    const getSize = () => ({
+      width: window.innerWidth,
+      height: Math.max(
+        container.offsetHeight,
+        document.documentElement.scrollHeight,
+      ),
+    });
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      // USA VIEWPORT INTEIRO, não o parent
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      const size = getSize();
+      width = size.width;
+      height = size.height;
+
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
       if (particles.length === 0) {
         particles = Array.from({ length: PARTICLE_COUNT }, () => {
           const isLarge = Math.random() < 0.3;
@@ -47,18 +68,16 @@ export function NeuralCanvas() {
           };
         });
       } else {
-        // Redistribuir partículas existentes pelo novo viewport (em resize)
         particles.forEach((p) => {
           if (p.x > width) p.x = Math.random() * width;
           if (p.y > height) p.y = Math.random() * height;
         });
       }
     };
+
     const draw = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
       ctx.clearRect(0, 0, width, height);
-      // Atualiza posições
+
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
@@ -67,7 +86,7 @@ export function NeuralCanvas() {
         p.x = Math.max(0, Math.min(width, p.x));
         p.y = Math.max(0, Math.min(height, p.y));
       }
-      // Conexões
+
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const a = particles[i];
@@ -86,7 +105,7 @@ export function NeuralCanvas() {
           }
         }
       }
-      // Partículas com brilho
+
       for (const p of particles) {
         ctx.beginPath();
         ctx.shadowBlur = 12 * p.brightness;
@@ -100,24 +119,32 @@ export function NeuralCanvas() {
         ctx.arc(p.x, p.y, p.radius * 0.5, 0, Math.PI * 2);
         ctx.fill();
       }
+
       ctx.shadowBlur = 0;
       animationId = requestAnimationFrame(draw);
     };
+
     resize();
     draw();
-    // Resize listener no WINDOW, não no parent
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
     window.addEventListener("resize", resize);
+
     return () => {
       cancelAnimationFrame(animationId);
+      resizeObserver.disconnect();
       window.removeEventListener("resize", resize);
     };
   }, []);
+
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={containerRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 h-screen w-screen"
-      style={{ zIndex: 1 }}
-    />
+      className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
+    >
+      <canvas ref={canvasRef} className="block h-full w-full" />
+    </div>
   );
 }

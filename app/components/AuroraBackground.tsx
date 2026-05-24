@@ -7,18 +7,25 @@ export default function AuroraBackground() {
       <div className="aurora-top-glow"></div>
       <div className="aurora-horizon"></div>
       <div className="darkness-center"></div>
+      <div className="atmosphere-depth"></div>
       <div className="vignette-edges"></div>
       <style jsx>{`
         .aurora-wrapper {
-          position: fixed;
+          position: absolute;
           inset: 0;
-          width: 100vw;
-          height: 100vh;
-          height: 100dvh;
+          width: 100%;
+          height: 100%;
           overflow: hidden;
           pointer-events: none;
           z-index: 0;
-          background: #0a1228;
+          background: linear-gradient(
+            180deg,
+            #0a1228 0%,
+            #0a1228 18%,
+            #090f1f 45%,
+            #080c18 72%,
+            #07030f 100%
+          );
         }
         /* AURORA VIOLETA — lateral ESQUERDA, vertical */
         .aurora-violet {
@@ -123,6 +130,21 @@ export default function AuroraBackground() {
             );
           pointer-events: none;
         }
+        /* PROFUNDIDADE PROGRESSIVA — escurece ao longo da página */
+        .atmosphere-depth {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(7, 3, 15, 0) 0%,
+            rgba(7, 3, 15, 0.06) 22%,
+            rgba(7, 3, 15, 0.22) 48%,
+            rgba(7, 3, 15, 0.48) 72%,
+            rgba(7, 3, 15, 0.78) 88%,
+            rgba(7, 3, 15, 0.95) 100%
+          );
+          pointer-events: none;
+        }
         /* VINHETA EDGES — escurece bordas inferiores */
         .vignette-edges {
           position: absolute;
@@ -130,9 +152,10 @@ export default function AuroraBackground() {
           background:
             linear-gradient(
               to bottom,
-              transparent 60%,
-              rgba(7, 3, 15, 0.5) 90%,
-              rgba(7, 3, 15, 0.85) 100%
+              transparent 35%,
+              rgba(7, 3, 15, 0.35) 65%,
+              rgba(7, 3, 15, 0.72) 85%,
+              rgba(7, 3, 15, 0.95) 100%
             ),
             linear-gradient(
               to right,

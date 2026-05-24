@@ -116,10 +116,13 @@ function CrownLogo({ className }: { className?: string }) {
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
+      <div className="homepage-atmosphere" aria-hidden>
+        <AuroraBackground />
+        <NeuralCanvas />
+      </div>
+
       <CustomCursor />
-      <AuroraBackground />
-      <NeuralCanvas />
 
       {/* NAV */}
       <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-iconza-lilac/10">
@@ -282,6 +285,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
