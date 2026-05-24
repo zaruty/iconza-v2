@@ -40,6 +40,57 @@ const universes = [
   },
 ] as const;
 
+function BrainOutlineIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden
+    >
+      <path
+        d="M12 3.75c-2.95 0-5.35 2.15-5.75 5.05-.16 1.1.04 2.15.58 3.05-.48.78-.73 1.68-.73 2.65 0 2.4 1.95 4.35 4.35 4.35h3.1c2.4 0 4.35-1.95 4.35-4.35 0-.97-.25-1.87-.73-2.65.54-.9.74-1.95.58-3.05-.4-2.9-2.8-5.05-5.75-5.05z"
+        stroke="currentColor"
+        strokeWidth="1.05"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 6.25v11.5"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+        opacity="0.65"
+      />
+      <path
+        d="M9 10.25c.9.6 1.65.72 3 .32"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15 10.25c-.9.6-1.65.72-3 .32"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8.5 14c1.05.5 2.15.45 3.5-.08"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15.5 14c-1.05.5-2.15.45-3.5-.08"
+        stroke="currentColor"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function CrownLogo({ className }: { className?: string }) {
   return (
     <svg
@@ -96,7 +147,7 @@ export default function Home() {
         {/* HERO */}
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
           <div className="relative z-20 mx-auto max-w-3xl text-center">
-            <h1 className="font-hero text-4xl leading-[1.15] font-medium tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+            <h1 className="hero-title font-hero font-medium tracking-tight text-white">
               Universos
               <br />
               para mentes
@@ -111,12 +162,10 @@ export default function Home() {
               Explore experiências visuais e universos temáticos que
               desenvolvem criatividade, emoção e inteligência estratégica.
             </p>
-            <div className="mt-10 flex justify-center">
-              <a
-                href="#universos"
-                className="hero-explore-btn inline-block px-8 py-3.5 text-sm font-normal tracking-wide"
-              >
-                Explorar universos
+            <div className="mt-10 flex justify-center px-2">
+              <a href="#universos" className="hero-explore-btn">
+                <BrainOutlineIcon className="hero-explore-btn__icon" />
+                <span>Explorar universos</span>
               </a>
             </div>
           </div>

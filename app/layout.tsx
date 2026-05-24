@@ -30,7 +30,7 @@ const playfair = Playfair_Display({
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {

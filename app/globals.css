@@ -57,22 +57,78 @@ body {
   }
 }
 
-.hero-explore-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #d6d8e1;
-  border-radius: 14px;
-  transition:
-    border-color 0.35s ease,
-    color 0.35s ease,
-    box-shadow 0.35s ease;
+.hero-title {
+  font-size: clamp(48px, 13vw, 72px);
+  line-height: 1.08;
 }
 
-.hero-explore-btn:hover,
-.hero-explore-btn:active {
-  border-color: rgba(255, 255, 255, 0.24);
-  color: #eceef3;
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: clamp(72px, 9vw, 140px);
+    line-height: 1.06;
+  }
+}
+
+.hero-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(8, 12, 24, 0.22);
+  border: 1px solid rgba(180, 210, 255, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #e8edf8;
+  border-radius: 999px;
+  padding: 16px 24px;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.hero-explore-btn__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 0.95;
+}
+
+.hero-explore-btn:hover {
+  background: rgba(10, 18, 36, 0.34);
+  border-color: rgba(195, 220, 255, 0.36);
+  color: #f4f7fc;
   box-shadow:
-    inset 0 0 18px rgba(123, 136, 255, 0.1),
-    0 0 22px rgba(169, 214, 255, 0.07);
+    inset 0 0 32px rgba(90, 140, 210, 0.16),
+    inset 0 0 10px rgba(130, 175, 235, 0.1),
+    0 0 36px rgba(110, 165, 220, 0.1);
+}
+
+.hero-explore-btn:active {
+  background: rgba(14, 24, 46, 0.42);
+  border-color: rgba(210, 235, 255, 0.46);
+  color: #fafcff;
+  box-shadow:
+    inset 0 0 40px rgba(120, 170, 235, 0.22),
+    inset 0 0 14px rgba(150, 195, 255, 0.14),
+    0 0 28px rgba(140, 185, 255, 0.11);
+}
+
+@media (min-width: 768px) {
+  .hero-explore-btn {
+    padding: 18px 34px;
+    font-size: 18px;
+  }
+
+  .hero-explore-btn__icon {
+    width: 22px;
+    height: 22px;
+  }
 }
