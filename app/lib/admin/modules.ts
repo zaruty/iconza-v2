@@ -54,7 +54,7 @@ export const ADMIN_MODULES: AdminModule[] = [
   {
     id: "universes",
     title: "Universos",
-    description: "Gerenciar ICONMIND, ICONLOVE, ICONETHNIA e demais mundos.",
+    description: "Gerenciar ICONMIND, ICONLOVE, ICONETNIA e demais mundos.",
     href: "/admin/dashboard/universos",
     category: "content",
     status: "coming-soon",

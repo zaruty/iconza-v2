@@ -10,7 +10,9 @@ export type MockUniverse = {
   status: UniverseStatus;
   mastery: number;
   accent: string;
+  accentDeep: string;
   accentMuted: string;
+  accentFill: string;
 };
 
 export type MockAchievement = {
@@ -68,13 +70,13 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     ...UNIVERSE_COLORS.iconlove,
   },
   {
-    id: "iconethnia",
-    name: "ICONETHNIA",
+    id: "iconetnia",
+    name: "ICONETNIA",
     tagline: "Cultura e identidade",
     description: "Explore tradições e narrativas visuais diversas.",
     status: "locked",
     mastery: 0,
-    ...UNIVERSE_COLORS.iconethnia,
+    ...UNIVERSE_COLORS.iconetnia,
   },
   {
     id: "iconfood",
@@ -174,9 +176,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     id: "3",
     title: "Raízes do cerrado",
     author: "Juliana M.",
-    universeId: "iconethnia",
-    universeName: "ICONETHNIA",
-    accent: UNIVERSE_COLORS.iconethnia.accent,
+    universeId: "iconetnia",
+    universeName: "ICONETNIA",
+    accent: UNIVERSE_COLORS.iconetnia.accent,
   },
   {
     id: "4",

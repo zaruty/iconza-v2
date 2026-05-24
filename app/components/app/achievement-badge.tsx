@@ -14,9 +14,9 @@ export function AchievementBadge({ achievement }: AchievementBadgeProps) {
     >
       <div className="acervo-piece__icon-wrap" aria-hidden>
         {locked ? (
-          <Lock className="acervo-piece__icon" strokeWidth={1.5} />
+          <Lock className="acervo-piece__icon" fill="color-mix(in srgb, currentColor 40%, transparent)" strokeWidth={1.5} />
         ) : (
-          <Trophy className="acervo-piece__icon" strokeWidth={1.5} />
+          <Trophy className="acervo-piece__icon" fill="currentColor" strokeWidth={1.25} />
         )}
       </div>
       <h3 className="acervo-piece__name font-subtitle">{achievement.name}</h3>

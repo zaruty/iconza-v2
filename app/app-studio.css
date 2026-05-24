@@ -5,11 +5,11 @@
   --app-surface-muted: #e8e6e1;
   --app-progress-fill: #9ca3af;
   --app-ui-muted: #78716c;
-  --nav-home: #7A8FA8;
-  --nav-explore: #9B87B3;
-  --nav-universes: #5F9078;
-  --nav-achievements: #B8895A;
-  --nav-profile: #B87A84;
+  --nav-home: #5c7294;
+  --nav-explore: #7e6a9e;
+  --nav-universes: #4a8569;
+  --nav-achievements: #a87248;
+  --nav-profile: #a85f6b;
 }
 
 .app-shell[data-theme="dark"] {
@@ -21,11 +21,11 @@
   --app-track: rgba(255, 255, 255, 0.08);
   --app-surface: rgba(255, 255, 255, 0.03);
   --app-surface-muted: rgba(255, 255, 255, 0.02);
-  --nav-home: #7A8FA8;
-  --nav-explore: #9B87B3;
-  --nav-universes: #5F9078;
-  --nav-achievements: #B8895A;
-  --nav-profile: #B87A84;
+  --nav-home: #5c7294;
+  --nav-explore: #7e6a9e;
+  --nav-universes: #4a8569;
+  --nav-achievements: #a87248;
+  --nav-profile: #a85f6b;
   --app-chrome-bg-bottom: rgba(10, 10, 14, 0.88);
 }
 
@@ -271,51 +271,49 @@
 }
 
 .studio-btn--edit {
-  background: rgba(184, 122, 132, 0.16);
-  border-color: rgba(184, 122, 132, 0.34);
-  color: #9e5e68;
+  background: #a85f6b;
+  border-color: #8f4e59;
+  color: #fdf8f9;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit {
-  background: rgba(184, 122, 132, 0.18);
-  border-color: rgba(184, 122, 132, 0.38);
-  color: #c48892;
+  background: #96525e;
+  border-color: #844651;
+  color: #fdf8f9;
 }
 
 .studio-btn--edit:hover {
-  background: rgba(184, 122, 132, 0.22);
-  border-color: rgba(184, 122, 132, 0.4);
-  color: #8f505a;
+  background: #96525e;
+  border-color: #844651;
+  color: #fff;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit:hover {
-  background: rgba(184, 122, 132, 0.26);
-  border-color: rgba(184, 122, 132, 0.44);
-  color: #d49aa4;
+  background: #a85f6b;
+  border-color: #96525e;
 }
 
 .studio-btn--signout {
-  background: rgba(122, 46, 54, 0.18);
-  border-color: rgba(122, 46, 54, 0.34);
-  color: #7a2e36;
+  background: #7a2e36;
+  border-color: #6b2a31;
+  color: #f5e8ea;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout {
-  background: rgba(122, 46, 54, 0.22);
-  border-color: rgba(122, 46, 54, 0.38);
-  color: #c47a82;
+  background: #6b2a31;
+  border-color: #5c242a;
+  color: #f5e8ea;
 }
 
 .studio-btn--signout:hover {
-  background: rgba(122, 46, 54, 0.28);
-  border-color: rgba(122, 46, 54, 0.4);
-  color: #6b2a31;
+  background: #6b2a31;
+  border-color: #5c242a;
+  color: #fff;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout:hover {
-  background: rgba(122, 46, 54, 0.34);
-  border-color: rgba(122, 46, 54, 0.44);
-  color: #d48a92;
+  background: #7a2e36;
+  border-color: #6b2a31;
 }
 
 /* Progress — thin, neutral */
@@ -392,31 +390,43 @@
 }
 
 .creative-brain-map__core-outer {
-  fill: rgba(255, 255, 255, 0.06);
+  fill: rgba(255, 255, 255, 0.1);
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__core-outer {
-  fill: rgba(0, 0, 0, 0.04);
+  fill: rgba(92, 114, 148, 0.12);
 }
 
 .creative-brain-map__core-inner {
-  fill: var(--app-text-muted);
+  fill: #5c7294;
+}
+
+.app-shell[data-theme="dark"] .creative-brain-map__core-inner {
+  fill: #8fa3be;
 }
 
 .creative-brain-map__brain-fill {
-  fill: rgba(255, 255, 255, 0.04);
+  fill: rgba(255, 255, 255, 0.06);
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__brain-fill {
-  fill: rgba(0, 0, 0, 0.03);
+  fill: rgba(92, 114, 148, 0.06);
+}
+
+.creative-brain-map__line {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+
+.app-shell[data-theme="light"] .creative-brain-map__line {
+  stroke: rgba(92, 114, 148, 0.18);
 }
 
 .creative-brain-map__line.is-active {
-  stroke: rgba(255, 255, 255, 0.35);
+  stroke-opacity: 0.78;
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__line.is-active {
-  stroke: rgba(0, 0, 0, 0.18);
+  stroke-opacity: 0.68;
 }
 
 /* Explore — masonry editorial */
@@ -472,12 +482,12 @@
   background:
     linear-gradient(
       165deg,
-      color-mix(in srgb, var(--explore-accent) 34%, transparent),
-      var(--app-surface-muted) 76%
+      color-mix(in srgb, var(--explore-accent) 42%, transparent),
+      color-mix(in srgb, var(--explore-accent) 18%, var(--app-surface-muted)) 74%
     ),
     radial-gradient(
       circle at 28% 18%,
-      color-mix(in srgb, var(--explore-accent) 20%, transparent),
+      color-mix(in srgb, var(--explore-accent) 28%, transparent),
       transparent 58%
     );
 }
@@ -523,19 +533,18 @@
   border-radius: 999px;
   border-width: 1px;
   border-style: solid;
-  background: transparent;
   font-size: 0.6875rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
-  opacity: 0.96;
-  transition: opacity 0.16s ease;
-}
-
-.app-shell[data-theme="light"] .universe-filter-chips__chip {
-  background: transparent;
+  opacity: 1;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .universe-filter-chips__chip:hover {
-  opacity: 1;
+  filter: brightness(1.04);
 }
 
 .app-shell[data-theme="light"] .app-glass:hover,
@@ -770,7 +779,7 @@
 }
 
 .acervo-progress .app-progress__fill {
-  background: #b8895a;
+  background: #a87248;
 }
 
 .acervo-progress .app-progress__label,
@@ -781,25 +790,28 @@
 .acervo-piece__icon-wrap {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-bottom: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   border: 1px solid transparent;
   transition:
     background 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .acervo-piece--unlocked .acervo-piece__icon-wrap {
-  color: #b8895a;
-  background: rgba(184, 137, 90, 0.16);
-  border-color: rgba(184, 137, 90, 0.3);
+  color: #fdf5ed;
+  background: #a87248;
+  border-color: #8f603a;
+  box-shadow: 0 3px 10px rgba(168, 114, 72, 0.24);
 }
 
 .acervo-piece--unlocked:hover .acervo-piece__icon-wrap {
-  background: rgba(184, 137, 90, 0.22);
-  border-color: rgba(184, 137, 90, 0.36);
+  background: #965f38;
+  border-color: #7f522f;
+  box-shadow: 0 4px 12px rgba(168, 114, 72, 0.28);
 }
 
 .acervo-piece--unlocked .acervo-piece__icon {
@@ -813,7 +825,7 @@
 
 .acervo-piece--locked .acervo-piece__icon-wrap {
   color: var(--app-text-muted);
-  background: rgba(0, 0, 0, 0.03);
+  background: color-mix(in srgb, var(--app-text-muted) 12%, transparent);
   border-color: var(--app-border);
 }
 
@@ -930,7 +942,9 @@
   width: 1.0625rem;
   height: 1.0625rem;
   transform: translateY(0.5px);
-  transition: opacity 0.22s ease;
+  transition: fill 0.22s ease;
+  fill: color-mix(in srgb, currentColor 58%, transparent);
+  stroke: currentColor;
 }
 
 .app-nav__label--sidebar {
@@ -1061,18 +1075,6 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.app-nav__link--sidebar .app-nav__icon {
-  opacity: 0.82;
-}
-
-.app-nav__link--sidebar:hover .app-nav__icon {
-  opacity: 0.92;
-}
-
-.app-nav__link--sidebar.is-active .app-nav__icon {
-  opacity: 1;
-}
-
 .app-nav__link[data-nav="home"] .app-nav__icon {
   color: var(--nav-home);
 }
@@ -1113,49 +1115,59 @@
   color: var(--nav-profile);
 }
 
-.app-nav__link--bottom .app-nav__icon {
-  opacity: 0.72;
+.app-nav__link--bottom .app-nav__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.125rem;
+  height: 1.875rem;
+  border-radius: 0.5625rem;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
-.app-nav__link--bottom:hover .app-nav__icon {
-  opacity: 0.88;
+.app-nav__link--bottom .app-nav__icon {
+  fill: color-mix(in srgb, currentColor 58%, transparent);
+  stroke: currentColor;
+}
+
+.app-nav__link--bottom.is-active .app-nav__icon-wrap {
+  color: #faf9f7;
+}
+
+.app-nav__link--bottom[data-nav="home"].is-active .app-nav__icon-wrap {
+  background: var(--nav-home);
+}
+
+.app-nav__link--bottom[data-nav="explore"].is-active .app-nav__icon-wrap {
+  background: var(--nav-explore);
+}
+
+.app-nav__link--bottom[data-nav="universes"].is-active .app-nav__icon-wrap {
+  background: var(--nav-universes);
+}
+
+.app-nav__link--bottom[data-nav="achievements"].is-active .app-nav__icon-wrap {
+  background: var(--nav-achievements);
+}
+
+.app-nav__link--bottom[data-nav="profile"].is-active .app-nav__icon-wrap {
+  background: var(--nav-profile);
 }
 
 .app-nav__link--bottom.is-active .app-nav__icon {
-  opacity: 1;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
-.app-nav__link--bottom[data-nav="home"].is-active,
-.app-nav__link--bottom[data-nav="home"].is-active .app-nav__icon {
-  color: var(--nav-home);
-}
-
-.app-nav__link--bottom[data-nav="explore"].is-active,
-.app-nav__link--bottom[data-nav="explore"].is-active .app-nav__icon {
-  color: var(--nav-explore);
-}
-
-.app-nav__link--bottom[data-nav="universes"].is-active,
-.app-nav__link--bottom[data-nav="universes"].is-active .app-nav__icon {
-  color: var(--nav-universes);
-}
-
-.app-nav__link--bottom[data-nav="achievements"].is-active,
-.app-nav__link--bottom[data-nav="achievements"].is-active .app-nav__icon {
-  color: var(--nav-achievements);
-}
-
-.app-nav__link--bottom[data-nav="profile"].is-active,
-.app-nav__link--bottom[data-nav="profile"].is-active .app-nav__icon {
-  color: var(--nav-profile);
+.app-nav__link--sidebar.is-active .app-nav__icon {
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 .app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active {
   background: transparent;
-}
-
-.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon {
-  color: inherit;
 }
 
 .theme-toggle {

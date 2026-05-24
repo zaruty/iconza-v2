@@ -1,33 +1,47 @@
 export type UniverseColorKey =
   | "iconmind"
   | "iconlove"
-  | "iconethnia"
+  | "iconetnia"
   | "iconfood"
   | "iconart";
 
-export const UNIVERSE_COLORS: Record<
-  UniverseColorKey,
-  { accent: string; accentMuted: string }
-> = {
+export type UniverseColorSet = {
+  accent: string;
+  accentDeep: string;
+  accentMuted: string;
+  accentFill: string;
+};
+
+export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconmind: {
-    accent: "#7A8FA8",
-    accentMuted: "rgba(122, 143, 168, 0.32)",
+    accent: "#5C7294",
+    accentDeep: "#4A5E78",
+    accentMuted: "rgba(92, 114, 148, 0.32)",
+    accentFill: "rgba(92, 114, 148, 0.22)",
   },
   iconlove: {
-    accent: "#B87A84",
-    accentMuted: "rgba(184, 122, 132, 0.32)",
+    accent: "#A85F6B",
+    accentDeep: "#8F4E59",
+    accentMuted: "rgba(168, 95, 107, 0.32)",
+    accentFill: "rgba(168, 95, 107, 0.22)",
   },
-  iconethnia: {
-    accent: "#5F9078",
-    accentMuted: "rgba(95, 144, 120, 0.32)",
+  iconetnia: {
+    accent: "#4A8569",
+    accentDeep: "#3D7058",
+    accentMuted: "rgba(74, 133, 105, 0.32)",
+    accentFill: "rgba(74, 133, 105, 0.22)",
   },
   iconfood: {
-    accent: "#B8895A",
-    accentMuted: "rgba(184, 137, 90, 0.32)",
+    accent: "#A87248",
+    accentDeep: "#8F603A",
+    accentMuted: "rgba(168, 114, 72, 0.32)",
+    accentFill: "rgba(168, 114, 72, 0.22)",
   },
   iconart: {
-    accent: "#9B87B3",
-    accentMuted: "rgba(155, 135, 179, 0.32)",
+    accent: "#7E6A9E",
+    accentDeep: "#685688",
+    accentMuted: "rgba(126, 106, 158, 0.32)",
+    accentFill: "rgba(126, 106, 158, 0.22)",
   },
 };
 
@@ -38,11 +52,25 @@ export function getUniverseColor(id: string): string {
   return UNIVERSE_COLORS.iconmind.accent;
 }
 
+export function getUniverseColorDeep(id: string): string {
+  if (id in UNIVERSE_COLORS) {
+    return UNIVERSE_COLORS[id as UniverseColorKey].accentDeep;
+  }
+  return UNIVERSE_COLORS.iconmind.accentDeep;
+}
+
 export function getUniverseColorMuted(id: string): string {
   if (id in UNIVERSE_COLORS) {
     return UNIVERSE_COLORS[id as UniverseColorKey].accentMuted;
   }
   return UNIVERSE_COLORS.iconmind.accentMuted;
+}
+
+export function getUniverseColorFill(id: string): string {
+  if (id in UNIVERSE_COLORS) {
+    return UNIVERSE_COLORS[id as UniverseColorKey].accentFill;
+  }
+  return UNIVERSE_COLORS.iconmind.accentFill;
 }
 
 export function isUniverseColorKey(id: string): id is UniverseColorKey {

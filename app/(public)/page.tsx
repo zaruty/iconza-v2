@@ -18,7 +18,7 @@ const universes = [
     accent: "from-iconza-pink/10 to-transparent",
   },
   {
-    name: "ICONETHNIA",
+    name: "ICONETNIA",
     tagline: "Cultura e identidade",
     description:
       "Explore tradições, diversidade e narrativas visuais de diferentes povos e origens.",

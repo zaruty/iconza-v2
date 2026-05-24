@@ -1,11 +1,12 @@
 import { MOCK_UNIVERSES } from "@/app/lib/app/mock-student";
-import { getUniverseColor } from "@/app/lib/app/universe-colors";
+import { getUniverseColor, getUniverseColorFill } from "@/app/lib/app/universe-colors";
 
 export function UniverseFilterChips() {
   return (
     <div className="universe-filter-chips" role="list" aria-label="Filtrar por universo">
       {MOCK_UNIVERSES.map((universe) => {
         const accent = getUniverseColor(universe.id);
+        const fill = getUniverseColorFill(universe.id);
 
         return (
           <button
@@ -15,7 +16,8 @@ export function UniverseFilterChips() {
             role="listitem"
             data-universe={universe.id}
             style={{
-              borderColor: `${accent}66`,
+              backgroundColor: fill,
+              borderColor: `${accent}73`,
               color: accent,
             }}
           >

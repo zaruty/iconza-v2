@@ -53,7 +53,7 @@ export default function AdminDashboardPage() {
         <AdminStatCard
           label="Universos"
           value="5"
-          hint="ICONMIND, ICONLOVE, ICONETHNIA, ICONFOOD, ICONART"
+          hint="ICONMIND, ICONLOVE, ICONETNIA, ICONFOOD, ICONART"
           category="content"
           icon="universes"
         />
