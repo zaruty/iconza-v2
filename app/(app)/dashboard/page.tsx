@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AuthAtmosphere } from "@/app/components/auth/auth-atmosphere";
-import { IconzaLogo } from "@/app/components/iconza-logo";
-import { clearSession, getSession } from "@/app/lib/auth/session";
-import type { AuthSession } from "@/app/lib/auth/types";
+import { AppScreen } from "@/app/components/app/app-screen";
+import { CreativeBrainMap } from "@/app/components/app/creative-brain-map";
+import { GlassPanel } from "@/app/components/app/glass-panel";
+import { ProgressBar } from "@/app/components/app/progress-bar";
+import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
+import { getSession } from "@/app/lib/auth/session";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [session, setSession] = useState<AuthSession | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -19,56 +19,71 @@ export default function DashboardPage() {
       router.replace("/login");
       return;
     }
-    setSession(current);
     setReady(true);
   }, [router]);
 
-  function handleSignOut() {
-    clearSession();
-    router.push("/login");
-  }
-
-  if (!ready || !session) {
+  if (!ready) {
     return (
-      <div className="auth-page auth-viewport-min relative flex items-center justify-center">
-        <AuthAtmosphere />
-        <span className="auth-spinner relative z-10" aria-label="Carregando" />
+      <div className="app-hud-loading">
+        <span className="auth-spinner" aria-label="Carregando" />
       </div>
     );
   }
 
+  const { continueLearning } = MOCK_STUDENT;
+
   return (
-    <div className="auth-page auth-viewport-min relative">
-      <AuthAtmosphere />
+    <AppScreen>
+      <header className="app-hud-header">
+        <p className="app-hud-eyebrow font-subtitle">Bem-vinda de volta</p>
+        <h1 className="app-hud-title font-display">
+          Olá, {MOCK_STUDENT.firstName}
+        </h1>
+      </header>
 
-      <div className="site-content auth-viewport-min relative z-10 flex flex-col items-center justify-center px-4 py-12">
-        <div className="auth-card w-full max-w-lg text-center">
-          <IconzaLogo className="mx-auto h-8 w-11 text-white/75" />
-          <h1 className="auth-card__title font-hero mt-6">
-            Olá, {session.user.name ?? "explorador"}
-          </h1>
-          <p className="auth-card__subtitle font-subtitle mt-3">
-            Área privada temporária — mock auth ativo. Em breve, dashboard
-            completo com Supabase.
-          </p>
-          <p className="font-subtitle mt-4 text-sm text-white/45">
-            {session.user.email} · via {session.provider}
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link href="/" className="btn-outline-premium auth-btn-full sm:w-auto">
-              Voltar ao site
-            </Link>
-            <button
-              type="button"
-              onClick={handleSignOut}
-              className="btn-google auth-btn-full sm:w-auto"
-            >
-              Sair
-            </button>
+      <GlassPanel className="dashboard-level-card">
+        <div className="dashboard-level-card__head">
+          <div>
+            <p className="dashboard-level-card__label font-subtitle">Nível atual</p>
+            <p className="dashboard-level-card__level font-display">
+              {MOCK_STUDENT.level}
+            </p>
           </div>
+          <span className="dashboard-level-card__xp font-subtitle">
+            {MOCK_STUDENT.xp} XP
+          </span>
         </div>
-      </div>
-    </div>
+        <ProgressBar
+          value={MOCK_STUDENT.xp}
+          max={MOCK_STUDENT.xpGoal}
+          label="Progresso para o próximo nível"
+          accent="#7B88FF"
+          showValues
+        />
+      </GlassPanel>
+
+      <section className="dashboard-section">
+        <h2 className="app-hud-section-title font-display">Mapa mental</h2>
+        <GlassPanel className="dashboard-brain-wrap">
+          <CreativeBrainMap />
+        </GlassPanel>
+      </section>
+
+      <section className="dashboard-section">
+        <h2 className="app-hud-section-title font-display">Continuar</h2>
+        <GlassPanel glow pulse className="dashboard-continue-card">
+          <p className="dashboard-continue-card__label font-subtitle">Universo ativo</p>
+          <h3 className="dashboard-continue-card__title font-display">
+            {continueLearning.universeName}
+          </h3>
+          <ProgressBar
+            value={continueLearning.progress}
+            label="Progresso da etapa"
+            accent="#7B88FF"
+            showValues
+          />
+        </GlassPanel>
+      </section>
+    </AppScreen>
   );
 }
