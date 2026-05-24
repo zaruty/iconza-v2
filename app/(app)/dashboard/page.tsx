@@ -57,7 +57,6 @@ export default function DashboardPage() {
           value={MOCK_STUDENT.xp}
           max={MOCK_STUDENT.xpGoal}
           label="Progresso para o próximo nível"
-          accent="#7B88FF"
           showValues
         />
       </GlassPanel>
@@ -79,7 +78,6 @@ export default function DashboardPage() {
           <ProgressBar
             value={continueLearning.progress}
             label="Progresso da etapa"
-            accent="#7B88FF"
             showValues
           />
         </GlassPanel>

@@ -44,7 +44,7 @@ function NavLink({ item, variant }: { item: NavItem; variant: "bottom" | "sideba
       <span className="app-nav__icon-wrap">
         <Icon className="app-nav__icon" strokeWidth={active ? 2.25 : 1.75} aria-hidden />
       </span>
-      {active ? (
+      {variant === "sidebar" || active ? (
         <span className="app-nav__label font-subtitle">{item.label}</span>
       ) : null}
     </Link>

@@ -21,14 +21,13 @@ export function CreativeBrainMap() {
   return (
     <div className="creative-brain-map" aria-label="Mapa mental dos universos">
       <svg viewBox="0 0 240 220" className="creative-brain-map__svg" aria-hidden>
-        <defs>
-          <radialGradient id="brainGlow" cx="50%" cy="45%" r="55%">
-            <stop offset="0%" stopColor="rgba(123,136,255,0.35)" />
-            <stop offset="100%" stopColor="rgba(123,136,255,0)" />
-          </radialGradient>
-        </defs>
-
-        <ellipse cx="120" cy="110" rx="88" ry="78" fill="url(#brainGlow)" />
+        <ellipse
+          cx="120"
+          cy="110"
+          rx="88"
+          ry="78"
+          className="creative-brain-map__glow"
+        />
 
         <path
           d="M120 42 C88 42 62 68 58 98 C54 128 72 158 98 168 C108 172 118 174 120 174 C122 174 132 172 142 168 C168 158 186 128 182 98 C178 68 152 42 120 42 Z"
@@ -63,14 +62,14 @@ export function CreativeBrainMap() {
               r={node.isActive ? 14 : 11}
               fill={
                 node.isActive || node.isAvailable
-                  ? node.accentMuted
+                  ? "color-mix(in srgb, var(--app-accent) 28%, transparent)"
                   : "var(--app-map-node-empty)"
               }
               stroke={
                 node.isActive
-                  ? node.accent
+                  ? "var(--app-accent)"
                   : node.isAvailable
-                    ? "rgba(123,136,255,0.35)"
+                    ? "color-mix(in srgb, var(--app-accent) 45%, transparent)"
                     : "var(--app-map-stroke)"
               }
               strokeWidth="1.2"
@@ -82,7 +81,7 @@ export function CreativeBrainMap() {
               r={node.isActive ? 4 : 3}
               fill={
                 node.isActive || node.isAvailable
-                  ? node.accent
+                  ? "var(--app-accent)"
                   : "var(--app-map-node-muted)"
               }
               opacity={node.status === "locked" ? 0.35 : 1}
@@ -90,8 +89,8 @@ export function CreativeBrainMap() {
           </g>
         ))}
 
-        <circle cx="120" cy="110" r="10" fill="rgba(123,136,255,0.18)" />
-        <circle cx="120" cy="110" r="4" fill="#7B88FF" />
+        <circle cx="120" cy="110" r="10" className="creative-brain-map__core-outer" />
+        <circle cx="120" cy="110" r="4" className="creative-brain-map__core-inner" />
       </svg>
 
       <ul className="creative-brain-map__legend">
@@ -102,7 +101,7 @@ export function CreativeBrainMap() {
               style={{
                 background:
                   node.isActive || node.isAvailable
-                    ? node.accent
+                    ? "var(--app-accent)"
                     : "var(--app-map-node-muted)",
                 opacity: node.status === "locked" ? 0.4 : 1,
               }}

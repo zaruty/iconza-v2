@@ -32,7 +32,6 @@ export default function ConquistasPage() {
         <ProgressBar
           value={MOCK_STUDENT.xp}
           max={MOCK_STUDENT.xpGoal}
-          accent="#7B88FF"
           showValues
         />
       </GlassPanel>
