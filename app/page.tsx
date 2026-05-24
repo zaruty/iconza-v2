@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AuroraBackground from "./components/AuroraBackground";
 import { CustomCursor } from "./components/custom-cursor";
 import { NeuralCanvas } from "./components/neural-canvas";
@@ -125,31 +126,31 @@ export default function Home() {
       <CustomCursor />
 
       {/* NAV */}
-      <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-iconza-lilac/10">
+      <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-refined">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-          <a
-            href="#"
-            className="group flex items-center gap-2.5 text-iconza-pink transition-opacity hover:opacity-80"
+          <Link
+            href="/"
+            className="group relative z-20 flex items-center gap-2.5 text-iconza-pink transition-opacity hover:opacity-80"
           >
-            <CrownLogo className="h-5 w-7 text-iconza-lavender transition-colors group-hover:text-iconza-lilac sm:h-6 sm:w-8" />
+            <CrownLogo className="h-5 w-7 text-white/70 transition-colors group-hover:text-white/90 sm:h-6 sm:w-8" />
             <span className="font-display text-lg font-semibold tracking-[0.2em] sm:text-xl">
               ICONZA
             </span>
-          </a>
+          </Link>
 
-          <a
-            href="#comecar"
-            className="rounded-full border border-iconza-lilac/40 bg-iconza-lilac/10 px-4 py-2 text-xs font-medium text-iconza-pink transition-all hover:border-iconza-lavender hover:bg-iconza-lilac/20 sm:px-5 sm:py-2.5 sm:text-sm"
+          <Link
+            href="/cadastro"
+            className="btn-outline-premium btn-outline-premium--sm relative z-20"
           >
             Começar gratuitamente
-          </a>
+          </Link>
         </nav>
       </header>
 
       <main className="site-content relative z-10">
         {/* HERO */}
         <section className="hero-section relative overflow-hidden px-4 pb-8 pt-14 sm:px-6 md:flex md:min-h-[100dvh] md:flex-col md:items-center md:justify-center md:pb-16 md:pt-[4.5rem]">
-          <div className="hero-section__content mx-auto w-full max-w-3xl text-center">
+          <div className="hero-section__content content-readability relative mx-auto w-full max-w-3xl text-center">
             <h1 className="hero-title font-hero font-medium tracking-tight text-white">
               Universos
               <br />
@@ -166,16 +167,19 @@ export default function Home() {
               desenvolvem criatividade, emoção e inteligência estratégica.
             </p>
             <div className="mt-8 flex justify-center px-2 sm:mt-10">
-              <a href="#universos" className="hero-explore-btn">
+              <Link
+                href="/cadastro"
+                className="btn-outline-premium hero-explore-btn relative z-20"
+              >
                 <BrainOutlineIcon className="hero-explore-btn__icon" />
                 <span>Explorar universos</span>
-              </a>
+              </Link>
             </div>
           </div>
 
           <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 animate-bounce md:block">
-            <div className="h-8 w-5 rounded-full border border-iconza-lilac/30 p-1">
-              <div className="mx-auto h-1.5 w-1 rounded-full bg-iconza-lavender/60" />
+            <div className="h-8 w-5 rounded-full border border-white/20 p-1">
+              <div className="mx-auto h-1.5 w-1 rounded-full bg-white/50" />
             </div>
           </div>
         </section>
@@ -183,9 +187,9 @@ export default function Home() {
         {/* UNIVERSOS */}
         <section
           id="universos"
-          className="relative border-t border-iconza-lilac/10 px-4 py-20 sm:px-6 sm:py-28"
+          className="relative scroll-mt-20 border-t border-refined px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-28"
         >
-          <div className="mx-auto max-w-6xl">
+          <div className="content-readability relative mx-auto max-w-6xl">
             <div className="mb-12 max-w-2xl sm:mb-16">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-iconza-lilac">
                 Universos
@@ -203,7 +207,7 @@ export default function Home() {
               {universes.map((universe, index) => (
                 <article
                   key={universe.name}
-                  className={`glass-panel group relative overflow-hidden rounded-2xl border border-iconza-lilac/15 p-6 transition-all duration-300 hover:border-iconza-lavender/35 sm:p-7 ${
+                  className={`glass-panel group relative overflow-hidden rounded-2xl border border-refined p-6 transition-all duration-300 hover:border-white/25 sm:p-7 ${
                     index === universes.length - 1
                       ? "sm:col-span-2 lg:col-span-1"
                       : ""
@@ -213,7 +217,7 @@ export default function Home() {
                     className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${universe.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
                   />
                   <div className="relative">
-                    <span className="inline-block rounded-full border border-iconza-lilac/25 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-iconza-lavender">
+                    <span className="inline-block rounded-full border border-white/18 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/65">
                       {universe.tagline}
                     </span>
                     <h3 className="mt-4 font-display text-2xl font-semibold tracking-wide text-iconza-pink sm:text-3xl">
@@ -222,7 +226,7 @@ export default function Home() {
                     <p className="mt-3 text-sm leading-relaxed text-iconza-pink/60">
                       {universe.description}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-iconza-lilac transition-colors group-hover:text-iconza-lavender">
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-white/55 transition-colors group-hover:text-white/80">
                       Explorar
                       <svg
                         width="14"
@@ -252,8 +256,8 @@ export default function Home() {
           id="comecar"
           className="relative overflow-hidden px-4 py-20 sm:px-6 sm:py-28"
         >
-          <div className="glass-panel relative mx-auto max-w-3xl rounded-3xl border border-iconza-lilac/20 px-6 py-14 text-center sm:px-12 sm:py-16">
-            <CrownLogo className="mx-auto h-7 w-10 text-iconza-lavender" />
+          <div className="glass-panel content-readability relative mx-auto max-w-3xl rounded-3xl border border-refined px-6 py-14 text-center sm:px-12 sm:py-16">
+            <CrownLogo className="mx-auto h-7 w-10 text-white/70" />
             <h2 className="mt-6 font-display text-3xl font-semibold text-iconza-pink sm:text-4xl md:text-5xl">
               Pronto para criar?
             </h2>
@@ -261,21 +265,21 @@ export default function Home() {
               Entre na ICONZA e comece sua jornada gratuita. Descubra como a IA
               pode ampliar sua criatividade visual.
             </p>
-            <a
-              href="#"
-              className="mt-8 inline-block rounded-full bg-iconza-lilac px-10 py-3.5 text-sm font-semibold text-iconza-bg transition-all hover:bg-iconza-lavender sm:text-base"
+            <Link
+              href="/cadastro"
+              className="btn-outline-premium hero-explore-btn relative z-20 mt-8 inline-flex"
             >
               Começar gratuitamente
-            </a>
+            </Link>
           </div>
         </section>
       </main>
 
       {/* FOOTER */}
-      <footer className="site-content relative z-10 border-t border-iconza-lilac/10 px-4 py-8 sm:px-6">
+      <footer className="site-content relative z-10 border-t border-refined px-4 py-8 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="flex items-center gap-2 text-iconza-pink/50">
-            <CrownLogo className="h-4 w-6 text-iconza-lilac/60" />
+            <CrownLogo className="h-4 w-6 text-white/45" />
             <span className="text-xs font-medium tracking-[0.15em]">
               ICONZA
             </span>
