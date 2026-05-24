@@ -5,13 +5,13 @@ export type AppNavColorKey =
   | "achievements"
   | "profile";
 
-/** Editorial nav pigments — filled, not neon */
+/** Nav pigments aligned with illustrated universe palette */
 export const APP_NAV_COLORS: Record<AppNavColorKey, string> = {
-  home: "#5C7294",
-  explore: "#7E6A9E",
-  universes: "#4A8569",
-  achievements: "#A87248",
-  profile: "#A85F6B",
+  home: "#6F8FB8",
+  explore: "#D97832",
+  universes: "#7A5CCF",
+  achievements: "#E0A11B",
+  profile: "#C26D8C",
 };
 
 export function hrefToNavColorKey(href: string): AppNavColorKey {

@@ -47,8 +47,17 @@ function NavLink({ item, variant }: { item: NavItem; variant: "bottom" | "sideba
       <span className="app-nav__icon-wrap">
         <Icon
           className="app-nav__icon"
-          fill={active ? "currentColor" : "color-mix(in srgb, currentColor 62%, transparent)"}
-          strokeWidth={variant === "bottom" ? (active ? 1.25 : 1.5) : active ? 1.25 : 1.5}
+          fill="currentColor"
+          stroke="currentColor"
+          strokeWidth={
+            variant === "bottom"
+              ? active
+                ? 1.5
+                : 1.75
+              : active
+                ? 1.25
+                : 1.5
+          }
           aria-hidden
         />
       </span>

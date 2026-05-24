@@ -27,7 +27,7 @@ export default function ConquistasPage() {
           value={MOCK_STUDENT.xp}
           max={MOCK_STUDENT.xpGoal}
           label="Ritmo da jornada"
-          accent="#A87248"
+          accent="#E0A11B"
           showValues
         />
       </div>

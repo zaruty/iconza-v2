@@ -5,11 +5,11 @@
   --app-surface-muted: #e8e6e1;
   --app-progress-fill: #9ca3af;
   --app-ui-muted: #78716c;
-  --nav-home: #5c7294;
-  --nav-explore: #7e6a9e;
-  --nav-universes: #4a8569;
-  --nav-achievements: #a87248;
-  --nav-profile: #a85f6b;
+  --nav-home: #6f8fb8;
+  --nav-explore: #d97832;
+  --nav-universes: #7a5ccf;
+  --nav-achievements: #e0a11b;
+  --nav-profile: #c26d8c;
 }
 
 .app-shell[data-theme="dark"] {
@@ -21,11 +21,11 @@
   --app-track: rgba(255, 255, 255, 0.08);
   --app-surface: rgba(255, 255, 255, 0.03);
   --app-surface-muted: rgba(255, 255, 255, 0.02);
-  --nav-home: #5c7294;
-  --nav-explore: #7e6a9e;
-  --nav-universes: #4a8569;
-  --nav-achievements: #a87248;
-  --nav-profile: #a85f6b;
+  --nav-home: #6f8fb8;
+  --nav-explore: #d97832;
+  --nav-universes: #7a5ccf;
+  --nav-achievements: #e0a11b;
+  --nav-profile: #c26d8c;
   --app-chrome-bg-bottom: rgba(10, 10, 14, 0.88);
 }
 
@@ -474,32 +474,46 @@
   border-radius: 0.625rem;
   background:
     radial-gradient(
-      ellipse 88% 72% at 24% 14%,
-      color-mix(in srgb, var(--explore-pigment) 48%, white),
-      transparent 66%
+      ellipse 94% 80% at 20% 10%,
+      color-mix(in srgb, var(--explore-pigment) 68%, white),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 48% at 90% 94%,
+      color-mix(in srgb, var(--explore-pigment-deep) 48%, black),
+      transparent 70%
     ),
     linear-gradient(
-      168deg,
-      var(--explore-pigment) 0%,
-      color-mix(in srgb, var(--explore-pigment) 68%, var(--explore-pigment-deep)) 42%,
+      162deg,
+      color-mix(in srgb, var(--explore-pigment) 94%, white) 0%,
+      var(--explore-pigment) 36%,
       var(--explore-pigment-deep) 100%
     );
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 4px 18px color-mix(in srgb, var(--explore-pigment-deep) 22%, transparent);
 }
 
 .app-shell[data-theme="dark"] .explore-pin__visual {
   background:
     radial-gradient(
-      ellipse 88% 72% at 24% 14%,
-      color-mix(in srgb, var(--explore-pigment) 32%, transparent),
-      transparent 66%
+      ellipse 94% 80% at 20% 10%,
+      color-mix(in srgb, var(--explore-pigment) 42%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 48% at 90% 94%,
+      color-mix(in srgb, var(--explore-pigment-deep) 38%, #0a0a0e),
+      transparent 70%
     ),
     linear-gradient(
-      168deg,
-      color-mix(in srgb, var(--explore-pigment) 58%, #141418) 0%,
-      color-mix(in srgb, var(--explore-pigment-deep) 72%, #101014) 100%
+      162deg,
+      color-mix(in srgb, var(--explore-pigment) 72%, #141418) 0%,
+      color-mix(in srgb, var(--explore-pigment-deep) 88%, #101014) 100%
     );
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.28);
 }
 
 .explore-pin:nth-child(3n) .explore-pin__visual {
@@ -541,19 +555,21 @@
   min-height: 40px;
   padding: 0.4375rem 0.875rem;
   border-radius: 999px;
-  border-width: 1px;
-  border-style: solid;
+  border: none;
+  color: #fafaf9;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    filter 0.2s ease;
+    filter 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .universe-filter-chips__chip:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.07);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
 }
 
 .app-shell[data-theme="light"] .app-glass:hover,
@@ -788,7 +804,7 @@
 }
 
 .acervo-progress .app-progress__fill {
-  background: #a87248;
+  background: #e0a11b;
 }
 
 .acervo-progress .app-progress__label,
@@ -811,16 +827,16 @@
 }
 
 .acervo-piece--unlocked .acervo-piece__icon-wrap {
-  color: #fdf5ed;
-  background: #a87248;
-  border-color: #8f603a;
-  box-shadow: 0 3px 10px rgba(168, 114, 72, 0.24);
+  color: #fff8eb;
+  background: #e0a11b;
+  border-color: #c48812;
+  box-shadow: 0 3px 10px rgba(224, 161, 27, 0.28);
 }
 
 .acervo-piece--unlocked:hover .acervo-piece__icon-wrap {
-  background: #965f38;
-  border-color: #7f522f;
-  box-shadow: 0 4px 12px rgba(168, 114, 72, 0.28);
+  background: #c48812;
+  border-color: #a87210;
+  box-shadow: 0 4px 12px rgba(224, 161, 27, 0.32);
 }
 
 .acervo-piece--unlocked .acervo-piece__icon {
@@ -953,6 +969,11 @@
   transform: translateY(0.5px);
   transition: fill 0.22s ease;
   fill: color-mix(in srgb, currentColor 58%, transparent);
+  stroke: currentColor;
+}
+
+.app-nav__link--sidebar.is-active .app-nav__icon {
+  fill: currentColor;
   stroke: currentColor;
 }
 
@@ -1124,6 +1145,26 @@
   color: var(--nav-profile);
 }
 
+.app-nav__link--bottom[data-nav="home"] {
+  color: var(--nav-home);
+}
+
+.app-nav__link--bottom[data-nav="explore"] {
+  color: var(--nav-explore);
+}
+
+.app-nav__link--bottom[data-nav="universes"] {
+  color: var(--nav-universes);
+}
+
+.app-nav__link--bottom[data-nav="achievements"] {
+  color: var(--nav-achievements);
+}
+
+.app-nav__link--bottom[data-nav="profile"] {
+  color: var(--nav-profile);
+}
+
 .app-nav__link--bottom .app-nav__icon-wrap {
   display: flex;
   align-items: center;
@@ -1133,16 +1174,26 @@
   border-radius: 0.5625rem;
   transition:
     background 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .app-nav__link--bottom .app-nav__icon {
-  fill: color-mix(in srgb, currentColor 58%, transparent);
+  fill: currentColor;
   stroke: currentColor;
 }
 
+.app-nav__link--bottom.is-active {
+  color: #ffffff;
+}
+
+.app-nav__link--bottom.is-active .app-nav__label {
+  color: #ffffff;
+}
+
 .app-nav__link--bottom.is-active .app-nav__icon-wrap {
-  color: #faf9f7;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
 }
 
 .app-nav__link--bottom[data-nav="home"].is-active .app-nav__icon-wrap {
@@ -1170,13 +1221,19 @@
   stroke: currentColor;
 }
 
-.app-nav__link--sidebar.is-active .app-nav__icon {
-  fill: currentColor;
-  stroke: currentColor;
-}
-
+.app-shell[data-theme="light"] .app-nav--bottom .app-nav__link.is-active,
 .app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active {
   background: transparent;
+  color: #ffffff;
+}
+
+.app-shell[data-theme="light"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon {
+  color: inherit;
+}
+
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link .app-nav__icon {
+  color: inherit;
 }
 
 .theme-toggle {
