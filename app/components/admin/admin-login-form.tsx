@@ -123,14 +123,14 @@ export function AdminLoginShell({ children }: { children: React.ReactNode }) {
         <aside className="admin-login-aside">
           <Link href="/" className="admin-brand">
             <span className="admin-brand__mark" aria-hidden />
-            <span className="admin-brand__text font-display">ICONZA</span>
+            <span className="admin-brand__text font-subtitle">ICONZA</span>
           </Link>
           <div className="admin-login-aside__copy">
             <p className="admin-login-aside__eyebrow font-subtitle">
-              Painel administrativo
+              Administração
             </p>
-            <h1 className="admin-login-aside__title font-display">
-              Controle total da plataforma
+            <h1 className="admin-login-aside__title font-subtitle">
+              Controle da plataforma
             </h1>
             <p className="admin-login-aside__subtitle font-subtitle">
               Gerencie universos, conteúdo, usuários e monetização em um
@@ -143,10 +143,10 @@ export function AdminLoginShell({ children }: { children: React.ReactNode }) {
           <div className="admin-login-card">
             <Link href="/" className="admin-brand admin-brand--mobile-only">
               <span className="admin-brand__mark" aria-hidden />
-              <span className="admin-brand__text font-display">ICONZA</span>
+              <span className="admin-brand__text font-subtitle">ICONZA</span>
             </Link>
             <div className="admin-login-card__header">
-              <h2 className="admin-login-card__title font-display">
+              <h2 className="admin-login-card__title font-subtitle">
                 Acesso admin
               </h2>
               <p className="admin-login-card__subtitle font-subtitle">

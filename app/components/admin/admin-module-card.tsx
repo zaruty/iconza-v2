@@ -19,7 +19,7 @@ export function AdminModuleCard({ module }: AdminModuleCardProps) {
           <span className="admin-module-card__status">Em breve</span>
         ) : null}
       </div>
-      <h3 className="admin-module-card__title font-display">{module.title}</h3>
+      <h3 className="admin-module-card__title font-subtitle">{module.title}</h3>
       <p className="admin-module-card__desc font-subtitle">{module.description}</p>
     </>
   );
@@ -49,7 +49,7 @@ export function AdminStatCard({ label, value, hint }: AdminStatCardProps) {
   return (
     <article className="admin-stat-card">
       <p className="admin-stat-card__label font-subtitle">{label}</p>
-      <p className="admin-stat-card__value font-display">{value}</p>
+      <p className="admin-stat-card__value font-subtitle">{value}</p>
       <p className="admin-stat-card__hint font-subtitle">{hint}</p>
     </article>
   );

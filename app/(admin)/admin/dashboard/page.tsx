@@ -26,12 +26,12 @@ export default function AdminDashboardPage() {
     <div className="admin-dashboard">
       <section className="admin-dashboard__intro">
         <p className="admin-dashboard__eyebrow font-subtitle">Visão geral</p>
-        <h2 className="admin-dashboard__title font-display">
-          Central de gestão ICONZA
+        <h2 className="admin-dashboard__title font-subtitle">
+          Central de gestão
         </h2>
         <p className="admin-dashboard__subtitle font-subtitle">
-          Painel profissional para operar conteúdo, usuários e monetização —
-          separado da jornada gamificada do aluno.
+          Conteúdo, usuários e monetização — separado da jornada gamificada do
+          aluno.
         </p>
       </section>
 
@@ -65,7 +65,7 @@ export default function AdminDashboardPage() {
         return (
           <section key={category} className="admin-module-section">
             <div className="admin-module-section__head">
-              <h3 className="admin-module-section__title font-display">
+              <h3 className="admin-module-section__title font-subtitle">
                 {meta.label}
               </h3>
               <p className="admin-module-section__desc font-subtitle">

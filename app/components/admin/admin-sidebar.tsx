@@ -195,8 +195,8 @@ export function AdminSidebar({
             <span className="admin-brand__mark" aria-hidden />
             {!collapsed ? (
               <div>
-                <span className="admin-brand__text font-display">ICONZA</span>
-                <span className="admin-brand__sub font-subtitle">Admin</span>
+              <span className="admin-brand__text font-subtitle">ICONZA</span>
+              <span className="admin-brand__sub font-subtitle">Admin</span>
               </div>
             ) : null}
           </Link>

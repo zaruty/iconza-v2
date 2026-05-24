@@ -1,12 +1,12 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { AdminSession } from "@/app/lib/admin/types";
 import { signOutAdmin } from "@/app/lib/admin/mock-auth";
 import { ThemeToggle } from "@/app/components/theme/theme-toggle";
 import { useAdminTheme } from "./admin-theme-provider";
-import { AdminIconMenu } from "./admin-icons";
 
 type AdminHeaderProps = {
   session: AdminSession;
@@ -33,11 +33,10 @@ export function AdminHeader({ session, onMenuOpen }: AdminHeaderProps) {
           onClick={onMenuOpen}
           aria-label="Abrir menu"
         >
-          <AdminIconMenu className="h-5 w-5" />
+          <Menu className="h-[18px] w-[18px]" strokeWidth={1.5} />
         </button>
         <div>
-          <p className="admin-header__eyebrow font-subtitle">Painel administrativo</p>
-          <h1 className="admin-header__title font-display">Dashboard</h1>
+          <h1 className="admin-header__title font-subtitle">Dashboard</h1>
         </div>
       </div>
 
