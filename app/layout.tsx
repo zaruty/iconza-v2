@@ -35,6 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${cormorant.variable} ${dmSans.variable} h-full bg-transparent antialiased`}
     >
       <body className="relative isolate min-h-full flex flex-col bg-iconza-bg font-sans text-iconza-pink">
