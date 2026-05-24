@@ -11,7 +11,7 @@ export function ExploreContentCard({ item }: ExploreContentCardProps) {
       <div
         className="explore-card__visual"
         style={{
-          background: `linear-gradient(145deg, ${item.accent}55 0%, rgba(10,18,40,0.2) 100%)`,
+          background: `linear-gradient(145deg, ${item.accent}44 0%, rgba(243,244,246,0.9) 100%)`,
         }}
         aria-hidden
       />
