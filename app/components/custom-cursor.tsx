@@ -1,46 +1,44 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-
+import { useEffect, useRef } from "react";
 export function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const positionRef = useRef({ x: -100, y: -100 });
-  const targetRef = useRef({ x: -100, y: -100 });
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotPos = useRef({ x: -100, y: -100 });
+  const ringPos = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number | null>(null);
-  const [enabled, setEnabled] = useState(false);
-
   useEffect(() => {
     const fineMq = window.matchMedia("(pointer: fine)");
     if (!fineMq.matches) return;
-
-    setEnabled(true);
     document.body.classList.add("custom-cursor-active");
-
     const handleMove = (e: MouseEvent) => {
-      targetRef.current.x = e.clientX;
-      targetRef.current.y = e.clientY;
+      dotPos.current.x = e.clientX;
+      dotPos.current.y = e.clientY;
+      if (dotRef.current) {
+        dotRef.current.style.transform =
+          `translate3d(${e.clientX - 3}px, ${e.clientY - 3}px, 0)`;
+      }
     };
     const handleLeave = () => {
-      if (cursorRef.current) cursorRef.current.style.opacity = "0";
+      if (dotRef.current) dotRef.current.style.opacity = "0";
+      if (ringRef.current) ringRef.current.style.opacity = "0";
     };
     const handleEnter = () => {
-      if (cursorRef.current) cursorRef.current.style.opacity = "1";
+      if (dotRef.current) dotRef.current.style.opacity = "1";
+      if (ringRef.current) ringRef.current.style.opacity = "1";
     };
     const animate = () => {
-      positionRef.current.x +=
-        (targetRef.current.x - positionRef.current.x) * 0.25;
-      positionRef.current.y +=
-        (targetRef.current.y - positionRef.current.y) * 0.25;
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${positionRef.current.x - 12}px, ${positionRef.current.y - 12}px, 0)`;
+      ringPos.current.x += (dotPos.current.x - ringPos.current.x) * 0.15;
+      ringPos.current.y += (dotPos.current.y - ringPos.current.y) * 0.15;
+      if (ringRef.current) {
+        ringRef.current.style.transform =
+          `translate3d(${ringPos.current.x - 16}px, ${ringPos.current.y - 16}px, 0)`;
       }
       rafRef.current = requestAnimationFrame(animate);
     };
-
     window.addEventListener("mousemove", handleMove);
     document.documentElement.addEventListener("mouseleave", handleLeave);
     document.documentElement.addEventListener("mouseenter", handleEnter);
     rafRef.current = requestAnimationFrame(animate);
-
     return () => {
       window.removeEventListener("mousemove", handleMove);
       document.documentElement.removeEventListener("mouseleave", handleLeave);
@@ -49,54 +47,39 @@ export function CustomCursor() {
       document.body.classList.remove("custom-cursor-active");
     };
   }, []);
-
-  if (!enabled) return null;
-
   return (
     <>
-      <div ref={cursorRef} className="gemini-cursor" aria-hidden="true" />
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
       <style jsx>{`
-        .gemini-cursor {
+        .cursor-dot {
           position: fixed;
           top: 0;
           left: 0;
-          width: 24px;
-          height: 24px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
+          background: #C4B0E0;
           pointer-events: none;
           z-index: 9999;
-          opacity: 1;
           transition: opacity 0.3s ease;
-          background: linear-gradient(
-            135deg,
-            #4285f4 0%,
-            #a05af5 33%,
-            #e37482 66%,
-            #fbbc04 100%
-          );
-          background-size: 300% 300%;
-          box-shadow:
-            0 0 12px rgba(160, 90, 245, 0.6),
-            0 0 24px rgba(66, 133, 244, 0.4),
-            0 0 36px rgba(251, 188, 4, 0.2);
-          mix-blend-mode: screen;
-          animation: brilho-gemini 4s ease infinite;
         }
-        @keyframes brilho-gemini {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
+        .cursor-ring {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(168, 146, 200, 0.6);
+          pointer-events: none;
+          z-index: 9998;
+          transition: opacity 0.3s ease;
         }
-        @media (prefers-reduced-motion: reduce) {
-          .gemini-cursor {
-            animation: none;
-            background: #a05af5;
+        @media (pointer: coarse) {
+          .cursor-dot,
+          .cursor-ring {
+            display: none;
           }
         }
       `}</style>
