@@ -621,7 +621,7 @@ body {
   --app-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
   --app-track: rgba(0, 0, 0, 0.06);
   --app-nav-bg: #ffffff;
-  --app-nav-sidebar-bg: rgba(24, 24, 28, 0.72);
+  --app-nav-sidebar-bg: rgba(20, 20, 24, 0.8);
   --app-nav-sidebar-blur: blur(10px);
   --app-nav-sidebar-border: rgba(255, 255, 255, 0.04);
   --app-nav-sidebar-muted: rgba(255, 255, 255, 0.34);
@@ -646,8 +646,8 @@ body {
 .app-shell[data-theme="dark"] {
   --app-bg: #0f0f14;
   --app-bg-gradient: linear-gradient(135deg, #0f0f14 0%, #141822 50%, #0f1219 100%);
-  --app-chrome-bg: rgba(15, 15, 20, 0.75);
-  --app-chrome-bg-bottom: rgba(15, 15, 20, 0.85);
+  --app-chrome-bg: rgba(12, 12, 16, 0.84);
+  --app-chrome-bg-bottom: rgba(10, 10, 14, 0.88);
   --app-chrome-blur: blur(20px);
   --app-chrome-border: rgba(255, 255, 255, 0.06);
   --app-nav-icon-muted: rgba(255, 255, 255, 0.45);

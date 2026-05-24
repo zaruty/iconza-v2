@@ -32,6 +32,9 @@ export default function PerfilPage() {
         <button type="button" className="studio-btn studio-btn--ghost font-subtitle">
           Editar perfil
         </button>
+        <button type="button" className="studio-btn studio-btn--signout font-subtitle">
+          Sair da conta
+        </button>
       </div>
     </AppScreen>
   );

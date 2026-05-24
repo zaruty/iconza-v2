@@ -10,24 +10,24 @@ export const UNIVERSE_COLORS: Record<
   { accent: string; accentMuted: string }
 > = {
   iconmind: {
-    accent: "#7c8aa5",
-    accentMuted: "rgba(124, 138, 165, 0.35)",
+    accent: "#7A8FA8",
+    accentMuted: "rgba(122, 143, 168, 0.32)",
   },
   iconlove: {
-    accent: "#f472b6",
-    accentMuted: "rgba(244, 114, 182, 0.35)",
+    accent: "#B87A84",
+    accentMuted: "rgba(184, 122, 132, 0.32)",
   },
   iconethnia: {
-    accent: "#34d399",
-    accentMuted: "rgba(52, 211, 153, 0.35)",
+    accent: "#5F9078",
+    accentMuted: "rgba(95, 144, 120, 0.32)",
   },
   iconfood: {
-    accent: "#fbbf24",
-    accentMuted: "rgba(251, 191, 36, 0.35)",
+    accent: "#B8895A",
+    accentMuted: "rgba(184, 137, 90, 0.32)",
   },
   iconart: {
-    accent: "#60a5fa",
-    accentMuted: "rgba(96, 165, 250, 0.35)",
+    accent: "#9B87B3",
+    accentMuted: "rgba(155, 135, 179, 0.32)",
   },
 };
 

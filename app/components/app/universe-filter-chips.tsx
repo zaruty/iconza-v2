@@ -15,7 +15,7 @@ export function UniverseFilterChips() {
             role="listitem"
             data-universe={universe.id}
             style={{
-              borderColor: `${accent}55`,
+              borderColor: `${accent}66`,
               color: accent,
             }}
           >
