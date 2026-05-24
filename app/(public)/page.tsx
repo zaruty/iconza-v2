@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { HomeAtmosphere } from "./components/home-atmosphere";
-import { CustomCursor } from "./components/custom-cursor";
+import { HomeAtmosphere } from "@/app/components/home-atmosphere";
+import { CustomCursor } from "@/app/components/custom-cursor";
 
 const universes = [
   {
