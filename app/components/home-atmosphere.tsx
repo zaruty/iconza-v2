@@ -1,9 +1,9 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import AuroraBackground from "../AuroraBackground";
-import { NeuralCanvas } from "../neural-canvas";
-import { NeuralCanvasBoundary } from "../neural-canvas-boundary";
+import AuroraBackground from "./AuroraBackground";
+import { NeuralCanvas } from "./neural-canvas";
+import { NeuralCanvasBoundary } from "./neural-canvas-boundary";
 
 function shouldReduceEffects() {
   if (typeof window === "undefined") return true;
@@ -35,7 +35,7 @@ function subscribe(onStoreChange: () => void) {
   };
 }
 
-export function AuthAtmosphere() {
+export function HomeAtmosphere() {
   const reduceEffects = useSyncExternalStore(
     subscribe,
     shouldReduceEffects,
@@ -43,13 +43,13 @@ export function AuthAtmosphere() {
   );
 
   return (
-    <div className="auth-atmosphere" aria-hidden>
+    <>
       <AuroraBackground />
       {reduceEffects ? null : (
         <NeuralCanvasBoundary>
-          <NeuralCanvas scope="viewport" />
+          <NeuralCanvas scope="document" />
         </NeuralCanvasBoundary>
       )}
-    </div>
+    </>
   );
 }

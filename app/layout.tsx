@@ -7,6 +7,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: "#050a14",
+  viewportFit: "cover",
 };
 
 const cormorant = Cormorant_Garamond({
@@ -50,7 +51,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${cormorant.variable} ${dmSans.variable} ${playfair.variable} ${poppins.variable} h-full bg-transparent antialiased`}
     >
-      <body className="relative isolate min-h-full flex flex-col bg-iconza-bg font-sans text-iconza-pink">
+      <body className="relative min-h-full flex flex-col bg-iconza-bg font-sans text-iconza-pink">
         {children}
       </body>
     </html>

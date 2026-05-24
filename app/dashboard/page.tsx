@@ -30,7 +30,7 @@ export default function DashboardPage() {
 
   if (!ready || !session) {
     return (
-      <div className="auth-page relative flex min-h-[100dvh] items-center justify-center">
+      <div className="auth-page auth-viewport-min relative flex items-center justify-center">
         <AuthAtmosphere />
         <span className="auth-spinner relative z-10" aria-label="Carregando" />
       </div>
@@ -38,11 +38,11 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="auth-page relative min-h-[100dvh]">
+    <div className="auth-page auth-viewport-min relative">
       <AuthAtmosphere />
 
-      <div className="site-content relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-4 py-12">
-        <div className="auth-card content-readability w-full max-w-lg text-center">
+      <div className="site-content auth-viewport-min relative z-10 flex flex-col items-center justify-center px-4 py-12">
+        <div className="auth-card w-full max-w-lg text-center">
           <IconzaLogo className="mx-auto h-8 w-11 text-white/75" />
           <h1 className="auth-card__title font-hero mt-6">
             Olá, {session.user.name ?? "explorador"}

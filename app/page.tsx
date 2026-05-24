@@ -1,7 +1,6 @@
 import Link from "next/link";
-import AuroraBackground from "./components/AuroraBackground";
+import { HomeAtmosphere } from "./components/home-atmosphere";
 import { CustomCursor } from "./components/custom-cursor";
-import { NeuralCanvas } from "./components/neural-canvas";
 
 const universes = [
   {
@@ -117,37 +116,42 @@ function CrownLogo({ className }: { className?: string }) {
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="homepage-root">
       <div className="homepage-atmosphere" aria-hidden>
-        <AuroraBackground />
-        <NeuralCanvas />
+        <HomeAtmosphere />
       </div>
 
-      <CustomCursor />
+      <div className="homepage-ui">
+        <CustomCursor />
 
-      {/* NAV */}
-      <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-refined">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-          <Link
-            href="/"
-            className="group relative z-20 flex items-center gap-2.5 text-iconza-pink transition-opacity hover:opacity-80"
-          >
-            <CrownLogo className="h-5 w-7 text-white/70 transition-colors group-hover:text-white/90 sm:h-6 sm:w-8" />
-            <span className="font-display text-lg font-semibold tracking-[0.2em] sm:text-xl">
-              ICONZA
-            </span>
-          </Link>
+        {/* NAV */}
+        <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-refined">
+          <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+            <Link
+              href="/"
+              className="group flex min-h-[44px] shrink-0 items-center gap-2.5 text-iconza-pink transition-opacity hover:opacity-80"
+            >
+              <CrownLogo className="h-5 w-7 text-white/70 transition-colors group-hover:text-white/90 sm:h-6 sm:w-8" />
+              <span className="font-display text-lg font-semibold tracking-[0.2em] sm:text-xl">
+                ICONZA
+              </span>
+            </Link>
 
-          <Link
-            href="/cadastro"
-            className="btn-outline-premium btn-outline-premium--sm relative z-20"
-          >
-            Começar gratuitamente
-          </Link>
-        </nav>
-      </header>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Link href="/login" className="nav-text-link">
+                Entrar
+              </Link>
+              <Link
+                href="/cadastro"
+                className="btn-outline-premium btn-outline-premium--sm"
+              >
+                Começar gratuitamente
+              </Link>
+            </div>
+          </nav>
+        </header>
 
-      <main className="site-content relative z-10">
+        <main className="site-content relative z-10">
         {/* HERO */}
         <section className="hero-section relative overflow-hidden px-4 pb-8 pt-14 sm:px-6 md:flex md:min-h-[100dvh] md:flex-col md:items-center md:justify-center md:pb-16 md:pt-[4.5rem]">
           <div className="hero-section__content content-readability relative mx-auto w-full max-w-3xl text-center">
@@ -166,11 +170,8 @@ export default function Home() {
               Explore experiências visuais e universos temáticos que
               desenvolvem criatividade, emoção e inteligência estratégica.
             </p>
-            <div className="mt-8 flex justify-center px-2 sm:mt-10">
-              <Link
-                href="/cadastro"
-                className="btn-outline-premium hero-explore-btn relative z-20"
-              >
+            <div className="hero-cta-row mt-8 flex justify-center px-2 sm:mt-10">
+              <Link href="/cadastro" className="btn-outline-premium hero-explore-btn">
                 <BrainOutlineIcon className="hero-explore-btn__icon" />
                 <span>Explorar universos</span>
               </Link>
@@ -267,7 +268,7 @@ export default function Home() {
             </p>
             <Link
               href="/cadastro"
-              className="btn-outline-premium hero-explore-btn relative z-20 mt-8 inline-flex"
+              className="btn-outline-premium hero-explore-btn mt-8 inline-flex"
             >
               Começar gratuitamente
             </Link>
@@ -289,6 +290,7 @@ export default function Home() {
           </p>
         </div>
       </footer>
+      </div>
     </div>
   );
 }

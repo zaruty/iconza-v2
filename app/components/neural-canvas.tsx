@@ -25,17 +25,17 @@ type NeuralConfig = {
 };
 
 const MOBILE_CONFIG: NeuralConfig = {
-  particleCount: 90,
-  connectionDistance: 145,
-  lineWidth: 0.7,
-  lineAlphaMax: 0.25,
-  shadowBlurBase: 12,
-  largeRatio: 0.3,
-  largeRadiusMin: 1.2,
-  largeRadiusRange: 1.4,
-  smallRadiusMin: 0.4,
-  smallRadiusRange: 0.8,
-  speed: 0.25,
+  particleCount: 48,
+  connectionDistance: 120,
+  lineWidth: 0.6,
+  lineAlphaMax: 0.2,
+  shadowBlurBase: 0,
+  largeRatio: 0.28,
+  largeRadiusMin: 1,
+  largeRadiusRange: 1.2,
+  smallRadiusMin: 0.35,
+  smallRadiusRange: 0.65,
+  speed: 0.22,
 };
 
 const DESKTOP_CONFIG: NeuralConfig = {
@@ -76,7 +76,17 @@ function createParticles(width: number, height: number, config: NeuralConfig) {
   });
 }
 
-export function NeuralCanvas() {
+const MAX_CANVAS_DIMENSION = 2048;
+
+type NeuralCanvasProps = {
+  scope?: "viewport" | "document";
+};
+
+function clampDimension(value: number) {
+  return Math.max(1, Math.min(value, MAX_CANVAS_DIMENSION));
+}
+
+export function NeuralCanvas({ scope = "document" }: NeuralCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -95,13 +105,22 @@ export function NeuralCanvas() {
     let config = getConfig();
     let isDesktop = window.innerWidth >= 768;
 
-    const getSize = () => ({
-      width: window.innerWidth,
-      height: Math.max(
-        container.offsetHeight,
-        document.documentElement.scrollHeight,
-      ),
-    });
+    const getSize = () => {
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const measuredHeight =
+        scope === "viewport"
+          ? Math.max(container.offsetHeight, viewportHeight)
+          : Math.max(
+              container.offsetHeight,
+              document.documentElement.scrollHeight,
+            );
+
+      return {
+        width: clampDimension(viewportWidth),
+        height: clampDimension(measuredHeight),
+      };
+    };
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -129,52 +148,60 @@ export function NeuralCanvas() {
     };
 
     const draw = () => {
-      ctx.clearRect(0, 0, width, height);
+      try {
+        ctx.clearRect(0, 0, width, height);
 
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-        p.x = Math.max(0, Math.min(width, p.x));
-        p.y = Math.max(0, Math.min(height, p.y));
-      }
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+          p.x = Math.max(0, Math.min(width, p.x));
+          p.y = Math.max(0, Math.min(height, p.y));
+        }
 
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < config.connectionDistance) {
-            const alpha = 1 - dist / config.connectionDistance;
-            const proximity = (a.brightness + b.brightness) * 0.5;
-            ctx.beginPath();
-            ctx.strokeStyle = `${LINE_COLOR} ${alpha * config.lineAlphaMax * proximity})`;
-            ctx.lineWidth = config.lineWidth;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i];
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < config.connectionDistance) {
+              const alpha = 1 - dist / config.connectionDistance;
+              const proximity = (a.brightness + b.brightness) * 0.5;
+              ctx.beginPath();
+              ctx.strokeStyle = `${LINE_COLOR} ${alpha * config.lineAlphaMax * proximity})`;
+              ctx.lineWidth = config.lineWidth;
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
           }
         }
-      }
 
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.shadowBlur = config.shadowBlurBase * p.brightness;
-        ctx.shadowColor = PARTICLE_GLOW;
-        ctx.fillStyle = PARTICLE_COLOR;
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
+        for (const p of particles) {
+          ctx.beginPath();
+          if (config.shadowBlurBase > 0) {
+            ctx.shadowBlur = config.shadowBlurBase * p.brightness;
+            ctx.shadowColor = PARTICLE_GLOW;
+          }
+          ctx.fillStyle = PARTICLE_COLOR;
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = `rgba(255, 255, 255, ${0.92 * p.brightness})`;
+          ctx.arc(p.x, p.y, p.radius * 0.48, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
         ctx.shadowBlur = 0;
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.92 * p.brightness})`;
-        ctx.arc(p.x, p.y, p.radius * 0.48, 0, Math.PI * 2);
-        ctx.fill();
+      } catch {
+        cancelAnimationFrame(animationId);
+        return;
       }
 
-      ctx.shadowBlur = 0;
       animationId = requestAnimationFrame(draw);
     };
 
@@ -190,7 +217,7 @@ export function NeuralCanvas() {
       resizeObserver.disconnect();
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [scope]);
 
   return (
     <div
@@ -198,7 +225,10 @@ export function NeuralCanvas() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
     >
-      <canvas ref={canvasRef} className="block h-full w-full" />
+      <canvas
+        ref={canvasRef}
+        className="pointer-events-none block h-full w-full touch-none"
+      />
     </div>
   );
 }

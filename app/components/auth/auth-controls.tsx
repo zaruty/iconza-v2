@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { GoogleIcon } from "../iconza-logo";
 
 type GoogleButtonProps = {
@@ -76,8 +77,8 @@ export function AuthFooterLink({
   children: React.ReactNode;
 }) {
   return (
-    <a href={href} className="auth-link font-subtitle">
+    <Link href={href} className="auth-link font-subtitle">
       {children}
-    </a>
+    </Link>
   );
 }
