@@ -10,6 +10,7 @@ import {
   User,
   type LucideIcon,
 } from "lucide-react";
+import { hrefToNavColorKey } from "@/app/lib/app/nav-colors";
 
 type NavItem = {
   href: string;
@@ -34,11 +35,13 @@ function NavLink({ item, variant }: { item: NavItem; variant: "bottom" | "sideba
   const pathname = usePathname();
   const active = isActive(pathname, item.href);
   const Icon = item.icon;
+  const navKey = hrefToNavColorKey(item.href);
 
   return (
     <Link
       href={item.href}
       className={`app-nav__link app-nav__link--${variant} ${active ? "is-active" : ""}`}
+      data-nav={navKey}
       aria-current={active ? "page" : undefined}
     >
       <span className="app-nav__icon-wrap">

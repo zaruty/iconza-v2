@@ -623,7 +623,8 @@ body {
   --app-nav-bg: #ffffff;
   --app-nav-sidebar-bg: #141416;
   --app-nav-sidebar-muted: #888892;
-  --app-nav-sidebar-active-text: #f0f0f0;
+  --app-nav-sidebar-active-bg: #f0f2f5;
+  --app-nav-sidebar-active-text: #1a1a2e;
   --app-nav-border: rgba(0, 0, 0, 0.06);
   --app-nav-muted: #9ca3af;
   --app-map-stroke: #d1d5db;
@@ -636,6 +637,7 @@ body {
   --app-accent-light: #8b9bb4;
   --app-btn-text: #ffffff;
   --app-chip-bg: #ffffff;
+  background-color: #f4f5f7;
 }
 
 .app-shell[data-theme="dark"] {
@@ -669,6 +671,12 @@ body {
   min-height: 100dvh;
   background: var(--app-bg);
   color: var(--app-text);
+}
+
+.app-shell[data-theme="light"] .app-main,
+.app-shell[data-theme="light"] .app-hud-screen,
+.app-shell[data-theme="light"] .app-hud-loading {
+  background-color: #f4f5f7;
 }
 
 .app-main {
@@ -777,6 +785,8 @@ body {
 }
 
 .app-shell[data-theme="light"] .app-glass {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.06);
   box-shadow: var(--app-card-shadow);
 }
 
@@ -792,10 +802,8 @@ body {
 }
 
 .app-shell[data-theme="light"] .app-glass--glow {
-  border-color: rgba(124, 138, 165, 0.45);
-  box-shadow:
-    var(--app-card-shadow),
-    0 0 0 1px rgba(124, 138, 165, 0.12);
+  border-color: rgba(124, 138, 165, 0.3);
+  box-shadow: var(--app-card-shadow);
 }
 
 .app-glass--pulse {
@@ -831,12 +839,12 @@ body {
   100% {
     box-shadow:
       var(--app-card-shadow),
-      0 0 0 1px rgba(124, 138, 165, 0.15);
+      0 0 0 1px rgba(124, 138, 165, 0.3);
   }
   50% {
     box-shadow:
       var(--app-card-shadow-hover),
-      0 0 0 1px rgba(124, 138, 165, 0.28);
+      0 0 0 1px rgba(124, 138, 165, 0.42);
   }
 }
 
@@ -1439,20 +1447,24 @@ body {
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link {
   color: var(--app-nav-sidebar-muted);
+  transition:
+    background 0.16s ease,
+    color 0.16s ease;
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link:hover {
   background: rgba(255, 255, 255, 0.04);
-  color: var(--app-nav-sidebar-active-text);
+  color: #f0f0f0;
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--app-nav-sidebar-active-bg);
   color: var(--app-nav-sidebar-active-text);
 }
 
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active .app-nav__icon {
-  color: var(--app-accent);
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active:hover {
+  background: var(--app-nav-sidebar-active-bg);
+  color: var(--app-nav-sidebar-active-text);
 }
 
 .app-shell[data-theme="light"] .app-nav--bottom {
@@ -1529,7 +1541,7 @@ body {
   color: var(--app-accent);
 }
 
-.app-nav__link--sidebar.is-active {
+.app-shell[data-theme="dark"] .app-nav__link--sidebar.is-active {
   background: rgba(123, 136, 255, 0.12);
   color: var(--app-accent);
 }
@@ -1569,6 +1581,31 @@ body {
 .app-nav__link--sidebar .app-nav__label {
   max-width: none;
   font-size: 0.875rem;
+}
+
+/* Student app — sidebar icon colors (light) */
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="home"] .app-nav__icon {
+  color: #7c8aa5;
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="explore"] .app-nav__icon {
+  color: #60a5fa;
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="universes"] .app-nav__icon {
+  color: #34d399;
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="achievements"] .app-nav__icon {
+  color: #fbbf24;
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="profile"] .app-nav__icon {
+  color: #f472b6;
+}
+
+.app-shell[data-theme="light"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon {
+  color: var(--app-accent);
 }
 
 @import "./admin-panel.css";

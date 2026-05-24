@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { useTheme, type ThemeMode } from "@/app/lib/theme";
+import { getThemeColor, useTheme, type ThemeMode } from "@/app/lib/theme";
 
 type AppThemeContextValue = {
   theme: ThemeMode;
@@ -21,7 +21,11 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AppThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="app-shell min-h-full" data-theme={theme}>
+      <div
+        className="app-shell min-h-full"
+        data-theme={theme}
+        style={{ backgroundColor: getThemeColor("app", theme) }}
+      >
         {children}
       </div>
     </AppThemeContext.Provider>
