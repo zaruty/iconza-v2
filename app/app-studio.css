@@ -271,50 +271,50 @@
 }
 
 .studio-btn--edit {
-  background: color-mix(in srgb, var(--nav-profile) 11%, transparent);
-  border-color: color-mix(in srgb, var(--nav-profile) 20%, transparent);
-  color: #8e5560;
+  background: rgba(184, 122, 132, 0.16);
+  border-color: rgba(184, 122, 132, 0.34);
+  color: #9e5e68;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit {
-  background: color-mix(in srgb, var(--nav-profile) 14%, transparent);
-  border-color: color-mix(in srgb, var(--nav-profile) 24%, transparent);
-  color: #c9929a;
+  background: rgba(184, 122, 132, 0.18);
+  border-color: rgba(184, 122, 132, 0.38);
+  color: #c48892;
 }
 
 .studio-btn--edit:hover {
-  background: color-mix(in srgb, var(--nav-profile) 16%, transparent);
-  border-color: color-mix(in srgb, var(--nav-profile) 28%, transparent);
-  color: #7a454f;
+  background: rgba(184, 122, 132, 0.22);
+  border-color: rgba(184, 122, 132, 0.4);
+  color: #8f505a;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit:hover {
-  background: color-mix(in srgb, var(--nav-profile) 20%, transparent);
-  border-color: color-mix(in srgb, var(--nav-profile) 32%, transparent);
-  color: #d4a0a8;
+  background: rgba(184, 122, 132, 0.26);
+  border-color: rgba(184, 122, 132, 0.44);
+  color: #d49aa4;
 }
 
 .studio-btn--signout {
-  background: rgba(122, 46, 54, 0.1);
-  border-color: rgba(122, 46, 54, 0.18);
+  background: rgba(122, 46, 54, 0.14);
+  border-color: rgba(122, 46, 54, 0.3);
   color: #7a2e36;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout {
-  background: rgba(122, 46, 54, 0.14);
-  border-color: rgba(122, 46, 54, 0.26);
+  background: rgba(122, 46, 54, 0.18);
+  border-color: rgba(122, 46, 54, 0.34);
   color: #c47a82;
 }
 
 .studio-btn--signout:hover {
-  background: rgba(122, 46, 54, 0.16);
-  border-color: rgba(122, 46, 54, 0.24);
+  background: rgba(122, 46, 54, 0.22);
+  border-color: rgba(122, 46, 54, 0.36);
   color: #6b2a31;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout:hover {
-  background: rgba(122, 46, 54, 0.2);
-  border-color: rgba(122, 46, 54, 0.32);
+  background: rgba(122, 46, 54, 0.28);
+  border-color: rgba(122, 46, 54, 0.4);
   color: #d48a92;
 }
 
