@@ -76,9 +76,9 @@ export default function AuroraBackground() {
           height: 50vh;
           background: radial-gradient(
             ellipse at center bottom,
-            rgba(255, 255, 255, 0.4) 0%,
-            rgba(200, 230, 255, 0.3) 8%,
-            rgba(100, 180, 220, 0.2) 25%,
+            rgba(255, 255, 255, 0.28) 0%,
+            rgba(200, 230, 255, 0.2) 8%,
+            rgba(100, 180, 220, 0.14) 25%,
             transparent 60%
           );
           filter: blur(50px);
@@ -107,13 +107,20 @@ export default function AuroraBackground() {
         .darkness-center {
           position: absolute;
           inset: 0;
-          background: radial-gradient(
-            ellipse 50% 35% at center 55%,
-            rgba(7, 3, 15, 0.85) 0%,
-            rgba(7, 3, 15, 0.6) 35%,
-            rgba(7, 3, 15, 0.25) 65%,
-            transparent 100%
-          );
+          background:
+            linear-gradient(
+              to bottom,
+              rgba(7, 3, 15, 0.28) 0%,
+              rgba(7, 3, 15, 0.12) 18%,
+              transparent 32%
+            ),
+            radial-gradient(
+              ellipse 52% 38% at center 46%,
+              rgba(7, 3, 15, 0.85) 0%,
+              rgba(7, 3, 15, 0.6) 35%,
+              rgba(7, 3, 15, 0.25) 65%,
+              transparent 100%
+            );
           pointer-events: none;
         }
         /* VINHETA EDGES — escurece bordas inferiores */
@@ -185,13 +192,20 @@ export default function AuroraBackground() {
             filter: blur(40px); 
           }
           .darkness-center {
-            background: radial-gradient(
-              ellipse 70% 30% at center 55%,
-              rgba(7, 3, 15, 0.85) 0%,
-              rgba(7, 3, 15, 0.6) 35%,
-              rgba(7, 3, 15, 0.25) 65%,
-              transparent 100%
-            );
+            background:
+              linear-gradient(
+                to bottom,
+                rgba(7, 3, 15, 0.32) 0%,
+                rgba(7, 3, 15, 0.14) 16%,
+                transparent 30%
+              ),
+              radial-gradient(
+                ellipse 72% 34% at center 44%,
+                rgba(7, 3, 15, 0.85) 0%,
+                rgba(7, 3, 15, 0.6) 35%,
+                rgba(7, 3, 15, 0.25) 65%,
+                transparent 100%
+              );
           }
         }
         @media (prefers-reduced-motion: reduce) {

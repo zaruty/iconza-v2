@@ -145,8 +145,8 @@ export default function Home() {
 
       <main className="site-content relative z-10">
         {/* HERO */}
-        <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
-          <div className="relative z-20 mx-auto max-w-3xl text-center">
+        <section className="hero-section relative overflow-hidden px-4 pb-8 pt-14 sm:px-6 md:flex md:min-h-[100dvh] md:flex-col md:items-center md:justify-center md:pb-16 md:pt-[4.5rem]">
+          <div className="hero-section__content mx-auto w-full max-w-3xl text-center">
             <h1 className="hero-title font-hero font-medium tracking-tight text-white">
               Universos
               <br />
@@ -158,11 +158,11 @@ export default function Home() {
                 criativas
               </span>
             </h1>
-            <p className="font-subtitle mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base md:text-lg">
+            <p className="font-subtitle mx-auto mt-5 max-w-xl text-sm leading-relaxed text-white/75 sm:mt-6 sm:text-base md:text-lg">
               Explore experiências visuais e universos temáticos que
               desenvolvem criatividade, emoção e inteligência estratégica.
             </p>
-            <div className="mt-10 flex justify-center px-2">
+            <div className="mt-8 flex justify-center px-2 sm:mt-10">
               <a href="#universos" className="hero-explore-btn">
                 <BrainOutlineIcon className="hero-explore-btn__icon" />
                 <span>Explorar universos</span>
@@ -170,7 +170,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce">
+          <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 animate-bounce md:block">
             <div className="h-8 w-5 rounded-full border border-iconza-lilac/30 p-1">
               <div className="mx-auto h-1.5 w-1 rounded-full bg-iconza-lavender/60" />
             </div>
