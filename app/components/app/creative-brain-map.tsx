@@ -32,15 +32,14 @@ export function CreativeBrainMap() {
 
         <path
           d="M120 42 C88 42 62 68 58 98 C54 128 72 158 98 168 C108 172 118 174 120 174 C122 174 132 172 142 168 C168 158 186 128 182 98 C178 68 152 42 120 42 Z"
-          fill="rgba(123,136,255,0.1)"
-          stroke="rgba(26,26,46,0.12)"
+          className="creative-brain-map__brain-fill creative-brain-map__brain-stroke"
           strokeWidth="1.2"
         />
 
         <path
           d="M120 58 C104 58 92 72 90 88 C88 104 96 122 108 128 M120 58 C136 58 148 72 150 88 C152 104 144 122 132 128"
           fill="none"
-          stroke="rgba(26,26,46,0.1)"
+          className="creative-brain-map__brain-detail"
           strokeWidth="1"
         />
 
@@ -51,11 +50,7 @@ export function CreativeBrainMap() {
             y1="110"
             x2={node.cx}
             y2={node.cy}
-            stroke={
-              node.isActive
-                ? "rgba(123,136,255,0.55)"
-                : "rgba(26,26,46,0.1)"
-            }
+            className={`creative-brain-map__line ${node.isActive ? "is-active" : ""}`}
             strokeWidth={node.isActive ? 1.4 : 1}
           />
         ))}
@@ -69,14 +64,14 @@ export function CreativeBrainMap() {
               fill={
                 node.isActive || node.isAvailable
                   ? node.accentMuted
-                  : "rgba(26,26,46,0.05)"
+                  : "var(--app-map-node-empty)"
               }
               stroke={
                 node.isActive
                   ? node.accent
                   : node.isAvailable
                     ? "rgba(123,136,255,0.35)"
-                    : "rgba(26,26,46,0.12)"
+                    : "var(--app-map-stroke)"
               }
               strokeWidth="1.2"
               opacity={node.status === "locked" ? 0.45 : 1}
@@ -88,7 +83,7 @@ export function CreativeBrainMap() {
               fill={
                 node.isActive || node.isAvailable
                   ? node.accent
-                  : "rgba(26,26,46,0.2)"
+                  : "var(--app-map-node-muted)"
               }
               opacity={node.status === "locked" ? 0.35 : 1}
             />
@@ -105,7 +100,10 @@ export function CreativeBrainMap() {
             <span
               className="creative-brain-map__dot"
               style={{
-                background: node.isActive || node.isAvailable ? node.accent : "rgba(26,26,46,0.2)",
+                background:
+                  node.isActive || node.isAvailable
+                    ? node.accent
+                    : "var(--app-map-node-muted)",
                 opacity: node.status === "locked" ? 0.4 : 1,
               }}
             />

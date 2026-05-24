@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { MockExploreItem } from "@/app/lib/app/mock-student";
 import { GlassPanel } from "./glass-panel";
 
@@ -10,9 +11,7 @@ export function ExploreContentCard({ item }: ExploreContentCardProps) {
     <GlassPanel className="explore-card">
       <div
         className="explore-card__visual"
-        style={{
-          background: `linear-gradient(145deg, ${item.accent}44 0%, rgba(243,244,246,0.9) 100%)`,
-        }}
+        style={{ "--explore-accent": item.accent } as CSSProperties}
         aria-hidden
       />
       <div className="explore-card__body">

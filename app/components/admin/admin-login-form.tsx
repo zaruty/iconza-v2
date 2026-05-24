@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/app/components/theme/theme-toggle";
+import { useAdminTheme } from "@/app/components/admin/admin-theme-provider";
 import { getAdminSession } from "@/app/lib/admin/session";
 import { signInAdmin } from "@/app/lib/admin/mock-auth";
 
@@ -110,8 +112,13 @@ export function AdminLoginForm() {
 }
 
 export function AdminLoginShell({ children }: { children: React.ReactNode }) {
+  const { theme, toggleTheme } = useAdminTheme();
+
   return (
     <div className="admin-login-page auth-viewport-min">
+      <div className="admin-login-theme-bar">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+      </div>
       <div className="admin-login-grid">
         <aside className="admin-login-aside">
           <Link href="/" className="admin-brand">

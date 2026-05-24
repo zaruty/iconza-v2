@@ -19,8 +19,8 @@ export function UniverseDomainCard({ universe }: UniverseDomainCardProps) {
       <div className="universe-domain-card__head">
         <div>
           <p
-            className="universe-domain-card__tag font-subtitle"
-            style={{ color: isLocked ? "rgba(26,26,46,0.35)" : universe.accent }}
+            className={`universe-domain-card__tag font-subtitle ${isLocked ? "is-locked" : ""}`}
+            style={isLocked ? undefined : { color: universe.accent }}
           >
             {universe.tagline}
           </p>
@@ -38,7 +38,7 @@ export function UniverseDomainCard({ universe }: UniverseDomainCardProps) {
       <ProgressBar
         value={universe.mastery}
         label="Domínio"
-        accent={isLocked ? "rgba(26,26,46,0.15)" : universe.accent}
+        accent={isLocked ? "var(--app-map-node-muted)" : universe.accent}
         showValues
       />
     </GlassPanel>

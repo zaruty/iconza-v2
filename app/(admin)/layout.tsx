@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdminThemeProvider } from "@/app/components/admin/admin-theme-provider";
 
 export const metadata: Metadata = {
   title: "Admin — ICONZA",
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 export default function AdminRootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <div className="admin-root min-h-full">{children}</div>;
+  return <AdminThemeProvider>{children}</AdminThemeProvider>;
 }

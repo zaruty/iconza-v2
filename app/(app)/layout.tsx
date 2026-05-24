@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppPwaProvider } from "@/app/components/app/AppPwaProvider";
+import { AppThemeProvider } from "@/app/components/app/app-theme-provider";
 import { BottomNav } from "@/app/components/app/BottomNav";
 
 export const metadata: Metadata = {
@@ -31,10 +32,10 @@ export default function AppLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <AppPwaProvider>
-      <div className="app-shell min-h-full">
+      <AppThemeProvider>
         <BottomNav />
         <main className="app-main">{children}</main>
-      </div>
+      </AppThemeProvider>
     </AppPwaProvider>
   );
 }
