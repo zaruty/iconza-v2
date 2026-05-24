@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#7B88FF" />
+    <title>ICONZA — Offline</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        background: #0a1228;
+        color: #e8edf8;
+        font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+      }
+
+      main {
+        max-width: 22rem;
+        text-align: center;
+      }
+
+      .mark {
+        width: 0.55rem;
+        height: 2rem;
+        margin: 0 auto 1.25rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #b39dff 0%, #7b88ff 55%, #5ecfff 100%);
+        box-shadow: 0 0 18px rgba(123, 136, 255, 0.35);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin: 0.75rem 0 0;
+        line-height: 1.6;
+        color: rgba(232, 237, 248, 0.62);
+        font-size: 0.9375rem;
+      }
+
+      button {
+        margin-top: 1.5rem;
+        min-height: 44px;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid rgba(195, 220, 255, 0.22);
+        border-radius: 0.75rem;
+        background: rgba(123, 136, 255, 0.18);
+        color: #f4f7fc;
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mark" aria-hidden="true"></div>
+      <h1>Você está offline</h1>
+      <p>
+        Sem conexão no momento. Assim que a internet voltar, continue sua jornada
+        na ICONZA.
+      </p>
+      <button type="button" onclick="window.location.reload()">Tentar novamente</button>
+    </main>
+  </body>
+</html>
