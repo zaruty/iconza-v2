@@ -24,7 +24,11 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
       <div
         className="app-shell min-h-full"
         data-theme={theme}
-        style={{ backgroundColor: getThemeColor("app", theme) }}
+        style={
+          theme === "light"
+            ? { backgroundColor: getThemeColor("app", theme) }
+            : undefined
+        }
       >
         {children}
       </div>

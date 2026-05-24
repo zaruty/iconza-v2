@@ -641,7 +641,15 @@ body {
 }
 
 .app-shell[data-theme="dark"] {
-  --app-bg: #0a1228;
+  --app-bg: #0f0f14;
+  --app-bg-gradient: linear-gradient(135deg, #0f0f14 0%, #141822 50%, #0f1219 100%);
+  --app-chrome-bg: rgba(15, 15, 20, 0.75);
+  --app-chrome-bg-bottom: rgba(15, 15, 20, 0.85);
+  --app-chrome-blur: blur(20px);
+  --app-chrome-border: rgba(255, 255, 255, 0.06);
+  --app-nav-icon-muted: rgba(255, 255, 255, 0.45);
+  --app-nav-icon-active: rgba(255, 255, 255, 0.95);
+  --app-nav-active-bg: rgba(255, 255, 255, 0.08);
   --app-text: #e8edf8;
   --app-text-muted: rgba(232, 237, 248, 0.58);
   --app-text-subtle: rgba(232, 237, 248, 0.45);
@@ -650,9 +658,9 @@ body {
   --app-surface-muted: rgba(6, 14, 32, 0.55);
   --app-border: rgba(180, 210, 255, 0.14);
   --app-track: rgba(180, 210, 255, 0.1);
-  --app-nav-bg: #0a1228;
-  --app-nav-border: rgba(228, 235, 248, 0.1);
-  --app-nav-muted: rgba(232, 237, 248, 0.38);
+  --app-nav-bg: transparent;
+  --app-nav-border: rgba(255, 255, 255, 0.06);
+  --app-nav-muted: rgba(255, 255, 255, 0.45);
   --app-map-stroke: rgba(180, 210, 255, 0.22);
   --app-map-line: rgba(180, 210, 255, 0.12);
   --app-map-node-empty: rgba(255, 255, 255, 0.04);
@@ -662,6 +670,7 @@ body {
   --app-accent-hover: #8b97ff;
   --app-btn-text: #f4f7fc;
   --app-chip-bg: rgba(6, 14, 32, 0.65);
+  background: var(--app-bg-gradient);
 }
 
 .app-shell {
@@ -677,6 +686,12 @@ body {
 .app-shell[data-theme="light"] .app-hud-screen,
 .app-shell[data-theme="light"] .app-hud-loading {
   background-color: #f4f5f7;
+}
+
+.app-shell[data-theme="dark"] .app-main,
+.app-shell[data-theme="dark"] .app-hud-screen,
+.app-shell[data-theme="dark"] .app-hud-loading {
+  background: var(--app-bg-gradient);
 }
 
 .app-main {
@@ -1421,6 +1436,56 @@ body {
   box-shadow: none;
 }
 
+.app-shell[data-theme="dark"] .app-nav--sidebar {
+  background: var(--app-chrome-bg);
+  backdrop-filter: var(--app-chrome-blur);
+  -webkit-backdrop-filter: var(--app-chrome-blur);
+  border-right: 1px solid var(--app-chrome-border);
+}
+
+.app-shell[data-theme="dark"] .app-nav--bottom {
+  background: var(--app-chrome-bg-bottom);
+  backdrop-filter: var(--app-chrome-blur);
+  -webkit-backdrop-filter: var(--app-chrome-blur);
+  border-top-color: var(--app-chrome-border);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link {
+  color: var(--app-nav-icon-muted);
+  transition:
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link:hover,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active {
+  background: var(--app-nav-active-bg);
+  color: var(--app-nav-icon-active);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link .app-nav__icon,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link .app-nav__icon {
+  color: var(--app-nav-icon-muted);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active .app-nav__icon,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon {
+  color: var(--app-nav-icon-active);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active:hover,
+.app-shell[data-theme="dark"] .app-nav--bottom .app-nav__link.is-active:hover {
+  background: var(--app-nav-active-bg);
+  color: var(--app-nav-icon-active);
+}
+
 .app-nav--bottom {
   position: fixed;
   inset-inline: 0;
@@ -1542,9 +1607,13 @@ body {
   color: var(--app-accent);
 }
 
-.app-shell[data-theme="dark"] .app-nav__link--sidebar.is-active {
-  background: rgba(123, 136, 255, 0.12);
+.app-shell[data-theme="light"] .app-nav__link--bottom.is-active {
   color: var(--app-accent);
+}
+
+.app-shell[data-theme="dark"] .app-nav__link--sidebar.is-active {
+  background: var(--app-nav-active-bg);
+  color: var(--app-nav-icon-active);
 }
 
 .app-nav__icon-wrap {

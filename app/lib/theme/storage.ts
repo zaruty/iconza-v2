@@ -24,7 +24,7 @@ export function setStoredTheme(scope: ThemeScope, theme: ThemeMode) {
 
 export function getThemeColor(scope: ThemeScope, theme: ThemeMode): string {
   if (scope === "app") {
-    return theme === "light" ? "#F4F5F7" : "#0a1228";
+    return theme === "light" ? "#F4F5F7" : "#0f0f14";
   }
   return theme === "light" ? "#F5F5F4" : "#0f0f11";
 }
