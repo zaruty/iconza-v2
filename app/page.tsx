@@ -68,6 +68,7 @@ export default function Home() {
     <>
       <CustomCursor />
       <AuroraBackground />
+      <NeuralCanvas />
 
       {/* NAV */}
       <header className="glass-panel site-content fixed inset-x-0 top-0 z-50 border-b border-iconza-lilac/10">
@@ -94,10 +95,6 @@ export default function Home() {
       <main className="site-content relative z-10">
         {/* HERO */}
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
-          <div className="pointer-events-none absolute inset-0 z-0">
-            <NeuralCanvas />
-          </div>
-
           <div className="relative z-20 mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-iconza-lilac sm:text-sm">
               Plataforma educacional
