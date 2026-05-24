@@ -621,10 +621,13 @@ body {
   --app-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
   --app-track: rgba(0, 0, 0, 0.06);
   --app-nav-bg: #ffffff;
-  --app-nav-sidebar-bg: #141416;
-  --app-nav-sidebar-muted: #888892;
-  --app-nav-sidebar-active-bg: #f0f2f5;
-  --app-nav-sidebar-active-text: #1a1a2e;
+  --app-nav-sidebar-bg: rgba(24, 24, 28, 0.72);
+  --app-nav-sidebar-blur: blur(10px);
+  --app-nav-sidebar-border: rgba(255, 255, 255, 0.04);
+  --app-nav-sidebar-muted: rgba(255, 255, 255, 0.34);
+  --app-nav-sidebar-hover: rgba(255, 255, 255, 0.48);
+  --app-nav-sidebar-active-bg: rgba(255, 255, 255, 0.035);
+  --app-nav-sidebar-active-text: rgba(255, 255, 255, 0.88);
   --app-nav-border: rgba(0, 0, 0, 0.06);
   --app-nav-muted: #9ca3af;
   --app-map-stroke: #d1d5db;
@@ -1651,27 +1654,6 @@ body {
 .app-nav__link--sidebar .app-nav__label {
   max-width: none;
   font-size: 0.875rem;
-}
-
-/* Student app — sidebar icon colors (light) */
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="home"] .app-nav__icon {
-  color: #7c8aa5;
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="explore"] .app-nav__icon {
-  color: #60a5fa;
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="universes"] .app-nav__icon {
-  color: #34d399;
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="achievements"] .app-nav__icon {
-  color: #fbbf24;
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="profile"] .app-nav__icon {
-  color: #f472b6;
 }
 
 .app-shell[data-theme="light"] .app-nav--bottom .app-nav__link.is-active .app-nav__icon {

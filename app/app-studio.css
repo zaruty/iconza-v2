@@ -756,13 +756,204 @@
   color: var(--app-text-muted);
 }
 
-/* Sidebar refinement */
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link {
-  border-radius: 0.5rem;
+/* Editorial sidebar — curatorial navigation */
+@media (min-width: 768px) {
+  .app-main {
+    padding-left: calc(12.875rem + 2.5rem);
+  }
+}
+
+.app-nav--sidebar {
+  inset-block: 1.25rem;
+  left: 1.125rem;
+  width: 12.875rem;
+  height: auto;
+  max-height: calc(100dvh - 2.5rem);
+  flex-direction: column;
+  justify-content: flex-start;
+  border-right: none;
+  border-radius: 0.875rem;
+  padding: 1.75rem 0.625rem;
+  backdrop-filter: var(--app-nav-sidebar-blur);
+  -webkit-backdrop-filter: var(--app-nav-sidebar-blur);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar {
+  background: var(--app-nav-sidebar-bg);
+  border: 1px solid var(--app-nav-sidebar-border);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.05);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar {
+  background: rgba(18, 18, 24, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.035);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+}
+
+.app-nav__list--sidebar {
+  gap: 0.625rem;
+  padding-top: 0.25rem;
 }
 
 .app-nav__link--sidebar {
+  position: relative;
+  align-items: center;
   border-radius: 0.5rem;
+  padding: 0.75rem 0.75rem 0.75rem 0.9375rem;
+  gap: 0.75rem;
+  background: transparent;
+  transition:
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.app-nav__link--sidebar::before {
+  content: "";
+  position: absolute;
+  left: 0.4375rem;
+  top: 50%;
+  width: 1.5px;
+  height: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition:
+    height 0.22s ease,
+    opacity 0.22s ease;
+}
+
+.app-nav__link--sidebar.is-active::before {
+  height: 0.875rem;
+  opacity: 0.55;
+}
+
+.app-nav__link--sidebar[data-nav="home"].is-active::before {
+  background: rgba(154, 168, 192, 0.65);
+}
+
+.app-nav__link--sidebar[data-nav="explore"].is-active::before {
+  background: rgba(147, 197, 253, 0.6);
+}
+
+.app-nav__link--sidebar[data-nav="universes"].is-active::before {
+  background: rgba(110, 231, 183, 0.55);
+}
+
+.app-nav__link--sidebar[data-nav="achievements"].is-active::before {
+  background: rgba(252, 211, 77, 0.55);
+}
+
+.app-nav__link--sidebar[data-nav="profile"].is-active::before {
+  background: rgba(249, 168, 212, 0.55);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link {
+  color: var(--app-nav-sidebar-muted);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--app-nav-sidebar-hover);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active {
+  background: var(--app-nav-sidebar-active-bg);
+  color: var(--app-nav-sidebar-active-text);
+  box-shadow: none;
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active:hover {
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--app-nav-sidebar-active-text);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active {
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.86);
+  box-shadow: none;
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active:hover {
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.app-nav__link--sidebar .app-nav__icon-wrap {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.app-nav__link--sidebar .app-nav__icon {
+  display: block;
+  width: 1.0625rem;
+  height: 1.0625rem;
+  opacity: 0.48;
+  transform: translateY(0.5px);
+  transition: opacity 0.22s ease;
+}
+
+.app-nav__link--sidebar:hover .app-nav__icon {
+  opacity: 0.58;
+}
+
+.app-nav__link--sidebar.is-active .app-nav__icon {
+  opacity: 0.78;
+}
+
+.app-nav__label--sidebar {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  line-height: 1.25;
+  transform: translateY(0.5px);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link .app-nav__icon {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link:hover .app-nav__icon {
+  color: rgba(255, 255, 255, 0.44);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="home"].is-active .app-nav__icon {
+  color: rgba(184, 196, 216, 0.82);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="explore"].is-active .app-nav__icon {
+  color: rgba(147, 197, 253, 0.78);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="universes"].is-active .app-nav__icon {
+  color: rgba(110, 231, 183, 0.72);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="achievements"].is-active .app-nav__icon {
+  color: rgba(252, 211, 77, 0.72);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="profile"].is-active .app-nav__icon {
+  color: rgba(249, 168, 212, 0.72);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link .app-nav__icon {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active .app-nav__icon {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .theme-toggle {

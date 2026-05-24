@@ -45,10 +45,16 @@ function NavLink({ item, variant }: { item: NavItem; variant: "bottom" | "sideba
       aria-current={active ? "page" : undefined}
     >
       <span className="app-nav__icon-wrap">
-        <Icon className="app-nav__icon" strokeWidth={active ? 2.25 : 1.75} aria-hidden />
+        <Icon
+          className="app-nav__icon"
+          strokeWidth={variant === "sidebar" ? (active ? 1.625 : 1.375) : active ? 2.25 : 1.75}
+          aria-hidden
+        />
       </span>
       {variant === "sidebar" || active ? (
-        <span className="app-nav__label font-subtitle">{item.label}</span>
+        <span className={`app-nav__label${variant === "sidebar" ? " app-nav__label--sidebar" : " font-subtitle"}`}>
+          {item.label}
+        </span>
       ) : null}
     </Link>
   );
