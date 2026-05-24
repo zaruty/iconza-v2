@@ -1,3 +1,5 @@
+import { UNIVERSE_COLORS } from "./universe-colors";
+
 export type UniverseStatus = "active" | "available" | "locked";
 
 export type MockUniverse = {
@@ -54,8 +56,7 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     description: "Transforme ideias complexas em ícones claros com IA.",
     status: "active",
     mastery: 40,
-    accent: "#7B88FF",
-    accentMuted: "rgba(123, 136, 255, 0.35)",
+    ...UNIVERSE_COLORS.iconmind,
   },
   {
     id: "iconlove",
@@ -64,8 +65,7 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     description: "Crie símbolos que comunicam afeto e empatia.",
     status: "available",
     mastery: 0,
-    accent: "#E8A0BF",
-    accentMuted: "rgba(232, 160, 191, 0.35)",
+    ...UNIVERSE_COLORS.iconlove,
   },
   {
     id: "iconethnia",
@@ -74,8 +74,7 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     description: "Explore tradições e narrativas visuais diversas.",
     status: "locked",
     mastery: 0,
-    accent: "#B39DFF",
-    accentMuted: "rgba(179, 157, 255, 0.2)",
+    ...UNIVERSE_COLORS.iconethnia,
   },
   {
     id: "iconfood",
@@ -84,8 +83,7 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     description: "Represente gastronomia e experiências culinárias.",
     status: "locked",
     mastery: 0,
-    accent: "#5ECFFF",
-    accentMuted: "rgba(94, 207, 255, 0.2)",
+    ...UNIVERSE_COLORS.iconfood,
   },
   {
     id: "iconart",
@@ -94,8 +92,7 @@ export const MOCK_UNIVERSES: MockUniverse[] = [
     description: "Mergulhe na estética aplicada ao design de ícones.",
     status: "available",
     mastery: 0,
-    accent: "#A9D6FF",
-    accentMuted: "rgba(169, 214, 255, 0.35)",
+    ...UNIVERSE_COLORS.iconart,
   },
 ];
 
@@ -163,7 +160,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Marina Costa",
     universeId: "iconmind",
     universeName: "ICONMIND",
-    accent: "#7B88FF",
+    accent: UNIVERSE_COLORS.iconmind.accent,
   },
   {
     id: "2",
@@ -171,7 +168,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Ana Luísa",
     universeId: "iconlove",
     universeName: "ICONLOVE",
-    accent: "#E8A0BF",
+    accent: UNIVERSE_COLORS.iconlove.accent,
   },
   {
     id: "3",
@@ -179,7 +176,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Juliana M.",
     universeId: "iconethnia",
     universeName: "ICONETHNIA",
-    accent: "#B39DFF",
+    accent: UNIVERSE_COLORS.iconethnia.accent,
   },
   {
     id: "4",
@@ -187,7 +184,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Camila Ribeiro",
     universeId: "iconfood",
     universeName: "ICONFOOD",
-    accent: "#5ECFFF",
+    accent: UNIVERSE_COLORS.iconfood.accent,
   },
   {
     id: "5",
@@ -195,7 +192,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Beatriz N.",
     universeId: "iconart",
     universeName: "ICONART",
-    accent: "#A9D6FF",
+    accent: UNIVERSE_COLORS.iconart.accent,
   },
   {
     id: "6",
@@ -203,7 +200,7 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Fernanda S.",
     universeId: "iconmind",
     universeName: "ICONMIND",
-    accent: "#7B88FF",
+    accent: UNIVERSE_COLORS.iconmind.accent,
   },
 ];
 

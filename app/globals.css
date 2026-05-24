@@ -1184,7 +1184,7 @@ body {
   font-size: 0.625rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--app-accent);
+  color: var(--explore-accent, var(--app-accent));
 }
 
 .explore-card__title {
@@ -1373,12 +1373,13 @@ body {
 }
 
 .achievement-badge--unlocked .achievement-badge__icon-wrap {
-  background: rgba(123, 136, 255, 0.14);
-  color: var(--app-accent);
+  background: rgba(251, 191, 36, 0.14);
+  color: #fbbf24;
 }
 
-.app-shell[data-theme="light"] .achievement-badge--unlocked .achievement-badge__icon-wrap {
-  background: rgba(124, 138, 165, 0.14);
+.app-shell[data-theme="dark"] .achievement-badge--unlocked .achievement-badge__icon-wrap {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
 }
 
 .achievement-badge__icon {

@@ -5,6 +5,13 @@ export {
   MOCK_UNIVERSES,
   getUniverseById,
 } from "./mock-student";
+export {
+  UNIVERSE_COLORS,
+  getUniverseColor,
+  getUniverseColorMuted,
+  isUniverseColorKey,
+} from "./universe-colors";
+export type { UniverseColorKey } from "./universe-colors";
 export type {
   MockAchievement,
   MockExploreItem,
