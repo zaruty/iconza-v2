@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -21,6 +21,18 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["500", "600"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "ICONZA — Crie ícones com IA",
   description:
@@ -36,7 +48,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${cormorant.variable} ${dmSans.variable} h-full bg-transparent antialiased`}
+      className={`${cormorant.variable} ${dmSans.variable} ${playfair.variable} ${poppins.variable} h-full bg-transparent antialiased`}
     >
       <body className="relative isolate min-h-full flex flex-col bg-iconza-bg font-sans text-iconza-pink">
         {children}

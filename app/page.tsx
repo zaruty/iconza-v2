@@ -96,29 +96,25 @@ export default function Home() {
         {/* HERO */}
         <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-16 sm:px-6">
           <div className="relative z-20 mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-iconza-lilac sm:text-sm">
-              Plataforma educacional
-            </p>
-            <h1 className="font-display text-4xl leading-tight font-semibold text-iconza-pink sm:text-5xl md:text-6xl lg:text-7xl">
-              Crie ícones{" "}
-              <span className="text-iconza-lavender sm:bg-gradient-to-r sm:from-iconza-lavender sm:to-iconza-lilac sm:bg-clip-text sm:text-transparent">
-                com IA
+            <h1 className="font-hero text-4xl leading-[1.15] font-medium tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+              Universos
+              <br />
+              para mentes
+              <br />
+              <span
+                className="bg-[linear-gradient(90deg,#A9D6FF_0%,#7B88FF_50%,#B39DFF_100%)] bg-clip-text text-transparent"
+              >
+                criativas
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-iconza-pink/70 sm:text-base md:text-lg">
-              Aprenda design visual explorando universos temáticos e domine a
-              criação de ícones com inteligência artificial.
+            <p className="font-subtitle mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base md:text-lg">
+              Explore experiências visuais e universos temáticos que
+              desenvolvem criatividade, emoção e inteligência estratégica.
             </p>
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <a
-                href="#comecar"
-                className="w-full rounded-full bg-iconza-lilac px-8 py-3.5 text-sm font-semibold text-iconza-bg transition-all hover:bg-iconza-lavender sm:w-auto"
-              >
-                Começar gratuitamente
-              </a>
+            <div className="mt-10 flex justify-center">
               <a
                 href="#universos"
-                className="w-full rounded-full border border-iconza-lilac/30 px-8 py-3.5 text-sm font-medium text-iconza-pink/90 transition-all hover:border-iconza-lavender/50 hover:text-iconza-pink sm:w-auto"
+                className="hero-explore-btn inline-block px-8 py-3.5 text-sm font-normal tracking-wide"
               >
                 Explorar universos
               </a>

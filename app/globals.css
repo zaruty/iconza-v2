@@ -14,6 +14,8 @@
   --color-iconza-pink: var(--iconza-pink);
   --font-display: var(--font-cormorant);
   --font-sans: var(--font-dm-sans);
+  --font-hero: var(--font-playfair);
+  --font-subtitle: var(--font-poppins);
 }
 
 html {
@@ -53,4 +55,24 @@ body {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+}
+
+.hero-explore-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #d6d8e1;
+  border-radius: 14px;
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.hero-explore-btn:hover,
+.hero-explore-btn:active {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #eceef3;
+  box-shadow:
+    inset 0 0 18px rgba(123, 136, 255, 0.1),
+    0 0 22px rgba(169, 214, 255, 0.07);
 }
