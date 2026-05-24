@@ -1,19 +1,46 @@
 import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
-import { GlassPanel } from "./glass-panel";
 
 export function ProfileHeader() {
   return (
-    <div className="profile-header">
-      <div className="profile-header__avatar" aria-hidden>
-        {MOCK_STUDENT.firstName.charAt(0)}
+    <header className="profile-identity">
+      <div className="profile-identity__main">
+        <div className="profile-identity__avatar" aria-hidden>
+          {MOCK_STUDENT.firstName.charAt(0)}
+        </div>
+        <div className="profile-identity__copy">
+          <h1 className="profile-identity__name font-display">
+            {MOCK_STUDENT.fullName}
+          </h1>
+          <p className="profile-identity__role font-subtitle">
+            {MOCK_STUDENT.level}
+          </p>
+          <p className="profile-identity__bio font-subtitle">{MOCK_STUDENT.bio}</p>
+        </div>
       </div>
-      <h1 className="profile-header__name font-display">{MOCK_STUDENT.fullName}</h1>
-      <p className="profile-header__level font-subtitle">
-        {MOCK_STUDENT.level} · {MOCK_STUDENT.xp} XP
-      </p>
-      <GlassPanel className="profile-header__bio">
-        <p className="font-subtitle">{MOCK_STUDENT.bio}</p>
-      </GlassPanel>
-    </div>
+      <ul className="profile-identity__stats" aria-label="Resumo">
+        <li>
+          <span className="profile-identity__stat-value font-subtitle">
+            {MOCK_STUDENT.stats.totalXp}
+          </span>
+          <span className="profile-identity__stat-label font-subtitle">XP</span>
+        </li>
+        <li>
+          <span className="profile-identity__stat-value font-subtitle">
+            {MOCK_STUDENT.stats.universesStarted}
+          </span>
+          <span className="profile-identity__stat-label font-subtitle">
+            Universos
+          </span>
+        </li>
+        <li>
+          <span className="profile-identity__stat-value font-subtitle">
+            {MOCK_STUDENT.stats.achievements}
+          </span>
+          <span className="profile-identity__stat-label font-subtitle">
+            Peças
+          </span>
+        </li>
+      </ul>
+    </header>
   );
 }

@@ -609,13 +609,13 @@ body {
 
 /* === APP EXPERIENCE (student HUD) === */
 .app-shell[data-theme="light"] {
-  --app-bg: #f4f5f7;
+  --app-bg: #f0efec;
   --app-text: #1a1a2e;
   --app-text-muted: #6b7280;
   --app-text-subtle: #6b7280;
   --app-text-faint: #9ca3af;
   --app-surface: #ffffff;
-  --app-surface-muted: #f4f5f7;
+  --app-surface-muted: #e8e6e1;
   --app-border: rgba(0, 0, 0, 0.06);
   --app-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   --app-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -637,7 +637,7 @@ body {
   --app-accent-light: #8b9bb4;
   --app-btn-text: #ffffff;
   --app-chip-bg: #ffffff;
-  background-color: #f4f5f7;
+  background-color: #f0efec;
 }
 
 .app-shell[data-theme="dark"] {
@@ -685,7 +685,7 @@ body {
 .app-shell[data-theme="light"] .app-main,
 .app-shell[data-theme="light"] .app-hud-screen,
 .app-shell[data-theme="light"] .app-hud-loading {
-  background-color: #f4f5f7;
+  background-color: #f0efec;
 }
 
 .app-shell[data-theme="dark"] .app-main,
@@ -1678,4 +1678,5 @@ body {
   color: var(--app-accent);
 }
 
+@import "./app-studio.css";
 @import "./admin-panel.css";

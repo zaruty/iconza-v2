@@ -9,7 +9,7 @@ type ProgressBarProps = {
 export function ProgressBar({
   value,
   max = 100,
-  accent = "var(--app-accent)",
+  accent = "var(--app-progress-fill, var(--app-text-muted))",
   label,
   showValues = false,
 }: ProgressBarProps) {

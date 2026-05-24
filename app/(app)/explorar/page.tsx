@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 
 export default function ExplorarPage() {
   return (
-    <AppScreen>
-      <header className="app-hud-header">
-        <p className="app-hud-eyebrow font-subtitle">Inspiração</p>
-        <h1 className="app-hud-title font-display">Descubra</h1>
-        <p className="app-hud-subtitle font-subtitle">
-          Explore criações da comunidade e encontre novos caminhos visuais.
+    <AppScreen layout="full">
+      <header className="studio-intro studio-intro--compact">
+        <p className="studio-eyebrow font-subtitle">Descoberta</p>
+        <h1 className="studio-title font-display">Explorar</h1>
+        <p className="studio-lead font-subtitle">
+          Curadoria viva da comunidade — referências, gestos e universos.
         </p>
       </header>
 
       <UniverseFilterChips />
 
-      <div className="explore-grid">
+      <div className="explore-masonry">
         {MOCK_EXPLORE_ITEMS.map((item) => (
           <ExploreContentCard key={item.id} item={item} />
         ))}

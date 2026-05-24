@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 
 export default function UniversosPage() {
   return (
-    <AppScreen>
-      <header className="app-hud-header">
-        <p className="app-hud-eyebrow font-subtitle">Seus domínios</p>
-        <h1 className="app-hud-title font-display">Universos</h1>
-        <p className="app-hud-subtitle font-subtitle">
-          Explore os cinco mundos da ICONZA e acompanhe seu domínio em cada um.
+    <AppScreen layout="wide">
+      <header className="studio-intro">
+        <p className="studio-eyebrow font-subtitle">Domínios culturais</p>
+        <h1 className="studio-title font-display">Universos</h1>
+        <p className="studio-lead font-subtitle">
+          Cinco mundos para explorar identidade, emoção e linguagem visual.
         </p>
       </header>
 
-      <div className="universe-grid">
+      <div className="universe-catalog">
         {MOCK_UNIVERSES.map((universe) => (
           <UniverseDomainCard key={universe.id} universe={universe} />
         ))}

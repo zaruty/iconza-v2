@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AppScreen } from "@/app/components/app/app-screen";
 import { CreativeBrainMap } from "@/app/components/app/creative-brain-map";
-import { GlassPanel } from "@/app/components/app/glass-panel";
 import { ProgressBar } from "@/app/components/app/progress-bar";
+import { getUniverseColor } from "@/app/lib/app/universe-colors";
 import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
 import { getSession } from "@/app/lib/auth/session";
 
@@ -31,56 +31,58 @@ export default function DashboardPage() {
   }
 
   const { continueLearning } = MOCK_STUDENT;
+  const continueAccent = getUniverseColor(continueLearning.universeId);
 
   return (
-    <AppScreen>
-      <header className="app-hud-header">
-        <p className="app-hud-eyebrow font-subtitle">Bem-vinda de volta</p>
-        <h1 className="app-hud-title font-display">
+    <AppScreen layout="wide">
+      <header className="studio-intro">
+        <p className="studio-eyebrow font-subtitle">Continuidade</p>
+        <h1 className="studio-title font-display">
           Olá, {MOCK_STUDENT.firstName}
         </h1>
+        <p className="studio-lead font-subtitle">
+          Sua jornada visual segue em {continueLearning.universeName}.
+        </p>
       </header>
 
-      <GlassPanel className="dashboard-level-card">
-        <div className="dashboard-level-card__head">
-          <div>
-            <p className="dashboard-level-card__label font-subtitle">Nível atual</p>
-            <p className="dashboard-level-card__level font-display">
-              {MOCK_STUDENT.level}
-            </p>
-          </div>
-          <span className="dashboard-level-card__xp font-subtitle">
-            {MOCK_STUDENT.xp} XP
-          </span>
-        </div>
-        <ProgressBar
-          value={MOCK_STUDENT.xp}
-          max={MOCK_STUDENT.xpGoal}
-          label="Progresso para o próximo nível"
-          showValues
-        />
-      </GlassPanel>
-
-      <section className="dashboard-section">
-        <h2 className="app-hud-section-title font-display">Mapa mental</h2>
-        <GlassPanel className="dashboard-brain-wrap">
-          <CreativeBrainMap />
-        </GlassPanel>
-      </section>
-
-      <section className="dashboard-section">
-        <h2 className="app-hud-section-title font-display">Continuar</h2>
-        <GlassPanel glow pulse className="dashboard-continue-card">
-          <p className="dashboard-continue-card__label font-subtitle">Universo ativo</p>
-          <h3 className="dashboard-continue-card__title font-display">
+      <div className="studio-home-grid">
+        <article className="studio-continue">
+          <p className="studio-continue__label font-subtitle">Em progresso</p>
+          <h2 className="studio-continue__title font-display">
             {continueLearning.universeName}
-          </h3>
+          </h2>
           <ProgressBar
             value={continueLearning.progress}
-            label="Progresso da etapa"
+            label="Etapa atual"
+            accent={continueAccent}
             showValues
           />
-        </GlassPanel>
+        </article>
+
+        <aside className="studio-presence">
+          <p className="studio-presence__role font-display">{MOCK_STUDENT.level}</p>
+          <p className="studio-presence__meta font-subtitle">
+            {MOCK_STUDENT.xp} XP · meta {MOCK_STUDENT.xpGoal}
+          </p>
+          <ProgressBar
+            value={MOCK_STUDENT.xp}
+            max={MOCK_STUDENT.xpGoal}
+            label="Ritmo"
+            showValues
+          />
+        </aside>
+      </div>
+
+      <section className="studio-section">
+        <div className="studio-section__head">
+          <h2 className="studio-section__title font-display">Constelação</h2>
+          <p className="studio-section__desc font-subtitle">
+            Seus universos conectados em uma trilha viva de descoberta.
+          </p>
+        </div>
+        <div className="studio-constellation">
+          <CreativeBrainMap />
+        </div>
       </section>
     </AppScreen>
   );
