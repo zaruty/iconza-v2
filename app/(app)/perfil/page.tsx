@@ -29,10 +29,10 @@ export default function PerfilPage() {
       </section>
 
       <div className="profile-actions">
-        <button type="button" className="studio-btn studio-btn--ghost font-subtitle">
+        <button type="button" className="studio-btn studio-btn--edit">
           Editar perfil
         </button>
-        <button type="button" className="studio-btn studio-btn--signout font-subtitle">
+        <button type="button" className="studio-btn studio-btn--signout">
           Sair da conta
         </button>
       </div>

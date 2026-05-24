@@ -251,49 +251,71 @@
 .studio-btn {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0.5rem 0;
-  border: none;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0.4375rem 1.0625rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
   background: transparent;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  line-height: 1.2;
   touch-action: manipulation;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.studio-btn--ghost {
-  color: var(--app-text);
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  text-decoration-color: rgba(0, 0, 0, 0.18);
+.studio-btn--edit {
+  background: color-mix(in srgb, var(--nav-profile) 11%, transparent);
+  border-color: color-mix(in srgb, var(--nav-profile) 20%, transparent);
+  color: #8e5560;
 }
 
-.app-shell[data-theme="dark"] .studio-btn--ghost {
-  text-decoration-color: rgba(255, 255, 255, 0.22);
+.app-shell[data-theme="dark"] .studio-btn--edit {
+  background: color-mix(in srgb, var(--nav-profile) 14%, transparent);
+  border-color: color-mix(in srgb, var(--nav-profile) 24%, transparent);
+  color: #c9929a;
 }
 
-.studio-btn--ghost:hover {
-  color: var(--app-text-muted);
+.studio-btn--edit:hover {
+  background: color-mix(in srgb, var(--nav-profile) 16%, transparent);
+  border-color: color-mix(in srgb, var(--nav-profile) 28%, transparent);
+  color: #7a454f;
+}
+
+.app-shell[data-theme="dark"] .studio-btn--edit:hover {
+  background: color-mix(in srgb, var(--nav-profile) 20%, transparent);
+  border-color: color-mix(in srgb, var(--nav-profile) 32%, transparent);
+  color: #d4a0a8;
 }
 
 .studio-btn--signout {
+  background: rgba(122, 46, 54, 0.1);
+  border-color: rgba(122, 46, 54, 0.18);
   color: #7a2e36;
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  text-decoration-color: rgba(122, 46, 54, 0.35);
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout {
-  color: #9e4a52;
-  text-decoration-color: rgba(158, 74, 82, 0.4);
+  background: rgba(122, 46, 54, 0.14);
+  border-color: rgba(122, 46, 54, 0.26);
+  color: #c47a82;
 }
 
 .studio-btn--signout:hover {
+  background: rgba(122, 46, 54, 0.16);
+  border-color: rgba(122, 46, 54, 0.24);
   color: #6b2a31;
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout:hover {
-  color: #b85a63;
+  background: rgba(122, 46, 54, 0.2);
+  border-color: rgba(122, 46, 54, 0.32);
+  color: #d48a92;
 }
 
 /* Progress — thin, neutral */
@@ -712,9 +734,9 @@
 
 .profile-actions {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
   margin-top: 2rem;
 }
 
@@ -818,7 +840,9 @@
 .app-shell[data-theme="light"] .app-nav--sidebar {
   background: var(--app-nav-sidebar-bg);
   border: 1px solid var(--app-nav-sidebar-border);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .app-shell[data-theme="dark"] .app-nav--sidebar {
