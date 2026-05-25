@@ -6,6 +6,7 @@ import {
   Compass,
   Home,
   Orbit,
+  Settings,
   Trophy,
   User,
   type LucideIcon,
@@ -20,10 +21,11 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Início", icon: Home },
+  { href: "/perfil", label: "Perfil", icon: User },
   { href: "/explorar", label: "Explorar", icon: Compass },
   { href: "/universos", label: "Universos", icon: Orbit },
   { href: "/conquistas", label: "Conquistas", icon: Trophy },
-  { href: "/perfil", label: "Perfil", icon: User },
+  { href: "/configuracoes", label: "Configurações", icon: Settings },
 ];
 
 function isActive(pathname: string, href: string) {

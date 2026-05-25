@@ -19,6 +19,7 @@ const APP_ROUTES = [
   "/universos",
   "/conquistas",
   "/perfil",
+  "/configuracoes",
 ];
 
 function isAppDocument(url: string) {

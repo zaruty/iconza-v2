@@ -1,25 +1,29 @@
 export type AppNavColorKey =
   | "home"
+  | "profile"
   | "explore"
   | "universes"
   | "achievements"
-  | "profile";
+  | "settings";
 
 /** Nav pigments aligned with illustrated universe palette */
 export const APP_NAV_COLORS: Record<AppNavColorKey, string> = {
   home: "#6F8FB8",
+  profile: "#C26D8C",
   explore: "#D97832",
   universes: "#7A5CCF",
   achievements: "#E0A11B",
-  profile: "#C26D8C",
+  settings: "#8E99A8",
 };
 
 export function hrefToNavColorKey(href: string): AppNavColorKey {
   if (href === "/dashboard") return "home";
+  if (href.startsWith("/perfil")) return "profile";
   if (href.startsWith("/explorar")) return "explore";
   if (href.startsWith("/universos")) return "universes";
   if (href.startsWith("/conquistas")) return "achievements";
-  return "profile";
+  if (href.startsWith("/configuracoes")) return "settings";
+  return "home";
 }
 
 export function getNavColor(href: string): string {

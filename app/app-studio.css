@@ -10,6 +10,7 @@
   --nav-universes: #7a5ccf;
   --nav-achievements: #e0a11b;
   --nav-profile: #c26d8c;
+  --nav-settings: #8e99a8;
 }
 
 .app-shell[data-theme="dark"] {
@@ -26,6 +27,7 @@
   --nav-universes: #7a5ccf;
   --nav-achievements: #e0a11b;
   --nav-profile: #c26d8c;
+  --nav-settings: #8e99a8;
   --app-chrome-bg-bottom: rgba(10, 10, 14, 0.88);
 }
 
@@ -340,6 +342,118 @@
   letter-spacing: 0.04em;
 }
 
+.app-progress--premium .app-progress__track {
+  height: 0.5rem;
+  background: color-mix(in srgb, var(--app-text-muted) 12%, var(--app-track));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.app-progress__fill--premium {
+  background: linear-gradient(
+    90deg,
+    var(--progress-accent-deep, var(--progress-accent)),
+    var(--progress-accent) 58%,
+    color-mix(in srgb, var(--progress-accent) 82%, #ffffff) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 12px color-mix(in srgb, var(--progress-accent) 32%, transparent);
+}
+
+.app-shell[data-theme="dark"] .app-progress--premium .app-progress__track {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.28);
+}
+
+.app-shell[data-theme="dark"] .app-progress__fill--premium {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 16px color-mix(in srgb, var(--progress-accent) 38%, transparent);
+}
+
+.app-shell[data-theme="dark"] .app-progress--premium .app-progress__label,
+.app-shell[data-theme="dark"] .app-progress--premium .app-progress__value {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.universe-domain .app-progress--premium {
+  margin-top: 0.25rem;
+}
+
+/* Settings */
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--app-border);
+}
+
+.settings-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.375rem 0;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.settings-panel__row--muted {
+  opacity: 0.72;
+}
+
+.settings-panel__label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--app-text);
+}
+
+.settings-panel__hint {
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--app-text-muted);
+}
+
+/* Brain map — extensible asset */
+.creative-brain-map__asset {
+  position: relative;
+  width: min(100%, 16rem);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+}
+
+.creative-brain-map__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.creative-brain-map__asset-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  pointer-events: none;
+}
+
+.app-shell[data-theme="dark"] .creative-brain-map__asset {
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.42);
+}
+
+.app-shell[data-theme="dark"] .creative-brain-map__asset-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.12) 0%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
+}
+
 /* Home */
 .studio-home-grid {
   display: grid;
@@ -442,54 +556,145 @@
 }
 
 /* Explore — editorial masonry gallery */
-.explore-masonry {
-  column-count: 2;
-  column-gap: 1.125rem;
+.explore-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-@media (min-width: 480px) {
-  .explore-masonry {
-    column-gap: 1.25rem;
-  }
-}
-
-.explorar-page-lead {
-  max-width: 34rem;
+.explore-gallery__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  margin-bottom: 2.25rem;
 }
 
 @media (min-width: 768px) {
-  .explore-masonry {
+  .explore-gallery__toolbar {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.75rem;
+  }
+}
+
+.explore-density {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 0.375rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--app-border);
+  background: color-mix(in srgb, var(--app-bg) 88%, transparent);
+}
+
+.explore-density__btn {
+  min-height: 34px;
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--app-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.explore-density__btn:hover {
+  color: var(--app-text);
+}
+
+.explore-density__btn.is-active {
+  background: var(--nav-explore);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 8px rgba(217, 120, 50, 0.22);
+}
+
+.explore-masonry {
+  column-count: 1;
+  column-gap: 1.25rem;
+}
+
+.explore-masonry[data-density="compact"] {
+  column-count: 2;
+  column-gap: 0.875rem;
+}
+
+.explore-masonry[data-density="medium"] {
+  column-count: 1;
+  column-gap: 1.375rem;
+}
+
+.explore-masonry[data-density="expanded"] {
+  column-count: 1;
+  column-gap: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .explore-masonry[data-density="compact"] {
     column-count: 3;
+    column-gap: 1.125rem;
+  }
+
+  .explore-masonry[data-density="medium"] {
+    column-count: 2;
     column-gap: 1.5rem;
+  }
+
+  .explore-masonry[data-density="expanded"] {
+    column-count: 1;
+    column-gap: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .explore-masonry {
+  .explore-masonry[data-density="compact"] {
+    column-count: 4;
+    column-gap: 1.25rem;
+  }
+
+  .explore-masonry[data-density="medium"] {
     column-count: 3;
-    column-gap: 1.75rem;
+    column-gap: 1.625rem;
+  }
+
+  .explore-masonry[data-density="expanded"] {
+    column-count: 2;
+    column-gap: 2.25rem;
   }
 }
 
 .explore-pin {
   break-inside: avoid;
-  margin-bottom: 1.5rem;
-  border-radius: 0.75rem;
+  margin-bottom: 1.625rem;
+  border-radius: 0.875rem;
   overflow: hidden;
   background: #faf9f7;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.03),
-    0 8px 24px rgba(0, 0, 0, 0.06);
+    0 1px 2px rgba(0, 0, 0, 0.025),
+    0 10px 28px rgba(0, 0, 0, 0.055);
   transition:
-    box-shadow 0.28s ease,
-    transform 0.28s ease;
+    box-shadow 0.32s ease,
+    transform 0.32s ease;
+}
+
+.explore-pin[data-density="expanded"] {
+  margin-bottom: 2rem;
 }
 
 .explore-pin:hover {
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 16px 40px rgba(0, 0, 0, 0.09);
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 18px 44px rgba(0, 0, 0, 0.085);
 }
 
 .explore-pin__media {
@@ -532,7 +737,15 @@
 }
 
 .explore-pin__body {
-  padding: 1.125rem 1.125rem 1.375rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.explore-pin[data-density="expanded"] .explore-pin__body {
+  padding: 1.375rem 1.375rem 1.625rem;
+}
+
+.explore-pin[data-density="expanded"] .explore-pin__title {
+  font-size: clamp(1.1875rem, 2.2vw, 1.375rem);
 }
 
 .explore-pin__universe {
@@ -961,17 +1174,22 @@
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar {
-  background: var(--app-nav-sidebar-bg);
-  border: 1px solid var(--app-nav-sidebar-border);
+  background: rgba(18, 18, 22, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
-    0 14px 44px rgba(0, 0, 0, 0.14),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 48px rgba(255, 255, 255, 0.02),
+    0 20px 52px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(0, 0, 0, 0.18);
 }
 
 .app-shell[data-theme="dark"] .app-nav--sidebar {
-  background: rgba(12, 12, 16, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.045);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.32);
+  background: rgba(10, 10, 14, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 56px rgba(255, 255, 255, 0.015),
+    0 20px 52px rgba(0, 0, 0, 0.48);
 }
 
 .app-nav__list--sidebar {
@@ -1047,8 +1265,33 @@
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--app-nav-sidebar-hover);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--nav-glow, var(--nav-home)) 10%, transparent);
+}
+
+.app-nav__link--sidebar[data-nav="home"]:hover {
+  --nav-glow: var(--nav-home);
+}
+
+.app-nav__link--sidebar[data-nav="profile"]:hover {
+  --nav-glow: var(--nav-profile);
+}
+
+.app-nav__link--sidebar[data-nav="explore"]:hover {
+  --nav-glow: var(--nav-explore);
+}
+
+.app-nav__link--sidebar[data-nav="universes"]:hover {
+  --nav-glow: var(--nav-universes);
+}
+
+.app-nav__link--sidebar[data-nav="achievements"]:hover {
+  --nav-glow: var(--nav-achievements);
+}
+
+.app-nav__link--sidebar[data-nav="settings"]:hover {
+  --nav-glow: var(--nav-settings);
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active {
@@ -1062,14 +1305,34 @@
 
 @media (max-width: 767px) {
   .app-nav--bottom {
-    inset-inline: 0.875rem;
+    inset-inline: 0.5rem;
     bottom: calc(0.625rem + env(safe-area-inset-bottom, 0px));
     height: auto;
     min-height: 58px;
-    padding: 0.375rem 0.25rem calc(0.375rem + env(safe-area-inset-bottom, 0px));
+    padding: 0.3125rem 0.125rem calc(0.3125rem + env(safe-area-inset-bottom, 0px));
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 1rem;
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.28);
+  }
+
+  .app-nav__list--bottom {
+    height: auto;
+    min-height: 52px;
+  }
+
+  .app-nav__link--bottom .app-nav__icon-wrap {
+    width: 1.9375rem;
+    height: 1.75rem;
+  }
+
+  .app-nav__link--bottom .app-nav__icon {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .app-nav__link--bottom .app-nav__label {
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
   }
 
   .app-shell[data-theme="light"] .app-nav--bottom {
@@ -1089,8 +1352,8 @@
 }
 
 .app-nav__link--sidebar.is-active::before {
-  height: 0.9375rem;
-  opacity: 0.82;
+  height: 1.125rem;
+  opacity: 1;
 }
 
 .app-nav__link--sidebar[data-nav="home"].is-active::before {
@@ -1113,48 +1376,78 @@
   background: var(--nav-profile);
 }
 
+.app-nav__link--sidebar[data-nav="settings"].is-active::before {
+  background: var(--nav-settings);
+}
+
 .app-nav__link--sidebar[data-nav="home"].is-active {
-  background: color-mix(in srgb, var(--nav-home) 10%, transparent);
-}
-
-.app-nav__link--sidebar[data-nav="explore"].is-active {
-  background: color-mix(in srgb, var(--nav-explore) 10%, transparent);
-}
-
-.app-nav__link--sidebar[data-nav="universes"].is-active {
-  background: color-mix(in srgb, var(--nav-universes) 10%, transparent);
-}
-
-.app-nav__link--sidebar[data-nav="achievements"].is-active {
-  background: color-mix(in srgb, var(--nav-achievements) 10%, transparent);
+  background: color-mix(in srgb, var(--nav-home) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-home) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-home) 14%, transparent);
 }
 
 .app-nav__link--sidebar[data-nav="profile"].is-active {
-  background: color-mix(in srgb, var(--nav-profile) 10%, transparent);
+  background: color-mix(in srgb, var(--nav-profile) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-profile) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-profile) 14%, transparent);
+}
+
+.app-nav__link--sidebar[data-nav="explore"].is-active {
+  background: color-mix(in srgb, var(--nav-explore) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-explore) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-explore) 14%, transparent);
+}
+
+.app-nav__link--sidebar[data-nav="universes"].is-active {
+  background: color-mix(in srgb, var(--nav-universes) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-universes) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-universes) 14%, transparent);
+}
+
+.app-nav__link--sidebar[data-nav="achievements"].is-active {
+  background: color-mix(in srgb, var(--nav-achievements) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-achievements) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-achievements) 14%, transparent);
+}
+
+.app-nav__link--sidebar[data-nav="settings"].is-active {
+  background: color-mix(in srgb, var(--nav-settings) 14%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--nav-settings) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--nav-settings) 14%, transparent);
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active {
-  box-shadow: none;
+  color: var(--app-nav-sidebar-active-text);
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link.is-active:hover {
-  background: color-mix(in srgb, var(--nav-home) 12%, transparent);
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="explore"].is-active:hover {
-  background: color-mix(in srgb, var(--nav-explore) 12%, transparent);
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="universes"].is-active:hover {
-  background: color-mix(in srgb, var(--nav-universes) 12%, transparent);
-}
-
-.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="achievements"].is-active:hover {
-  background: color-mix(in srgb, var(--nav-achievements) 12%, transparent);
+  background: color-mix(in srgb, var(--nav-home) 16%, transparent);
 }
 
 .app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="profile"].is-active:hover {
-  background: color-mix(in srgb, var(--nav-profile) 12%, transparent);
+  background: color-mix(in srgb, var(--nav-profile) 16%, transparent);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="explore"].is-active:hover {
+  background: color-mix(in srgb, var(--nav-explore) 16%, transparent);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="universes"].is-active:hover {
+  background: color-mix(in srgb, var(--nav-universes) 16%, transparent);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="achievements"].is-active:hover {
+  background: color-mix(in srgb, var(--nav-achievements) 16%, transparent);
+}
+
+.app-shell[data-theme="light"] .app-nav--sidebar .app-nav__link[data-nav="settings"].is-active:hover {
+  background: color-mix(in srgb, var(--nav-settings) 16%, transparent);
 }
 
 .app-shell[data-theme="dark"] .app-nav--sidebar .app-nav__link.is-active {
@@ -1232,6 +1525,22 @@
     background 0.2s ease,
     color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.app-nav__link[data-nav="settings"] .app-nav__icon {
+  color: var(--nav-settings);
+}
+
+.app-nav__link--sidebar[data-nav="settings"].is-active .app-nav__icon {
+  color: var(--nav-settings);
+}
+
+.app-nav__link--bottom[data-nav="settings"] {
+  color: var(--nav-settings);
+}
+
+.app-nav__link--bottom[data-nav="settings"].is-active .app-nav__icon-wrap {
+  background: var(--nav-settings);
 }
 
 .app-nav__link--bottom .app-nav__icon {

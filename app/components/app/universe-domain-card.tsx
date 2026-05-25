@@ -40,7 +40,9 @@ export function UniverseDomainCard({ universe }: UniverseDomainCardProps) {
             value={universe.mastery}
             label="Domínio"
             accent={universe.accent}
+            accentDeep={universe.accentDeep}
             showValues
+            variant="premium"
           />
         ) : null}
       </div>

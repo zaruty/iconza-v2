@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AppScreen } from "@/app/components/app/app-screen";
 import { CreativeBrainMap } from "@/app/components/app/creative-brain-map";
 import { ProgressBar } from "@/app/components/app/progress-bar";
+import { DEFAULT_BRAIN_MAP_CONFIG } from "@/app/lib/app/brain-map-config";
 import { getUniverseColor } from "@/app/lib/app/universe-colors";
 import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
 import { getSession } from "@/app/lib/auth/session";
@@ -81,7 +82,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="studio-constellation">
-          <CreativeBrainMap />
+          <CreativeBrainMap config={DEFAULT_BRAIN_MAP_CONFIG} />
         </div>
       </section>
     </AppScreen>

@@ -1,17 +1,23 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { MockExploreItem } from "@/app/lib/app/mock-student";
+import type { ExploreDensity } from "@/app/lib/app/explore-density";
 import { getUniverseColor } from "@/app/lib/app/universe-colors";
 
 type ExploreContentCardProps = {
   item: MockExploreItem;
+  density?: ExploreDensity;
 };
 
-export function ExploreContentCard({ item }: ExploreContentCardProps) {
+export function ExploreContentCard({
+  item,
+  density = "medium",
+}: ExploreContentCardProps) {
   return (
     <article
       className="explore-pin"
       data-universe={item.universeId}
+      data-density={density}
       style={{ "--explore-accent": getUniverseColor(item.universeId) } as CSSProperties}
     >
       <div className="explore-pin__media">
