@@ -10,19 +10,21 @@ export type UniverseColorSet = {
   accentDeep: string;
   accentMuted: string;
   accentFill: string;
+  cardHighlight: string;
   cardPigment: string;
   cardPigmentDeep: string;
   chipFill: string;
   chipBorder: string;
 };
 
-/** Illustrated premium pigments — solid fills, not neon */
+/** Vivid illustrated pigments — solid, warm, never neon */
 export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconmind: {
     accent: "#6F8FB8",
     accentDeep: "#5A7BA3",
-    accentMuted: "rgba(111, 143, 184, 0.32)",
-    accentFill: "rgba(111, 143, 184, 0.22)",
+    accentMuted: "rgba(111, 143, 184, 0.28)",
+    accentFill: "rgba(111, 143, 184, 0.18)",
+    cardHighlight: "#9BB4D4",
     cardPigment: "#82A0CA",
     cardPigmentDeep: "#6F8FB8",
     chipFill: "#6F8FB8",
@@ -31,8 +33,9 @@ export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconlove: {
     accent: "#C26D8C",
     accentDeep: "#A85A75",
-    accentMuted: "rgba(194, 109, 140, 0.32)",
-    accentFill: "rgba(194, 109, 140, 0.22)",
+    accentMuted: "rgba(194, 109, 140, 0.28)",
+    accentFill: "rgba(194, 109, 140, 0.18)",
+    cardHighlight: "#D88FA5",
     cardPigment: "#D07F9A",
     cardPigmentDeep: "#C26D8C",
     chipFill: "#C26D8C",
@@ -41,8 +44,9 @@ export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconetnia: {
     accent: "#7A5CCF",
     accentDeep: "#6348B0",
-    accentMuted: "rgba(122, 92, 207, 0.32)",
-    accentFill: "rgba(122, 92, 207, 0.22)",
+    accentMuted: "rgba(122, 92, 207, 0.28)",
+    accentFill: "rgba(122, 92, 207, 0.18)",
+    cardHighlight: "#9A78E8",
     cardPigment: "#9170E0",
     cardPigmentDeep: "#7A5CCF",
     chipFill: "#7A5CCF",
@@ -51,8 +55,9 @@ export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconfood: {
     accent: "#E0A11B",
     accentDeep: "#C48812",
-    accentMuted: "rgba(224, 161, 27, 0.32)",
-    accentFill: "rgba(224, 161, 27, 0.22)",
+    accentMuted: "rgba(224, 161, 27, 0.28)",
+    accentFill: "rgba(224, 161, 27, 0.18)",
+    cardHighlight: "#EFB52A",
     cardPigment: "#E8AF28",
     cardPigmentDeep: "#E0A11B",
     chipFill: "#E0A11B",
@@ -61,8 +66,9 @@ export const UNIVERSE_COLORS: Record<UniverseColorKey, UniverseColorSet> = {
   iconart: {
     accent: "#D97832",
     accentDeep: "#BC6428",
-    accentMuted: "rgba(217, 120, 50, 0.32)",
-    accentFill: "rgba(217, 120, 50, 0.22)",
+    accentMuted: "rgba(217, 120, 50, 0.28)",
+    accentFill: "rgba(217, 120, 50, 0.18)",
+    cardHighlight: "#E89555",
     cardPigment: "#E08845",
     cardPigmentDeep: "#D97832",
     chipFill: "#D97832",
@@ -96,6 +102,13 @@ export function getUniverseColorFill(id: string): string {
     return UNIVERSE_COLORS[id as UniverseColorKey].accentFill;
   }
   return UNIVERSE_COLORS.iconmind.accentFill;
+}
+
+export function getUniverseCardHighlight(id: string): string {
+  if (id in UNIVERSE_COLORS) {
+    return UNIVERSE_COLORS[id as UniverseColorKey].cardHighlight;
+  }
+  return UNIVERSE_COLORS.iconmind.cardHighlight;
 }
 
 export function getUniverseCardPigment(id: string): string {

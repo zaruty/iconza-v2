@@ -271,49 +271,61 @@
 }
 
 .studio-btn--edit {
-  background: #a85f6b;
-  border-color: #8f4e59;
-  color: #fdf8f9;
+  background: #c26d8c;
+  border-color: #a85a75;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 3px 12px rgba(194, 109, 140, 0.28);
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit {
-  background: #96525e;
-  border-color: #844651;
-  color: #fdf8f9;
+  background: #c26d8c;
+  border-color: #a85a75;
+  color: #ffffff;
 }
 
 .studio-btn--edit:hover {
-  background: #96525e;
-  border-color: #844651;
-  color: #fff;
+  background: #a85a75;
+  border-color: #944f68;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 5px 16px rgba(194, 109, 140, 0.32);
 }
 
 .app-shell[data-theme="dark"] .studio-btn--edit:hover {
-  background: #a85f6b;
-  border-color: #96525e;
+  background: #d07f9a;
+  border-color: #c26d8c;
 }
 
 .studio-btn--signout {
   background: #7a2e36;
   border-color: #6b2a31;
-  color: #f5e8ea;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 3px 12px rgba(122, 46, 54, 0.24);
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout {
-  background: #6b2a31;
-  border-color: #5c242a;
-  color: #f5e8ea;
+  background: #7a2e36;
+  border-color: #6b2a31;
+  color: #ffffff;
 }
 
 .studio-btn--signout:hover {
   background: #6b2a31;
   border-color: #5c242a;
-  color: #fff;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 5px 16px rgba(122, 46, 54, 0.3);
 }
 
 .app-shell[data-theme="dark"] .studio-btn--signout:hover {
-  background: #7a2e36;
-  border-color: #6b2a31;
+  background: #8f3842;
+  border-color: #7a2e36;
 }
 
 /* Progress — thin, neutral */
@@ -394,11 +406,11 @@
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__core-outer {
-  fill: rgba(92, 114, 148, 0.12);
+  fill: color-mix(in srgb, var(--nav-home) 18%, transparent);
 }
 
 .creative-brain-map__core-inner {
-  fill: #5c7294;
+  fill: var(--nav-home);
 }
 
 .app-shell[data-theme="dark"] .creative-brain-map__core-inner {
@@ -410,7 +422,7 @@
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__brain-fill {
-  fill: rgba(92, 114, 148, 0.06);
+  fill: color-mix(in srgb, var(--nav-home) 8%, transparent);
 }
 
 .creative-brain-map__line {
@@ -418,15 +430,15 @@
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__line {
-  stroke: rgba(92, 114, 148, 0.18);
+  stroke: color-mix(in srgb, var(--nav-home) 28%, transparent);
 }
 
 .creative-brain-map__line.is-active {
-  stroke-opacity: 0.78;
+  stroke-opacity: 1;
 }
 
 .app-shell[data-theme="light"] .creative-brain-map__line.is-active {
-  stroke-opacity: 0.68;
+  stroke-opacity: 0.92;
 }
 
 /* Explore — masonry editorial */
@@ -474,46 +486,46 @@
   border-radius: 0.625rem;
   background:
     radial-gradient(
-      ellipse 94% 80% at 20% 10%,
-      color-mix(in srgb, var(--explore-pigment) 68%, white),
-      transparent 62%
+      ellipse 92% 76% at 18% 12%,
+      var(--explore-pigment-light) 0%,
+      transparent 72%
     ),
     radial-gradient(
-      ellipse 55% 48% at 90% 94%,
-      color-mix(in srgb, var(--explore-pigment-deep) 48%, black),
+      ellipse 64% 52% at 82% 88%,
+      var(--explore-pigment-deep) 0%,
       transparent 70%
     ),
     linear-gradient(
-      162deg,
-      color-mix(in srgb, var(--explore-pigment) 94%, white) 0%,
-      var(--explore-pigment) 36%,
+      158deg,
+      var(--explore-pigment-light) 0%,
+      var(--explore-pigment) 38%,
       var(--explore-pigment-deep) 100%
     );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 4px 18px color-mix(in srgb, var(--explore-pigment-deep) 22%, transparent);
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    0 8px 28px color-mix(in srgb, var(--explore-pigment-deep) 28%, transparent);
 }
 
 .app-shell[data-theme="dark"] .explore-pin__visual {
   background:
     radial-gradient(
-      ellipse 94% 80% at 20% 10%,
-      color-mix(in srgb, var(--explore-pigment) 42%, transparent),
-      transparent 62%
+      ellipse 92% 76% at 18% 12%,
+      color-mix(in srgb, var(--explore-pigment-light) 82%, transparent) 0%,
+      transparent 72%
     ),
     radial-gradient(
-      ellipse 55% 48% at 90% 94%,
-      color-mix(in srgb, var(--explore-pigment-deep) 38%, #0a0a0e),
+      ellipse 64% 52% at 82% 88%,
+      color-mix(in srgb, var(--explore-pigment-deep) 88%, transparent) 0%,
       transparent 70%
     ),
     linear-gradient(
-      162deg,
-      color-mix(in srgb, var(--explore-pigment) 72%, #141418) 0%,
-      color-mix(in srgb, var(--explore-pigment-deep) 88%, #101014) 100%
+      158deg,
+      var(--explore-pigment) 0%,
+      var(--explore-pigment-deep) 100%
     );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 4px 20px rgba(0, 0, 0, 0.28);
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 28px color-mix(in srgb, var(--explore-pigment-deep) 32%, transparent);
 }
 
 .explore-pin:nth-child(3n) .explore-pin__visual {
@@ -556,11 +568,13 @@
   padding: 0.4375rem 0.875rem;
   border-radius: 999px;
   border: none;
-  color: #fafaf9;
+  color: #ffffff;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 3px 12px rgba(0, 0, 0, 0.1);
   transition:
     filter 0.2s ease,
     box-shadow 0.2s ease,
@@ -568,8 +582,10 @@
 }
 
 .universe-filter-chips__chip:hover {
-  filter: brightness(1.07);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  filter: brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 5px 18px rgba(0, 0, 0, 0.14);
 }
 
 .app-shell[data-theme="light"] .app-glass:hover,
@@ -596,7 +612,7 @@
   margin-right: 1.25rem;
   border-radius: 999px;
   background: var(--domain-accent, var(--app-text-muted));
-  opacity: 0.88;
+  opacity: 1;
 }
 
 .universe-domain--locked .universe-domain__accent-bar {
@@ -685,17 +701,12 @@
   width: 4.5rem;
   height: 4.5rem;
   border-radius: 999px;
-  background: transparent;
-  border: 1px solid color-mix(in srgb, var(--nav-profile) 38%, var(--app-border));
+  background: color-mix(in srgb, var(--nav-profile) 12%, transparent);
+  border: 2px solid var(--nav-profile);
   font-family: var(--font-display), serif;
   font-size: 1.625rem;
   font-weight: 500;
-  color: var(--nav-profile, var(--app-text));
-}
-
-.app-shell[data-theme="light"] .profile-identity__avatar {
-  background: transparent;
-  border-color: rgba(0, 0, 0, 0.07);
+  color: var(--nav-profile);
 }
 
 .profile-identity__name {
@@ -827,16 +838,20 @@
 }
 
 .acervo-piece--unlocked .acervo-piece__icon-wrap {
-  color: #fff8eb;
+  color: #ffffff;
   background: #e0a11b;
   border-color: #c48812;
-  box-shadow: 0 3px 10px rgba(224, 161, 27, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 3px 12px rgba(224, 161, 27, 0.32);
 }
 
 .acervo-piece--unlocked:hover .acervo-piece__icon-wrap {
   background: #c48812;
   border-color: #a87210;
-  box-shadow: 0 4px 12px rgba(224, 161, 27, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 4px 14px rgba(224, 161, 27, 0.36);
 }
 
 .acervo-piece--unlocked .acervo-piece__icon {
@@ -849,13 +864,15 @@
 }
 
 .acervo-piece--locked .acervo-piece__icon-wrap {
-  color: var(--app-text-muted);
-  background: color-mix(in srgb, var(--app-text-muted) 12%, transparent);
-  border-color: var(--app-border);
+  color: color-mix(in srgb, var(--nav-achievements) 72%, var(--app-text-muted));
+  background: color-mix(in srgb, var(--nav-achievements) 14%, transparent);
+  border-color: color-mix(in srgb, var(--nav-achievements) 28%, var(--app-border));
 }
 
 .app-shell[data-theme="dark"] .acervo-piece--locked .acervo-piece__icon-wrap {
-  background: rgba(255, 255, 255, 0.04);
+  color: color-mix(in srgb, var(--nav-achievements) 68%, var(--app-text-muted));
+  background: color-mix(in srgb, var(--nav-achievements) 16%, transparent);
+  border-color: color-mix(in srgb, var(--nav-achievements) 32%, transparent);
 }
 
 .acervo-piece--locked .acervo-piece__icon {
@@ -962,14 +979,17 @@
   height: 1.125rem;
 }
 
+.app-nav__link .app-nav__icon {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
 .app-nav__link--sidebar .app-nav__icon {
   display: block;
   width: 1.0625rem;
   height: 1.0625rem;
   transform: translateY(0.5px);
   transition: fill 0.22s ease;
-  fill: color-mix(in srgb, currentColor 58%, transparent);
-  stroke: currentColor;
 }
 
 .app-nav__link--sidebar.is-active .app-nav__icon {
@@ -1179,8 +1199,8 @@
 }
 
 .app-nav__link--bottom .app-nav__icon {
-  fill: currentColor;
-  stroke: currentColor;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .app-nav__link--bottom.is-active {
@@ -1193,7 +1213,9 @@
 
 .app-nav__link--bottom.is-active .app-nav__icon-wrap {
   color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 3px 12px rgba(0, 0, 0, 0.12);
 }
 
 .app-nav__link--bottom[data-nav="home"].is-active .app-nav__icon-wrap {

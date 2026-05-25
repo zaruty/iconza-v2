@@ -1,9 +1,10 @@
 import type { CSSProperties } from "react";
 import type { MockExploreItem } from "@/app/lib/app/mock-student";
 import {
+  getUniverseCardHighlight,
   getUniverseCardPigment,
   getUniverseCardPigmentDeep,
-  getUniverseColorDeep,
+  getUniverseColor,
 } from "@/app/lib/app/universe-colors";
 
 type ExploreContentCardProps = {
@@ -17,9 +18,10 @@ export function ExploreContentCard({ item }: ExploreContentCardProps) {
       data-universe={item.universeId}
       style={
         {
+          "--explore-pigment-light": getUniverseCardHighlight(item.universeId),
           "--explore-pigment": getUniverseCardPigment(item.universeId),
           "--explore-pigment-deep": getUniverseCardPigmentDeep(item.universeId),
-          "--explore-accent": getUniverseColorDeep(item.universeId),
+          "--explore-accent": getUniverseColor(item.universeId),
         } as CSSProperties
       }
     >
