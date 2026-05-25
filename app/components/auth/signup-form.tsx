@@ -10,7 +10,7 @@ import {
   SubmitButton,
 } from "@/app/components/auth/auth-controls";
 import { AuthInput } from "@/app/components/auth/auth-input";
-import { signInWithGoogle, signUpWithEmail } from "@/app/lib/auth/mock-auth";
+import { signInWithGoogle, signUpWithEmail } from "@/app/lib/auth";
 
 export function SignUpForm() {
   const router = useRouter();
@@ -54,10 +54,7 @@ export function SignUpForm() {
 
     if (!result.success) {
       setError(result.error ?? "Não foi possível conectar com Google.");
-      return;
     }
-
-    router.push("/dashboard");
   }
 
   return (

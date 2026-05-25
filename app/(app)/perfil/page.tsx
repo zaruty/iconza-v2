@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppScreen } from "@/app/components/app/app-screen";
+import { ProfileActions } from "@/app/components/app/profile-actions";
 import { ProfileHeader } from "@/app/components/app/profile-header";
 
 export const metadata: Metadata = {
@@ -28,14 +29,7 @@ export default function PerfilPage() {
         </div>
       </section>
 
-      <div className="profile-actions">
-        <button type="button" className="studio-btn studio-btn--edit">
-          Editar perfil
-        </button>
-        <button type="button" className="studio-btn studio-btn--signout">
-          Sair da conta
-        </button>
-      </div>
+      <ProfileActions />
     </AppScreen>
   );
 }

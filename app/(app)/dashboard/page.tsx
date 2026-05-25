@@ -1,29 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { AppScreen } from "@/app/components/app/app-screen";
 import { CreativeBrainMap } from "@/app/components/app/creative-brain-map";
 import { ProgressBar } from "@/app/components/app/progress-bar";
 import { DEFAULT_BRAIN_MAP_CONFIG } from "@/app/lib/app/brain-map-config";
 import { getUniverseColor } from "@/app/lib/app/universe-colors";
 import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
-import { getSession } from "@/app/lib/auth/session";
+import { useUser } from "@/app/lib/auth/use-user";
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const { firstName, loading } = useUser();
 
-  useEffect(() => {
-    const current = getSession();
-    if (!current) {
-      router.replace("/login");
-      return;
-    }
-    setReady(true);
-  }, [router]);
-
-  if (!ready) {
+  if (loading) {
     return (
       <div className="app-hud-loading">
         <span className="auth-spinner" aria-label="Carregando" />
@@ -38,9 +26,7 @@ export default function DashboardPage() {
     <AppScreen layout="wide">
       <header className="studio-intro">
         <p className="studio-eyebrow font-subtitle">Continuidade</p>
-        <h1 className="studio-title font-display">
-          Olá, {MOCK_STUDENT.firstName}
-        </h1>
+        <h1 className="studio-title font-display">Olá, {firstName}</h1>
         <p className="studio-lead font-subtitle">
           Sua jornada visual segue em {continueLearning.universeName}.
         </p>
