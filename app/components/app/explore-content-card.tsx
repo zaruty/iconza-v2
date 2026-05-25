@@ -15,7 +15,7 @@ export function ExploreContentCard({
 }: ExploreContentCardProps) {
   return (
     <article
-      className="explore-pin"
+      className="explore-pin explore-pin--editorial"
       data-universe={item.universeId}
       data-density={density}
       style={{ "--explore-accent": getUniverseColor(item.universeId) } as CSSProperties}
