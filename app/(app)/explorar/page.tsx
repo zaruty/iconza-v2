@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { AppScreen } from "@/app/components/app/app-screen";
-import { ExploreContentCard } from "@/app/components/app/explore-content-card";
-import { UniverseFilterChips } from "@/app/components/app/universe-filter-chips";
+import { ExploreGallery } from "@/app/components/app/explore-gallery";
 import { MOCK_EXPLORE_ITEMS } from "@/app/lib/app/mock-student";
 
 export const metadata: Metadata = {
@@ -19,13 +18,7 @@ export default function ExplorarPage() {
         </p>
       </header>
 
-      <UniverseFilterChips />
-
-      <div className="explore-masonry">
-        {MOCK_EXPLORE_ITEMS.map((item) => (
-          <ExploreContentCard key={item.id} item={item} />
-        ))}
-      </div>
+      <ExploreGallery items={MOCK_EXPLORE_ITEMS} />
     </AppScreen>
   );
 }

@@ -28,7 +28,8 @@ export type MockExploreItem = {
   author: string;
   universeId: string;
   universeName: string;
-  accent: string;
+  imageUrl: string;
+  imageAlt: string;
 };
 
 export const MOCK_STUDENT = {
@@ -162,7 +163,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Marina Costa",
     universeId: "iconmind",
     universeName: "ICONMIND",
-    accent: UNIVERSE_COLORS.iconmind.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1557672172-298babd8a573?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Composição abstrata em tons azuis e violetas",
   },
   {
     id: "2",
@@ -170,7 +173,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Ana Luísa",
     universeId: "iconlove",
     universeName: "ICONLOVE",
-    accent: UNIVERSE_COLORS.iconlove.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Duas mãos entrelaçadas em luz quente",
   },
   {
     id: "3",
@@ -178,7 +183,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Juliana M.",
     universeId: "iconetnia",
     universeName: "ICONETNIA",
-    accent: UNIVERSE_COLORS.iconetnia.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1582555172866-f73c12a55a6f?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Textura têxtil com padrões culturais vibrantes",
   },
   {
     id: "4",
@@ -186,7 +193,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Camila Ribeiro",
     universeId: "iconfood",
     universeName: "ICONFOOD",
-    accent: UNIVERSE_COLORS.iconfood.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Prato colorido em estilo editorial gastronômico",
   },
   {
     id: "5",
@@ -194,7 +203,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Beatriz N.",
     universeId: "iconart",
     universeName: "ICONART",
-    accent: UNIVERSE_COLORS.iconart.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Galeria de arte com luz natural suave",
   },
   {
     id: "6",
@@ -202,7 +213,9 @@ export const MOCK_EXPLORE_ITEMS: MockExploreItem[] = [
     author: "Fernanda S.",
     universeId: "iconmind",
     universeName: "ICONMIND",
-    accent: UNIVERSE_COLORS.iconmind.accent,
+    imageUrl:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&auto=format&fit=crop",
+    imageAlt: "Planeta iluminado visto do espaço",
   },
 ];
 
