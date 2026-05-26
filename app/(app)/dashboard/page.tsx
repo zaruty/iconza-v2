@@ -9,9 +9,9 @@ import { MOCK_STUDENT } from "@/app/lib/app/mock-student";
 import { useUser } from "@/app/lib/auth/use-user";
 
 export default function DashboardPage() {
-  const { firstName, loading } = useUser();
+  const { firstName, authLoading } = useUser();
 
-  if (loading) {
+  if (authLoading) {
     return (
       <div className="app-hud-loading">
         <span className="auth-spinner" aria-label="Carregando" />

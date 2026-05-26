@@ -8,9 +8,9 @@ import {
 import { useUser } from "@/app/lib/auth/use-user";
 
 export function ProfileHeader() {
-  const { user, profile, loading, displayName } = useUser();
+  const { user, profile, authLoading, displayName } = useUser();
 
-  if (loading) {
+  if (authLoading) {
     return (
       <div className="app-hud-loading">
         <span className="auth-spinner" aria-label="Carregando perfil" />
