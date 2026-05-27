@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { AppPwaProvider } from "@/app/components/app/AppPwaProvider";
 import { AppThemeProvider } from "@/app/components/app/app-theme-provider";
-import { BottomNav } from "@/app/components/app/BottomNav";
+import { AppChrome } from "@/app/components/app/app-chrome";
 import { UserProvider } from "@/app/components/app/user-provider";
 
 export const metadata: Metadata = {
@@ -35,8 +35,7 @@ export default function AppLayout({
     <AppPwaProvider>
       <AppThemeProvider>
         <UserProvider>
-          <BottomNav />
-          <main className="app-main">{children}</main>
+          <AppChrome>{children}</AppChrome>
         </UserProvider>
       </AppThemeProvider>
     </AppPwaProvider>
