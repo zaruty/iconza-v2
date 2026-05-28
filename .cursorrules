@@ -1,0 +1,17 @@
+# ICONZA v2 — Regras permanentes do projeto
+
+## Fluxo de trabalho
+
+- **Plano antes de implementar:** Sempre apresentar o plano (escopo, arquivos afetados, abordagem) e aguardar aprovação da usuária antes de codar.
+- **Commit + push após aprovação:** Depois que a usuária aprovar qualquer plano ou pedido de implementação, fazer **commit** e **push para `origin/main` automaticamente**, sem pedir confirmação extra. Incluir apenas os arquivos da tarefa aprovada; nunca commitar `.env`, credenciais ou artefatos de build (`.next/`, etc.).
+
+## Homepage pública — áreas protegidas
+
+- **Não alterar hero, nav ou footer** sem pedido explícito da usuária.
+- **Homepage pública → SSR puro:** `app/(public)/page.tsx` e seções estáticas devem permanecer Server Components. Interatividade isolada em Client Components importados (ex.: sticky scroll, animações).
+
+## Arquitetura Next.js / Supabase
+
+- **Upload → Client Component:** Seleção, preview e envio de arquivos ficam em Client Components (`"use client"`).
+- **Persistência → Server Action com `createServerClient()`:** Gravar no banco ou storage via Server Actions usando o client Supabase do servidor (`createServerClient()`), nunca no browser com chaves privilegiadas.
+- **Nunca usar `service_role` no browser:** A chave `service_role` só no servidor (Server Actions, Route Handlers, scripts). No client, usar apenas a anon key com RLS.
