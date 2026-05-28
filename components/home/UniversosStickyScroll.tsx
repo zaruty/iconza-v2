@@ -122,6 +122,8 @@ function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
 
+const ICON_WHITE = "rgba(255, 255, 255, 0.90)";
+
 function UniversoIcon({
   universo,
   imageFailed,
@@ -132,7 +134,7 @@ function UniversoIcon({
   onImageError: () => void;
 }) {
   const Icon = ICON_MAP[universo.icone];
-  const glow = `drop-shadow(0 0 60px ${universo.accentColor})`;
+  const glow = "drop-shadow(0 0 60px rgba(255, 255, 255, 0.2))";
 
   if (universo.imagem && !imageFailed) {
     return (
@@ -153,8 +155,9 @@ function UniversoIcon({
     <Icon
       size={280}
       strokeWidth={1}
+      color={ICON_WHITE}
       className="pointer-events-none"
-      style={{ color: universo.accentColor, filter: glow }}
+      style={{ color: ICON_WHITE, stroke: ICON_WHITE, filter: glow }}
       aria-hidden
     />
   );
@@ -344,8 +347,8 @@ export function UniversosStickyScroll() {
     <section
       id="universos"
       ref={containerRef}
-      className="relative z-30 m-0 scroll-mt-20 bg-[#08091A] sm:scroll-mt-24"
-      style={{ height: "600vh" }}
+      className="relative z-30 m-0 mt-0 bg-[#08091A] p-0 pt-0"
+      style={{ height: "600vh", marginTop: 0, paddingTop: 0 }}
       aria-label="Universos ICONZA"
     >
       <StickyPanel

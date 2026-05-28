@@ -146,6 +146,16 @@ export default function Home() {
               <div className="mx-auto h-1.5 w-1 rounded-full bg-white/50" />
             </div>
           </div>
+
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
+            style={{
+              height: "180px",
+              background:
+                "linear-gradient(to bottom, transparent 0%, #08091A 100%)",
+            }}
+          />
         </section>
         </main>
 
