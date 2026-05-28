@@ -157,7 +157,7 @@ function rgbaFromRgb(rgb: Rgb, alpha: number): string {
   return `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${alpha})`;
 }
 
-const NEURAL_CONNECTION_DISTANCE = 180;
+const NEURAL_CONNECTION_DISTANCE = 220;
 const NEURAL_COLOR_TRANSITION_MS = 1200;
 
 type NeuralNode = {
@@ -168,8 +168,8 @@ type NeuralNode = {
 };
 
 function getNeuralNodeCount() {
-  if (typeof window === "undefined") return 40;
-  return window.matchMedia("(min-width: 768px)").matches ? 40 : 20;
+  if (typeof window === "undefined") return 55;
+  return window.matchMedia("(min-width: 768px)").matches ? 55 : 20;
 }
 
 function NeuralBackground({ activeIndex }: { activeIndex: number }) {
@@ -274,16 +274,16 @@ function NeuralBackground({ activeIndex }: { activeIndex: number }) {
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = rgbaFromRgb(color, 0.15);
-          ctx.lineWidth = 0.4;
+          ctx.strokeStyle = rgbaFromRgb(color, 0.35);
+          ctx.lineWidth = 1.2;
           ctx.stroke();
         }
       }
 
       for (const node of nodes) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, 1, 0, Math.PI * 2);
-        ctx.fillStyle = rgbaFromRgb(color, 0.5);
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = rgbaFromRgb(color, 0.7);
         ctx.fill();
       }
 
@@ -482,8 +482,8 @@ function UniversosContent({
   onDotClick: (index: number) => void;
 }) {
   return (
-    <div className="relative z-[3] flex h-full w-full flex-col justify-start md:flex-row md:items-center md:justify-center md:pt-[calc(4.5rem+env(safe-area-inset-top,0px))]">
-      <div className="flex w-full flex-col justify-start px-6 pb-10 md:min-h-0 md:w-[38%] md:max-w-[38%] md:justify-end md:pl-16 md:pr-12 md:pb-14">
+    <div className="relative z-[3] flex h-full w-full flex-col justify-start md:relative md:h-full">
+      <div className="flex w-full flex-col justify-start px-6 pb-10 md:absolute md:top-1/2 md:left-12 md:max-w-[320px] md:-translate-y-1/2">
         <p className="text-xs tracking-[0.2em] text-white/60 md:text-base md:tracking-[0.3em]">
           {universo.numero}
         </p>
@@ -636,9 +636,9 @@ function StickyPanel({
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 z-20"
           style={{
-            height: "200px",
+            height: "280px",
             background:
-              "linear-gradient(to bottom, #08091A 0%, transparent 100%)",
+              "linear-gradient(to bottom, #08091A 0%, #08091A 30%, transparent 100%)",
           }}
         />
 
