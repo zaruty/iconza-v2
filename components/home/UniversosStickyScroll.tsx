@@ -134,6 +134,177 @@ function accentWithAlpha(hex: string, alpha = "60") {
   return `${hex}${alpha}`;
 }
 
+type Rgb = { r: number; g: number; b: number };
+
+function hexToRgb(hex: string): Rgb {
+  const normalized = hex.replace("#", "");
+  return {
+    r: parseInt(normalized.slice(0, 2), 16),
+    g: parseInt(normalized.slice(2, 4), 16),
+    b: parseInt(normalized.slice(4, 6), 16),
+  };
+}
+
+function lerpRgb(a: Rgb, b: Rgb, t: number): Rgb {
+  return {
+    r: a.r + (b.r - a.r) * t,
+    g: a.g + (b.g - a.g) * t,
+    b: a.b + (b.b - a.b) * t,
+  };
+}
+
+function rgbaFromRgb(rgb: Rgb, alpha: number): string {
+  return `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${alpha})`;
+}
+
+const NEURAL_CONNECTION_DISTANCE = 180;
+const NEURAL_COLOR_TRANSITION_MS = 1200;
+
+type NeuralNode = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+};
+
+function getNeuralNodeCount() {
+  if (typeof window === "undefined") return 40;
+  return window.matchMedia("(min-width: 768px)").matches ? 40 : 20;
+}
+
+function NeuralBackground({ activeIndex }: { activeIndex: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const nodesRef = useRef<NeuralNode[]>([]);
+  const currentColorRef = useRef<Rgb>(
+    hexToRgb(universos[activeIndex].accentColor),
+  );
+  const startColorRef = useRef<Rgb>(
+    hexToRgb(universos[activeIndex].accentColor),
+  );
+  const targetColorRef = useRef<Rgb>(
+    hexToRgb(universos[activeIndex].accentColor),
+  );
+  const colorTransitionStartRef = useRef(0);
+  const rafRef = useRef(0);
+
+  useEffect(() => {
+    startColorRef.current = { ...currentColorRef.current };
+    targetColorRef.current = hexToRgb(universos[activeIndex].accentColor);
+    colorTransitionStartRef.current = performance.now();
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const initNodes = (width: number, height: number, count: number) => {
+      nodesRef.current = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+      }));
+    };
+
+    const resize = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const width = parent.clientWidth;
+      const height = parent.clientHeight;
+      const count = getNeuralNodeCount();
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (nodesRef.current.length !== count) {
+        initNodes(width, height, count);
+      }
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const draw = (now: number) => {
+      const parent = canvas.parentElement;
+      if (!parent) {
+        rafRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
+      const width = parent.clientWidth;
+      const height = parent.clientHeight;
+
+      const elapsed = now - colorTransitionStartRef.current;
+      const progress = Math.min(1, elapsed / NEURAL_COLOR_TRANSITION_MS);
+      const eased = 1 - (1 - progress) ** 3;
+      currentColorRef.current = lerpRgb(
+        startColorRef.current,
+        targetColorRef.current,
+        eased,
+      );
+      const color = currentColorRef.current;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const nodes = nodesRef.current;
+      for (const node of nodes) {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < 0) node.x = width;
+        else if (node.x > width) node.x = 0;
+        if (node.y < 0) node.y = height;
+        else if (node.y > height) node.y = 0;
+      }
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist >= NEURAL_CONNECTION_DISTANCE) continue;
+
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = rgbaFromRgb(color, 0.15);
+          ctx.lineWidth = 0.4;
+          ctx.stroke();
+        }
+      }
+
+      for (const node of nodes) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 1, 0, Math.PI * 2);
+        ctx.fillStyle = rgbaFromRgb(color, 0.5);
+        ctx.fill();
+      }
+
+      rafRef.current = requestAnimationFrame(draw);
+    };
+
+    rafRef.current = requestAnimationFrame(draw);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[1]" aria-hidden>
+      <canvas ref={canvasRef} className="h-full w-full" />
+    </div>
+  );
+}
+
 function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
@@ -316,7 +487,7 @@ function UniversosContent({
         <p className="text-xs tracking-[0.2em] text-white/60 md:text-base md:tracking-[0.3em]">
           {universo.numero}
         </p>
-        <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-7xl xl:text-8xl">
+        <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-8xl">
           {universo.nome}
         </h3>
         <p className="mt-2 text-[11px] tracking-[0.25em] text-white/70 md:mt-3 md:text-base">
@@ -462,6 +633,7 @@ function StickyPanel({
         />
 
         <AtmosphericOverlay activeIndex={activeIndex} />
+        <NeuralBackground activeIndex={activeIndex} />
         <GiantBackgroundText activeIndex={activeIndex} />
         <PlanetaCrossfade activeIndex={activeIndex} />
         <DesktopVerticalDots activeIndex={activeIndex} onDotClick={onDotClick} />
