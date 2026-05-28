@@ -39,17 +39,20 @@ body {
 .site-content {
   position: relative;
   z-index: 10;
+  overflow: visible;
 }
 
 .homepage-root {
   position: relative;
   min-height: 100%;
+  overflow: visible;
 }
 
 .homepage-ui {
   position: relative;
   z-index: 20;
   pointer-events: auto;
+  overflow: visible;
 }
 
 .homepage-atmosphere {
@@ -58,7 +61,6 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  touch-action: none;
   user-select: none;
 }
 

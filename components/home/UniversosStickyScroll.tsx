@@ -7,6 +7,7 @@ import {
   useMotionValueEvent,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
 import {
   Brain,
@@ -16,7 +17,7 @@ import {
   UtensilsCrossed,
   type LucideIcon,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ICON_MAP = {
   Brain,
@@ -27,6 +28,8 @@ const ICON_MAP = {
 } as const satisfies Record<string, LucideIcon>;
 
 type IconName = keyof typeof ICON_MAP;
+
+type PanelPin = "relative" | "fixed" | "bottom";
 
 type Universo = {
   id: string;
@@ -66,9 +69,9 @@ const universos: Universo[] = [
     tagline: "EMOÇÃO CRIA CONEXÃO.",
     descricao:
       "Relações profundas começam com autoconhecimento. Desenvolva inteligência emocional e construa vínculos que transformam.",
-    bgCenter: "#6B1535",
-    bgMid: "#3D0A1E",
-    bgEdge: "#1A0510",
+    bgCenter: "#8B1A4A",
+    bgMid: "#5C0F30",
+    bgEdge: "#2D0518",
     accentColor: "#C26D8C",
     imagem: null,
     icone: "Heart",
@@ -81,9 +84,9 @@ const universos: Universo[] = [
     tagline: "IDENTIDADE CRIA PERTENCIMENTO.",
     descricao:
       "Cultura e identidade são suas maiores forças. Explore suas raízes, celebre sua história e amplifique sua voz no mundo.",
-    bgCenter: "#0F4A2A",
-    bgMid: "#072B18",
-    bgEdge: "#03120A",
+    bgCenter: "#1A6B3A",
+    bgMid: "#0F4525",
+    bgEdge: "#051A0F",
     accentColor: "#4CAF82",
     imagem: null,
     icone: "Globe",
@@ -96,9 +99,9 @@ const universos: Universo[] = [
     tagline: "SABOR CRIA MEMÓRIA.",
     descricao:
       "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
-    bgCenter: "#6B2A08",
-    bgMid: "#3D1504",
-    bgEdge: "#1A0902",
+    bgCenter: "#8B4A1A",
+    bgMid: "#5C2D0F",
+    bgEdge: "#2D1205",
     accentColor: "#D97832",
     imagem: null,
     icone: "UtensilsCrossed",
@@ -127,6 +130,14 @@ const universos: Universo[] = [
 
 function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
+}
+
+function getPanelPin(containerTop: number, containerBottom: number) {
+  const viewportHeight = window.innerHeight;
+
+  if (containerTop > 0) return "relative" as const;
+  if (containerBottom <= viewportHeight) return "bottom" as const;
+  return "fixed" as const;
 }
 
 function UniversoVisual({
@@ -186,15 +197,15 @@ function UniversoPanel({
 
   return (
     <motion.div
-      className="flex h-full w-full flex-col md:flex-row"
+      className="flex h-full min-h-0 w-full flex-col md:flex-row"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
       transition={{ duration: 0.4 }}
     >
-      {/* Coluna esquerda */}
+      {/* Coluna esquerda — 55% */}
       <div
-        className="relative flex min-h-[420px] flex-1 flex-col justify-between overflow-visible p-8 pb-10 md:min-h-0 md:w-[55%] md:rounded-l-[24px] md:p-10 md:pb-12"
+        className="relative flex h-full min-h-0 flex-none flex-col justify-between overflow-hidden p-5 pb-6 md:w-[55%] md:max-w-[55%] md:overflow-visible md:rounded-l-[24px] md:p-10 md:pb-12"
         style={{
           background: `radial-gradient(ellipse at 60% 40%, ${universo.bgCenter} 0%, ${universo.bgMid} 45%, ${universo.bgEdge} 100%)`,
         }}
@@ -205,49 +216,28 @@ function UniversoPanel({
           onImageError={() => setImageFailed(true)}
         />
 
-        <div className="relative z-20 max-w-md">
+        <div className="relative z-20 max-w-md shrink-0">
           <p
             className="text-xs tracking-[0.2em]"
             style={{ color: universo.accentColor }}
           >
             {universo.numero}
           </p>
-          <h3 className="mt-2 text-4xl font-black tracking-tight text-white md:text-[48px]">
+          <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-[48px]">
             {universo.nome}
           </h3>
           <p
-            className="mt-3 text-[11px] tracking-[0.25em]"
+            className="mt-2 text-[11px] tracking-[0.25em] md:mt-3"
             style={{ color: universo.accentColor }}
           >
             {universo.tagline}
           </p>
-          <p className="mt-4 max-w-sm text-sm leading-[1.7] text-white/60">
+          <p className="mt-3 max-w-sm text-sm leading-[1.6] text-white/60 md:mt-4 md:leading-[1.7]">
             {universo.descricao}
           </p>
         </div>
 
-        {/* Ícone mobile */}
-        <div className="relative z-20 my-6 flex justify-center md:hidden">
-          <div
-            className="rounded-full p-10"
-            style={{
-              background: `radial-gradient(circle, ${universo.accentColor}26 0%, transparent 70%)`,
-            }}
-          >
-            {(() => {
-              const Icon = ICON_MAP[universo.icone];
-              return (
-                <Icon
-                  size={120}
-                  strokeWidth={1.1}
-                  style={{ color: universo.accentColor }}
-                />
-              );
-            })()}
-          </div>
-        </div>
-
-        <div className="relative z-20 flex items-center gap-2">
+        <div className="relative z-20 mt-4 flex shrink-0 items-center gap-2 md:mt-0">
           {universos.map((item, index) => (
             <button
               key={item.id}
@@ -276,25 +266,25 @@ function UniversoPanel({
         </div>
 
         <p
-          className="pointer-events-none absolute bottom-[-20px] left-[-10px] z-0 w-[200%] select-none font-black leading-none text-white/[0.07] mix-blend-overlay max-md:text-[clamp(48px,18vw,80px)] md:text-[clamp(80px,12vw,140px)]"
+          className="pointer-events-none absolute bottom-[-20px] left-[-10px] z-0 hidden w-[200%] select-none font-black leading-none text-white/[0.07] mix-blend-overlay md:block md:text-[clamp(80px,12vw,140px)]"
           aria-hidden
         >
           {universo.nome}
         </p>
       </div>
 
-      {/* Coluna direita */}
-      <div className="flex flex-col justify-between border-t border-white/30 bg-white/55 p-8 backdrop-blur-[20px] md:w-[45%] md:border-l md:border-t-0 md:px-10 md:py-12">
-        <div>
+      {/* Coluna direita — 45% */}
+      <div className="flex min-h-0 flex-1 flex-col justify-between overflow-hidden border-t border-white/30 bg-white/55 p-5 backdrop-blur-[20px] md:h-full md:w-[45%] md:max-w-[45%] md:flex-none md:border-l md:border-t-0 md:px-10 md:py-12">
+        <div className="min-h-0 overflow-y-auto">
           <p className="text-[13px] text-black/45">Meu universo</p>
-          <p className="mt-2 text-[32px] font-light text-black/80">
+          <p className="mt-2 text-2xl font-light text-black/80 md:text-[32px]">
             {universo.nome}
           </p>
 
-          <p className="mt-10 text-[10px] tracking-[0.2em] text-black/35">
+          <p className="mt-6 text-[10px] tracking-[0.2em] text-black/35 md:mt-10">
             RECURSOS
           </p>
-          <ul className="mt-4">
+          <ul className="mt-3 md:mt-4">
             {universo.recursos.map((recurso, index) => (
               <li key={recurso}>
                 {index > 0 ? (
@@ -308,7 +298,7 @@ function UniversoPanel({
 
         <Link
           href="/cadastro"
-          className="mt-8 inline-flex w-fit items-center justify-center rounded-full px-8 py-3.5 text-sm tracking-wide text-[#F3F3F5] transition-[filter,transform] hover:brightness-105 active:translate-y-px md:mt-10"
+          className="mt-4 inline-flex w-fit shrink-0 items-center justify-center rounded-full px-8 py-3.5 text-sm tracking-wide text-[#F3F3F5] transition-[filter,transform] hover:brightness-105 active:translate-y-px md:mt-10"
           style={{
             background:
               "linear-gradient(180deg, #5B53C7 0%, #3B338F 48%, #211A59 100%)",
@@ -321,9 +311,54 @@ function UniversoPanel({
   );
 }
 
+function UniversosPanel({
+  activeUniverso,
+  activeIndex,
+  panelBackground,
+  onDotClick,
+  pin,
+}: {
+  activeUniverso: Universo;
+  activeIndex: number;
+  panelBackground: MotionValue<string>;
+  onDotClick: (index: number) => void;
+  pin: PanelPin;
+}) {
+  const pinClassName =
+    pin === "fixed"
+      ? "fixed inset-x-0 top-0 z-40"
+      : pin === "bottom"
+        ? "absolute inset-x-0 bottom-0 z-10"
+        : "relative z-10";
+
+  return (
+    <div className={`h-svh w-full ${pinClassName}`}>
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{ backgroundColor: panelBackground }}
+      />
+
+      <div className="flex h-full min-h-0 w-full flex-col px-10 pb-6 pt-[calc(4.5rem+env(safe-area-inset-top,0px))] sm:pb-8">
+        <div className="h-full min-h-0 w-full overflow-hidden rounded-[24px] shadow-2xl shadow-black/40">
+          <AnimatePresence mode="wait">
+            <UniversoPanel
+              key={activeUniverso.id}
+              universo={activeUniverso}
+              activeIndex={activeIndex}
+              onDotClick={onDotClick}
+            />
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function UniversosStickyScroll() {
   const containerRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [panelPin, setPanelPin] = useState<PanelPin>("relative");
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -339,6 +374,25 @@ export function UniversosStickyScroll() {
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     setActiveIndex(getActiveIndex(latest));
   });
+
+  useEffect(() => {
+    const updatePanelPin = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const { top, bottom } = container.getBoundingClientRect();
+      setPanelPin(getPanelPin(top, bottom));
+    };
+
+    updatePanelPin();
+    window.addEventListener("scroll", updatePanelPin, { passive: true });
+    window.addEventListener("resize", updatePanelPin);
+
+    return () => {
+      window.removeEventListener("scroll", updatePanelPin);
+      window.removeEventListener("resize", updatePanelPin);
+    };
+  }, []);
 
   const scrollToUniverse = (index: number) => {
     const container = containerRef.current;
@@ -357,25 +411,17 @@ export function UniversosStickyScroll() {
     <section
       id="universos"
       ref={containerRef}
-      className="relative scroll-mt-20 sm:scroll-mt-24"
+      className="relative z-30 scroll-mt-20 sm:scroll-mt-24"
       style={{ height: "600vh" }}
       aria-label="Universos ICONZA"
     >
-      <motion.div
-        className="sticky top-0 flex h-screen items-center px-4 py-6 sm:px-6"
-        style={{ backgroundColor: panelBackground }}
-      >
-        <div className="mx-auto h-[min(720px,calc(100vh-3rem))] w-full max-w-6xl overflow-hidden rounded-[24px] shadow-2xl shadow-black/40 md:h-[min(640px,calc(100vh-4rem))]">
-          <AnimatePresence mode="wait">
-            <UniversoPanel
-              key={activeUniverso.id}
-              universo={activeUniverso}
-              activeIndex={activeIndex}
-              onDotClick={scrollToUniverse}
-            />
-          </AnimatePresence>
-        </div>
-      </motion.div>
+      <UniversosPanel
+        activeUniverso={activeUniverso}
+        activeIndex={activeIndex}
+        panelBackground={panelBackground}
+        onDotClick={scrollToUniverse}
+        pin={panelPin}
+      />
     </section>
   );
 }

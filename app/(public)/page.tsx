@@ -147,13 +147,14 @@ export default function Home() {
             </div>
           </div>
         </section>
+        </main>
 
         <UniversosStickyScroll />
 
         {/* CTA */}
         <section
           id="comecar"
-          className="relative overflow-hidden px-4 py-20 sm:px-6 sm:py-28"
+          className="site-content relative z-10 overflow-hidden px-4 py-20 sm:px-6 sm:py-28"
         >
           <div className="glass-panel content-readability relative mx-auto max-w-3xl rounded-3xl border border-refined px-6 py-14 text-center sm:px-12 sm:py-16">
             <CrownLogo className="mx-auto h-7 w-10 text-white/70" />
@@ -172,7 +173,6 @@ export default function Home() {
             </Link>
           </div>
         </section>
-      </main>
 
       {/* FOOTER */}
       <footer className="site-content relative z-10 border-t border-refined px-4 py-8 sm:px-6">

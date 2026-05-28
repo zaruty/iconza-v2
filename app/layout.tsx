@@ -34,7 +34,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${cormorant.variable} ${dmSans.variable} ${playfair.variable} ${poppins.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${dmSans.variable} ${playfair.variable} ${poppins.variable} min-h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>
