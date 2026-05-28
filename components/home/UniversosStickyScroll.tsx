@@ -36,6 +36,7 @@ type Universo = {
   descricao: string;
   bgColor: string;
   accentColor: string;
+  atmosphere?: string;
   imagem: string | null;
   icone: IconName;
   recursos: [string, string, string];
@@ -62,8 +63,10 @@ const universos: Universo[] = [
     tagline: "EMOÇÃO CRIA CONEXÃO.",
     descricao:
       "Relações profundas começam com autoconhecimento. Desenvolva inteligência emocional e construa vínculos que transformam.",
-    bgColor: "#4A0F28",
-    accentColor: "#C26D8C",
+    bgColor: "#3D0A20",
+    accentColor: "#D4688A",
+    atmosphere:
+      "radial-gradient(circle at 20% 30%, rgba(180,80,120,0.22), transparent 40%), radial-gradient(circle at 75% 20%, rgba(120,40,70,0.18), transparent 45%)",
     imagem: null,
     icone: "Heart",
     recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
@@ -75,8 +78,10 @@ const universos: Universo[] = [
     tagline: "IDENTIDADE CRIA PERTENCIMENTO.",
     descricao:
       "Cultura e identidade são suas maiores forças. Explore suas raízes, celebre sua história e amplifique sua voz no mundo.",
-    bgColor: "#0A3D1F",
-    accentColor: "#4CAF82",
+    bgColor: "#0A2A14",
+    accentColor: "#52B87A",
+    atmosphere:
+      "radial-gradient(circle at 25% 25%, rgba(60,150,90,0.20), transparent 40%), radial-gradient(circle at 70% 20%, rgba(30,90,50,0.15), transparent 45%)",
     imagem: null,
     icone: "Globe",
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
@@ -128,6 +133,14 @@ function accentGlowColor(hex: string, alpha = 0.35) {
     .toString(16)
     .padStart(2, "0");
   return `#${normalized}${a}`;
+}
+
+function accentGlowGradient(hex: string) {
+  return `radial-gradient(circle, ${accentGlowColor(hex, 0.25)} 0%, ${accentGlowColor(hex, 0.1)} 40%, transparent 70%)`;
+}
+
+function accentGlowGradientOuter(hex: string) {
+  return `radial-gradient(circle, ${accentGlowColor(hex, 0.08)} 0%, transparent 60%)`;
 }
 
 function getActiveIndex(progress: number) {
@@ -183,15 +196,25 @@ function IconWithGlow({
   onImageError: () => void;
 }) {
   return (
-    <div className="relative flex h-[320px] w-[320px] items-center justify-center">
+    <div className="relative flex h-[700px] w-[700px] items-center justify-center">
       <div
         aria-hidden
         className="absolute z-0 rounded-full"
         style={{
-          width: 320,
-          height: 320,
-          background: `radial-gradient(circle, ${accentGlowColor(universo.accentColor)} 0%, transparent 70%)`,
-          filter: "blur(40px)",
+          width: 700,
+          height: 700,
+          background: accentGlowGradientOuter(universo.accentColor),
+          filter: "blur(80px)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute z-0 rounded-full"
+        style={{
+          width: 500,
+          height: 500,
+          background: accentGlowGradient(universo.accentColor),
+          filter: "blur(60px)",
         }}
       />
       <UniversoIcon
@@ -409,6 +432,24 @@ function ContentCrossfade({
   );
 }
 
+function AtmosphericOverlay({ activeIndex }: { activeIndex: number }) {
+  const atmosphere = universos[activeIndex].atmosphere;
+
+  if (!atmosphere) return null;
+
+  return (
+    <motion.div
+      key={activeIndex}
+      aria-hidden
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      style={{ background: atmosphere }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    />
+  );
+}
+
 function StickyPanel({
   activeIndex,
   panelBackground,
@@ -427,6 +468,8 @@ function StickyPanel({
           className="absolute inset-0 h-full w-full transition-[background-color] duration-[800ms] ease-in-out"
           style={{ backgroundColor: panelBackground }}
         />
+
+        <AtmosphericOverlay activeIndex={activeIndex} />
 
         <ContentCrossfade activeIndex={activeIndex} onDotClick={onDotClick} />
         <IconCrossfade activeIndex={activeIndex} />
