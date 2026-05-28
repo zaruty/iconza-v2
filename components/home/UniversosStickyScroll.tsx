@@ -6,6 +6,8 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
+  useTransform,
+  type MotionValue,
 } from "framer-motion";
 import {
   Brain,
@@ -126,6 +128,24 @@ const universos: Universo[] = [
   },
 ];
 
+const PANEL_SCROLL_PROGRESS = [
+  0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
+] as const;
+
+const PANEL_SCROLL_COLORS: string[] = [
+  "#0D1F3F",
+  "#1A1830",
+  "#3D0A1E",
+  "#2A1520",
+  "#072B18",
+  "#1A2010",
+  "#3D1504",
+  "#2A1A10",
+  "#1F0A3D",
+  "#150828",
+  "#0D041A",
+];
+
 function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
@@ -163,18 +183,21 @@ function UniversoVisual({
 
   return (
     <div
-      className="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 md:flex md:right-8"
+      className="pointer-events-none absolute top-1/2 left-[27.5%] z-10 hidden -translate-x-1/2 -translate-y-1/2 md:block"
       aria-hidden
     >
-      <div
-        className="rounded-full p-[60px]"
-        style={{
-          background: `radial-gradient(circle, ${universo.accentColor}26 0%, transparent 70%)`,
-        }}
-      >
+      <div className="relative flex h-[400px] w-[400px] items-center justify-center">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(circle, ${universo.accentColor} 0%, transparent 65%)`,
+            opacity: 0.35,
+          }}
+        />
         <Icon
-          size={200}
+          size={260}
           strokeWidth={1.1}
+          className="relative z-10"
           style={{ color: universo.accentColor }}
         />
       </div>
@@ -195,20 +218,20 @@ function UniversoPanel({
 
   return (
     <motion.div
-      className="flex h-full min-h-0 w-full flex-col md:flex-row"
+      className="relative flex h-full min-h-0 w-full flex-col md:flex-row"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
       transition={{ duration: 0.4 }}
     >
+      <UniversoVisual
+        universo={universo}
+        imageFailed={imageFailed}
+        onImageError={() => setImageFailed(true)}
+      />
+
       {/* Coluna esquerda — 55%, sem card (fundo = painel) */}
       <div className="relative flex h-full min-h-0 flex-none flex-col justify-between overflow-hidden p-5 pb-6 md:w-[55%] md:max-w-[55%] md:overflow-visible md:p-10 md:pb-12">
-        <UniversoVisual
-          universo={universo}
-          imageFailed={imageFailed}
-          onImageError={() => setImageFailed(true)}
-        />
-
         <div className="relative z-20 max-w-md shrink-0">
           <p
             className="text-xs tracking-[0.2em]"
@@ -270,25 +293,22 @@ function UniversoPanel({
       <div
         className="flex min-h-0 flex-1 flex-col justify-between overflow-hidden p-5 md:h-full md:w-[45%] md:max-w-[45%] md:flex-none md:px-10 md:py-12"
         style={{
-          background: "rgba(0, 0, 0, 0.20)",
-          backdropFilter: "blur(12px)",
+          background: "rgba(0, 0, 0, 0.12)",
+          backdropFilter: "blur(8px)",
         }}
       >
         <div className="min-h-0 overflow-y-auto">
-          <p className="text-[13px] text-white/45">Meu universo</p>
+          <p className="text-[13px] text-white/40">Meu universo</p>
           <p className="mt-2 text-2xl font-light text-white/90 md:text-[32px]">
             {universo.nome}
           </p>
 
-          <p className="mt-6 text-[10px] tracking-[0.2em] text-white/45 md:mt-10">
+          <p className="mt-6 text-[10px] tracking-[0.2em] text-white/40 md:mt-10">
             RECURSOS
           </p>
-          <ul className="mt-3 md:mt-4">
-            {universo.recursos.map((recurso, index) => (
+          <ul className="mt-3 flex flex-col gap-3 md:mt-4 md:gap-4">
+            {universo.recursos.map((recurso) => (
               <li key={recurso}>
-                {index > 0 ? (
-                  <div className="my-3 h-px bg-white/10" aria-hidden />
-                ) : null}
                 <span className="text-sm text-white/90">{recurso}</span>
               </li>
             ))}
@@ -309,11 +329,13 @@ function UniversoPanel({
 function UniversosPanel({
   activeUniverso,
   activeIndex,
+  panelBackground,
   onDotClick,
   pin,
 }: {
   activeUniverso: Universo;
   activeIndex: number;
+  panelBackground: MotionValue<string>;
   onDotClick: (index: number) => void;
   pin: PanelPin;
 }) {
@@ -324,14 +346,12 @@ function UniversosPanel({
         ? "absolute inset-x-0 bottom-0 z-10"
         : "relative z-10";
 
-  const panelGradient = `radial-gradient(ellipse at 60% 40%, ${activeUniverso.bgCenter} 0%, ${activeUniverso.bgMid} 45%, ${activeUniverso.bgEdge} 100%)`;
-
   return (
     <div className={`h-svh w-full ${pinClassName}`}>
       <div className="flex h-full min-h-0 w-full flex-col px-10 pb-6 pt-[calc(4.5rem+env(safe-area-inset-top,0px))] sm:pb-8">
-        <div
+        <motion.div
           className="h-full min-h-0 w-full overflow-hidden rounded-[24px] shadow-2xl shadow-black/40"
-          style={{ background: panelGradient }}
+          style={{ backgroundColor: panelBackground }}
         >
           <AnimatePresence mode="wait">
             <UniversoPanel
@@ -341,7 +361,7 @@ function UniversosPanel({
               onDotClick={onDotClick}
             />
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -356,6 +376,12 @@ export function UniversosStickyScroll() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
+
+  const panelBackground = useTransform(
+    scrollYProgress,
+    [...PANEL_SCROLL_PROGRESS],
+    PANEL_SCROLL_COLORS,
+  );
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     setActiveIndex(getActiveIndex(latest));
@@ -404,6 +430,7 @@ export function UniversosStickyScroll() {
       <UniversosPanel
         activeUniverso={activeUniverso}
         activeIndex={activeIndex}
+        panelBackground={panelBackground}
         onDotClick={scrollToUniverse}
         pin={panelPin}
       />
