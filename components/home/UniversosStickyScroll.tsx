@@ -34,6 +34,7 @@ type Universo = {
   nome: string;
   tagline: string;
   descricao: string;
+  bgColor: string;
   accentColor: string;
   imagem: string | null;
   icone: IconName;
@@ -48,6 +49,7 @@ const universos: Universo[] = [
     tagline: "CONHECIMENTO CRIA DIREÇÃO.",
     descricao:
       "Mentes curiosas constroem futuros extraordinários. Explore ideias, desenvolva estratégias e transforme conhecimento em impacto real.",
+    bgColor: "#1A2E5C",
     accentColor: "#6B8FC7",
     imagem: "/images/universos/iconmind-hero.png",
     icone: "Brain",
@@ -60,6 +62,7 @@ const universos: Universo[] = [
     tagline: "EMOÇÃO CRIA CONEXÃO.",
     descricao:
       "Relações profundas começam com autoconhecimento. Desenvolva inteligência emocional e construa vínculos que transformam.",
+    bgColor: "#4A0F28",
     accentColor: "#C26D8C",
     imagem: null,
     icone: "Heart",
@@ -72,6 +75,7 @@ const universos: Universo[] = [
     tagline: "IDENTIDADE CRIA PERTENCIMENTO.",
     descricao:
       "Cultura e identidade são suas maiores forças. Explore suas raízes, celebre sua história e amplifique sua voz no mundo.",
+    bgColor: "#0A3D1F",
     accentColor: "#4CAF82",
     imagem: null,
     icone: "Globe",
@@ -84,6 +88,7 @@ const universos: Universo[] = [
     tagline: "SABOR CRIA MEMÓRIA.",
     descricao:
       "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
+    bgColor: "#5C2A08",
     accentColor: "#D97832",
     imagem: null,
     icone: "UtensilsCrossed",
@@ -100,6 +105,7 @@ const universos: Universo[] = [
     tagline: "EXPRESSÃO CRIA IMPACTO.",
     descricao:
       "Arte é o idioma da alma criativa. Desenvolva seu olhar estético, sua linguagem visual e sua assinatura única.",
+    bgColor: "#2A0F5C",
     accentColor: "#7A5CCF",
     imagem: null,
     icone: "Palette",
@@ -111,12 +117,18 @@ const BG_SCROLL_PROGRESS = [0, 0.2, 0.4, 0.6, 0.8, 1.0] as const;
 
 const BG_SCROLL_COLORS: string[] = [
   "#08091A",
-  "#1A2E5C",
-  "#3D0A1E",
-  "#0F4D28",
-  "#7A3510",
-  "#1A0D2E",
+  ...universos.map((u) => u.bgColor),
 ];
+
+const CROSSFADE_MS = 0.4;
+
+function accentGlowColor(hex: string, alpha = 0.35) {
+  const normalized = hex.replace("#", "");
+  const a = Math.round(alpha * 255)
+    .toString(16)
+    .padStart(2, "0");
+  return `#${normalized}${a}`;
+}
 
 function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
@@ -134,7 +146,6 @@ function UniversoIcon({
   onImageError: () => void;
 }) {
   const Icon = ICON_MAP[universo.icone];
-  const glow = "drop-shadow(0 0 60px rgba(255, 255, 255, 0.2))";
 
   if (universo.imagem && !imageFailed) {
     return (
@@ -144,8 +155,7 @@ function UniversoIcon({
         alt=""
         width={280}
         height={280}
-        className="pointer-events-none h-[280px] w-[280px] object-contain"
-        style={{ filter: glow }}
+        className="pointer-events-none relative z-[1] h-[280px] w-[280px] object-contain"
         onError={onImageError}
       />
     );
@@ -156,10 +166,78 @@ function UniversoIcon({
       size={280}
       strokeWidth={1}
       color={ICON_WHITE}
-      className="pointer-events-none"
-      style={{ color: ICON_WHITE, stroke: ICON_WHITE, filter: glow }}
+      className="pointer-events-none relative z-[1]"
+      style={{ color: ICON_WHITE, stroke: ICON_WHITE }}
       aria-hidden
     />
+  );
+}
+
+function IconWithGlow({
+  universo,
+  imageFailed,
+  onImageError,
+}: {
+  universo: Universo;
+  imageFailed: boolean;
+  onImageError: () => void;
+}) {
+  return (
+    <div className="relative flex h-[320px] w-[320px] items-center justify-center">
+      <div
+        aria-hidden
+        className="absolute z-0 rounded-full"
+        style={{
+          width: 320,
+          height: 320,
+          background: `radial-gradient(circle, ${accentGlowColor(universo.accentColor)} 0%, transparent 70%)`,
+          filter: "blur(40px)",
+        }}
+      />
+      <UniversoIcon
+        universo={universo}
+        imageFailed={imageFailed}
+        onImageError={onImageError}
+      />
+    </div>
+  );
+}
+
+function IconCrossfade({ activeIndex }: { activeIndex: number }) {
+  const [shownIndex, setShownIndex] = useState(activeIndex);
+  const [visible, setVisible] = useState(true);
+  const [imageFailed, setImageFailed] = useState(false);
+  const pendingIndexRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (activeIndex === shownIndex) return;
+
+    pendingIndexRef.current = activeIndex;
+    setVisible(false);
+  }, [activeIndex, shownIndex]);
+
+  const handleAnimationComplete = () => {
+    if (pendingIndexRef.current === null) return;
+
+    setShownIndex(pendingIndexRef.current);
+    pendingIndexRef.current = null;
+    setImageFailed(false);
+    setVisible(true);
+  };
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute top-1/2 left-1/2 z-[2] -translate-x-1/2 -translate-y-1/2"
+      animate={{ opacity: visible ? 1 : 0 }}
+      transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
+      onAnimationComplete={handleAnimationComplete}
+    >
+      <IconWithGlow
+        universo={universos[shownIndex]}
+        imageFailed={imageFailed}
+        onImageError={() => setImageFailed(true)}
+      />
+    </motion.div>
   );
 }
 
@@ -172,8 +250,6 @@ function UniversosContent({
   activeIndex: number;
   onDotClick: (index: number) => void;
 }) {
-  const [imageFailed, setImageFailed] = useState(false);
-
   return (
     <>
       {/* Layer 2 — texto gigante translúcido */}
@@ -184,15 +260,6 @@ function UniversosContent({
       >
         {universo.nome}
       </p>
-
-      {/* Layer 3 — ícone central, sem wrapper */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 z-[2] -translate-x-1/2 -translate-y-1/2">
-        <UniversoIcon
-          universo={universo}
-          imageFailed={imageFailed}
-          onImageError={() => setImageFailed(true)}
-        />
-      </div>
 
       {/* Layer 4 — HUD + coluna direita (desktop) */}
       <div className="relative z-[3] flex h-full w-full pt-[calc(4.5rem+env(safe-area-inset-top,0px))] md:flex-row">
@@ -315,7 +382,7 @@ function ContentCrossfade({
           className="absolute inset-0 h-full w-full"
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
           onAnimationComplete={() => clearPrevious(previous)}
         >
           <UniversosContent
@@ -330,7 +397,7 @@ function ContentCrossfade({
         className="absolute inset-0 h-full w-full"
         initial={previous !== null ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
       >
         <UniversosContent
           universo={universos[current]}
@@ -362,6 +429,7 @@ function StickyPanel({
         />
 
         <ContentCrossfade activeIndex={activeIndex} onDotClick={onDotClick} />
+        <IconCrossfade activeIndex={activeIndex} />
       </div>
     </div>
   );
