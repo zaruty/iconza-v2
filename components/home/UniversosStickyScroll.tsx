@@ -6,8 +6,6 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
-  useTransform,
-  type MotionValue,
 } from "framer-motion";
 import {
   Brain,
@@ -203,13 +201,8 @@ function UniversoPanel({
       exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
       transition={{ duration: 0.4 }}
     >
-      {/* Coluna esquerda — 55% */}
-      <div
-        className="relative flex h-full min-h-0 flex-none flex-col justify-between overflow-hidden p-5 pb-6 md:w-[55%] md:max-w-[55%] md:overflow-visible md:rounded-l-[24px] md:p-10 md:pb-12"
-        style={{
-          background: `radial-gradient(ellipse at 60% 40%, ${universo.bgCenter} 0%, ${universo.bgMid} 45%, ${universo.bgEdge} 100%)`,
-        }}
-      >
+      {/* Coluna esquerda — 55%, sem card (fundo = painel) */}
+      <div className="relative flex h-full min-h-0 flex-none flex-col justify-between overflow-hidden p-5 pb-6 md:w-[55%] md:max-w-[55%] md:overflow-visible md:p-10 md:pb-12">
         <UniversoVisual
           universo={universo}
           imageFailed={imageFailed}
@@ -273,24 +266,30 @@ function UniversoPanel({
         </p>
       </div>
 
-      {/* Coluna direita — 45% */}
-      <div className="flex min-h-0 flex-1 flex-col justify-between overflow-hidden border-t border-white/30 bg-white/55 p-5 backdrop-blur-[20px] md:h-full md:w-[45%] md:max-w-[45%] md:flex-none md:border-l md:border-t-0 md:px-10 md:py-12">
+      {/* Coluna direita — 45%, quase invisível */}
+      <div
+        className="flex min-h-0 flex-1 flex-col justify-between overflow-hidden p-5 md:h-full md:w-[45%] md:max-w-[45%] md:flex-none md:px-10 md:py-12"
+        style={{
+          background: "rgba(0, 0, 0, 0.20)",
+          backdropFilter: "blur(12px)",
+        }}
+      >
         <div className="min-h-0 overflow-y-auto">
-          <p className="text-[13px] text-black/45">Meu universo</p>
-          <p className="mt-2 text-2xl font-light text-black/80 md:text-[32px]">
+          <p className="text-[13px] text-white/45">Meu universo</p>
+          <p className="mt-2 text-2xl font-light text-white/90 md:text-[32px]">
             {universo.nome}
           </p>
 
-          <p className="mt-6 text-[10px] tracking-[0.2em] text-black/35 md:mt-10">
+          <p className="mt-6 text-[10px] tracking-[0.2em] text-white/45 md:mt-10">
             RECURSOS
           </p>
           <ul className="mt-3 md:mt-4">
             {universo.recursos.map((recurso, index) => (
               <li key={recurso}>
                 {index > 0 ? (
-                  <div className="my-3 h-px bg-black/[0.06]" aria-hidden />
+                  <div className="my-3 h-px bg-white/10" aria-hidden />
                 ) : null}
-                <span className="text-sm text-black/70">{recurso}</span>
+                <span className="text-sm text-white/90">{recurso}</span>
               </li>
             ))}
           </ul>
@@ -298,11 +297,7 @@ function UniversoPanel({
 
         <Link
           href="/cadastro"
-          className="mt-4 inline-flex w-fit shrink-0 items-center justify-center rounded-full px-8 py-3.5 text-sm tracking-wide text-[#F3F3F5] transition-[filter,transform] hover:brightness-105 active:translate-y-px md:mt-10"
-          style={{
-            background:
-              "linear-gradient(180deg, #5B53C7 0%, #3B338F 48%, #211A59 100%)",
-          }}
+          className="mt-4 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-white/30 bg-transparent px-8 py-3.5 text-sm tracking-wide text-white/90 transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
         >
           Explorar {universo.nome}
         </Link>
@@ -314,13 +309,11 @@ function UniversoPanel({
 function UniversosPanel({
   activeUniverso,
   activeIndex,
-  panelBackground,
   onDotClick,
   pin,
 }: {
   activeUniverso: Universo;
   activeIndex: number;
-  panelBackground: MotionValue<string>;
   onDotClick: (index: number) => void;
   pin: PanelPin;
 }) {
@@ -331,16 +324,15 @@ function UniversosPanel({
         ? "absolute inset-x-0 bottom-0 z-10"
         : "relative z-10";
 
+  const panelGradient = `radial-gradient(ellipse at 60% 40%, ${activeUniverso.bgCenter} 0%, ${activeUniverso.bgMid} 45%, ${activeUniverso.bgEdge} 100%)`;
+
   return (
     <div className={`h-svh w-full ${pinClassName}`}>
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{ backgroundColor: panelBackground }}
-      />
-
       <div className="flex h-full min-h-0 w-full flex-col px-10 pb-6 pt-[calc(4.5rem+env(safe-area-inset-top,0px))] sm:pb-8">
-        <div className="h-full min-h-0 w-full overflow-hidden rounded-[24px] shadow-2xl shadow-black/40">
+        <div
+          className="h-full min-h-0 w-full overflow-hidden rounded-[24px] shadow-2xl shadow-black/40"
+          style={{ background: panelGradient }}
+        >
           <AnimatePresence mode="wait">
             <UniversoPanel
               key={activeUniverso.id}
@@ -364,12 +356,6 @@ export function UniversosStickyScroll() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
-  const panelBackground = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    universos.map((u) => u.bgMid).concat(universos[4].bgMid),
-  );
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     setActiveIndex(getActiveIndex(latest));
@@ -418,7 +404,6 @@ export function UniversosStickyScroll() {
       <UniversosPanel
         activeUniverso={activeUniverso}
         activeIndex={activeIndex}
-        panelBackground={panelBackground}
         onDotClick={scrollToUniverse}
         pin={panelPin}
       />
