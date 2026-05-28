@@ -632,6 +632,16 @@ function StickyPanel({
           transition={{ duration: 1.2, ease: "easeOut" }}
         />
 
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-20"
+          style={{
+            height: "200px",
+            background:
+              "linear-gradient(to bottom, #08091A 0%, transparent 100%)",
+          }}
+        />
+
         <AtmosphericOverlay activeIndex={activeIndex} />
         <NeuralBackground activeIndex={activeIndex} />
         <GiantBackgroundText activeIndex={activeIndex} />
