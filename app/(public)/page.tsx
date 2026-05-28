@@ -1,44 +1,7 @@
 import Link from "next/link";
 import { HomeAtmosphere } from "@/app/components/home-atmosphere";
 import { CustomCursor } from "@/app/components/custom-cursor";
-
-const universes = [
-  {
-    name: "ICONMIND",
-    tagline: "Pensamento visual",
-    description:
-      "Transforme ideias complexas em ícones claros. Aprenda a sintetizar conceitos com IA.",
-    accent: "from-iconza-lilac/20 to-transparent",
-  },
-  {
-    name: "ICONLOVE",
-    tagline: "Emoção e conexão",
-    description:
-      "Crie símbolos que comunicam afeto, empatia e relações humanas de forma única.",
-    accent: "from-iconza-pink/10 to-transparent",
-  },
-  {
-    name: "ICONETNIA",
-    tagline: "Cultura e identidade",
-    description:
-      "Explore tradições, diversidade e narrativas visuais de diferentes povos e origens.",
-    accent: "from-iconza-lavender/15 to-transparent",
-  },
-  {
-    name: "ICONFOOD",
-    tagline: "Sabores em ícone",
-    description:
-      "Represente gastronomia, ingredientes e experiências culinárias com precisão visual.",
-    accent: "from-iconza-lilac/15 to-transparent",
-  },
-  {
-    name: "ICONART",
-    tagline: "Arte e expressão",
-    description:
-      "Mergulhe na estética, composição e linguagem artística aplicada ao design de ícones.",
-    accent: "from-iconza-lavender/20 to-transparent",
-  },
-] as const;
+import { UniversosStickyScroll } from "@/components/home/UniversosStickyScroll";
 
 function BrainOutlineIcon({ className }: { className?: string }) {
   return (
@@ -185,72 +148,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* UNIVERSOS */}
-        <section
-          id="universos"
-          className="relative scroll-mt-20 border-t border-refined px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-28"
-        >
-          <div className="content-readability relative mx-auto max-w-6xl">
-            <div className="mb-12 max-w-2xl sm:mb-16">
-              <p className="text-xs font-medium uppercase tracking-[0.3em] text-iconza-lilac">
-                Universos
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-iconza-pink sm:text-4xl md:text-5xl">
-                Cinco mundos para explorar
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-iconza-pink/65 sm:text-base">
-                Cada universo ICONZA é um caminho de aprendizado focado em um
-                domínio criativo diferente.
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-              {universes.map((universe, index) => (
-                <article
-                  key={universe.name}
-                  className={`glass-panel group relative overflow-hidden rounded-2xl border border-refined p-6 transition-all duration-300 hover:border-white/25 sm:p-7 ${
-                    index === universes.length - 1
-                      ? "sm:col-span-2 lg:col-span-1"
-                      : ""
-                  }`}
-                >
-                  <div
-                    className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${universe.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
-                  />
-                  <div className="relative">
-                    <span className="inline-block rounded-full border border-white/18 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/65">
-                      {universe.tagline}
-                    </span>
-                    <h3 className="mt-4 font-display text-2xl font-semibold tracking-wide text-iconza-pink sm:text-3xl">
-                      {universe.name}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-iconza-pink/60">
-                      {universe.description}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-white/55 transition-colors group-hover:text-white/80">
-                      Explorar
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        aria-hidden
-                      >
-                        <path
-                          d="M3 7h8M8 4l3 3-3 3"
-                          stroke="currentColor"
-                          strokeWidth="1.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <UniversosStickyScroll />
 
         {/* CTA */}
         <section
