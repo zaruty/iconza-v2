@@ -110,11 +110,11 @@ const universos: Universo[] = [
 const BG_SCROLL_PROGRESS = [0, 0.2, 0.4, 0.6, 0.8, 1.0] as const;
 
 const BG_SCROLL_COLORS: string[] = [
+  "#08091A",
   "#1A2E5C",
   "#3D0A1E",
   "#0F4D28",
   "#7A3510",
-  "#3D1565",
   "#1A0D2E",
 ];
 
@@ -283,27 +283,29 @@ function StickyPanel({
   const universo = universos[activeIndex];
 
   return (
-    <div className="sticky top-0 h-svh w-full overflow-hidden">
-      {/* Layer 1 — fundo animado fullscreen */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 h-full w-full transition-[background-color] duration-[800ms] ease-in-out"
-        style={{ backgroundColor: panelBackground }}
-      />
-
-      <motion.div
-        key={activeIndex}
-        className="absolute inset-0 h-full w-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-      >
-        <UniversosContent
-          universo={universo}
-          activeIndex={activeIndex}
-          onDotClick={onDotClick}
+    <div className="sticky top-0 h-[100vh] w-full">
+      <div className="relative h-full w-full overflow-hidden">
+        {/* Layer 1 — fundo animado fullscreen */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 h-full w-full transition-[background-color] duration-[800ms] ease-in-out"
+          style={{ backgroundColor: panelBackground }}
         />
-      </motion.div>
+
+        <motion.div
+          key={activeIndex}
+          className="absolute inset-0 h-full w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        >
+          <UniversosContent
+            universo={universo}
+            activeIndex={activeIndex}
+            onDotClick={onDotClick}
+          />
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -342,7 +344,7 @@ export function UniversosStickyScroll() {
     <section
       id="universos"
       ref={containerRef}
-      className="relative z-30 scroll-mt-20 sm:scroll-mt-24"
+      className="relative z-30 m-0 scroll-mt-20 bg-[#08091A] sm:scroll-mt-24"
       style={{ height: "600vh" }}
       aria-label="Universos ICONZA"
     >

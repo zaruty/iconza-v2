@@ -99,6 +99,18 @@ body {
   padding-bottom: clamp(2rem, 6svh, 3.5rem);
 }
 
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent 0%, #08091a 100%);
+  pointer-events: none;
+  z-index: 15;
+}
+
 @media (max-width: 767px) {
   .hero-section {
     display: block !important;
