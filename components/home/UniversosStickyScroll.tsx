@@ -37,7 +37,6 @@ type Universo = {
   bgColor: string;
   accentColor: string;
   atmosphere?: string;
-  imagem: string | null;
   icone: IconName;
   recursos: [string, string, string];
 };
@@ -52,7 +51,6 @@ const universos: Universo[] = [
       "Mentes curiosas constroem futuros extraordinários. Explore ideias, desenvolva estratégias e transforme conhecimento em impacto real.",
     bgColor: "#1A2E5C",
     accentColor: "#6B8FC7",
-    imagem: "/images/universos/iconmind-hero.png",
     icone: "Brain",
     recursos: ["Mapa de ideias", "Guia estratégico", "Radar de insights"],
   },
@@ -67,7 +65,6 @@ const universos: Universo[] = [
     accentColor: "#52B87A",
     atmosphere:
       "radial-gradient(circle at 25% 25%, rgba(60,150,90,0.20), transparent 40%), radial-gradient(circle at 70% 20%, rgba(30,90,50,0.15), transparent 45%)",
-    imagem: null,
     icone: "Globe",
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
   },
@@ -78,11 +75,10 @@ const universos: Universo[] = [
     tagline: "SABOR CRIA MEMÓRIA.",
     descricao:
       "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
-    bgColor: "#3D1A00",
+    bgColor: "#2A0E00",
     accentColor: "#E8721A",
     atmosphere:
-      "radial-gradient(circle at 20% 25%, rgba(232,114,26,0.25), transparent 40%), radial-gradient(circle at 75% 20%, rgba(180,80,10,0.18), transparent 45%), radial-gradient(circle at 50% 70%, rgba(120,50,0,0.20), transparent 50%)",
-    imagem: null,
+      "radial-gradient(circle at 25% 30%, rgba(232,114,26,0.35), transparent 45%), radial-gradient(circle at 70% 25%, rgba(200,90,10,0.25), transparent 45%), radial-gradient(circle at 50% 65%, rgba(150,60,0,0.20), transparent 50%)",
     icone: "UtensilsCrossed",
     recursos: [
       "Mapa gastronômico",
@@ -101,7 +97,6 @@ const universos: Universo[] = [
     accentColor: "#D4688A",
     atmosphere:
       "radial-gradient(circle at 20% 30%, rgba(180,80,120,0.22), transparent 40%), radial-gradient(circle at 75% 20%, rgba(120,40,70,0.18), transparent 45%)",
-    imagem: null,
     icone: "Heart",
     recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
   },
@@ -114,7 +109,6 @@ const universos: Universo[] = [
       "Arte é o idioma da alma criativa. Desenvolva seu olhar estético, sua linguagem visual e sua assinatura única.",
     bgColor: "#2A0F5C",
     accentColor: "#7A5CCF",
-    imagem: null,
     icone: "Palette",
     recursos: ["Mapa estético", "Guia de linguagem visual", "Radar criativo"],
   },
@@ -151,30 +145,8 @@ function getActiveIndex(progress: number) {
 
 const ICON_WHITE = "rgba(255, 255, 255, 0.90)";
 
-function UniversoIcon({
-  universo,
-  imageFailed,
-  onImageError,
-}: {
-  universo: Universo;
-  imageFailed: boolean;
-  onImageError: () => void;
-}) {
+function UniversoIcon({ universo }: { universo: Universo }) {
   const Icon = ICON_MAP[universo.icone];
-
-  if (universo.imagem && !imageFailed) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={universo.imagem}
-        alt=""
-        width={280}
-        height={280}
-        className="pointer-events-none relative z-[1] h-[280px] w-[280px] object-contain"
-        onError={onImageError}
-      />
-    );
-  }
 
   return (
     <Icon
@@ -188,15 +160,7 @@ function UniversoIcon({
   );
 }
 
-function IconWithGlow({
-  universo,
-  imageFailed,
-  onImageError,
-}: {
-  universo: Universo;
-  imageFailed: boolean;
-  onImageError: () => void;
-}) {
+function IconWithGlow({ universo }: { universo: Universo }) {
   return (
     <div className="relative flex h-[700px] w-[700px] items-center justify-center">
       <div
@@ -219,11 +183,7 @@ function IconWithGlow({
           filter: "blur(60px)",
         }}
       />
-      <UniversoIcon
-        universo={universo}
-        imageFailed={imageFailed}
-        onImageError={onImageError}
-      />
+      <UniversoIcon universo={universo} />
     </div>
   );
 }
@@ -231,22 +191,23 @@ function IconWithGlow({
 function IconCrossfade({ activeIndex }: { activeIndex: number }) {
   const [shownIndex, setShownIndex] = useState(activeIndex);
   const [visible, setVisible] = useState(true);
-  const [imageFailed, setImageFailed] = useState(false);
   const pendingIndexRef = useRef<number | null>(null);
+  const isFadingOutRef = useRef(false);
 
   useEffect(() => {
     if (activeIndex === shownIndex) return;
 
     pendingIndexRef.current = activeIndex;
+    isFadingOutRef.current = true;
     setVisible(false);
   }, [activeIndex, shownIndex]);
 
   const handleAnimationComplete = () => {
-    if (pendingIndexRef.current === null) return;
+    if (!isFadingOutRef.current || pendingIndexRef.current === null) return;
 
+    isFadingOutRef.current = false;
     setShownIndex(pendingIndexRef.current);
     pendingIndexRef.current = null;
-    setImageFailed(false);
     setVisible(true);
   };
 
@@ -257,11 +218,7 @@ function IconCrossfade({ activeIndex }: { activeIndex: number }) {
       transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
       onAnimationComplete={handleAnimationComplete}
     >
-      <IconWithGlow
-        universo={universos[shownIndex]}
-        imageFailed={imageFailed}
-        onImageError={() => setImageFailed(true)}
-      />
+      <IconWithGlow universo={universos[shownIndex]} />
     </motion.div>
   );
 }
