@@ -57,23 +57,8 @@ const universos: Universo[] = [
     recursos: ["Mapa de ideias", "Guia estratégico", "Radar de insights"],
   },
   {
-    id: "iconlove",
-    numero: "02",
-    nome: "ICONLOVE",
-    tagline: "EMOÇÃO CRIA CONEXÃO.",
-    descricao:
-      "Relações profundas começam com autoconhecimento. Desenvolva inteligência emocional e construa vínculos que transformam.",
-    bgColor: "#3D0A20",
-    accentColor: "#D4688A",
-    atmosphere:
-      "radial-gradient(circle at 20% 30%, rgba(180,80,120,0.22), transparent 40%), radial-gradient(circle at 75% 20%, rgba(120,40,70,0.18), transparent 45%)",
-    imagem: null,
-    icone: "Heart",
-    recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
-  },
-  {
     id: "iconetnia",
-    numero: "03",
+    numero: "02",
     nome: "ICONETNIA",
     tagline: "IDENTIDADE CRIA PERTENCIMENTO.",
     descricao:
@@ -85,6 +70,21 @@ const universos: Universo[] = [
     imagem: null,
     icone: "Globe",
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
+  },
+  {
+    id: "iconlove",
+    numero: "03",
+    nome: "ICONLOVE",
+    tagline: "EMOÇÃO CRIA CONEXÃO.",
+    descricao:
+      "Relações profundas começam com autoconhecimento. Desenvolva inteligência emocional e construa vínculos que transformam.",
+    bgColor: "#3D0A20",
+    accentColor: "#D4688A",
+    atmosphere:
+      "radial-gradient(circle at 20% 30%, rgba(180,80,120,0.22), transparent 40%), radial-gradient(circle at 75% 20%, rgba(120,40,70,0.18), transparent 45%)",
+    imagem: null,
+    icone: "Heart",
+    recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
   },
   {
     id: "iconfood",
