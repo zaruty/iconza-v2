@@ -47,7 +47,7 @@ export function HomeAtmosphere() {
       <AuroraBackground />
       {reduceEffects ? null : (
         <NeuralCanvasBoundary>
-          <NeuralCanvas scope="document" />
+          <NeuralCanvas scope="viewport" />
         </NeuralCanvasBoundary>
       )}
     </>

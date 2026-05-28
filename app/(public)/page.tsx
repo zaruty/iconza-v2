@@ -80,10 +80,6 @@ function CrownLogo({ className }: { className?: string }) {
 export default function Home() {
   return (
     <div className="homepage-root">
-      <div className="homepage-atmosphere" aria-hidden>
-        <HomeAtmosphere />
-      </div>
-
       <div className="homepage-ui">
         <CustomCursor />
 
@@ -117,6 +113,10 @@ export default function Home() {
         <main className="site-content relative z-10">
         {/* HERO */}
         <section className="hero-section relative px-4 sm:px-6 md:flex md:min-h-[100dvh] md:flex-col md:items-center md:justify-center md:pb-16 md:pt-[4.5rem]">
+          <div className="homepage-atmosphere" aria-hidden>
+            <HomeAtmosphere />
+          </div>
+
           <div className="hero-section__content content-readability relative mx-auto w-full max-w-3xl text-center">
             <h1 className="hero-title font-hero font-medium tracking-tight text-white">
               Universos

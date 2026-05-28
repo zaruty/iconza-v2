@@ -144,11 +144,7 @@ function accentWithAlpha(hex: string, alpha = "60") {
 }
 
 function getActiveIndex(progress: number) {
-  if (progress < 0.1) return 0;
-  if (progress < 0.3) return 1;
-  if (progress < 0.5) return 2;
-  if (progress < 0.7) return 3;
-  return 4;
+  return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
 
 function PlanetaCSS({ universo }: { universo: Universo }) {
@@ -254,7 +250,7 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
         </motion.p>
       </AnimatePresence>
 
-      <div className="hidden w-full select-none items-center justify-center font-black leading-none text-white mix-blend-overlay opacity-[0.12] md:flex md:text-[22vw]">
+      <div className="hidden w-full translate-y-[10%] select-none items-center justify-center font-black leading-none text-white mix-blend-overlay opacity-[0.12] md:flex md:text-[22vw]">
         <span>IC</span>
         <span
           className="shrink-0"
@@ -511,7 +507,7 @@ export function UniversosStickyScroll() {
       id="universos"
       ref={containerRef}
       className="relative z-30 m-0 mt-0 w-full overflow-x-clip overflow-y-visible bg-[#08091A] p-0 pt-0"
-      style={{ height: "500vh", marginTop: 0, paddingTop: 0 }}
+      style={{ height: "600vh", marginTop: 0, paddingTop: 0 }}
       aria-label="Universos ICONZA"
     >
       <StickyPanel
