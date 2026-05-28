@@ -16,7 +16,7 @@ import {
   UtensilsCrossed,
   type LucideIcon,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ICON_MAP = {
   Brain,
@@ -194,8 +194,8 @@ function UniversosContent({
         />
       </div>
 
-      {/* Layer 4 — HUD + coluna direita */}
-      <div className="relative z-[3] flex h-full w-full pt-[calc(4.5rem+env(safe-area-inset-top,0px))]">
+      {/* Layer 4 — HUD + coluna direita (desktop) */}
+      <div className="relative z-[3] flex h-full w-full pt-[calc(4.5rem+env(safe-area-inset-top,0px))] md:flex-row">
         <div className="flex min-h-0 flex-1 flex-col justify-end px-6 pb-10 sm:px-10 sm:pb-14 md:max-w-[55%] md:px-12">
           <p className="text-xs tracking-[0.2em] text-white/60">{universo.numero}</p>
           <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-[48px]">
@@ -235,13 +235,20 @@ function UniversosContent({
               />
             ))}
           </div>
+
+          <Link
+            href="/cadastro"
+            className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:hidden"
+          >
+            Explorar {universo.nome}
+          </Link>
         </div>
 
         <div
-          className="flex min-h-0 w-full max-w-md flex-col justify-between self-end px-6 py-10 sm:px-8 md:w-[40%] md:max-w-none md:px-10 md:py-14"
+          className="hidden min-h-0 w-full max-w-md flex-col justify-between self-end px-6 py-10 sm:px-8 md:flex md:w-[40%] md:max-w-none md:px-10 md:py-14"
           style={{
-            background: "rgba(255, 255, 255, 0.05)",
-            backdropFilter: "blur(10px)",
+            background: "rgba(255, 255, 255, 0.04)",
+            backdropFilter: "blur(8px)",
           }}
         >
           <div className="min-h-0 overflow-y-auto">
@@ -274,6 +281,67 @@ function UniversosContent({
   );
 }
 
+function ContentCrossfade({
+  activeIndex,
+  onDotClick,
+}: {
+  activeIndex: number;
+  onDotClick: (index: number) => void;
+}) {
+  const [layers, setLayers] = useState<{ current: number; previous: number | null }>({
+    current: activeIndex,
+    previous: null,
+  });
+
+  useEffect(() => {
+    setLayers((state) => {
+      if (activeIndex === state.current) return state;
+      return { current: activeIndex, previous: state.current };
+    });
+  }, [activeIndex]);
+
+  const clearPrevious = (index: number) => {
+    setLayers((state) =>
+      state.previous === index ? { ...state, previous: null } : state,
+    );
+  };
+
+  const { current, previous } = layers;
+
+  return (
+    <div className="absolute inset-0 h-full w-full">
+      {previous !== null ? (
+        <motion.div
+          className="absolute inset-0 h-full w-full"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          onAnimationComplete={() => clearPrevious(previous)}
+        >
+          <UniversosContent
+            universo={universos[previous]}
+            activeIndex={previous}
+            onDotClick={onDotClick}
+          />
+        </motion.div>
+      ) : null}
+
+      <motion.div
+        className="absolute inset-0 h-full w-full"
+        initial={previous !== null ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        <UniversosContent
+          universo={universos[current]}
+          activeIndex={current}
+          onDotClick={onDotClick}
+        />
+      </motion.div>
+    </div>
+  );
+}
+
 function StickyPanel({
   activeIndex,
   panelBackground,
@@ -283,8 +351,6 @@ function StickyPanel({
   panelBackground: MotionValue<string>;
   onDotClick: (index: number) => void;
 }) {
-  const universo = universos[activeIndex];
-
   return (
     <div className="sticky top-0 h-[100vh] w-full">
       <div className="relative h-full w-full overflow-hidden">
@@ -295,19 +361,7 @@ function StickyPanel({
           style={{ backgroundColor: panelBackground }}
         />
 
-        <motion.div
-          key={activeIndex}
-          className="absolute inset-0 h-full w-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        >
-          <UniversosContent
-            universo={universo}
-            activeIndex={activeIndex}
-            onDotClick={onDotClick}
-          />
-        </motion.div>
+        <ContentCrossfade activeIndex={activeIndex} onDotClick={onDotClick} />
       </div>
     </div>
   );
