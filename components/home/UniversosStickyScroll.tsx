@@ -137,6 +137,8 @@ const BG_SCROLL_COLORS: string[] = [
 
 const CROSSFADE_MS = 0.4;
 
+const DESKTOP_PLANET_TEXT_GAP_PX = 450;
+
 function accentWithAlpha(hex: string, alpha = "60") {
   return `${hex}${alpha}`;
 }
@@ -212,7 +214,7 @@ function PlanetaCrossfade({ activeIndex }: { activeIndex: number }) {
 
   return (
     <motion.div
-      className="relative z-[2] mx-auto flex h-[250px] w-[250px] shrink-0 items-center justify-center md:pointer-events-none md:absolute md:top-1/2 md:left-1/2 md:h-[450px] md:w-[450px] md:-translate-x-1/2 md:-translate-y-1/2"
+      className="relative z-[2] mx-auto flex h-[250px] w-[250px] shrink-0 items-center justify-center md:pointer-events-none md:absolute md:inset-0 md:z-[2] md:h-auto md:w-auto md:items-center md:justify-center"
       animate={{ opacity: visible ? 1 : 0 }}
       transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
       onAnimationComplete={handleAnimationComplete}
@@ -237,8 +239,8 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
     >
       <AnimatePresence mode="wait">
         <motion.p
-          key={universo.id}
-          className="w-full select-none font-black leading-none text-white mix-blend-overlay text-[clamp(48px,18vw,72px)] md:left-[-10px] md:w-[120%] md:text-[clamp(100px,14vw,180px)]"
+          key={`${universo.id}-mobile`}
+          className="w-full select-none font-black leading-none text-white mix-blend-overlay text-[clamp(48px,18vw,72px)] md:hidden"
           initial={{ opacity: 0, y: 150, scale: 0.8 }}
           animate={{ opacity: 0.15, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -150, scale: 1.2 }}
@@ -246,6 +248,24 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
         >
           {universo.textoFundo}
         </motion.p>
+
+        <motion.div
+          key={`${universo.id}-desktop`}
+          className="hidden w-full select-none items-center justify-center font-black leading-none text-white mix-blend-overlay md:flex md:text-[32vw]"
+          initial={{ opacity: 0, y: 150, scale: 0.8 }}
+          animate={{ opacity: 0.15, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -150, scale: 1.2 }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+        >
+          <span>IC</span>
+          <span
+            className="shrink-0"
+            style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
+            aria-hidden
+          />
+          <span>N</span>
+          <span>{universo.textoFundo}</span>
+        </motion.div>
       </AnimatePresence>
     </div>
   );
