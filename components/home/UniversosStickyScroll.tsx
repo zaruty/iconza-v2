@@ -2,31 +2,16 @@
 
 import Link from "next/link";
 import {
+  AnimatePresence,
   motion,
   useMotionValueEvent,
   useScroll,
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import {
-  Brain,
-  Globe,
-  Heart,
-  Palette,
-  UtensilsCrossed,
-  type LucideIcon,
-} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const ICON_MAP = {
-  Brain,
-  Heart,
-  Globe,
-  UtensilsCrossed,
-  Palette,
-} as const satisfies Record<string, LucideIcon>;
-
-type IconName = keyof typeof ICON_MAP;
+type IconName = "Brain" | "Heart" | "Globe" | "UtensilsCrossed" | "Palette";
 
 type Universo = {
   id: string;
@@ -37,12 +22,36 @@ type Universo = {
   bgColor: string;
   accentColor: string;
   atmosphere?: string;
+  textoFundo: string;
+  planetGradient: string;
   icone: IconName;
   recursos: [string, string, string];
 };
 
+function darkenHex(hex: string, factor = 0.35) {
+  const normalized = hex.replace("#", "");
+  const r = Math.round(parseInt(normalized.slice(0, 2), 16) * (1 - factor));
+  const g = Math.round(parseInt(normalized.slice(2, 4), 16) * (1 - factor));
+  const b = Math.round(parseInt(normalized.slice(4, 6), 16) * (1 - factor));
+  return `#${[r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
+function buildPlanetGradient(bgColor: string, accentColor: string) {
+  const bgColorEscuro = darkenHex(bgColor);
+  return `radial-gradient(circle at 30% 30%, ${accentColor}, ${bgColor} 70%, ${bgColorEscuro})`;
+}
+
+function buildUniverso(
+  data: Omit<Universo, "planetGradient">,
+): Universo {
+  return {
+    ...data,
+    planetGradient: buildPlanetGradient(data.bgColor, data.accentColor),
+  };
+}
+
 const universos: Universo[] = [
-  {
+  buildUniverso({
     id: "iconmind",
     numero: "01",
     nome: "ICONMIND",
@@ -51,10 +60,11 @@ const universos: Universo[] = [
       "Mentes curiosas constroem futuros extraordinários. Explore ideias, desenvolva estratégias e transforme conhecimento em impacto real.",
     bgColor: "#1A2E5C",
     accentColor: "#6B8FC7",
+    textoFundo: "MIND",
     icone: "Brain",
     recursos: ["Mapa de ideias", "Guia estratégico", "Radar de insights"],
-  },
-  {
+  }),
+  buildUniverso({
     id: "iconetnia",
     numero: "02",
     nome: "ICONETNIA",
@@ -65,10 +75,11 @@ const universos: Universo[] = [
     accentColor: "#52B87A",
     atmosphere:
       "radial-gradient(circle at 25% 25%, rgba(60,150,90,0.20), transparent 40%), radial-gradient(circle at 70% 20%, rgba(30,90,50,0.15), transparent 45%)",
+    textoFundo: "ETNIA",
     icone: "Globe",
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
-  },
-  {
+  }),
+  buildUniverso({
     id: "iconfood",
     numero: "03",
     nome: "ICONFOOD",
@@ -79,14 +90,15 @@ const universos: Universo[] = [
     accentColor: "#E8721A",
     atmosphere:
       "radial-gradient(circle at 25% 30%, rgba(232,114,26,0.35), transparent 45%), radial-gradient(circle at 70% 25%, rgba(200,90,10,0.25), transparent 45%), radial-gradient(circle at 50% 65%, rgba(150,60,0,0.20), transparent 50%)",
+    textoFundo: "FOOD",
     icone: "UtensilsCrossed",
     recursos: [
       "Mapa gastronômico",
       "Guia de experiências",
       "Radar de tendências",
     ],
-  },
-  {
+  }),
+  buildUniverso({
     id: "iconlove",
     numero: "04",
     nome: "ICONLOVE",
@@ -97,10 +109,11 @@ const universos: Universo[] = [
     accentColor: "#D4688A",
     atmosphere:
       "radial-gradient(circle at 20% 30%, rgba(180,80,120,0.22), transparent 40%), radial-gradient(circle at 75% 20%, rgba(120,40,70,0.18), transparent 45%)",
+    textoFundo: "LOVE",
     icone: "Heart",
     recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
-  },
-  {
+  }),
+  buildUniverso({
     id: "iconart",
     numero: "05",
     nome: "ICONART",
@@ -109,9 +122,10 @@ const universos: Universo[] = [
       "Arte é o idioma da alma criativa. Desenvolva seu olhar estético, sua linguagem visual e sua assinatura única.",
     bgColor: "#2A0F5C",
     accentColor: "#7A5CCF",
+    textoFundo: "ART",
     icone: "Palette",
     recursos: ["Mapa estético", "Guia de linguagem visual", "Radar criativo"],
-  },
+  }),
 ];
 
 const BG_SCROLL_PROGRESS = [0, 0.2, 0.4, 0.6, 0.8, 1.0] as const;
@@ -123,100 +137,55 @@ const BG_SCROLL_COLORS: string[] = [
 
 const CROSSFADE_MS = 0.4;
 
-function accentGlowColor(hex: string, alpha = 0.35) {
-  const normalized = hex.replace("#", "");
-  const a = Math.round(alpha * 255)
-    .toString(16)
-    .padStart(2, "0");
-  return `#${normalized}${a}`;
-}
-
-function accentGlowGradient(hex: string) {
-  return `radial-gradient(circle, ${accentGlowColor(hex, 0.25)} 0%, ${accentGlowColor(hex, 0.1)} 40%, transparent 70%)`;
-}
-
-function accentGlowGradientOuter(hex: string) {
-  return `radial-gradient(circle, ${accentGlowColor(hex, 0.08)} 0%, transparent 60%)`;
+function accentWithAlpha(hex: string, alpha = "60") {
+  return `${hex}${alpha}`;
 }
 
 function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
 
-const ICON_WHITE = "rgba(255, 255, 255, 0.90)";
-
-function UniversoIcon({ universo }: { universo: Universo }) {
-  const Icon = ICON_MAP[universo.icone];
-
+function PlanetaCSS({ universo }: { universo: Universo }) {
   return (
-    <>
-      <Icon
-        size={160}
-        strokeWidth={1}
-        color={ICON_WHITE}
-        className="pointer-events-none relative z-[1] md:hidden"
-        style={{ color: ICON_WHITE, stroke: ICON_WHITE }}
-        aria-hidden
+    <motion.div
+      className="relative h-[250px] w-[250px] shrink-0 rounded-full md:h-[450px] md:w-[450px]"
+      initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+      transition={{ type: "spring", bounce: 0.3 }}
+      style={{
+        background: universo.planetGradient,
+        boxShadow: `0 0 80px ${accentWithAlpha(universo.accentColor)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
+      }}
+      aria-hidden
+    >
+      <div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
+          opacity: 0.2,
+        }}
       />
-      <Icon
-        size={280}
-        strokeWidth={1}
-        color={ICON_WHITE}
-        className="pointer-events-none relative z-[1] hidden md:block"
-        style={{ color: ICON_WHITE, stroke: ICON_WHITE }}
-        aria-hidden
-      />
-    </>
+      <div className="absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+    </motion.div>
   );
 }
 
-function IconWithGlow({ universo }: { universo: Universo }) {
+function PlanetaAtmosphericGlow({ universo }: { universo: Universo }) {
   return (
-    <>
-      <div className="relative flex h-[160px] w-[160px] items-center justify-center md:hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 z-0 rounded-full"
-          style={{
-            background: accentGlowGradientOuter(universo.accentColor),
-            filter: "blur(40px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute inset-[14%] z-0 rounded-full"
-          style={{
-            background: accentGlowGradient(universo.accentColor),
-            filter: "blur(30px)",
-          }}
-        />
-        <UniversoIcon universo={universo} />
-      </div>
-
-      <div className="relative hidden h-[700px] w-[700px] items-center justify-center md:flex">
-        <div
-          aria-hidden
-          className="absolute inset-0 z-0 rounded-full"
-          style={{
-            background: accentGlowGradientOuter(universo.accentColor),
-            filter: "blur(80px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute inset-[14%] z-0 rounded-full"
-          style={{
-            background: accentGlowGradient(universo.accentColor),
-            filter: "blur(60px)",
-          }}
-        />
-        <UniversoIcon universo={universo} />
-      </div>
-    </>
+    <motion.div
+      key={universo.id}
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] md:h-[600px] md:w-[600px]"
+      style={{ backgroundColor: universo.accentColor }}
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 0.4, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+    />
   );
 }
 
-function IconCrossfade({ activeIndex }: { activeIndex: number }) {
+function PlanetaCrossfade({ activeIndex }: { activeIndex: number }) {
   const [shownIndex, setShownIndex] = useState(activeIndex);
   const [visible, setVisible] = useState(true);
   const pendingIndexRef = useRef<number | null>(null);
@@ -239,15 +208,86 @@ function IconCrossfade({ activeIndex }: { activeIndex: number }) {
     setVisible(true);
   };
 
+  const universo = universos[shownIndex];
+
   return (
     <motion.div
-      className="relative z-[2] mx-auto flex h-[160px] w-[160px] shrink-0 items-center justify-center md:pointer-events-none md:absolute md:top-1/2 md:left-1/2 md:h-auto md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
+      className="relative z-[2] mx-auto flex h-[250px] w-[250px] shrink-0 items-center justify-center md:pointer-events-none md:absolute md:top-1/2 md:left-1/2 md:h-[450px] md:w-[450px] md:-translate-x-1/2 md:-translate-y-1/2"
       animate={{ opacity: visible ? 1 : 0 }}
       transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
       onAnimationComplete={handleAnimationComplete}
     >
-      <IconWithGlow universo={universos[shownIndex]} />
+      <AnimatePresence mode="wait">
+        <PlanetaAtmosphericGlow key={`glow-${universo.id}`} universo={universo} />
+      </AnimatePresence>
+      <div className="relative z-20 flex items-center justify-center">
+        <PlanetaCSS key={universo.id} universo={universo} />
+      </div>
     </motion.div>
+  );
+}
+
+function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
+  const universo = universos[activeIndex];
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-x-0 bottom-[-10px] z-[1] overflow-hidden md:bottom-[-30px]"
+      aria-hidden
+    >
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={universo.id}
+          className="w-full select-none font-black leading-none text-white mix-blend-overlay text-[clamp(48px,18vw,72px)] md:left-[-10px] md:w-[120%] md:text-[clamp(100px,14vw,180px)]"
+          initial={{ opacity: 0, y: 150, scale: 0.8 }}
+          animate={{ opacity: 0.15, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -150, scale: 1.2 }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+        >
+          {universo.textoFundo}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function DesktopVerticalDots({
+  activeIndex,
+  onDotClick,
+}: {
+  activeIndex: number;
+  onDotClick: (index: number) => void;
+}) {
+  const activeAccent = universos[activeIndex].accentColor;
+
+  return (
+    <div className="absolute top-1/2 right-8 z-40 hidden -translate-y-1/2 flex-col gap-4 md:flex">
+      {universos.map((item, index) => (
+        <button
+          key={item.id}
+          type="button"
+          aria-label={`Ir para ${item.nome}`}
+          aria-current={index === activeIndex ? "true" : undefined}
+          onClick={() => onDotClick(index)}
+          className="transition-all duration-300"
+          style={
+            index === activeIndex
+              ? {
+                  height: 40,
+                  width: 12,
+                  borderRadius: 6,
+                  backgroundColor: activeAccent,
+                }
+              : {
+                  height: 12,
+                  width: 12,
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                }
+          }
+        />
+      ))}
+    </div>
   );
 }
 
@@ -261,99 +301,88 @@ function UniversosContent({
   onDotClick: (index: number) => void;
 }) {
   return (
-    <>
-      {/* Layer 2 — texto gigante translúcido */}
-      <p
-        className="pointer-events-none absolute bottom-[-10px] left-0 z-[1] w-full select-none font-black leading-none text-white/[0.08] mix-blend-soft-light text-[clamp(48px,18vw,72px)] md:bottom-[-30px] md:left-[-10px] md:w-[120%] md:text-[clamp(100px,14vw,180px)]"
-        aria-hidden
-      >
-        {universo.nome}
-      </p>
+    <div className="relative z-[3] flex h-full w-full flex-col justify-start md:flex-row md:items-center md:justify-center md:pt-[calc(4.5rem+env(safe-area-inset-top,0px))]">
+      <div className="flex w-full flex-col justify-start px-6 pb-10 md:min-h-0 md:w-[55%] md:max-w-[55%] md:justify-end md:px-12 md:pb-14">
+        <p className="text-xs tracking-[0.2em] text-white/60">{universo.numero}</p>
+        <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-[48px]">
+          {universo.nome}
+        </h3>
+        <p className="mt-2 text-[11px] tracking-[0.25em] text-white/70 md:mt-3">
+          {universo.tagline}
+        </p>
+        <p className="mt-3 max-w-sm text-sm leading-[1.6] text-white/60 md:mt-4 md:leading-[1.7]">
+          {universo.descricao}
+        </p>
 
-      {/* Layer 4 — HUD + coluna direita */}
-      <div className="relative z-[3] flex h-full w-full flex-col justify-start md:flex-row md:items-center md:justify-center md:pt-[calc(4.5rem+env(safe-area-inset-top,0px))]">
-        <div className="flex w-full flex-col justify-start px-6 pb-10 md:min-h-0 md:w-[55%] md:max-w-[55%] md:justify-end md:px-12 md:pb-14">
-          <p className="text-xs tracking-[0.2em] text-white/60">{universo.numero}</p>
-          <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-[48px]">
-            {universo.nome}
-          </h3>
-          <p className="mt-2 text-[11px] tracking-[0.25em] text-white/70 md:mt-3">
-            {universo.tagline}
-          </p>
-          <p className="mt-3 max-w-sm text-sm leading-[1.6] text-white/60 md:mt-4 md:leading-[1.7]">
-            {universo.descricao}
-          </p>
-
-          <div className="mt-6 flex items-center gap-2 md:mt-8">
-            {universos.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                aria-label={`Ir para ${item.nome}`}
-                aria-current={index === activeIndex ? "true" : undefined}
-                onClick={() => onDotClick(index)}
-                className="transition-all duration-300"
-                style={
-                  index === activeIndex
-                    ? {
-                        width: 28,
-                        height: 4,
-                        borderRadius: 2,
-                        backgroundColor: "rgba(255,255,255,0.85)",
-                      }
-                    : {
-                        width: 4,
-                        height: 4,
-                        borderRadius: "50%",
-                        backgroundColor: "rgba(255,255,255,0.25)",
-                      }
-                }
-              />
-            ))}
-          </div>
-
-          <Link
-            href="/cadastro"
-            className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:hidden"
-          >
-            Explorar {universo.nome}
-          </Link>
+        <div className="mt-6 flex items-center gap-2 md:mt-8 md:hidden">
+          {universos.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              aria-label={`Ir para ${item.nome}`}
+              aria-current={index === activeIndex ? "true" : undefined}
+              onClick={() => onDotClick(index)}
+              className="transition-all duration-300"
+              style={
+                index === activeIndex
+                  ? {
+                      width: 28,
+                      height: 4,
+                      borderRadius: 2,
+                      backgroundColor: "rgba(255,255,255,0.85)",
+                    }
+                  : {
+                      width: 4,
+                      height: 4,
+                      borderRadius: "50%",
+                      backgroundColor: "rgba(255,255,255,0.25)",
+                    }
+              }
+            />
+          ))}
         </div>
 
-        <div
-          className="hidden min-h-0 w-full flex-col justify-between self-end px-6 py-10 sm:px-8 md:flex md:w-[45%] md:max-w-[45%] md:px-10 md:py-14"
-          style={{
-            background: "rgba(255, 255, 255, 0.04)",
-            backdropFilter: "blur(8px)",
-          }}
+        <Link
+          href="/cadastro"
+          className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:hidden"
         >
-          <div className="min-h-0 overflow-y-auto">
-            <p className="text-[13px] text-white/50">Meu universo</p>
-            <p className="mt-2 text-2xl font-light text-white md:text-[32px]">
-              {universo.nome}
-            </p>
-
-            <p className="mt-6 text-[10px] tracking-[0.2em] text-white/50 md:mt-10">
-              RECURSOS
-            </p>
-            <ul className="mt-3 flex flex-col gap-3 md:mt-4 md:gap-4">
-              {universo.recursos.map((recurso) => (
-                <li key={recurso}>
-                  <span className="text-sm text-white/90">{recurso}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <Link
-            href="/cadastro"
-            className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
-          >
-            Explorar {universo.nome}
-          </Link>
-        </div>
+          Explorar {universo.nome}
+        </Link>
       </div>
-    </>
+
+      <div
+        className="hidden min-h-0 w-full flex-col justify-between self-end px-6 py-10 sm:px-8 md:flex md:w-[45%] md:max-w-[45%] md:px-10 md:py-14"
+        style={{
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <div className="min-h-0 overflow-y-auto">
+          <p className="text-[13px] text-white/50">Meu universo</p>
+          <p className="mt-2 text-2xl font-light text-white md:text-[32px]">
+            {universo.nome}
+          </p>
+
+          <p className="mt-6 text-[10px] tracking-[0.2em] text-white/50 md:mt-10">
+            RECURSOS
+          </p>
+          <ul className="mt-3 flex flex-col gap-3 md:mt-4 md:gap-4">
+            {universo.recursos.map((recurso) => (
+              <li key={recurso}>
+                <span className="text-sm text-white/90">{recurso}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <Link
+          href="/cadastro"
+          className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
+        >
+          Explorar {universo.nome}
+        </Link>
+      </div>
+    </div>
   );
 }
 
@@ -448,7 +477,6 @@ function StickyPanel({
   return (
     <div className="sticky top-0 h-[100dvh] w-full">
       <div className="relative flex h-full w-full flex-col justify-start pt-20 md:block md:pt-0">
-        {/* Layer 1 — fundo animado fullscreen */}
         <motion.div
           aria-hidden
           className="absolute inset-0 h-full w-full transition-[background-color] duration-[800ms] ease-in-out"
@@ -456,8 +484,9 @@ function StickyPanel({
         />
 
         <AtmosphericOverlay activeIndex={activeIndex} />
-
-        <IconCrossfade activeIndex={activeIndex} />
+        <GiantBackgroundText activeIndex={activeIndex} />
+        <PlanetaCrossfade activeIndex={activeIndex} />
+        <DesktopVerticalDots activeIndex={activeIndex} onDotClick={onDotClick} />
         <ContentCrossfade activeIndex={activeIndex} onDotClick={onDotClick} />
       </div>
     </div>
