@@ -279,8 +279,7 @@ function UniversosContent({
     <>
       {/* Layer 2 — texto gigante translúcido */}
       <p
-        className="pointer-events-none absolute bottom-[-30px] left-[-10px] z-[1] w-[120%] select-none font-black leading-none text-white/[0.08] mix-blend-soft-light"
-        style={{ fontSize: "clamp(100px, 14vw, 180px)" }}
+        className="pointer-events-none absolute bottom-[-10px] left-[-10px] z-[1] w-[120%] select-none font-black leading-none text-white/[0.08] mix-blend-soft-light text-[clamp(48px,18vw,72px)] md:bottom-[-30px] md:text-[clamp(100px,14vw,180px)]"
         aria-hidden
       >
         {universo.nome}
@@ -401,10 +400,10 @@ function ContentCrossfade({
   const { current, previous } = layers;
 
   return (
-    <div className="absolute inset-0 h-full w-full">
+    <div className="absolute inset-0 h-full w-full overflow-visible">
       {previous !== null ? (
         <motion.div
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full overflow-visible"
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
@@ -419,7 +418,7 @@ function ContentCrossfade({
       ) : null}
 
       <motion.div
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full overflow-visible"
         initial={previous !== null ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
         transition={{ duration: CROSSFADE_MS, ease: "easeInOut" }}
@@ -462,8 +461,8 @@ function StickyPanel({
   onDotClick: (index: number) => void;
 }) {
   return (
-    <div className="sticky top-0 h-[100vh] w-full">
-      <div className="relative h-full w-full overflow-hidden">
+    <div className="sticky top-0 h-[100vh] w-full overflow-visible">
+      <div className="relative h-full w-full overflow-visible md:overflow-hidden">
         {/* Layer 1 — fundo animado fullscreen */}
         <motion.div
           aria-hidden
