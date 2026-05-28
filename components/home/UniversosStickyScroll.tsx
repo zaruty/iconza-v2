@@ -248,25 +248,17 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
         >
           {universo.textoFundo}
         </motion.p>
-
-        <motion.div
-          key={`${universo.id}-desktop`}
-          className="hidden w-full select-none items-center justify-center font-black leading-none text-white mix-blend-overlay md:flex md:text-[32vw]"
-          initial={{ opacity: 0, y: 150, scale: 0.8 }}
-          animate={{ opacity: 0.15, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -150, scale: 1.2 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-        >
-          <span>IC</span>
-          <span
-            className="shrink-0"
-            style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
-            aria-hidden
-          />
-          <span>N</span>
-          <span>{universo.textoFundo}</span>
-        </motion.div>
       </AnimatePresence>
+
+      <div className="hidden w-full select-none items-center justify-center font-black leading-none text-white mix-blend-overlay opacity-[0.12] md:flex md:text-[22vw]">
+        <span>IC</span>
+        <span
+          className="shrink-0"
+          style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
+          aria-hidden
+        />
+        <span>N</span>
+      </div>
     </div>
   );
 }
@@ -365,39 +357,6 @@ function UniversosContent({
         <Link
           href="/cadastro"
           className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:hidden"
-        >
-          Explorar {universo.nome}
-        </Link>
-      </div>
-
-      <div
-        className="hidden min-h-0 w-full flex-col justify-between self-end px-6 py-10 sm:px-8 md:flex md:w-[45%] md:max-w-[45%] md:px-10 md:py-14"
-        style={{
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <div className="min-h-0 overflow-y-auto">
-          <p className="text-[13px] text-white/50">Meu universo</p>
-          <p className="mt-2 text-2xl font-light text-white md:text-[32px]">
-            {universo.nome}
-          </p>
-
-          <p className="mt-6 text-[10px] tracking-[0.2em] text-white/50 md:mt-10">
-            RECURSOS
-          </p>
-          <ul className="mt-3 flex flex-col gap-3 md:mt-4 md:gap-4">
-            {universo.recursos.map((recurso) => (
-              <li key={recurso}>
-                <span className="text-sm text-white/90">{recurso}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <Link
-          href="/cadastro"
-          className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
         >
           Explorar {universo.nome}
         </Link>
