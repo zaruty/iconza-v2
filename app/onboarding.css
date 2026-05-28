@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+.onboarding-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .onboarding-video {
   position: relative;
   width: 100%;
@@ -17,13 +23,36 @@
   height: 100%;
   object-fit: cover;
   background: #000;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.onboarding-video__media.is-visible {
+  opacity: 1;
+}
+
+.onboarding-video__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #000;
+  color: rgb(255 255 255 / 0.6);
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .onboarding-video__unmute {
   position: absolute;
   top: max(1rem, env(safe-area-inset-top));
   right: max(1rem, env(safe-area-inset-right));
-  z-index: 2;
+  z-index: 4;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +75,7 @@
   position: absolute;
   inset-inline: 0;
   bottom: max(2rem, env(safe-area-inset-bottom));
-  z-index: 2;
+  z-index: 4;
   display: flex;
   justify-content: center;
   padding-inline: 1.5rem;
@@ -54,7 +83,46 @@
 }
 
 .onboarding-video__continue {
-  min-width: 12rem;
+  width: 100%;
+  max-width: 320px;
+  height: 56px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #5b53c7 0%, #3b338f 48%, #211a59 100%);
+  box-shadow:
+    0 0 8px rgb(91 83 199 / 0.18),
+    0 0 20px rgb(59 51 143 / 0.14),
+    inset 0 1px 1px rgb(255 255 255 / 0.16),
+    inset 0 -5px 10px rgb(0 0 0 / 0.28);
+  color: #f3f3f5;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.onboarding-video__continue:hover {
+  filter: brightness(1.06);
+}
+
+.onboarding-video__continue:active {
+  transform: translateY(1px);
+}
+
+@media (min-width: 768px) {
+  .onboarding-video__continue-wrap {
+    bottom: max(4rem, env(safe-area-inset-bottom));
+    padding-inline: 2rem;
+  }
+
+  .onboarding-video__continue {
+    max-width: 420px;
+    height: 64px;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+  }
 }
 
 .onboarding-video__error {

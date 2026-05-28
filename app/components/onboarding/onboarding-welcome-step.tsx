@@ -31,7 +31,7 @@ export function OnboardingWelcomeStep({
         <div className="onboarding-video__continue-wrap">
           <button
             type="button"
-            className="onboarding-video__continue btn-outline-premium"
+            className="onboarding-video__continue"
             onClick={() => router.push(continueHref)}
           >
             CONTINUAR
