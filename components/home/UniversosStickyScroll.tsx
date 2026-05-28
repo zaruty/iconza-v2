@@ -93,8 +93,10 @@ const universos: Universo[] = [
     tagline: "SABOR CRIA MEMÓRIA.",
     descricao:
       "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
-    bgColor: "#5C2A08",
-    accentColor: "#D97832",
+    bgColor: "#3D2800",
+    accentColor: "#F5C518",
+    atmosphere:
+      "radial-gradient(circle at 20% 25%, rgba(245,197,24,0.25), transparent 40%), radial-gradient(circle at 75% 20%, rgba(220,160,10,0.18), transparent 45%), radial-gradient(circle at 50% 70%, rgba(180,120,0,0.20), transparent 50%)",
     imagem: null,
     icone: "UtensilsCrossed",
     recursos: [
