@@ -6,8 +6,6 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
-  useTransform,
-  type MotionValue,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -128,13 +126,6 @@ const universos: Universo[] = [
   }),
 ];
 
-const BG_SCROLL_PROGRESS = [0, 0.2, 0.4, 0.6, 0.8, 1.0] as const;
-
-const BG_SCROLL_COLORS: string[] = [
-  "#08091A",
-  ...universos.map((u) => u.bgColor),
-];
-
 const CROSSFADE_MS = 0.4;
 
 const DESKTOP_PLANET_TEXT_GAP_PX = 450;
@@ -233,33 +224,40 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
   const universo = universos[activeIndex];
 
   return (
-    <div
-      className="pointer-events-none absolute inset-x-0 bottom-[-10px] z-[1] overflow-hidden md:inset-0 md:bottom-auto md:flex md:items-center md:justify-center"
-      aria-hidden
-    >
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={`${universo.id}-mobile`}
-          className="w-full select-none font-black leading-none text-white mix-blend-overlay text-[clamp(48px,18vw,72px)] md:hidden"
-          initial={{ opacity: 0, y: 150, scale: 0.8 }}
-          animate={{ opacity: 0.15, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -150, scale: 1.2 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-        >
-          {universo.textoFundo}
-        </motion.p>
-      </AnimatePresence>
-
-      <div className="hidden w-full translate-y-[10%] select-none items-center justify-center font-black leading-none text-white mix-blend-overlay opacity-[0.12] md:flex md:text-[22vw]">
-        <span>IC</span>
-        <span
-          className="shrink-0"
-          style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
-          aria-hidden
-        />
-        <span>N</span>
+    <>
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-[-10px] z-[1] overflow-hidden md:hidden"
+        aria-hidden
+      >
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`${universo.id}-mobile`}
+            className="w-full select-none font-black leading-none text-white mix-blend-overlay text-[clamp(48px,18vw,72px)]"
+            initial={{ opacity: 0, y: 150, scale: 0.8 }}
+            animate={{ opacity: 0.15, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -150, scale: 1.2 }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+          >
+            {universo.textoFundo}
+          </motion.p>
+        </AnimatePresence>
       </div>
-    </div>
+
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] hidden items-center justify-center md:flex"
+        aria-hidden
+      >
+        <div className="flex select-none items-center justify-center font-black leading-none text-white mix-blend-overlay opacity-[0.12] md:text-[22vw]">
+          <span>IC</span>
+          <span
+            className="shrink-0"
+            style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
+            aria-hidden
+          />
+          <span>N</span>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -314,15 +312,17 @@ function UniversosContent({
 }) {
   return (
     <div className="relative z-[3] flex h-full w-full flex-col justify-start md:flex-row md:items-center md:justify-center md:pt-[calc(4.5rem+env(safe-area-inset-top,0px))]">
-      <div className="flex w-full flex-col justify-start px-6 pb-10 md:min-h-0 md:w-[55%] md:max-w-[55%] md:justify-end md:px-12 md:pb-14">
-        <p className="text-xs tracking-[0.2em] text-white/60">{universo.numero}</p>
-        <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-[48px]">
+      <div className="flex w-full flex-col justify-start px-6 pb-10 md:min-h-0 md:w-[38%] md:max-w-[38%] md:justify-end md:pl-16 md:pr-12 md:pb-14">
+        <p className="text-xs tracking-[0.2em] text-white/60 md:text-base md:tracking-[0.3em]">
+          {universo.numero}
+        </p>
+        <h3 className="mt-2 text-3xl font-black tracking-tight text-white md:text-7xl xl:text-8xl">
           {universo.nome}
         </h3>
-        <p className="mt-2 text-[11px] tracking-[0.25em] text-white/70 md:mt-3">
+        <p className="mt-2 text-[11px] tracking-[0.25em] text-white/70 md:mt-3 md:text-base">
           {universo.tagline}
         </p>
-        <p className="mt-3 max-w-sm text-sm leading-[1.6] text-white/60 md:mt-4 md:leading-[1.7]">
+        <p className="mt-3 max-w-sm text-sm leading-[1.6] text-white/60 md:mt-4 md:max-w-md md:text-lg md:leading-[1.7]">
           {universo.descricao}
         </p>
 
@@ -446,11 +446,9 @@ function AtmosphericOverlay({ activeIndex }: { activeIndex: number }) {
 
 function StickyPanel({
   activeIndex,
-  panelBackground,
   onDotClick,
 }: {
   activeIndex: number;
-  panelBackground: MotionValue<string>;
   onDotClick: (index: number) => void;
 }) {
   return (
@@ -458,8 +456,9 @@ function StickyPanel({
       <div className="relative flex h-full w-full flex-col justify-start pt-20 md:block md:pt-0">
         <motion.div
           aria-hidden
-          className="absolute inset-0 h-full w-full transition-[background-color] duration-[800ms] ease-in-out"
-          style={{ backgroundColor: panelBackground }}
+          className="absolute inset-0 h-full w-full"
+          animate={{ backgroundColor: universos[activeIndex].bgColor }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         />
 
         <AtmosphericOverlay activeIndex={activeIndex} />
@@ -480,12 +479,6 @@ export function UniversosStickyScroll() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
-  const panelBackground = useTransform(
-    scrollYProgress,
-    [...BG_SCROLL_PROGRESS],
-    BG_SCROLL_COLORS,
-  );
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     setActiveIndex(getActiveIndex(latest));
@@ -512,7 +505,6 @@ export function UniversosStickyScroll() {
     >
       <StickyPanel
         activeIndex={activeIndex}
-        panelBackground={panelBackground}
         onDotClick={scrollToUniverse}
       />
 
