@@ -72,8 +72,27 @@ const universos: Universo[] = [
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
   },
   {
-    id: "iconlove",
+    id: "iconfood",
     numero: "03",
+    nome: "ICONFOOD",
+    tagline: "SABOR CRIA MEMÓRIA.",
+    descricao:
+      "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
+    bgColor: "#3D1A00",
+    accentColor: "#E8721A",
+    atmosphere:
+      "radial-gradient(circle at 20% 25%, rgba(232,114,26,0.25), transparent 40%), radial-gradient(circle at 75% 20%, rgba(180,80,10,0.18), transparent 45%), radial-gradient(circle at 50% 70%, rgba(120,50,0,0.20), transparent 50%)",
+    imagem: null,
+    icone: "UtensilsCrossed",
+    recursos: [
+      "Mapa gastronômico",
+      "Guia de experiências",
+      "Radar de tendências",
+    ],
+  },
+  {
+    id: "iconlove",
+    numero: "04",
     nome: "ICONLOVE",
     tagline: "EMOÇÃO CRIA CONEXÃO.",
     descricao:
@@ -85,25 +104,6 @@ const universos: Universo[] = [
     imagem: null,
     icone: "Heart",
     recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
-  },
-  {
-    id: "iconfood",
-    numero: "04",
-    nome: "ICONFOOD",
-    tagline: "SABOR CRIA MEMÓRIA.",
-    descricao:
-      "Gastronomia é linguagem universal. Transforme experiências culinárias em conteúdo, cultura e comunidade.",
-    bgColor: "#3D2800",
-    accentColor: "#F5C518",
-    atmosphere:
-      "radial-gradient(circle at 20% 25%, rgba(245,197,24,0.25), transparent 40%), radial-gradient(circle at 75% 20%, rgba(220,160,10,0.18), transparent 45%), radial-gradient(circle at 50% 70%, rgba(180,120,0,0.20), transparent 50%)",
-    imagem: null,
-    icone: "UtensilsCrossed",
-    recursos: [
-      "Mapa gastronômico",
-      "Guia de experiências",
-      "Radar de tendências",
-    ],
   },
   {
     id: "iconart",
@@ -514,7 +514,7 @@ export function UniversosStickyScroll() {
       id="universos"
       ref={containerRef}
       className="relative z-30 m-0 mt-0 bg-[#08091A] p-0 pt-0"
-      style={{ height: "600vh", marginTop: 0, paddingTop: 0 }}
+      style={{ height: "1000vh", marginTop: 0, paddingTop: 0 }}
       aria-label="Universos ICONZA"
     >
       <StickyPanel
