@@ -264,7 +264,7 @@ function UniversosContent({
 
           <Link
             href="/cadastro"
-            className="mt-6 inline-flex w-fit shrink-0 items-center justify-center px-8 py-3.5 text-sm tracking-wide text-white/90 transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
+            className="mt-6 inline-flex w-fit shrink-0 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-transparent px-8 py-[14px] text-[14px] tracking-[0.08em] text-[rgba(255,255,255,0.90)] transition-[background-color,transform] hover:bg-white/5 active:translate-y-px md:mt-10"
           >
             Explorar {universo.nome}
           </Link>
@@ -355,6 +355,16 @@ export function UniversosStickyScroll() {
         activeIndex={activeIndex}
         panelBackground={panelBackground}
         onDotClick={scrollToUniverse}
+      />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
+        style={{
+          height: "180px",
+          background:
+            "linear-gradient(to bottom, transparent 0%, #08091A 100%)",
+        }}
       />
     </section>
   );

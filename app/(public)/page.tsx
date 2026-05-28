@@ -164,7 +164,7 @@ export default function Home() {
         {/* CTA */}
         <section
           id="comecar"
-          className="site-content relative z-10 overflow-hidden px-4 py-20 sm:px-6 sm:py-28"
+          className="site-content relative z-10 m-0 overflow-hidden bg-[#08091A] px-4 py-20 sm:px-6 sm:py-28"
         >
           <div className="glass-panel content-readability relative mx-auto max-w-3xl rounded-3xl border border-refined px-6 py-14 text-center sm:px-12 sm:py-16">
             <CrownLogo className="mx-auto h-7 w-10 text-white/70" />
