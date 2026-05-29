@@ -312,6 +312,9 @@ function getActiveIndex(progress: number) {
 const PLANETA_SIZE_CLASS =
   "relative h-[250px] w-[250px] shrink-0 md:h-[450px] md:w-[450px]";
 
+/** Desligado temporariamente — reativar para restaurar identity elements. */
+const SHOW_IDENTITY_ELEMENTS = false;
+
 function IdentityIconMind({ accentColor }: { accentColor: string }) {
   return (
     <svg
@@ -726,7 +729,15 @@ function PlanetaSphere({
           opacity: 0.2,
         }}
       />
-      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+      <motion.div
+        className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md"
+        animate={{ opacity: [0.08, 0.14, 0.08] }}
+        transition={{
+          duration: 90,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
     </div>
   );
 }
@@ -742,19 +753,21 @@ function PlanetaUniverso({ universo }: { universo: Universo }) {
       transition={{ type: "spring", bounce: 0.3 }}
       aria-hidden
     >
-      {isFood ? (
+      {SHOW_IDENTITY_ELEMENTS && isFood ? (
         <div className="absolute inset-0 z-0">
           <IdentityIconFoodOrbit accentColor={universo.accentColor} />
         </div>
       ) : null}
 
-      <div className={`absolute inset-0 ${isFood ? "z-10" : "z-0"}`}>
+      <div className={`absolute inset-0 ${SHOW_IDENTITY_ELEMENTS && isFood ? "z-10" : "z-0"}`}>
         <PlanetaSphere universo={universo}>
-          <IdentityElement universo={universo} />
+          {SHOW_IDENTITY_ELEMENTS ? (
+            <IdentityElement universo={universo} />
+          ) : null}
         </PlanetaSphere>
       </div>
 
-      {isFood ? (
+      {SHOW_IDENTITY_ELEMENTS && isFood ? (
         <div className="pointer-events-none absolute inset-0 z-20">
           {FOOD_ORBIT_ITEMS.filter((item) => item.front).map((item) => (
             <FoodOrbitItem
