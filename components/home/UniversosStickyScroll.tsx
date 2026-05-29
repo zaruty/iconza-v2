@@ -190,6 +190,13 @@ const universos: Universo[] = [
     textoFundo: "MIND",
     icone: "Brain",
     recursos: ["Mapa de ideias", "Guia estratégico", "Radar de insights"],
+    planet: {
+      glowSpread: 60,
+      glowAlpha: "45",
+      highlight: { opacity: 0.14 },
+      insetShadow: { alpha: 0.88 },
+      surface: { rotationS: 45 },
+    },
   }),
   buildUniverso({
     id: "iconetnia",
@@ -205,6 +212,10 @@ const universos: Universo[] = [
     textoFundo: "ETNIA",
     icone: "Globe",
     recursos: ["Mapa cultural", "Guia de identidade", "Radar de impacto"],
+    planet: {
+      surface: { pattern: "bands", rotationS: 40 },
+      atmosphereGlow: { opacity: 0.35 },
+    },
   }),
   buildUniverso({
     id: "iconfood",
@@ -224,6 +235,11 @@ const universos: Universo[] = [
       "Guia de experiências",
       "Radar de tendências",
     ],
+    planet: {
+      glowSpread: 100,
+      glowAlpha: "90",
+      atmosphereGlow: { opacity: 0.55 },
+    },
   }),
   buildUniverso({
     id: "iconlove",
@@ -239,6 +255,11 @@ const universos: Universo[] = [
     textoFundo: "LOVE",
     icone: "Heart",
     recursos: ["Mapa emocional", "Guia de vínculos", "Radar de autoestima"],
+    planet: {
+      highlight: { size: 80, blurClass: "blur-lg" },
+      insetShadow: { alpha: 0.55 },
+      atmosphereGlow: { opacity: 0.5 },
+    },
   }),
   buildUniverso({
     id: "iconart",
@@ -252,6 +273,15 @@ const universos: Universo[] = [
     textoFundo: "ART",
     icone: "Palette",
     recursos: ["Mapa estético", "Guia de linguagem visual", "Radar criativo"],
+    planet: {
+      orbitRing: {
+        enabled: true,
+        inset: "-4%",
+        tilt: 68,
+        opacity: 0.22,
+        durationS: 45,
+      },
+    },
   }),
 ];
 
