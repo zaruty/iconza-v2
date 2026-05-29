@@ -343,44 +343,86 @@ const ICONMIND_PALETTE = {
   halo: "#4D6DAA",
 } as const;
 
-const ICONMIND_TEXTURE = [
-  "radial-gradient(circle at 18% 22%, rgba(126,152,200,0.14) 0%, transparent 26%)",
-  "radial-gradient(circle at 62% 28%, rgba(91,117,169,0.10) 0%, transparent 24%)",
-  "radial-gradient(circle at 42% 58%, rgba(37,56,95,0.16) 0%, transparent 32%)",
-  "radial-gradient(circle at 74% 68%, rgba(9,19,44,0.18) 0%, transparent 28%)",
-  "radial-gradient(circle at 28% 72%, rgba(126,152,200,0.07) 0%, transparent 20%)",
-  "radial-gradient(circle at 52% 18%, rgba(77,109,170,0.09) 0%, transparent 22%)",
-  "radial-gradient(circle at 84% 44%, rgba(91,117,169,0.08) 0%, transparent 18%)",
-  "radial-gradient(circle at 36% 42%, rgba(126,152,200,0.05) 0%, transparent 14%)",
-  "radial-gradient(circle at 58% 78%, rgba(37,56,95,0.11) 0%, transparent 26%)",
-  "radial-gradient(circle at 12% 48%, rgba(77,109,170,0.06) 0%, transparent 16%)",
+const ICONMIND_LUNAR_TEXTURE = [
+  "radial-gradient(ellipse 38% 28% at 24% 28%, rgba(126,152,200,0.32) 0%, transparent 100%)",
+  "radial-gradient(ellipse 42% 34% at 58% 22%, rgba(91,117,169,0.28) 0%, transparent 100%)",
+  "radial-gradient(ellipse 36% 30% at 72% 52%, rgba(37,56,95,0.35) 0%, transparent 100%)",
+  "radial-gradient(ellipse 30% 26% at 32% 62%, rgba(9,19,44,0.38) 0%, transparent 100%)",
+  "radial-gradient(ellipse 28% 22% at 48% 44%, rgba(77,109,170,0.26) 0%, transparent 100%)",
+  "radial-gradient(ellipse 24% 20% at 18% 48%, rgba(126,152,200,0.22) 0%, transparent 100%)",
+  "radial-gradient(ellipse 32% 24% at 64% 68%, rgba(91,117,169,0.24) 0%, transparent 100%)",
+  "radial-gradient(ellipse 20% 18% at 42% 78%, rgba(37,56,95,0.30) 0%, transparent 100%)",
+].join(", ");
+
+const ICONMIND_NEURAL_TEXTURE = [
+  "repeating-conic-gradient(from 12deg at 46% 42%, transparent 0deg, rgba(126,152,200,0.07) 3deg, transparent 7deg)",
+  "repeating-conic-gradient(from 88deg at 54% 56%, transparent 0deg, rgba(77,109,170,0.06) 2deg, transparent 6deg)",
+  "radial-gradient(circle at 50% 50%, transparent 38%, rgba(126,152,200,0.05) 52%, transparent 68%)",
+  "radial-gradient(circle at 50% 50%, transparent 55%, rgba(91,117,169,0.08) 62%, transparent 72%)",
+  "linear-gradient(135deg, transparent 42%, rgba(126,152,200,0.06) 50%, transparent 58%)",
+  "linear-gradient(215deg, transparent 44%, rgba(77,109,170,0.05) 52%, transparent 60%)",
 ].join(", ");
 
 const ICONMIND_COGNITIVE_NODES = [
-  { id: 0, x: 28, y: 32, size: 5, duration: 5.4, delay: 0 },
-  { id: 1, x: 48, y: 24, size: 3, duration: 6.2, delay: 0.6 },
-  { id: 2, x: 38, y: 48, size: 4, duration: 7.1, delay: 1.2 },
-  { id: 3, x: 58, y: 38, size: 2, duration: 4.6, delay: 0.3 },
-  { id: 4, x: 22, y: 52, size: 3, duration: 7.8, delay: 1.8 },
-  { id: 5, x: 62, y: 58, size: 6, duration: 5.9, delay: 0.9 },
-  { id: 6, x: 44, y: 66, size: 3, duration: 6.5, delay: 2.1 },
-  { id: 7, x: 54, y: 52, size: 4, duration: 4.2, delay: 1.4 },
-  { id: 8, x: 34, y: 38, size: 2, duration: 7.4, delay: 0.2 },
-  { id: 9, x: 66, y: 44, size: 3, duration: 5.1, delay: 2.6 },
+  { id: 0, x: 26, y: 28, size: 8, duration: 5.2, delay: 0 },
+  { id: 1, x: 42, y: 22, size: 6, duration: 6.4, delay: 0.4 },
+  { id: 2, x: 58, y: 26, size: 7, duration: 7.1, delay: 0.8 },
+  { id: 3, x: 34, y: 38, size: 5, duration: 4.8, delay: 1.2 },
+  { id: 4, x: 50, y: 36, size: 9, duration: 6.8, delay: 0.2 },
+  { id: 5, x: 66, y: 34, size: 6, duration: 5.6, delay: 1.6 },
+  { id: 6, x: 22, y: 46, size: 7, duration: 7.4, delay: 0.6 },
+  { id: 7, x: 38, y: 50, size: 4, duration: 4.4, delay: 2.0 },
+  { id: 8, x: 54, y: 48, size: 8, duration: 6.0, delay: 1.0 },
+  { id: 9, x: 70, y: 46, size: 5, duration: 7.8, delay: 1.4 },
+  { id: 10, x: 30, y: 58, size: 6, duration: 5.4, delay: 2.4 },
+  { id: 11, x: 46, y: 56, size: 10, duration: 6.6, delay: 0.3 },
+  { id: 12, x: 62, y: 58, size: 7, duration: 4.6, delay: 1.8 },
+  { id: 13, x: 24, y: 66, size: 5, duration: 7.2, delay: 2.8 },
+  { id: 14, x: 40, y: 68, size: 6, duration: 5.8, delay: 0.9 },
+  { id: 15, x: 56, y: 66, size: 8, duration: 6.2, delay: 2.2 },
+  { id: 16, x: 48, y: 42, size: 4, duration: 4.2, delay: 1.1 },
+  { id: 17, x: 60, y: 52, size: 5, duration: 7.0, delay: 0.5 },
+  { id: 18, x: 36, y: 30, size: 7, duration: 5.0, delay: 2.6 },
+  { id: 19, x: 52, y: 62, size: 6, duration: 6.4, delay: 1.3 },
+  { id: 20, x: 44, y: 28, size: 5, duration: 4.6, delay: 0.7 },
+  { id: 21, x: 28, y: 52, size: 8, duration: 7.6, delay: 1.7 },
+  { id: 22, x: 64, y: 42, size: 4, duration: 5.4, delay: 2.1 },
+  { id: 23, x: 32, y: 44, size: 6, duration: 6.8, delay: 0.1 },
+  { id: 24, x: 58, y: 38, size: 7, duration: 4.8, delay: 2.3 },
 ] as const;
 
-const ICONMIND_NODE_CONNECTIONS: [number, number][] = [
-  [0, 1],
-  [0, 2],
-  [1, 3],
-  [2, 4],
-  [2, 7],
-  [3, 9],
-  [4, 6],
-  [5, 7],
-  [6, 7],
-  [8, 2],
-];
+function buildIconMindConnections(
+  nodes: readonly { id: number; x: number; y: number }[],
+  maxDistance: number,
+) {
+  const pairs: [number, number][] = [];
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      if (Math.hypot(dx, dy) <= maxDistance) {
+        pairs.push([nodes[i].id, nodes[j].id]);
+      }
+    }
+  }
+
+  return pairs;
+}
+
+const ICONMIND_NODE_CONNECTIONS = buildIconMindConnections(
+  ICONMIND_COGNITIVE_NODES,
+  24,
+);
+
+const ICONMIND_ORBIT_PARTICLES = Array.from({ length: 32 }, (_, index) => ({
+  id: index,
+  armWidth: 108 + (index % 6) * 4,
+  size: 2 + (index % 3),
+  duration: 90 + (index % 8) * 12,
+  delay: (index % 10) * 0.8,
+  startAngle: (index / 32) * 360,
+}));
 
 function PlanetaIconMind({ universo }: { universo: Universo }) {
   const nodeMap = new Map(
@@ -389,94 +431,176 @@ function PlanetaIconMind({ universo }: { universo: Universo }) {
 
   return (
     <motion.div
-      className="relative h-[250px] w-[250px] shrink-0 overflow-hidden rounded-full md:h-[450px] md:w-[450px]"
+      className="relative h-[250px] w-[250px] shrink-0 md:h-[450px] md:w-[450px]"
+      style={{ perspective: 900 }}
       initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
       transition={{ type: "spring", bounce: 0.3 }}
-      style={{
-        background: `radial-gradient(circle at 30% 30%, ${ICONMIND_PALETTE.highlight}, ${ICONMIND_PALETTE.midtone} 52%, ${ICONMIND_PALETTE.shadow} 78%, ${ICONMIND_PALETTE.deepShadow})`,
-        boxShadow: `0 0 80px ${accentWithAlpha(ICONMIND_PALETTE.halo)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
-      }}
       aria-hidden
     >
-      <motion.div
-        className="pointer-events-none absolute inset-[-12%] rounded-full"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        style={{
-          background: ICONMIND_TEXTURE,
-          opacity: 0.5,
-        }}
-      />
-
-      <div
-        className="pointer-events-none absolute inset-0 rounded-full"
-        style={{
-          background: ICONMIND_TEXTURE,
-          opacity: 0.22,
-          mixBlendMode: "soft-light",
-        }}
-      />
-
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 100 100"
-        aria-hidden
-      >
-        {ICONMIND_NODE_CONNECTIONS.map(([fromId, toId]) => {
-          const from = nodeMap.get(fromId);
-          const to = nodeMap.get(toId);
-          if (!from || !to) return null;
-
-          return (
-            <line
-              key={`${fromId}-${toId}`}
-              x1={from.x}
-              y1={from.y}
-              x2={to.x}
-              y2={to.y}
-              stroke={ICONMIND_PALETTE.highlight}
-              strokeOpacity={0.08}
-              strokeWidth={0.2}
-            />
-          );
-        })}
-      </svg>
-
-      {ICONMIND_COGNITIVE_NODES.map((node) => (
+      {ICONMIND_ORBIT_PARTICLES.map((particle) => (
         <motion.div
-          key={node.id}
-          className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+          key={`orbit-${particle.id}`}
+          className="pointer-events-none absolute top-1/2 left-1/2 h-0"
           style={{
-            left: `${node.x}%`,
-            top: `${node.y}%`,
-            width: node.size,
-            height: node.size,
-            backgroundColor: ICONMIND_PALETTE.highlight,
-            filter: "blur(1.5px)",
+            width: `${particle.armWidth}%`,
+            marginLeft: `-${particle.armWidth / 2}%`,
+            transformOrigin: "center center",
           }}
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.3, 0.8, 0.3],
-          }}
+          initial={{ rotate: particle.startAngle }}
+          animate={{ rotate: particle.startAngle + 360 }}
           transition={{
-            duration: node.duration,
+            duration: particle.duration,
             repeat: Infinity,
-            delay: node.delay,
-            ease: "easeInOut",
+            ease: "linear",
+            delay: particle.delay,
           }}
-        />
+        >
+          <div
+            className="absolute top-0 right-0 rounded-full bg-[#7E98C8]"
+            style={{
+              width: particle.size,
+              height: particle.size,
+              transform: "translate(50%, -50%)",
+              opacity: 0.55,
+              boxShadow: "0 0 8px rgba(126,152,200,0.7)",
+            }}
+          />
+        </motion.div>
       ))}
 
-      <div
-        className="pointer-events-none absolute inset-0 rounded-full"
+      <motion.div
+        className="pointer-events-none absolute inset-[-2%] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
-          opacity: 0.2,
+          border: "1px solid rgba(126,152,200,0.28)",
+          boxShadow:
+            "0 0 18px rgba(126,152,200,0.18), inset 0 0 12px rgba(126,152,200,0.08)",
+          transform: "rotateX(68deg)",
         }}
+        animate={{ rotateZ: 360 }}
+        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
       />
-      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+
+      <motion.div
+        className="pointer-events-none absolute inset-[-6%] rounded-full"
+        style={{
+          border: "1px dashed rgba(126,152,200,0.18)",
+          transform: "rotateX(72deg) rotateZ(28deg)",
+        }}
+        animate={{ rotateZ: 388 }}
+        transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
+      />
+
+      <div
+        className="absolute inset-0 overflow-hidden rounded-full"
+        style={{
+          background: `radial-gradient(circle at 30% 30%, ${ICONMIND_PALETTE.highlight}, ${ICONMIND_PALETTE.midtone} 52%, ${ICONMIND_PALETTE.shadow} 78%, ${ICONMIND_PALETTE.deepShadow})`,
+          boxShadow: `0 0 80px ${accentWithAlpha(ICONMIND_PALETTE.halo)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
+        }}
+      >
+        <motion.div
+          className="pointer-events-none absolute inset-[-18%] rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          style={{
+            background: `${ICONMIND_LUNAR_TEXTURE}, ${ICONMIND_NEURAL_TEXTURE}`,
+            opacity: 0.72,
+          }}
+        />
+
+        <div
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background: ICONMIND_LUNAR_TEXTURE,
+            opacity: 0.38,
+            mixBlendMode: "soft-light",
+          }}
+        />
+
+        <div
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background: ICONMIND_NEURAL_TEXTURE,
+            opacity: 0.42,
+            mixBlendMode: "screen",
+          }}
+        />
+
+        <svg
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          viewBox="0 0 100 100"
+          aria-hidden
+        >
+          <path
+            d="M18 34 C 32 22, 48 18, 62 26 S 78 44, 70 58 S 48 72, 32 64 S 14 48, 18 34"
+            fill="none"
+            stroke={ICONMIND_PALETTE.highlight}
+            strokeOpacity={0.12}
+            strokeWidth={0.6}
+          />
+          <path
+            d="M28 48 C 40 38, 56 36, 68 44 S 74 58, 62 68 S 42 74, 30 62"
+            fill="none"
+            stroke={ICONMIND_PALETTE.midtone}
+            strokeOpacity={0.1}
+            strokeWidth={0.5}
+          />
+
+          {ICONMIND_NODE_CONNECTIONS.map(([fromId, toId]) => {
+            const from = nodeMap.get(fromId);
+            const to = nodeMap.get(toId);
+            if (!from || !to) return null;
+
+            return (
+              <line
+                key={`${fromId}-${toId}`}
+                x1={from.x}
+                y1={from.y}
+                x2={to.x}
+                y2={to.y}
+                stroke={ICONMIND_PALETTE.highlight}
+                strokeOpacity={0.25}
+                strokeWidth={1}
+              />
+            );
+          })}
+        </svg>
+
+        {ICONMIND_COGNITIVE_NODES.map((node) => (
+          <motion.div
+            key={node.id}
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              left: `${node.x}%`,
+              top: `${node.y}%`,
+              width: node.size,
+              height: node.size,
+              backgroundColor: ICONMIND_PALETTE.highlight,
+              boxShadow: `0 0 ${node.size * 1.5}px rgba(126,152,200,0.9), 0 0 ${node.size * 3}px rgba(126,152,200,0.45)`,
+            }}
+            animate={{
+              scale: [1, 1.18, 1],
+              opacity: [0.55, 1, 0.55],
+            }}
+            transition={{
+              duration: node.duration,
+              repeat: Infinity,
+              delay: node.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        <div
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
+            opacity: 0.2,
+          }}
+        />
+        <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+      </div>
     </motion.div>
   );
 }
