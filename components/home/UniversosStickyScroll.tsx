@@ -11,6 +11,120 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type IconName = "Brain" | "Heart" | "Globe" | "UtensilsCrossed" | "Palette";
 
+type PlanetSurfacePattern = "default" | "bands" | "minimal";
+
+type PlanetOrbitRingConfig = {
+  enabled: boolean;
+  inset: string;
+  tilt: number;
+  opacity: number;
+  durationS: number;
+};
+
+type PlanetHighlightConfig = {
+  size: number;
+  top: string;
+  left: string;
+  opacity: number;
+  blurClass: string;
+};
+
+type PlanetInsetShadowConfig = {
+  x: number;
+  y: number;
+  blur: number;
+  alpha: number;
+};
+
+type PlanetSurfaceConfig = {
+  rotationS: number;
+  opacity: number;
+  pattern: PlanetSurfacePattern;
+};
+
+type PlanetAtmosphereGlowConfig = {
+  opacity: number;
+};
+
+type PlanetStyleConfig = {
+  gradientLightAt: string;
+  glowSpread: number;
+  glowAlpha: string;
+  insetShadow: PlanetInsetShadowConfig;
+  highlight: PlanetHighlightConfig;
+  surface: PlanetSurfaceConfig;
+  atmosphereGlow: PlanetAtmosphereGlowConfig;
+  orbitRing: PlanetOrbitRingConfig;
+};
+
+type PlanetStyleInput = {
+  gradientLightAt?: string;
+  glowSpread?: number;
+  glowAlpha?: string;
+  insetShadow?: Partial<PlanetInsetShadowConfig>;
+  highlight?: Partial<PlanetHighlightConfig>;
+  surface?: Partial<PlanetSurfaceConfig>;
+  atmosphereGlow?: Partial<PlanetAtmosphereGlowConfig>;
+  orbitRing?: Partial<PlanetOrbitRingConfig>;
+};
+
+const DEFAULT_PLANET_STYLE: PlanetStyleConfig = {
+  gradientLightAt: "30% 30%",
+  glowSpread: 80,
+  glowAlpha: "60",
+  insetShadow: { x: -30, y: -30, blur: 60, alpha: 0.8 },
+  highlight: {
+    size: 64,
+    top: "20%",
+    left: "20%",
+    opacity: 0.1,
+    blurClass: "blur-md",
+  },
+  surface: {
+    rotationS: 30,
+    opacity: 0.52,
+    pattern: "default",
+  },
+  atmosphereGlow: {
+    opacity: 0.4,
+  },
+  orbitRing: {
+    enabled: false,
+    inset: "-4%",
+    tilt: 68,
+    opacity: 0.22,
+    durationS: 45,
+  },
+};
+
+function resolvePlanetStyle(input?: PlanetStyleInput): PlanetStyleConfig {
+  return {
+    gradientLightAt: input?.gradientLightAt ?? DEFAULT_PLANET_STYLE.gradientLightAt,
+    glowSpread: input?.glowSpread ?? DEFAULT_PLANET_STYLE.glowSpread,
+    glowAlpha: input?.glowAlpha ?? DEFAULT_PLANET_STYLE.glowAlpha,
+    insetShadow: {
+      ...DEFAULT_PLANET_STYLE.insetShadow,
+      ...input?.insetShadow,
+    },
+    highlight: {
+      ...DEFAULT_PLANET_STYLE.highlight,
+      ...input?.highlight,
+    },
+    surface: {
+      ...DEFAULT_PLANET_STYLE.surface,
+      ...input?.surface,
+    },
+    atmosphereGlow: {
+      ...DEFAULT_PLANET_STYLE.atmosphereGlow,
+      ...input?.atmosphereGlow,
+    },
+    orbitRing: {
+      ...DEFAULT_PLANET_STYLE.orbitRing,
+      ...input?.orbitRing,
+    },
+  };
+}
+
 type Universo = {
   id: string;
   numero: string;
@@ -22,6 +136,7 @@ type Universo = {
   atmosphere?: string;
   textoFundo: string;
   planetGradient: string;
+  planetStyle: PlanetStyleConfig;
   icone: IconName;
   recursos: [string, string, string];
 };
@@ -34,17 +149,31 @@ function darkenHex(hex: string, factor = 0.35) {
   return `#${[r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("")}`;
 }
 
-function buildPlanetGradient(bgColor: string, accentColor: string) {
+function buildPlanetGradient(
+  bgColor: string,
+  accentColor: string,
+  lightAt = DEFAULT_PLANET_STYLE.gradientLightAt,
+) {
   const bgColorEscuro = darkenHex(bgColor);
-  return `radial-gradient(circle at 30% 30%, ${accentColor}, ${bgColor} 70%, ${bgColorEscuro})`;
+  return `radial-gradient(circle at ${lightAt}, ${accentColor}, ${bgColor} 70%, ${bgColorEscuro})`;
 }
 
-function buildUniverso(
-  data: Omit<Universo, "planetGradient">,
-): Universo {
+type UniversoInput = Omit<Universo, "planetGradient" | "planetStyle"> & {
+  planet?: PlanetStyleInput;
+};
+
+function buildUniverso(data: UniversoInput): Universo {
+  const { planet, ...rest } = data;
+  const planetStyle = resolvePlanetStyle(planet);
+
   return {
-    ...data,
-    planetGradient: buildPlanetGradient(data.bgColor, data.accentColor),
+    ...rest,
+    planetStyle,
+    planetGradient: buildPlanetGradient(
+      rest.bgColor,
+      rest.accentColor,
+      planetStyle.gradientLightAt,
+    ),
   };
 }
 
@@ -129,6 +258,8 @@ const universos: Universo[] = [
 const CROSSFADE_MS = 0.4;
 
 const DESKTOP_PLANET_TEXT_GAP_PX = 450;
+/** Aproxima o "N" da esfera sem mover "IC" nem o spacer central. */
+const DESKTOP_N_SHIFT_LEFT_PX = 64;
 
 function accentWithAlpha(hex: string, alpha = "60") {
   return `${hex}${alpha}`;
@@ -315,15 +446,14 @@ const PLANETA_SIZE_CLASS =
 /** Desligado temporariamente — reativar para restaurar identity elements. */
 const SHOW_IDENTITY_ELEMENTS = false;
 
-const PLANET_SURFACE_ROTATION_S = 30;
-
 function buildPlanetSurfaceTexture(universo: Universo): string {
+  const { surface } = universo.planetStyle;
   const accentSoft = accentWithAlpha(universo.accentColor, "55");
   const accentMid = accentWithAlpha(universo.accentColor, "38");
   const accentLight = accentWithAlpha(universo.accentColor, "22");
   const depth = accentWithAlpha(universo.bgColor, "99");
 
-  return [
+  const base = [
     "radial-gradient(ellipse 38% 30% at 20% 26%, ACCENT_SOFT 0%, transparent 100%)",
     "radial-gradient(ellipse 42% 34% at 64% 22%, ACCENT_MID 0%, transparent 100%)",
     "radial-gradient(ellipse 36% 28% at 76% 56%, ACCENT_LIGHT 0%, transparent 100%)",
@@ -332,12 +462,28 @@ function buildPlanetSurfaceTexture(universo: Universo): string {
     "radial-gradient(ellipse 24% 20% at 14% 48%, ACCENT_LIGHT 0%, transparent 100%)",
     "radial-gradient(ellipse 30% 22% at 58% 76%, DEPTH 0%, transparent 100%)",
     "radial-gradient(ellipse 20% 18% at 82% 38%, ACCENT_SOFT 0%, transparent 100%)",
-  ]
+  ];
+
+  if (surface.pattern === "bands") {
+    const band = accentWithAlpha(universo.accentColor, "18");
+    base.push(
+      `linear-gradient(180deg, transparent 18%, ${band} 22%, transparent 26%)`,
+      `linear-gradient(180deg, transparent 38%, ${band} 42%, transparent 46%)`,
+      `linear-gradient(180deg, transparent 58%, ${band} 62%, transparent 66%)`,
+    );
+  }
+
+  return base
     .join(", ")
     .replaceAll("ACCENT_SOFT", accentSoft)
     .replaceAll("ACCENT_MID", accentMid)
     .replaceAll("ACCENT_LIGHT", accentLight)
     .replaceAll("DEPTH", depth);
+}
+
+function buildPlanetBoxShadow(universo: Universo): string {
+  const { glowSpread, glowAlpha, insetShadow } = universo.planetStyle;
+  return `0 0 ${glowSpread}px ${accentWithAlpha(universo.accentColor, glowAlpha)}, inset ${insetShadow.x}px ${insetShadow.y}px ${insetShadow.blur}px rgba(0,0,0,${insetShadow.alpha})`;
 }
 
 function IdentityIconMind({ accentColor }: { accentColor: string }) {
@@ -737,19 +883,21 @@ function PlanetaSphere({
   universo: Universo;
   children?: ReactNode;
 }) {
+  const { highlight, surface } = universo.planetStyle;
+
   return (
     <div
       className="absolute inset-0 overflow-hidden rounded-full"
       style={{
         background: universo.planetGradient,
-        boxShadow: `0 0 80px ${accentWithAlpha(universo.accentColor)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
+        boxShadow: buildPlanetBoxShadow(universo),
       }}
     >
       <motion.div
         className="pointer-events-none absolute inset-0"
         animate={{ rotate: 360 }}
         transition={{
-          duration: PLANET_SURFACE_ROTATION_S,
+          duration: surface.rotationS,
           repeat: Infinity,
           ease: "linear",
         }}
@@ -758,7 +906,7 @@ function PlanetaSphere({
           className="absolute inset-[-18%] rounded-full"
           style={{
             background: buildPlanetSurfaceTexture(universo),
-            opacity: 0.52,
+            opacity: surface.opacity,
           }}
         />
         {children ? (
@@ -774,8 +922,41 @@ function PlanetaSphere({
           opacity: 0.2,
         }}
       />
-      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 opacity-[0.10] blur-md" />
+      <div
+        className={`pointer-events-none absolute rounded-full bg-white/10 ${highlight.blurClass}`}
+        style={{
+          top: highlight.top,
+          left: highlight.left,
+          width: highlight.size,
+          height: highlight.size,
+          opacity: highlight.opacity,
+        }}
+      />
     </div>
+  );
+}
+
+function PlanetOrbitRing({ universo }: { universo: Universo }) {
+  const ring = universo.planetStyle.orbitRing;
+  if (!ring.enabled) return null;
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute rounded-full"
+      style={{
+        inset: ring.inset,
+        border: `1px solid ${universo.accentColor}`,
+        opacity: ring.opacity,
+        transform: `rotateX(${ring.tilt}deg)`,
+      }}
+      animate={{ rotateZ: 360 }}
+      transition={{
+        duration: ring.durationS,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      aria-hidden
+    />
   );
 }
 
@@ -796,7 +977,11 @@ function PlanetaUniverso({ universo }: { universo: Universo }) {
         </div>
       ) : null}
 
-      <div className={`absolute inset-0 ${SHOW_IDENTITY_ELEMENTS && isFood ? "z-10" : "z-0"}`}>
+      <PlanetOrbitRing universo={universo} />
+
+      <div
+        className={`absolute inset-0 ${SHOW_IDENTITY_ELEMENTS && isFood ? "z-10" : "z-0"}`}
+      >
         <PlanetaSphere universo={universo}>
           {SHOW_IDENTITY_ELEMENTS ? (
             <IdentityElement universo={universo} />
@@ -820,6 +1005,8 @@ function PlanetaUniverso({ universo }: { universo: Universo }) {
 }
 
 function PlanetaAtmosphericGlow({ universo }: { universo: Universo }) {
+  const glowOpacity = universo.planetStyle.atmosphereGlow.opacity;
+
   return (
     <motion.div
       key={universo.id}
@@ -827,7 +1014,7 @@ function PlanetaAtmosphericGlow({ universo }: { universo: Universo }) {
       className="pointer-events-none absolute top-1/2 left-1/2 z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] md:h-[600px] md:w-[600px]"
       style={{ backgroundColor: universo.accentColor }}
       initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 0.4, scale: 1 }}
+      animate={{ opacity: glowOpacity, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5 }}
     />
   );
@@ -909,7 +1096,7 @@ function GiantBackgroundText({ activeIndex }: { activeIndex: number }) {
             style={{ width: DESKTOP_PLANET_TEXT_GAP_PX }}
             aria-hidden
           />
-          <span>N</span>
+          <span style={{ marginLeft: -DESKTOP_N_SHIFT_LEFT_PX }}>N</span>
         </div>
       </div>
     </>
