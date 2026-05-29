@@ -335,6 +335,152 @@ function PlanetaCSS({ universo }: { universo: Universo }) {
   );
 }
 
+const ICONMIND_PALETTE = {
+  highlight: "#7E98C8",
+  midtone: "#5B75A9",
+  shadow: "#25385F",
+  deepShadow: "#09132C",
+  halo: "#4D6DAA",
+} as const;
+
+const ICONMIND_TEXTURE = [
+  "radial-gradient(circle at 18% 22%, rgba(126,152,200,0.14) 0%, transparent 26%)",
+  "radial-gradient(circle at 62% 28%, rgba(91,117,169,0.10) 0%, transparent 24%)",
+  "radial-gradient(circle at 42% 58%, rgba(37,56,95,0.16) 0%, transparent 32%)",
+  "radial-gradient(circle at 74% 68%, rgba(9,19,44,0.18) 0%, transparent 28%)",
+  "radial-gradient(circle at 28% 72%, rgba(126,152,200,0.07) 0%, transparent 20%)",
+  "radial-gradient(circle at 52% 18%, rgba(77,109,170,0.09) 0%, transparent 22%)",
+  "radial-gradient(circle at 84% 44%, rgba(91,117,169,0.08) 0%, transparent 18%)",
+  "radial-gradient(circle at 36% 42%, rgba(126,152,200,0.05) 0%, transparent 14%)",
+  "radial-gradient(circle at 58% 78%, rgba(37,56,95,0.11) 0%, transparent 26%)",
+  "radial-gradient(circle at 12% 48%, rgba(77,109,170,0.06) 0%, transparent 16%)",
+].join(", ");
+
+const ICONMIND_COGNITIVE_NODES = [
+  { id: 0, x: 28, y: 32, size: 5, duration: 5.4, delay: 0 },
+  { id: 1, x: 48, y: 24, size: 3, duration: 6.2, delay: 0.6 },
+  { id: 2, x: 38, y: 48, size: 4, duration: 7.1, delay: 1.2 },
+  { id: 3, x: 58, y: 38, size: 2, duration: 4.6, delay: 0.3 },
+  { id: 4, x: 22, y: 52, size: 3, duration: 7.8, delay: 1.8 },
+  { id: 5, x: 62, y: 58, size: 6, duration: 5.9, delay: 0.9 },
+  { id: 6, x: 44, y: 66, size: 3, duration: 6.5, delay: 2.1 },
+  { id: 7, x: 54, y: 52, size: 4, duration: 4.2, delay: 1.4 },
+  { id: 8, x: 34, y: 38, size: 2, duration: 7.4, delay: 0.2 },
+  { id: 9, x: 66, y: 44, size: 3, duration: 5.1, delay: 2.6 },
+] as const;
+
+const ICONMIND_NODE_CONNECTIONS: [number, number][] = [
+  [0, 1],
+  [0, 2],
+  [1, 3],
+  [2, 4],
+  [2, 7],
+  [3, 9],
+  [4, 6],
+  [5, 7],
+  [6, 7],
+  [8, 2],
+];
+
+function PlanetaIconMind({ universo }: { universo: Universo }) {
+  const nodeMap = new Map(
+    ICONMIND_COGNITIVE_NODES.map((node) => [node.id, node]),
+  );
+
+  return (
+    <motion.div
+      className="relative h-[250px] w-[250px] shrink-0 overflow-hidden rounded-full md:h-[450px] md:w-[450px]"
+      initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+      transition={{ type: "spring", bounce: 0.3 }}
+      style={{
+        background: `radial-gradient(circle at 30% 30%, ${ICONMIND_PALETTE.highlight}, ${ICONMIND_PALETTE.midtone} 52%, ${ICONMIND_PALETTE.shadow} 78%, ${ICONMIND_PALETTE.deepShadow})`,
+        boxShadow: `0 0 80px ${accentWithAlpha(ICONMIND_PALETTE.halo)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
+      }}
+      aria-hidden
+    >
+      <motion.div
+        className="pointer-events-none absolute inset-[-12%] rounded-full"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        style={{
+          background: ICONMIND_TEXTURE,
+          opacity: 0.5,
+        }}
+      />
+
+      <div
+        className="pointer-events-none absolute inset-0 rounded-full"
+        style={{
+          background: ICONMIND_TEXTURE,
+          opacity: 0.22,
+          mixBlendMode: "soft-light",
+        }}
+      />
+
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 100 100"
+        aria-hidden
+      >
+        {ICONMIND_NODE_CONNECTIONS.map(([fromId, toId]) => {
+          const from = nodeMap.get(fromId);
+          const to = nodeMap.get(toId);
+          if (!from || !to) return null;
+
+          return (
+            <line
+              key={`${fromId}-${toId}`}
+              x1={from.x}
+              y1={from.y}
+              x2={to.x}
+              y2={to.y}
+              stroke={ICONMIND_PALETTE.highlight}
+              strokeOpacity={0.08}
+              strokeWidth={0.2}
+            />
+          );
+        })}
+      </svg>
+
+      {ICONMIND_COGNITIVE_NODES.map((node) => (
+        <motion.div
+          key={node.id}
+          className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            left: `${node.x}%`,
+            top: `${node.y}%`,
+            width: node.size,
+            height: node.size,
+            backgroundColor: ICONMIND_PALETTE.highlight,
+            filter: "blur(1.5px)",
+          }}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: node.duration,
+            repeat: Infinity,
+            delay: node.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
+      <div
+        className="pointer-events-none absolute inset-0 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
+          opacity: 0.2,
+        }}
+      />
+      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+    </motion.div>
+  );
+}
+
 function PlanetaAtmosphericGlow({ universo }: { universo: Universo }) {
   return (
     <motion.div
@@ -385,7 +531,11 @@ function PlanetaCrossfade({ activeIndex }: { activeIndex: number }) {
         <PlanetaAtmosphericGlow key={`glow-${universo.id}`} universo={universo} />
       </AnimatePresence>
       <div className="relative z-20 flex items-center justify-center">
-        <PlanetaCSS key={universo.id} universo={universo} />
+        {universo.id === "iconmind" ? (
+          <PlanetaIconMind key={universo.id} universo={universo} />
+        ) : (
+          <PlanetaCSS key={universo.id} universo={universo} />
+        )}
       </div>
     </motion.div>
   );
