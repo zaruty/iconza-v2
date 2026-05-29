@@ -315,6 +315,31 @@ const PLANETA_SIZE_CLASS =
 /** Desligado temporariamente — reativar para restaurar identity elements. */
 const SHOW_IDENTITY_ELEMENTS = false;
 
+const PLANET_SURFACE_ROTATION_S = 30;
+
+function buildPlanetSurfaceTexture(universo: Universo): string {
+  const accentSoft = accentWithAlpha(universo.accentColor, "55");
+  const accentMid = accentWithAlpha(universo.accentColor, "38");
+  const accentLight = accentWithAlpha(universo.accentColor, "22");
+  const depth = accentWithAlpha(universo.bgColor, "99");
+
+  return [
+    "radial-gradient(ellipse 38% 30% at 20% 26%, ACCENT_SOFT 0%, transparent 100%)",
+    "radial-gradient(ellipse 42% 34% at 64% 22%, ACCENT_MID 0%, transparent 100%)",
+    "radial-gradient(ellipse 36% 28% at 76% 56%, ACCENT_LIGHT 0%, transparent 100%)",
+    "radial-gradient(ellipse 32% 26% at 28% 66%, DEPTH 0%, transparent 100%)",
+    "radial-gradient(ellipse 28% 24% at 50% 44%, ACCENT_MID 0%, transparent 100%)",
+    "radial-gradient(ellipse 24% 20% at 14% 48%, ACCENT_LIGHT 0%, transparent 100%)",
+    "radial-gradient(ellipse 30% 22% at 58% 76%, DEPTH 0%, transparent 100%)",
+    "radial-gradient(ellipse 20% 18% at 82% 38%, ACCENT_SOFT 0%, transparent 100%)",
+  ]
+    .join(", ")
+    .replaceAll("ACCENT_SOFT", accentSoft)
+    .replaceAll("ACCENT_MID", accentMid)
+    .replaceAll("ACCENT_LIGHT", accentLight)
+    .replaceAll("DEPTH", depth);
+}
+
 function IdentityIconMind({ accentColor }: { accentColor: string }) {
   return (
     <svg
@@ -720,7 +745,27 @@ function PlanetaSphere({
         boxShadow: `0 0 80px ${accentWithAlpha(universo.accentColor)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
       }}
     >
-      {children}
+      <motion.div
+        className="pointer-events-none absolute inset-0"
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: PLANET_SURFACE_ROTATION_S,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <div
+          className="absolute inset-[-18%] rounded-full"
+          style={{
+            background: buildPlanetSurfaceTexture(universo),
+            opacity: 0.52,
+          }}
+        />
+        {children ? (
+          <div className="absolute inset-0">{children}</div>
+        ) : null}
+      </motion.div>
+
       <div
         className="pointer-events-none absolute inset-0 rounded-full"
         style={{
@@ -729,15 +774,7 @@ function PlanetaSphere({
           opacity: 0.2,
         }}
       />
-      <motion.div
-        className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md"
-        animate={{ opacity: [0.08, 0.14, 0.08] }}
-        transition={{
-          duration: 90,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 opacity-[0.10] blur-md" />
     </div>
   );
 }
