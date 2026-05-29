@@ -996,6 +996,7 @@ function PlanetaUniverso({ universo }: { universo: Universo }) {
   return (
     <motion.div
       className={PLANETA_SIZE_CLASS}
+      style={{ perspective: 900 }}
       initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
       transition={{ type: "spring", bounce: 0.3 }}
@@ -1007,11 +1008,11 @@ function PlanetaUniverso({ universo }: { universo: Universo }) {
         </div>
       ) : null}
 
-      <PlanetOrbitRing universo={universo} />
+      <div className="pointer-events-none absolute inset-0 z-[5]">
+        <PlanetOrbitRing universo={universo} />
+      </div>
 
-      <div
-        className={`absolute inset-0 ${SHOW_IDENTITY_ELEMENTS && isFood ? "z-10" : "z-0"}`}
-      >
+      <div className="absolute inset-0 z-10">
         <PlanetaSphere universo={universo}>
           {SHOW_IDENTITY_ELEMENTS ? (
             <IdentityElement universo={universo} />
