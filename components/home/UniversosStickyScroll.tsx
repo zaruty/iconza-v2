@@ -7,7 +7,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type IconName = "Brain" | "Heart" | "Globe" | "UtensilsCrossed" | "Palette";
 
@@ -309,54 +309,462 @@ function getActiveIndex(progress: number) {
   return Math.min(4, Math.max(0, Math.floor(progress * 5)));
 }
 
-function PlanetaCSS({ universo }: { universo: Universo }) {
+const PLANETA_SIZE_CLASS =
+  "relative h-[250px] w-[250px] shrink-0 md:h-[450px] md:w-[450px]";
+
+function IdentityIconMind({ accentColor }: { accentColor: string }) {
   return (
-    <motion.div
-      className="relative h-[250px] w-[250px] shrink-0 rounded-full md:h-[450px] md:w-[450px]"
-      initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
-      animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-      transition={{ type: "spring", bounce: 0.3 }}
-      style={{
-        background: universo.planetGradient,
-        boxShadow: `0 0 80px ${accentWithAlpha(universo.accentColor)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
-      }}
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full mix-blend-screen"
+      viewBox="0 0 100 100"
       aria-hidden
     >
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
-          opacity: 0.2,
-        }}
+      <path
+        d="M 50 16 C 30 22, 20 48, 26 72 C 30 82, 38 78, 42 68"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1.4}
+        strokeOpacity={0.85}
       />
-      <div className="absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+      <path
+        d="M 50 16 C 70 22, 80 48, 74 72 C 70 82, 62 78, 58 68"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1.4}
+        strokeOpacity={0.85}
+      />
+      <line
+        x1={36}
+        y1={36}
+        x2={50}
+        y2={50}
+        stroke={accentColor}
+        strokeWidth={0.9}
+        strokeOpacity={0.65}
+      />
+      <line
+        x1={64}
+        y1={36}
+        x2={50}
+        y2={50}
+        stroke={accentColor}
+        strokeWidth={0.9}
+        strokeOpacity={0.65}
+      />
+      <line
+        x1={42}
+        y1={58}
+        x2={50}
+        y2={50}
+        stroke={accentColor}
+        strokeWidth={0.9}
+        strokeOpacity={0.65}
+      />
+      <line
+        x1={58}
+        y1={58}
+        x2={50}
+        y2={50}
+        stroke={accentColor}
+        strokeWidth={0.9}
+        strokeOpacity={0.65}
+      />
+      <line
+        x1={50}
+        y1={32}
+        x2={50}
+        y2={50}
+        stroke={accentColor}
+        strokeWidth={0.8}
+        strokeOpacity={0.5}
+      />
+      <circle cx={36} cy={36} r={2.2} fill={accentColor} fillOpacity={0.9} />
+      <circle cx={64} cy={36} r={2.2} fill={accentColor} fillOpacity={0.9} />
+      <circle cx={42} cy={58} r={1.8} fill={accentColor} fillOpacity={0.75} />
+      <circle cx={58} cy={58} r={1.8} fill={accentColor} fillOpacity={0.75} />
+      <circle cx={50} cy={50} r={2.8} fill={accentColor} fillOpacity={1} />
+    </svg>
+  );
+}
+
+function IdentityIconEtnia({ accentColor }: { accentColor: string }) {
+  return (
+    <motion.div
+      className="pointer-events-none absolute inset-0"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+    >
+      <svg className="h-full w-full" viewBox="0 0 100 100" aria-hidden>
+        <path
+          d="M 20 26 L 23 18 L 29 20 L 31 34 L 29 48 L 24 46 L 21 38 Z"
+          fill={accentColor}
+          fillOpacity={0.22}
+          stroke={accentColor}
+          strokeWidth={0.6}
+          strokeOpacity={0.45}
+        />
+        <path
+          d="M 25 52 L 29 54 L 31 70 L 27 76 L 23 72 L 24 58 Z"
+          fill={accentColor}
+          fillOpacity={0.2}
+          stroke={accentColor}
+          strokeWidth={0.6}
+          strokeOpacity={0.45}
+        />
+        <path
+          d="M 40 20 L 47 17 L 51 30 L 53 44 L 51 60 L 48 72 L 43 68 L 41 48 L 39 32 Z"
+          fill={accentColor}
+          fillOpacity={0.24}
+          stroke={accentColor}
+          strokeWidth={0.6}
+          strokeOpacity={0.45}
+        />
+        <path
+          d="M 52 18 L 72 16 L 78 28 L 76 42 L 66 46 L 54 40 L 50 28 Z"
+          fill={accentColor}
+          fillOpacity={0.22}
+          stroke={accentColor}
+          strokeWidth={0.6}
+          strokeOpacity={0.45}
+        />
+        <path
+          d="M 66 54 L 74 56 L 72 62 L 66 60 Z"
+          fill={accentColor}
+          fillOpacity={0.18}
+          stroke={accentColor}
+          strokeWidth={0.5}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 26 32 Q 38 28, 46 26"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.9}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 48 30 Q 58 34, 68 32"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.9}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 30 48 Q 42 44, 50 42"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.9}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 48 48 Q 58 52, 68 54"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.9}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 28 56 Q 40 58, 48 62"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.9}
+          strokeOpacity={0.4}
+        />
+        <path
+          d="M 46 38 Q 46 52, 44 64"
+          fill="none"
+          stroke={accentColor}
+          strokeWidth={0.8}
+          strokeOpacity={0.35}
+        />
+        <circle cx={26} cy={32} r={1.5} fill={accentColor} fillOpacity={0.7} />
+        <circle cx={46} cy={26} r={1.5} fill={accentColor} fillOpacity={0.7} />
+        <circle cx={68} cy={32} r={1.5} fill={accentColor} fillOpacity={0.7} />
+        <circle cx={50} cy={42} r={1.5} fill={accentColor} fillOpacity={0.7} />
+        <circle cx={68} cy={54} r={1.2} fill={accentColor} fillOpacity={0.6} />
+      </svg>
     </motion.div>
   );
 }
 
-function PlanetaIconMind({ universo }: { universo: Universo }) {
+const FOOD_ORBIT_ITEMS = [
+  { id: 0, arm: 112, start: 20, duration: 108, delay: 0, kind: "leaf" as const, front: false },
+  { id: 1, arm: 118, start: 70, duration: 96, delay: 0.5, kind: "drop" as const, front: true },
+  { id: 2, arm: 108, start: 140, duration: 120, delay: 1, kind: "grain" as const, front: false },
+  { id: 3, arm: 122, start: 200, duration: 102, delay: 0.3, kind: "spiral" as const, front: true },
+  { id: 4, arm: 114, start: 260, duration: 114, delay: 0.8, kind: "leaf" as const, front: false },
+  { id: 5, arm: 120, start: 310, duration: 90, delay: 1.2, kind: "grain" as const, front: true },
+  { id: 6, arm: 110, start: 30, duration: 126, delay: 0.6, kind: "drop" as const, front: true },
+];
+
+function FoodOrbitShape({
+  kind,
+  accentColor,
+}: {
+  kind: (typeof FOOD_ORBIT_ITEMS)[number]["kind"];
+  accentColor: string;
+}) {
+  if (kind === "leaf") {
+    return (
+      <div
+        className="rounded-full"
+        style={{
+          width: 10,
+          height: 6,
+          backgroundColor: accentColor,
+          opacity: 0.75,
+          transform: "rotate(-35deg)",
+          boxShadow: `0 0 8px ${accentWithAlpha(accentColor, "80")}`,
+        }}
+      />
+    );
+  }
+
+  if (kind === "grain") {
+    return (
+      <div
+        className="rounded-full"
+        style={{
+          width: 5,
+          height: 8,
+          backgroundColor: accentColor,
+          opacity: 0.7,
+          boxShadow: `0 0 6px ${accentWithAlpha(accentColor, "70")}`,
+        }}
+      />
+    );
+  }
+
+  if (kind === "drop") {
+    return (
+      <div
+        className="rounded-full"
+        style={{
+          width: 7,
+          height: 7,
+          backgroundColor: accentColor,
+          opacity: 0.8,
+          boxShadow: `0 0 10px ${accentWithAlpha(accentColor, "90")}`,
+        }}
+      />
+    );
+  }
+
+  return (
+    <svg width={12} height={12} viewBox="0 0 12 12" aria-hidden>
+      <path
+        d="M 2 8 C 4 4, 8 2, 10 4"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1.5}
+        strokeOpacity={0.75}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function FoodOrbitItem({
+  item,
+  accentColor,
+}: {
+  item: (typeof FOOD_ORBIT_ITEMS)[number];
+  accentColor: string;
+}) {
   return (
     <motion.div
-      className="relative h-[250px] w-[250px] shrink-0 rounded-full md:h-[450px] md:w-[450px]"
-      initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
-      animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-      transition={{ type: "spring", bounce: 0.3 }}
+      className="pointer-events-none absolute top-1/2 left-1/2 h-0"
+      style={{
+        width: `${item.arm}%`,
+        marginLeft: `-${item.arm / 2}%`,
+        transformOrigin: "center center",
+      }}
+      initial={{ rotate: item.start }}
+      animate={{ rotate: item.start + 360 }}
+      transition={{
+        duration: item.duration,
+        repeat: Infinity,
+        ease: "linear",
+        delay: item.delay,
+      }}
+    >
+      <div
+        className="absolute top-0 right-0"
+        style={{ transform: "translate(50%, -50%)" }}
+      >
+        <FoodOrbitShape kind={item.kind} accentColor={accentColor} />
+      </div>
+    </motion.div>
+  );
+}
+
+function IdentityIconFoodOrbit({ accentColor }: { accentColor: string }) {
+  return FOOD_ORBIT_ITEMS.filter((item) => !item.front).map((item) => (
+    <FoodOrbitItem key={item.id} item={item} accentColor={accentColor} />
+  ));
+}
+
+function IdentityIconLove({ accentColor }: { accentColor: string }) {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 100 100"
+      aria-hidden
+    >
+      <path
+        d="M 28 44 C 34 36, 42 34, 50 38"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1}
+        strokeOpacity={0.35}
+      />
+      <path
+        d="M 72 44 C 66 36, 58 34, 50 38"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1}
+        strokeOpacity={0.35}
+      />
+      <motion.path
+        d="M 28 44 Q 50 52, 72 44"
+        fill="none"
+        stroke={accentColor}
+        strokeWidth={1.4}
+        animate={{ strokeOpacity: [0.35, 0.75, 0.35] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.circle
+        cx={28}
+        cy={44}
+        r={2.8}
+        fill={accentColor}
+        animate={{ opacity: [0.55, 1, 0.55] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.circle
+        cx={72}
+        cy={44}
+        r={2.8}
+        fill={accentColor}
+        animate={{ opacity: [0.55, 1, 0.55] }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.15,
+        }}
+      />
+    </svg>
+  );
+}
+
+function IdentityIconArt({ accentColor }: { accentColor: string }) {
+  const gradientId = `iconart-brush-${accentColor.replace("#", "")}`;
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute inset-0"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+    >
+      <svg className="h-full w-full" viewBox="0 0 100 100" aria-hidden>
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={accentColor} stopOpacity={0.9} />
+            <stop offset="100%" stopColor={accentColor} stopOpacity={0.25} />
+          </linearGradient>
+        </defs>
+        <path
+          d="M 68 22 C 78 34, 82 50, 74 68 C 68 78, 58 74, 56 64"
+          fill="none"
+          stroke={`url(#${gradientId})`}
+          strokeWidth={5}
+          strokeLinecap="round"
+          strokeOpacity={0.8}
+        />
+      </svg>
+    </motion.div>
+  );
+}
+
+function IdentityElement({ universo }: { universo: Universo }) {
+  switch (universo.id) {
+    case "iconmind":
+      return <IdentityIconMind accentColor={universo.accentColor} />;
+    case "iconetnia":
+      return <IdentityIconEtnia accentColor={universo.accentColor} />;
+    case "iconlove":
+      return <IdentityIconLove accentColor={universo.accentColor} />;
+    case "iconart":
+      return <IdentityIconArt accentColor={universo.accentColor} />;
+    default:
+      return null;
+  }
+}
+
+function PlanetaSphere({
+  universo,
+  children,
+}: {
+  universo: Universo;
+  children?: ReactNode;
+}) {
+  return (
+    <div
+      className="absolute inset-0 overflow-hidden rounded-full"
       style={{
         background: universo.planetGradient,
         boxShadow: `0 0 80px ${accentWithAlpha(universo.accentColor)}, inset -30px -30px 60px rgba(0,0,0,0.8)`,
       }}
-      aria-hidden
     >
+      {children}
       <div
-        className="absolute inset-0 rounded-full"
+        className="pointer-events-none absolute inset-0 rounded-full"
         style={{
           background:
             "radial-gradient(circle at 70% 70%, transparent 20%, #000 120%)",
           opacity: 0.2,
         }}
       />
-      <div className="absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+      <div className="pointer-events-none absolute top-[20%] left-[20%] h-16 w-16 rounded-full bg-white/10 blur-md" />
+    </div>
+  );
+}
+
+function PlanetaUniverso({ universo }: { universo: Universo }) {
+  const isFood = universo.id === "iconfood";
+
+  return (
+    <motion.div
+      className={PLANETA_SIZE_CLASS}
+      initial={{ opacity: 0, y: 100, rotate: -45, scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+      transition={{ type: "spring", bounce: 0.3 }}
+      aria-hidden
+    >
+      {isFood ? (
+        <div className="absolute inset-0 z-0">
+          <IdentityIconFoodOrbit accentColor={universo.accentColor} />
+        </div>
+      ) : null}
+
+      <div className={`absolute inset-0 ${isFood ? "z-10" : "z-0"}`}>
+        <PlanetaSphere universo={universo}>
+          <IdentityElement universo={universo} />
+        </PlanetaSphere>
+      </div>
+
+      {isFood ? (
+        <div className="pointer-events-none absolute inset-0 z-20">
+          {FOOD_ORBIT_ITEMS.filter((item) => item.front).map((item) => (
+            <FoodOrbitItem
+              key={`overlay-${item.id}`}
+              item={item}
+              accentColor={universo.accentColor}
+            />
+          ))}
+        </div>
+      ) : null}
     </motion.div>
   );
 }
@@ -411,11 +819,7 @@ function PlanetaCrossfade({ activeIndex }: { activeIndex: number }) {
         <PlanetaAtmosphericGlow key={`glow-${universo.id}`} universo={universo} />
       </AnimatePresence>
       <div className="relative z-20 flex items-center justify-center">
-        {universo.id === "iconmind" ? (
-          <PlanetaIconMind key={universo.id} universo={universo} />
-        ) : (
-          <PlanetaCSS key={universo.id} universo={universo} />
-        )}
+        <PlanetaUniverso key={universo.id} universo={universo} />
       </div>
     </motion.div>
   );
