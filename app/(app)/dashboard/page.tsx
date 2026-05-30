@@ -1219,10 +1219,10 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
               display:"flex",
               alignItems:"center",
               justifyContent:"center",
-              marginBottom:10,
-              minHeight:72,
+              marginBottom:14,
+              minHeight:56,
             }}>
-              <Icon3D iconKey={s.iconKey} size={72} />
+              <Icon3D iconKey={s.iconKey} size={56} />
             </div>
 
             <span style={{
