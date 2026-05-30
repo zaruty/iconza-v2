@@ -209,6 +209,25 @@ function Icon3D({ iconKey, size = 20, color = "currentColor" }: Icon3DProps) {
       <ellipse cx="18" cy="16" rx="4" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(-20,18,16)"/>
     </svg>
   );
+  if (iconKey === "moon") return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" style={{ color }}>
+      <path
+        d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 7 11a7 7 0 0 0 7 7 7 7 0 0 0 7-3.5z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+  if (iconKey === "sun") return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" style={{ color }}>
+      <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+      <path
+        d="M12 2.5v2.2M12 19.3v2.2M4.5 4.5l1.55 1.55M17.95 17.95l1.55 1.55M2.5 12h2.2M19.3 12h2.2M4.5 19.5l1.55-1.55M17.95 6.05l1.55-1.55"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
   return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" style={{color}}><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.4"/></svg>;
 }
 

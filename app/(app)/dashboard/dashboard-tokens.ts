@@ -22,10 +22,11 @@ export const c3 = (d: boolean): string => (d ? T.t3d : T.t3);
 export const cd = (d: boolean): string => (d ? T.cardD : T.card);
 export const cb = (d: boolean): string => (d ? T.bD : "transparent");
 
-export type SolidIconSize = "small" | "md" | "lg";
+export type SolidIconSize = "xs" | "small" | "md" | "lg";
 
 /** Escala proporcional para SolidIcon3D (círculo + ícone interno). */
 export const SOLID_ICON_DIMENSIONS: Record<SolidIconSize, { circle: number; icon: number }> = {
+  xs: { circle: 34, icon: 16 },
   small: { circle: 44, icon: 18 },
   md: { circle: 52, icon: 22 },
   lg: { circle: 60, icon: 24 },

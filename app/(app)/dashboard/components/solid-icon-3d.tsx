@@ -4,7 +4,6 @@ import type { CSSProperties } from "react";
 import type { IconKey } from "../dashboard-types";
 import { Icon3D } from "../dashboard-icons";
 import {
-  darkenHex,
   SOLID_ICON_DIMENSIONS,
   type SolidIconSize,
 } from "../dashboard-tokens";
@@ -28,24 +27,20 @@ export function SolidIcon3D({
   ariaLabel,
 }: SolidIconProps) {
   const { circle, icon } = SOLID_ICON_DIMENSIONS[size];
-  const baseColor = darkenHex(accentColor);
 
   const shellStyle: CSSProperties = {
     width: circle,
     height: circle,
     borderRadius: "50%",
     background: accentColor,
+    border: "none",
+    outline: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
     position: "relative",
-    boxShadow: [
-      "inset 0 1px 0 rgba(255,255,255,0.34)",
-      "inset 0 -1px 0 rgba(0,0,0,0.14)",
-      `0 3px 0 ${baseColor}`,
-      "0 5px 10px rgba(0,0,0,0.2)",
-    ].join(", "),
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.28), 0 4px 10px rgba(0,0,0,0.16)",
     ...style,
   };
 
@@ -62,11 +57,11 @@ export function SolidIcon3D({
         style={{
           position: "absolute",
           top: "7%",
-          left: "16%",
-          right: "16%",
-          height: "30%",
+          left: "18%",
+          right: "18%",
+          height: "28%",
           borderRadius: "50%",
-          background: "rgba(255,255,255,0.26)",
+          background: "rgba(255,255,255,0.22)",
           pointerEvents: "none",
         }}
       />

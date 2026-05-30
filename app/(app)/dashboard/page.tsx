@@ -808,23 +808,29 @@ function TopBar({ isDark, setIsDark, zoom, setZoom, notifCount, onAbrirNotif }) 
       {/* Dark mode */}
       <motion.button onClick={() => setIsDark(d => !d)} whileTap={{ scale:0.88 }}
         title={isDark ? "Modo Claro" : "Modo Escuro"}
-        style={{ width:36, height:36, borderRadius:10, border:`1px solid ${divB}`,
-          background: isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.04)",
-          display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", fontSize:16 }}>
-        {isDark ? "☀️" : "🌙"}
+        style={{ padding:0, border:"none", background:"transparent", cursor:"pointer", display:"flex" }}>
+        <SolidIcon3D
+          iconKey={isDark ? "sun" : "moon"}
+          accentColor={isDark ? "#EAB308" : "#6366F1"}
+          size="xs"
+          ariaLabel={isDark ? "Activar modo claro" : "Activar modo escuro"}
+        />
       </motion.button>
 
       {/* Notificações */}
       <motion.button whileTap={{ scale:0.9 }} onClick={onAbrirNotif}
-        style={{ position:"relative", width:36, height:36, borderRadius:10, border:`1px solid ${divB}`,
-          background: isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.04)",
-          display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer" }}>
-        <Icon3D iconKey="bell" size={18} color={notifCount > 0 ? "#F43F5E" : c2(isDark)}/>
+        style={{ position:"relative", padding:0, border:"none", background:"transparent", cursor:"pointer", display:"flex" }}>
+        <SolidIcon3D
+          iconKey="bell"
+          accentColor={notifCount > 0 ? "#F43F5E" : "#7A5CCF"}
+          size="xs"
+          ariaLabel="Notificações"
+        />
         {notifCount > 0 && (
-          <span style={{ position:"absolute", top:-3, right:-3, width:16, height:16, borderRadius:"50%",
-            background:"#F43F5E", color:"white", fontSize:8, fontWeight:900,
+          <span style={{ position:"absolute", top:-2, right:-2, width:15, height:15, borderRadius:"50%",
+            background:"#FFFFFF", color:"#F43F5E", fontSize:8, fontWeight:900,
             display:"flex", alignItems:"center", justifyContent:"center",
-            border:`2px solid ${isDark?T.bgD:T.bg}` }}>{notifCount}</span>
+            boxShadow:"0 1px 4px rgba(0,0,0,0.2)" }}>{notifCount}</span>
         )}
       </motion.button>
     </div>
@@ -2043,13 +2049,23 @@ export default function App() {
                 <div style={{ width:28, height:28, borderRadius:8, background:"linear-gradient(135deg,#7A5CCF,#6B8FC7)", display:"flex", alignItems:"center", justifyContent:"center", color:"white", fontWeight:900, fontSize:12 }}>I</div>
                 <span style={{ fontWeight:900, fontSize:16, color:c1(isDark), letterSpacing:"-0.04em", flex:1 }}>ICONZA</span>
                 <motion.button onClick={() => setIsDark(d=>!d)} whileTap={{scale:0.88}}
-                  style={{ width:34,height:34,borderRadius:9,border:`1px solid ${isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)"}`,background:"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:16 }}>
-                  {isDark?"☀️":"🌙"}
+                  style={{ padding:0, border:"none", background:"transparent", cursor:"pointer", display:"flex" }}>
+                  <SolidIcon3D
+                    iconKey={isDark ? "sun" : "moon"}
+                    accentColor={isDark ? "#EAB308" : "#6366F1"}
+                    size="xs"
+                    ariaLabel={isDark ? "Activar modo claro" : "Activar modo escuro"}
+                  />
                 </motion.button>
                 <motion.button whileTap={{scale:0.88}} onClick={() => setNotifOpen(o=>!o)}
-                  style={{ position:"relative",width:34,height:34,borderRadius:9,border:`1px solid ${isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)"}`,background:"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer" }}>
-                  <Icon3D iconKey="bell" size={17} color={notifCount>0?"#F43F5E":c2(isDark)}/>
-                  {notifCount>0&&<span style={{position:"absolute",top:-3,right:-3,width:15,height:15,borderRadius:"50%",background:"#F43F5E",color:"white",fontSize:8,fontWeight:900,display:"flex",alignItems:"center",justifyContent:"center",border:`2px solid ${isDark?T.bgD:T.bg}`}}>{notifCount}</span>}
+                  style={{ position:"relative", padding:0, border:"none", background:"transparent", cursor:"pointer", display:"flex" }}>
+                  <SolidIcon3D
+                    iconKey="bell"
+                    accentColor={notifCount > 0 ? "#F43F5E" : "#7A5CCF"}
+                    size="xs"
+                    ariaLabel="Notificações"
+                  />
+                  {notifCount>0&&<span style={{position:"absolute",top:-2,right:-2,width:14,height:14,borderRadius:"50%",background:"#FFFFFF",color:"#F43F5E",fontSize:8,fontWeight:900,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}>{notifCount}</span>}
                 </motion.button>
               </div>
             ) : (
