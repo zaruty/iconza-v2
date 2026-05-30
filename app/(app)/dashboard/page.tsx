@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 "use client";
 
 import { useState, useEffect } from "react";
@@ -14,9 +14,9 @@ function useIsMobile() {
   return m;
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 // TOKENS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 const T = {
   bg:"#EDEDF2", bgD:"#0E0E10",
   card:"#FFFFFF", cardD:"#141518",
@@ -33,37 +33,37 @@ const c3 = d => d ? T.t3d : T.t3;
 const cd = d => d ? T.cardD : T.card;
 const cb = d => d ? T.bD : 'transparent';
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 // DADOS GLOBAIS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 const UV = [
-  { id:"iconmind",  label:"ICONMIND",  color:"#6B8FC7", bg:"#1A2E5C", tagline:"Mente & ConsciÃªncia",  progress:68, aulas:12, total:18 },
+  { id:"iconmind",  label:"ICONMIND",  color:"#6B8FC7", bg:"#1A2E5C", tagline:"Mente & Consciência",  progress:68, aulas:12, total:18 },
   { id:"iconetnia", label:"ICONETNIA", color:"#52B87A", bg:"#0A2A14", tagline:"Identidade & Cultura",  progress:32, aulas:5,  total:16 },
-  { id:"iconfood",  label:"ICONFOOD",  color:"#FF7A2E", bg:"#421800", tagline:"AlimentaÃ§Ã£o & Ritual",  progress:0,  aulas:0,  total:14 },
-  { id:"iconlove",  label:"ICONLOVE",  color:"#D4688A", bg:"#3D0A20", tagline:"Amor & ConexÃ£o",        progress:0,  aulas:0,  total:20 },
-  { id:"iconart",   label:"ICONART",   color:"#7A5CCF", bg:"#2A0F5C", tagline:"Arte & ExpressÃ£o",      progress:0,  aulas:0,  total:15 },
+  { id:"iconfood",  label:"ICONFOOD",  color:"#FF7A2E", bg:"#421800", tagline:"Alimentação & Ritual",  progress:0,  aulas:0,  total:14 },
+  { id:"iconlove",  label:"ICONLOVE",  color:"#D4688A", bg:"#3D0A20", tagline:"Amor & Conexão",        progress:0,  aulas:0,  total:20 },
+  { id:"iconart",   label:"ICONART",   color:"#7A5CCF", bg:"#2A0F5C", tagline:"Arte & Expressão",      progress:0,  aulas:0,  total:15 },
 ];
 
 const NAV = [
-  { id:"inicio",        label:"InÃ­cio",       color:"#6B8FC7", iconKey:"home"     },
+  { id:"inicio",        label:"Início",       color:"#6B8FC7", iconKey:"home"     },
   { id:"perfil",        label:"Perfil",       color:"#D4688A", iconKey:"user"     },
   { id:"universos",     label:"Universos",    color:"#7A5CCF", iconKey:"planet"   },
-  { id:"cerebro",       label:"CÃ©rebro",      color:"#F43F5E", iconKey:"brain"    },
+  { id:"cerebro",       label:"Cérebro",      color:"#F43F5E", iconKey:"brain"    },
   { id:"iconplay",      label:"ICONPLAY",     color:"#8B5CF6", iconKey:"trophy"   },
   { id:"apoio",         label:"Eu Apoio",     color:"#E0A11B", iconKey:"heart"    },
   { id:"ia",            label:"IA ICONZA",    color:"#C26D8C", iconKey:"bot"      },
   { id:"cursos",        label:"Cursos",       color:"#52B87A", iconKey:"graduate" },
-  { id:"colecoes",      label:"ColeÃ§Ãµes",     color:"#6B8FC7", iconKey:"bookmark" },
+  { id:"colecoes",      label:"Coleções",     color:"#6B8FC7", iconKey:"bookmark" },
   { id:"marketplace",   label:"Marketplace",  color:"#D97832", iconKey:"bag"      },
   { id:"configuracoes", label:"Config",       color:"#8E99A8", iconKey:"settings" },
 ];
 
 const AULAS = [
-  { universo:"iconmind",  titulo:"EdiÃ§Ã£o e Design Visual",   duracao:"22 min", aula:13, progress:68, tag:"Design"           },
-  { universo:"iconetnia", titulo:"Descubra Seu FenÃ³tipo",    duracao:"18 min", aula:6,  progress:32, tag:"Identidade"       },
-  { universo:"iconfood",  titulo:"UtensÃ­lios de Cozinha",    duracao:"15 min", aula:1,  progress:0,  tag:"CulinÃ¡ria"        },
+  { universo:"iconmind",  titulo:"Edição e Design Visual",   duracao:"22 min", aula:13, progress:68, tag:"Design"           },
+  { universo:"iconetnia", titulo:"Descubra Seu Fenótipo",    duracao:"18 min", aula:6,  progress:32, tag:"Identidade"       },
+  { universo:"iconfood",  titulo:"Utensílios de Cozinha",    duracao:"15 min", aula:1,  progress:0,  tag:"Culinária"        },
   { universo:"iconlove",  titulo:"Teste da Filha de Bode",   duracao:"20 min", aula:1,  progress:0,  tag:"Autoconhecimento" },
-  { universo:"iconart",   titulo:"IntroduÃ§Ã£o a Frida Kahlo", duracao:"25 min", aula:1,  progress:0,  tag:"Arte"             },
+  { universo:"iconart",   titulo:"Introdução a Frida Kahlo", duracao:"25 min", aula:1,  progress:0,  tag:"Arte"             },
 ];
 
 const BRAIN = [
@@ -75,73 +75,73 @@ const BRAIN = [
 ];
 
 const POSTS = [
-  { universo:"iconmind",  texto:"Acabei de entregar meu primeiro projeto de identidade visual! Obrigada ICONMIND âœ¨", likes:34, tempo:"2h" },
-  { universo:"iconetnia", texto:"Descobri meu fenÃ³tipo melanodÃ©rmico tipo 4C e CHOREI. Ver minha ancestralidade sendo validada Ã© transformador.", likes:91, tempo:"1d" },
-  { universo:"iconlove",  texto:"Fiz o Teste da Filha de Bode e entendi por que repito certos padrÃµes. DÃ³i e liberta.", likes:57, tempo:"3d" },
+  { universo:"iconmind",  texto:"Acabei de entregar meu primeiro projeto de identidade visual! Obrigada ICONMIND ✨", likes:34, tempo:"2h" },
+  { universo:"iconetnia", texto:"Descobri meu fenótipo melanodérmico tipo 4C e CHOREI. Ver minha ancestralidade sendo validada é transformador.", likes:91, tempo:"1d" },
+  { universo:"iconlove",  texto:"Fiz o Teste da Filha de Bode e entendi por que repito certos padrões. Dói e liberta.", likes:57, tempo:"3d" },
 ];
 
 const BLOG = [
-  { universo:"iconmind",  tipo:"Artigo",   titulo:"Como o design influencia sua percepÃ§Ã£o de realidade", leitura:"5 min" },
-  { universo:"iconetnia", tipo:"ReflexÃ£o", titulo:"FenÃ³tipos e a polÃ­tica do cabelo natural",             leitura:"7 min" },
-  { universo:"iconfood",  tipo:"Guia",     titulo:"Os 7 utensÃ­lios que toda cozinha ancestral tem",       leitura:"4 min" },
-  { universo:"iconlove",  tipo:"Teste",    titulo:"VocÃª reconhece um padrÃ£o de vÃ­nculo ansioso?",         leitura:"6 min" },
-  { universo:"iconart",   tipo:"Perfil",   titulo:"Frida Kahlo: 5 obras que sÃ£o cartas abertas",          leitura:"8 min" },
+  { universo:"iconmind",  tipo:"Artigo",   titulo:"Como o design influencia sua percepção de realidade", leitura:"5 min" },
+  { universo:"iconetnia", tipo:"Reflexão", titulo:"Fenótipos e a política do cabelo natural",             leitura:"7 min" },
+  { universo:"iconfood",  tipo:"Guia",     titulo:"Os 7 utensílios que toda cozinha ancestral tem",       leitura:"4 min" },
+  { universo:"iconlove",  tipo:"Teste",    titulo:"Você reconhece um padrão de vínculo ansioso?",         leitura:"6 min" },
+  { universo:"iconart",   tipo:"Perfil",   titulo:"Frida Kahlo: 5 obras que são cartas abertas",          leitura:"8 min" },
 ];
 
 const CHECKLIST_VIDEOS = [
   {
     id:"painel",
     titulo:"Conhecendo o Painel do Aluno",
-    desc:"Tour completo pela interface: sidebar, navegaÃ§Ã£o e configuraÃ§Ãµes iniciais.",
+    desc:"Tour completo pela interface: sidebar, navegação e configurações iniciais.",
     duracao:"4:32", pagina:"inicio", color:"#6B8FC7",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"Atalhos e navegaÃ§Ã£o avanÃ§ada", desc:"Zoom, dark mode e sidebar.", duracao:"2:48", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Atalhos e navegação avançada", desc:"Zoom, dark mode e sidebar.", duracao:"2:48", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"perfil",
     titulo:"Configurando seu Perfil",
-    desc:"Bio, tÃ­tulo ativo, conquistas e sua identidade pÃºblica no ICONZA.",
+    desc:"Bio, título ativo, conquistas e sua identidade pública no ICONZA.",
     duracao:"3:15", pagina:"perfil", color:"#D4688A",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"Sistema de XP, emblemas e tÃ­tulos", desc:"Como ganhar pontos e subir de nÃ­vel.", duracao:"2:50", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Sistema de XP, emblemas e títulos", desc:"Como ganhar pontos e subir de nível.", duracao:"2:50", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"universos",
     titulo:"Explorando os Universos",
-    desc:"O que sÃ£o os universos, como escolher o seu e iniciar sua primeira aula.",
+    desc:"O que são os universos, como escolher o seu e iniciar sua primeira aula.",
     duracao:"5:10", pagina:"universos", color:"#7A5CCF",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"Acompanhando seu progresso", desc:"Barras de evoluÃ§Ã£o e planejamento.", duracao:"3:40", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Acompanhando seu progresso", desc:"Barras de evolução e planejamento.", duracao:"3:40", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"cerebro",
     titulo:"Entendendo a Matriz Cognitiva",
-    desc:"Como a IA mapeia seu perfil e o que fazer com essas informaÃ§Ãµes.",
+    desc:"Como a IA mapeia seu perfil e o que fazer com essas informações.",
     duracao:"4:00", pagina:"cerebro", color:"#F43F5E",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"Usando seu perfil cognitivo", desc:"Aplique seus pontos fortes na criaÃ§Ã£o.", duracao:"3:20", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Usando seu perfil cognitivo", desc:"Aplique seus pontos fortes na criação.", duracao:"3:20", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"iconplay",
     titulo:"Participando do ICONPLAY",
-    desc:"Como entrar nos desafios, subir no ranking e ganhar seu portfÃ³lio.",
+    desc:"Como entrar nos desafios, subir no ranking e ganhar seu portfólio.",
     duracao:"3:45", pagina:"iconplay", color:"#8B5CF6",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"EstratÃ©gias para vencer desafios", desc:"Dicas para se destacar no ICONPLAY.", duracao:"4:10", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Estratégias para vencer desafios", desc:"Dicas para se destacar no ICONPLAY.", duracao:"4:10", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"apoio",
     titulo:"Como Apoiar o Projeto",
-    desc:"DoaÃ§Ãµes, ranking de apoiadores e lista de desejos da plataforma.",
+    desc:"Doações, ranking de apoiadores e lista de desejos da plataforma.",
     duracao:"2:55", pagina:"apoio", color:"#E0A11B",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"BenefÃ­cios exclusivos para apoiadores", desc:"O que vocÃª recebe ao apoiar regularmente.", duracao:"2:30", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Benefícios exclusivos para apoiadores", desc:"O que você recebe ao apoiar regularmente.", duracao:"2:30", videoId:"dQw4w9WgXcQ" }
   },
   {
     id:"agenda",
@@ -150,7 +150,7 @@ const CHECKLIST_VIDEOS = [
     duracao:"3:20", pagina:"inicio", color:"#C26D8C",
     videoId:"dQw4w9WgXcQ",
     concluido:false,
-    proximo:{ titulo:"Aproveitando ao mÃ¡ximo as mentorias", desc:"Como se preparar para uma sessÃ£o.", duracao:"3:55", videoId:"dQw4w9WgXcQ" }
+    proximo:{ titulo:"Aproveitando ao máximo as mentorias", desc:"Como se preparar para uma sessão.", duracao:"3:55", videoId:"dQw4w9WgXcQ" }
   },
 ];
 
@@ -158,45 +158,45 @@ const CHECKLIST_VIDEOS = [
 const CONQUISTAS = [
   { id:"a", label:"Primeiros Passos",  desc:"Concluiu sua primeira aula",            color:"#52B87A", iconKey:"sprout", xp:50,  desbloqueada:true,  data:"12 Jan 2026" },
   { id:"b", label:"Mente Aberta",      desc:"7 dias consecutivos de aprendizado",    color:"#E0A11B", iconKey:"fire",   xp:100, desbloqueada:true,  data:"20 Jan 2026" },
-  { id:"c", label:"Designer Nato",     desc:"Completou o mÃ³dulo de EdiÃ§Ã£o & Design", color:"#6B8FC7", iconKey:"pencil", xp:150, desbloqueada:true,  data:"28 Jan 2026" },
-  { id:"d", label:"Raiz Viva",         desc:"Iniciou ICONETNIA e descobriu fenÃ³tipo",color:"#52B87A", iconKey:"leaf",   xp:120, desbloqueada:true,  data:"05 Fev 2026" },
+  { id:"c", label:"Designer Nato",     desc:"Completou o módulo de Edição & Design", color:"#6B8FC7", iconKey:"pencil", xp:150, desbloqueada:true,  data:"28 Jan 2026" },
+  { id:"d", label:"Raiz Viva",         desc:"Iniciou ICONETNIA e descobriu fenótipo",color:"#52B87A", iconKey:"leaf",   xp:120, desbloqueada:true,  data:"05 Fev 2026" },
   { id:"e", label:"Alma Livre",        desc:"Complete 50% de qualquer universo",     color:"#7A5CCF", iconKey:"palette",xp:200, desbloqueada:false, data:null },
-  { id:"f", label:"GuardiÃ£ do Lar",    desc:"Conclua ICONFOOD mÃ³dulo 1",             color:"#E8711A", iconKey:"pot",    xp:150, desbloqueada:false, data:null },
-  { id:"g", label:"CoraÃ§Ã£o Aberto",    desc:"FaÃ§a o Teste da Filha de Bode",         color:"#D4688A", iconKey:"heart2", xp:120, desbloqueada:false, data:null },
-  { id:"h", label:"Alma de Artista",   desc:"Conclua a introduÃ§Ã£o a Frida Kahlo",    color:"#7A5CCF", iconKey:"frame",  xp:180, desbloqueada:false, data:null },
+  { id:"f", label:"Guardiã do Lar",    desc:"Conclua ICONFOOD módulo 1",             color:"#E8711A", iconKey:"pot",    xp:150, desbloqueada:false, data:null },
+  { id:"g", label:"Coração Aberto",    desc:"Faça o Teste da Filha de Bode",         color:"#D4688A", iconKey:"heart2", xp:120, desbloqueada:false, data:null },
+  { id:"h", label:"Alma de Artista",   desc:"Conclua a introdução a Frida Kahlo",    color:"#7A5CCF", iconKey:"frame",  xp:180, desbloqueada:false, data:null },
 ];
 
 const AGENDA = [
   { id:1, title:"Mentoria Individual: Identidade Visual com IA", tipo:"mentoria_individual", modalidade:"Online", time:"Hoje, 19:00",    duracao:"60 min", vagas:1,  preco:"R$ 197",   color:"#C26D8C", inscrito:true,  sino:false, email:false, foto:null },
-  { id:2, title:"Mentoria em Grupo: Posicionamento Digital",     tipo:"mentoria_grupo",      modalidade:"Online", time:"AmanhÃ£, 20:00", duracao:"90 min", vagas:8,  preco:"R$ 97",    color:"#7A5CCF", inscrito:true,  sino:true,  email:false, foto:null },
-  { id:3, title:"Workshop Presencial: CulinÃ¡ria Ancestral",      tipo:"evento",              modalidade:"RJ",     time:"SÃ¡b, 10:00",    duracao:"4h",     vagas:20, preco:"R$ 147",   color:"#FF7A2E", inscrito:false, sino:false, email:false, foto:null },
-  { id:4, title:"Live: Meu CÃ©rebro Criativo â€” Q&A Aberto",       tipo:"evento",              modalidade:"Online", time:"Dom, 18:00",    duracao:"2h",     vagas:999,preco:"Gratuito", color:"#52B87A", inscrito:false, sino:false, email:false, foto:null },
-  { id:5, title:"Mentoria em Grupo: Ancestralidade e FenÃ³tipo",  tipo:"mentoria_grupo",      modalidade:"Online", time:"Ter, 20:00",    duracao:"90 min", vagas:12, preco:"R$ 97",    color:"#6B8FC7", inscrito:false, sino:false, email:false, foto:null },
+  { id:2, title:"Mentoria em Grupo: Posicionamento Digital",     tipo:"mentoria_grupo",      modalidade:"Online", time:"Amanhã, 20:00", duracao:"90 min", vagas:8,  preco:"R$ 97",    color:"#7A5CCF", inscrito:true,  sino:true,  email:false, foto:null },
+  { id:3, title:"Workshop Presencial: Culinária Ancestral",      tipo:"evento",              modalidade:"RJ",     time:"Sáb, 10:00",    duracao:"4h",     vagas:20, preco:"R$ 147",   color:"#FF7A2E", inscrito:false, sino:false, email:false, foto:null },
+  { id:4, title:"Live: Meu Cérebro Criativo — Q&A Aberto",       tipo:"evento",              modalidade:"Online", time:"Dom, 18:00",    duracao:"2h",     vagas:999,preco:"Gratuito", color:"#52B87A", inscrito:false, sino:false, email:false, foto:null },
+  { id:5, title:"Mentoria em Grupo: Ancestralidade e Fenótipo",  tipo:"mentoria_grupo",      modalidade:"Online", time:"Ter, 20:00",    duracao:"90 min", vagas:12, preco:"R$ 97",    color:"#6B8FC7", inscrito:false, sino:false, email:false, foto:null },
 ];
 
 const PRODUTOS_AFILIADOS = [
-  { id:1, nome:"Microfone Condensador USB Profissional", preco:"R$ 189,90", desconto:"28% OFF", estrelas:4.8, vendas:"2.3k", cor:"#6B8FC7", emoji:"ðŸŽ™ï¸", link:"#" },
-  { id:2, nome:"Ring Light 18 polegadas com TripÃ©",     preco:"R$ 134,90", desconto:"35% OFF", estrelas:4.7, vendas:"5.1k", cor:"#E0A11B", emoji:"ðŸ’¡", link:"#" },
-  { id:3, nome:"Mesa Digitalizadora GrÃ¡fica Wacom",     preco:"R$ 299,00", desconto:"22% OFF", estrelas:4.9, vendas:"890",  cor:"#8B5CF6", emoji:"ðŸ–Šï¸", link:"#" },
-  { id:4, nome:"Cadeira ErgonÃ´mica Home Office",        preco:"R$ 649,00", desconto:"15% OFF", estrelas:4.6, vendas:"3.2k", cor:"#52B87A", emoji:"ðŸª‘", link:"#" },
-  { id:5, nome:"HD Externo SSD 1TB PortÃ¡til",           preco:"R$ 279,90", desconto:"20% OFF", estrelas:4.8, vendas:"1.8k", cor:"#C26D8C", emoji:"ðŸ’¾", link:"#" },
+  { id:1, nome:"Microfone Condensador USB Profissional", preco:"R$ 189,90", desconto:"28% OFF", estrelas:4.8, vendas:"2.3k", cor:"#6B8FC7", emoji:"🎙️", link:"#" },
+  { id:2, nome:"Ring Light 18 polegadas com Tripé",     preco:"R$ 134,90", desconto:"35% OFF", estrelas:4.7, vendas:"5.1k", cor:"#E0A11B", emoji:"💡", link:"#" },
+  { id:3, nome:"Mesa Digitalizadora Gráfica Wacom",     preco:"R$ 299,00", desconto:"22% OFF", estrelas:4.9, vendas:"890",  cor:"#8B5CF6", emoji:"🖊️", link:"#" },
+  { id:4, nome:"Cadeira Ergonômica Home Office",        preco:"R$ 649,00", desconto:"15% OFF", estrelas:4.6, vendas:"3.2k", cor:"#52B87A", emoji:"🪑", link:"#" },
+  { id:5, nome:"HD Externo SSD 1TB Portátil",           preco:"R$ 279,90", desconto:"20% OFF", estrelas:4.8, vendas:"1.8k", cor:"#C26D8C", emoji:"💾", link:"#" },
 ];
 
 const NOTIFICACOES = [
-  { id:1, tipo:"conquista", msg:"Desbloqueaste a conquista Raiz Viva!", tempo:"2h",  lida:false, icon:"ðŸƒ", color:"#52B87A" },
-  { id:2, tipo:"aula",      msg:"Sua prÃ³xima aula em ICONMIND estÃ¡ pronta",tempo:"4h",  lida:false, icon:"â–¶ï¸", color:"#6B8FC7" },
-  { id:3, tipo:"evento",    msg:"Mentoria comeÃ§a em 2 horas!",           tempo:"2h",  lida:false, icon:"ðŸŽ™ï¸", color:"#C26D8C" },
-  { id:4, tipo:"social",    msg:"Amara Silva comentou no seu mural",     tempo:"1d",  lida:true,  icon:"ðŸ’¬", color:"#7A5CCF" },
-  { id:5, tipo:"progresso", msg:"VocÃª estÃ¡ a 32% do ICONETNIA. Continue!", tempo:"2d", lida:true,  icon:"ðŸª", color:"#E0A11B" },
+  { id:1, tipo:"conquista", msg:"Desbloqueaste a conquista Raiz Viva!", tempo:"2h",  lida:false, icon:"🍃", color:"#52B87A" },
+  { id:2, tipo:"aula",      msg:"Sua próxima aula em ICONMIND está pronta",tempo:"4h",  lida:false, icon:"▶️", color:"#6B8FC7" },
+  { id:3, tipo:"evento",    msg:"Mentoria começa em 2 horas!",           tempo:"2h",  lida:false, icon:"🎙️", color:"#C26D8C" },
+  { id:4, tipo:"social",    msg:"Amara Silva comentou no seu mural",     tempo:"1d",  lida:true,  icon:"💬", color:"#7A5CCF" },
+  { id:5, tipo:"progresso", msg:"Você está a 32% do ICONETNIA. Continue!", tempo:"2d", lida:true,  icon:"🪐", color:"#E0A11B" },
 ];
 
 const HISTORICO = [
-  { id:1, tipo:"aula",      desc:"Concluiu Aula 12 â€” EdiÃ§Ã£o e Design Visual",      universo:"iconmind",  tempo:"Hoje, 10:32",   xp:+45  },
+  { id:1, tipo:"aula",      desc:"Concluiu Aula 12 — Edição e Design Visual",      universo:"iconmind",  tempo:"Hoje, 10:32",   xp:+45  },
   { id:2, tipo:"conquista", desc:"Desbloqueou conquista Raiz Viva",                 universo:"iconetnia", tempo:"Ontem, 18:14",  xp:+120 },
-  { id:3, tipo:"aula",      desc:"Iniciou Aula 6 â€” Descubra Seu FenÃ³tipo",          universo:"iconetnia", tempo:"Ontem, 17:50",  xp:+10  },
-  { id:4, tipo:"social",    desc:"Publicou no mural da comunidade",                 universo:"iconmind",  tempo:"2 dias atrÃ¡s",  xp:+15  },
-  { id:5, tipo:"aula",      desc:"Concluiu Aula 11 â€” Tipografia Essencial",         universo:"iconmind",  tempo:"3 dias atrÃ¡s",  xp:+40  },
-  { id:6, tipo:"conquista", desc:"Desbloqueou conquista Designer Nato",              universo:"iconmind",  tempo:"4 dias atrÃ¡s",  xp:+150 },
+  { id:3, tipo:"aula",      desc:"Iniciou Aula 6 — Descubra Seu Fenótipo",          universo:"iconetnia", tempo:"Ontem, 17:50",  xp:+10  },
+  { id:4, tipo:"social",    desc:"Publicou no mural da comunidade",                 universo:"iconmind",  tempo:"2 dias atrás",  xp:+15  },
+  { id:5, tipo:"aula",      desc:"Concluiu Aula 11 — Tipografia Essencial",         universo:"iconmind",  tempo:"3 dias atrás",  xp:+40  },
+  { id:6, tipo:"conquista", desc:"Desbloqueou conquista Designer Nato",              universo:"iconmind",  tempo:"4 dias atrás",  xp:+150 },
 ];
 
 const TITULOS = [
@@ -206,9 +206,9 @@ const TITULOS = [
   { id:"mestre",      label:"Mestre do Design",       desc:"Complete ICONMIND 100%",           color:"#E0A11B", desbloqueado:false, ativo:false },
 ];
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 // ICON 3D SVG
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
 function Icon3D({ iconKey, size=20, color="currentColor" }) {
   const s = size;
   const id = `i${iconKey}${s}x`.replace(/[^a-zA-Z0-9]/g,"");
@@ -406,7 +406,7 @@ function Icon3D({ iconKey, size=20, color="currentColor" }) {
   return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" style={{color}}><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.4"/></svg>;
 }
 
-// â•â•â• PLANET 3D â•â•â•
+// ═══ PLANET 3D ═══
 function Planet({ universo, size=44 }) {
   const u = UV.find(x => x.id === universo) || UV[0];
   return (
@@ -450,7 +450,7 @@ function NavIcon({ iconKey, color, isActive, size=18 }) {
   );
 }
 
-// â•â•â• INTRO SCREEN â•â•â•
+// ═══ INTRO SCREEN ═══
 function IntroScreen({ onComplete }) {
   useEffect(() => {
     const t = setTimeout(onComplete, 4000);
@@ -474,7 +474,7 @@ function IntroScreen({ onComplete }) {
       </motion.div>
       <motion.p initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.7 }}
         style={{ fontSize:13, color:"rgba(255,255,255,0.4)", textAlign:"center", maxWidth:260, lineHeight:1.6 }}>
-        Construindo identidades cognitivas atravÃ©s de universos temÃ¡ticos.
+        Construindo identidades cognitivas através de universos temáticos.
       </motion.p>
       <div style={{ width:200, height:3, borderRadius:2, background:"rgba(255,255,255,0.1)", overflow:"hidden" }}>
         <motion.div initial={{ width:0 }} animate={{ width:"100%" }} transition={{ duration:4, ease:"linear" }}
@@ -485,13 +485,13 @@ function IntroScreen({ onComplete }) {
         style={{ position:"absolute", bottom:36, right:36, padding:"10px 22px", borderRadius:12,
           border:"1px solid rgba(255,255,255,0.12)", background:"rgba(255,255,255,0.07)",
           color:"rgba(255,255,255,0.55)", fontSize:13, fontWeight:600, cursor:"pointer", backdropFilter:"blur(8px)" }}>
-        Pular â†’
+        Pular →
       </motion.button>
     </motion.div>
   );
 }
 
-// â•â•â• TOOLTIP CUSTOMIZADO â•â•â•
+// ═══ TOOLTIP CUSTOMIZADO ═══
 function Tooltip({ text, children, side="right" }) {
   const [visible, setVisible] = useState(false);
   return (
@@ -548,7 +548,7 @@ function Tooltip({ text, children, side="right" }) {
   );
 }
 
-// â•â•â• SIDEBAR COLAPSÃVEL â•â•â•
+// ═══ SIDEBAR COLAPSÁVEL ═══
 function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed }) {
   const divB = "rgba(255,255,255,0.07)";
 
@@ -577,7 +577,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
         boxShadow: collapsed ? "2px 0 16px rgba(0,0,0,0.18)" : "none",
       }}>
 
-      {/* Header â€” Crown como Ãºnico gatilho expand/colapso */}
+      {/* Header — Crown como único gatilho expand/colapso */}
       <div style={{
         padding:"12px 0 10px",
         borderBottom:`1px solid ${divB}`,
@@ -587,7 +587,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
         paddingRight: collapsed ? 0 : 12,
         minHeight:56,
       }}>
-        {/* Crown SVG â€” centralizada quando colapsada, Ã  esquerda quando expandida */}
+        {/* Crown SVG — centralizada quando colapsada, à esquerda quando expandida */}
         <Tooltip text={collapsed ? "Expandir menu" : "Recolher menu"} side="right">
           <motion.button
             onClick={() => setCollapsed(c => !c)}
@@ -609,7 +609,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
           </motion.button>
         </Tooltip>
 
-        {/* Logo â€” sÃ³ visÃ­vel quando expandida */}
+        {/* Logo — só visível quando expandida */}
         <AnimatePresence>
           {!collapsed && (
             <motion.div
@@ -621,7 +621,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
             </motion.div>
           )}
         </AnimatePresence>
-        {/* X â€” sÃ³ visÃ­vel quando expandida, sutil com hover */}
+        {/* X — só visível quando expandida, sutil com hover */}
         <AnimatePresence>
           {!collapsed && (
             <Tooltip text="Recolher menu" side="left">
@@ -653,7 +653,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
         {NAV.map(item => {
           const isActive = page === item.id;
 
-          // â”€â”€ regras de cor dinÃ¢mica â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ── regras de cor dinâmica ──────────────────────────────
           // Colapsada: ativo = cor do item, inativo = branco 50%
           // Expandida: ativo = cor do item (100%), inativo = branco 70%
           const iconColor = collapsed
@@ -663,17 +663,17 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
           // Label: ativo = branco puro, inativo = branco 65%
           const labelColor = isActive ? "#FFFFFF" : "rgba(255,255,255,0.65)";
 
-          // Fundo do botÃ£o: ativo = cor com 18% opacidade, hover herdado
+          // Fundo do botão: ativo = cor com 18% opacidade, hover herdado
           const btnBg = isActive
             ? (collapsed ? item.color+"18" : item.color+"18")
             : "transparent";
 
-          // Fundo do container do Ã­cone: ativo = cor 28%, inativo = branco 6% (sÃ³ expandida)
+          // Fundo do container do ícone: ativo = cor 28%, inativo = branco 6% (só expandida)
           const iconBg = isActive
             ? `linear-gradient(135deg,${item.color}40,${item.color}22)`
             : (!collapsed ? "rgba(255,255,255,0.06)" : "transparent");
 
-          // Sombra do Ã­cone ativo
+          // Sombra do ícone ativo
           const iconShadow = isActive
             ? `0 0 12px ${item.color}55, inset 0 1px 0 rgba(255,255,255,0.18)`
             : "none";
@@ -693,7 +693,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
                 background: btnBg,
                 transition:"background 0.15s",
               }}>
-              {/* Ãcone â€” contraste elevado no estado expandido */}
+              {/* Ícone — contraste elevado no estado expandido */}
               <div style={{
                 width:32, height:32, borderRadius:9,
                 display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0,
@@ -740,7 +740,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
       {/* Divider */}
       <div style={{ height:1, background:divB, margin:"0 10px" }}/>
 
-      {/* User + botÃ£o fechar (sÃ³ quando expandido) */}
+      {/* User + botão fechar (só quando expandido) */}
       <div style={{ padding:"10px 10px" }}>
         <div style={{
           display:"flex", alignItems:"center", gap:8, padding:"8px",
@@ -768,7 +768,7 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
   );
 }
 
-// â•â•â• TOPBAR â€” zoom (Â±) + dark mode â•â•â•
+// ═══ TOPBAR — zoom (±) + dark mode ═══
 function TopBar({ isDark, setIsDark, zoom, setZoom, notifCount, onAbrirNotif }) {
   const divB = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)";
   const MIN = 80; const MAX = 150; const STEP = 10;
@@ -787,13 +787,13 @@ function TopBar({ isDark, setIsDark, zoom, setZoom, notifCount, onAbrirNotif }) 
         ICONZA <span style={{ color:c3(isDark), fontWeight:400 }}>/ painel</span>
       </span>
 
-      {/* Zoom compacto: âˆ’ valor + */}
+      {/* Zoom compacto: − valor + */}
       <div style={{ display:"flex", alignItems:"center", gap:0, borderRadius:10, overflow:"hidden",
         border:`1px solid ${divB}`, background: isDark?"rgba(255,255,255,0.04)":"rgba(0,0,0,0.04)" }}>
         <button onClick={() => setZoom(z => Math.max(MIN, z - STEP))}
           style={{ width:30, height:30, border:"none", background:"transparent", cursor:"pointer",
             color:c2(isDark), fontSize:17, fontWeight:300, display:"flex", alignItems:"center", justifyContent:"center",
-            borderRight:`1px solid ${divB}` }}>âˆ’</button>
+            borderRight:`1px solid ${divB}` }}>−</button>
         <span style={{ width:44, textAlign:"center", fontSize:11, fontWeight:700, color:c1(isDark) }}>{zoom}%</span>
         <button onClick={() => setZoom(z => Math.min(MAX, z + STEP))}
           style={{ width:30, height:30, border:"none", background:"transparent", cursor:"pointer",
@@ -810,10 +810,10 @@ function TopBar({ isDark, setIsDark, zoom, setZoom, notifCount, onAbrirNotif }) 
         style={{ width:36, height:36, borderRadius:10, border:`1px solid ${divB}`,
           background: isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.04)",
           display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", fontSize:16 }}>
-        {isDark ? "â˜€ï¸" : "ðŸŒ™"}
+        {isDark ? "☀️" : "🌙"}
       </motion.button>
 
-      {/* NotificaÃ§Ãµes */}
+      {/* Notificações */}
       <motion.button whileTap={{ scale:0.9 }} onClick={onAbrirNotif}
         style={{ position:"relative", width:36, height:36, borderRadius:10, border:`1px solid ${divB}`,
           background: isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.04)",
@@ -830,7 +830,7 @@ function TopBar({ isDark, setIsDark, zoom, setZoom, notifCount, onAbrirNotif }) 
   );
 }
 
-// â•â•â• PAINEL DE NOTIFICAÃ‡Ã•ES â•â•â•
+// ═══ PAINEL DE NOTIFICAÇÕES ═══
 function PainelNotificacoes({ isDark, notifs, onLer, onClose }) {
   return (
     <motion.div initial={{ opacity:0, x:20, scale:0.97 }} animate={{ opacity:1, x:0, scale:1 }} exit={{ opacity:0, x:20, scale:0.97 }}
@@ -839,9 +839,9 @@ function PainelNotificacoes({ isDark, notifs, onLer, onClose }) {
       <div style={{ padding:"16px 18px 12px", display:"flex", justifyContent:"space-between", alignItems:"center", borderBottom:`1px solid ${cb(isDark)}` }}>
         <div style={{ display:"flex", alignItems:"center", gap:8 }}>
           <Icon3D iconKey="bell" size={18} color="#7A5CCF"/>
-          <span style={{ fontWeight:700, fontSize:14, color:c1(isDark) }}>NotificaÃ§Ãµes</span>
+          <span style={{ fontWeight:700, fontSize:14, color:c1(isDark) }}>Notificações</span>
         </div>
-        <button onClick={onClose} style={{ background:"none", border:"none", cursor:"pointer", color:c3(isDark), fontSize:20, lineHeight:1 }}>Ã—</button>
+        <button onClick={onClose} style={{ background:"none", border:"none", cursor:"pointer", color:c3(isDark), fontSize:20, lineHeight:1 }}>×</button>
       </div>
       <div style={{ maxHeight:360, overflowY:"auto" }}>
         {notifs.map((n, i) => (
@@ -868,10 +868,10 @@ function PainelNotificacoes({ isDark, notifs, onLer, onClose }) {
   );
 }
 
-// â•â•â• CHECK LIST DO USUÃRIO â•â•â•
+// ═══ CHECK LIST DO USUÁRIO ═══
 function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
   const [items, setItems] = useState(CHECKLIST_VIDEOS.map(v => ({...v})));
-  const [page, setPage] = useState(0); // pÃ¡gina atual (2 por vez)
+  const [page, setPage] = useState(0); // página atual (2 por vez)
   const [playing, setPlaying] = useState(null);
 
   const PER_PAGE = 2;
@@ -896,7 +896,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:8 }}>
           <div style={{ display:"flex", alignItems:"center", gap:7 }}>
             <div style={{ width:5, height:5, borderRadius:"50%", background:"#52B87A", boxShadow:"0 0 6px #52B87A" }}/>
-            <span style={{ fontWeight:600, fontSize:9, color:c3(isDark), letterSpacing:"0.18em", textTransform:"uppercase" }}>CheckList do UsuÃ¡rio</span>
+            <span style={{ fontWeight:600, fontSize:9, color:c3(isDark), letterSpacing:"0.18em", textTransform:"uppercase" }}>CheckList do Usuário</span>
           </div>
           <span style={{ fontWeight:900, fontSize:20, color:"#52B87A", letterSpacing:"-0.04em", lineHeight:1 }}>{pct}%</span>
         </div>
@@ -904,10 +904,10 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
           <motion.div initial={{ width:0 }} animate={{ width:`${pct}%` }} transition={{ duration:0.8, ease:"easeOut" }}
             style={{ height:"100%", borderRadius:3, background:"linear-gradient(90deg,#52B87A88,#52B87A)" }}/>
         </div>
-        <p style={{ fontSize:9, color:c3(isDark), marginTop:5, letterSpacing:'0.04em' }}>{concluidos}/{items.length} concluÃ­dos</p>
+        <p style={{ fontSize:9, color:c3(isDark), marginTop:5, letterSpacing:'0.04em' }}>{concluidos}/{items.length} concluídos</p>
       </div>
 
-      {/* VÃ­deos visÃ­veis â€” 2 por vez */}
+      {/* Vídeos visíveis — 2 por vez */}
       <div style={{ padding:"10px 12px", display:"flex", flexDirection:"column", gap:8 }}>
         <AnimatePresence mode="wait">
           <motion.div key={page}
@@ -932,7 +932,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                     opacity: isLocked ? 0.5 : 1,
                   }}>
 
-                    {/* Thumb 16:9 â€” max-height controlada */}
+                    {/* Thumb 16:9 — max-height controlada */}
                     <div onClick={() => !isLocked && !item.concluido && setPlaying(isPlaying ? null : item.id)}
                       style={{ width:"100%", paddingTop:"42%", maxHeight:160, position:"relative", overflow:"hidden",
                         background:`linear-gradient(145deg,${item.color}50,${item.color}18,#050508)`,
@@ -973,7 +973,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                           </motion.div>
                         )}
 
-                        {/* DuraÃ§Ã£o */}
+                        {/* Duração */}
                         {!item.concluido && !isLocked && (
                           <div style={{ position:"absolute", bottom:6, right:8, padding:"2px 6px", borderRadius:4,
                             background:"rgba(0,0,0,0.75)", backdropFilter:"blur(4px)" }}>
@@ -986,14 +986,14 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                           <div style={{ position:"absolute", top:7, left:8, padding:"3px 9px", borderRadius:20,
                             background:"rgba(82,184,122,0.25)", backdropFilter:"blur(8px)",
                             border:"1px solid rgba(82,184,122,0.35)" }}>
-                            <span style={{ fontSize:9, fontWeight:700, color:"#52B87A", letterSpacing:"0.04em" }}>âœ“ ConcluÃ­do</span>
+                            <span style={{ fontSize:9, fontWeight:700, color:"#52B87A", letterSpacing:"0.04em" }}>✓ Concluído</span>
                           </div>
                         )}
                         {isLocked && (
                           <div style={{ position:"absolute", top:7, left:8, padding:"3px 9px", borderRadius:20,
                             background:"rgba(0,0,0,0.3)", backdropFilter:"blur(8px)",
                             border:"1px solid rgba(255,255,255,0.1)" }}>
-                            <span style={{ fontSize:9, color:"rgba(255,255,255,0.55)", letterSpacing:"0.04em" }}>ðŸ”’ Bloqueado</span>
+                            <span style={{ fontSize:9, color:"rgba(255,255,255,0.55)", letterSpacing:"0.04em" }}>🔒 Bloqueado</span>
                           </div>
                         )}
                       </div>
@@ -1019,7 +1019,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                           style={{ flexShrink:0, marginTop:2, padding:"6px 10px", borderRadius:8,
                             border:`1px solid ${item.color}50`, background:`linear-gradient(135deg,${item.color}18,${item.color}08)`,
                             color:item.color, fontWeight:700, fontSize:10, cursor:"pointer", whiteSpace:"nowrap" }}>
-                          âœ“ ConcluÃ­do
+                          ✓ Concluído
                         </motion.button>
                       )}
                     </div>
@@ -1044,7 +1044,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                               style={{ width:"100%", marginTop:8, padding:"9px", borderRadius:9, border:"none",
                                 background:"linear-gradient(135deg,#52B87A,#3A9860)", color:"white", fontWeight:700,
                                 fontSize:12, cursor:"pointer", boxShadow:"0 4px 12px rgba(82,184,122,0.3)" }}>
-                              âœ“ Marcar como concluÃ­do
+                              ✓ Marcar como concluído
                             </motion.button>
                           </div>
                         </motion.div>
@@ -1052,7 +1052,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
                     </AnimatePresence>
                   </div>
 
-                  {/* PrÃ³ximo vÃ­deo recomendado */}
+                  {/* Próximo vídeo recomendado */}
                   <AnimatePresence>
                     {item.concluido && item.mostrarProximo && item.proximo && (
                       <motion.div initial={{ opacity:0, height:0 }} animate={{ opacity:1, height:"auto" }}
@@ -1078,7 +1078,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
         </AnimatePresence>
       </div>
 
-      {/* NavegaÃ§Ã£o por setas */}
+      {/* Navegação por setas */}
       <div style={{ padding:"8px 14px 12px", borderTop:`1px solid ${glassB}`,
         display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <motion.button
@@ -1122,7 +1122,7 @@ function CheckListUsuario({ isDark, glass, glassB, cardShadow }) {
 }
 
 
-// â•â•â• PAGE: INÃCIO â•â•â•
+// ═══ PAGE: INÍCIO ═══
 function PageInicio({ isDark, notifs, onAbrirNotif }) {
   const [idx, setIdx] = useState(0);
   const [agenda, setAgenda] = useState(AGENDA);
@@ -1160,10 +1160,10 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
     <motion.div key="inicio" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
       style={{ overflowY:"auto", flex:1, paddingBottom:60 }}>
 
-      {/* â”€â”€ HEADER â”€â”€ */}
+      {/* ── HEADER ── */}
       <div style={{ padding:"28px 28px 20px" }}>
         <p style={{ fontSize:9, fontWeight:600, letterSpacing:"0.16em", textTransform:"uppercase", color:c3(isDark), marginBottom:5, opacity:0.7 }}>Quinta-feira, 29 Mai</p>
-        <h1 style={{ fontWeight:900, fontSize:28, color:c1(isDark), letterSpacing:"-0.045em", marginBottom:6, lineHeight:1.05 }}>Sua jornada, Liza âœ¦</h1>
+        <h1 style={{ fontWeight:900, fontSize:28, color:c1(isDark), letterSpacing:"-0.045em", marginBottom:6, lineHeight:1.05 }}>Sua jornada, Liza ✦</h1>
         <div style={{ display:"flex", alignItems:"center", gap:8 }}>
           <span style={{ fontSize:12, color:c2(isDark) }}>2 universos ativos</span>
           <span style={{ width:3, height:3, borderRadius:"50%", background:c3(isDark) }}/>
@@ -1172,8 +1172,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
         </div>
       </div>
 
-      {/* â”€â”€ STATS â€” flutuantes, sem card, estilo editorial â”€â”€ */}
-      {/* â”€â”€ STATS â€” referÃªncia painel_minimalista_sem_blocos â”€â”€ */}
+      {/* ── STATS — grid minimalista, sem cards ── */}
       <div style={{
         padding:"0 28px 36px",
         display:"grid",
@@ -1277,7 +1276,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
         ))}
       </div>
 
-      {/* â”€â”€ CARROSSEL â€” largura total â”€â”€ */}
+      {/* ── CARROSSEL — largura total ── */}
       <div style={{ padding:"0 28px 24px" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
           <h2 style={{ fontWeight:700, fontSize:15, color:c1(isDark), letterSpacing:"-0.02em" }}>Aulas em destaque</h2>
@@ -1290,7 +1289,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                   cursor:"pointer", color:c1(isDark), fontSize:20, fontWeight:500,
                   display:"flex", alignItems:"center", justifyContent:"center",
                   boxShadow:"0 2px 8px rgba(0,0,0,0.1)", transition:"all 0.15s" }}>
-                {d<0?"â€¹":"â€º"}
+                {d<0?"‹":"›"}
               </button>
             ))}
           </div>
@@ -1306,7 +1305,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                 boxShadow:`0 8px 32px rgba(0,0,0,0.12), 0 0 48px ${u.color}20` }}>
               <div style={{ display:"flex", justifyContent:"space-between", marginBottom:16 }}>
                 <Tag label={aula.tag} color={u.color}/>
-                <span style={{ fontSize:10, color:"rgba(255,255,255,0.28)", letterSpacing:"0.02em" }}>Aula {aula.aula} Â· {aula.duracao}</span>
+                <span style={{ fontSize:10, color:"rgba(255,255,255,0.28)", letterSpacing:"0.02em" }}>Aula {aula.aula} · {aula.duracao}</span>
               </div>
               <div style={{ display:"flex", alignItems:"flex-start", gap:18, marginBottom:16 }}>
                 <Planet universo={aula.universo} size={64}/>
@@ -1332,7 +1331,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                 background:`rgba(${parseInt(u.color.slice(1,3),16)},${parseInt(u.color.slice(3,5),16)},${parseInt(u.color.slice(5,7),16)},0.16)`,
                 color:u.color, fontWeight:700, fontSize:13, cursor:"pointer", letterSpacing:"-0.01em",
                 backdropFilter:"blur(8px)" }}>
-                {aula.progress > 0 ? "â–¶  Continuar aula" : "â–¶  ComeÃ§ar agora"}
+                {aula.progress > 0 ? "▶  Continuar aula" : "▶  Começar agora"}
               </button>
             </motion.div>
           </AnimatePresence>
@@ -1353,13 +1352,13 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
         </div>
       </div>
 
-      {/* â”€â”€ GRID: PUBLICAÃ‡Ã•ES (principal) + COLUNA LATERAL â”€â”€ */}
+      {/* ── GRID: PUBLICAÇÕES (principal) + COLUNA LATERAL ── */}
       <div style={{ padding:"0 28px 24px", display:"grid", gridTemplateColumns:"1fr 220px", gap:16, alignItems:"start" }}>
 
-        {/* CHECK LIST DO USUÃRIO */}
+        {/* CHECK LIST DO USUÁRIO */}
         <CheckListUsuario isDark={isDark} glass={glass} glassB={glassB} cardShadow={cardShadow}/>
 
-        {/* COLUNA LATERAL â€” Produtos + Agenda */}
+        {/* COLUNA LATERAL — Produtos + Agenda */}
         <div style={{ display:"flex", flexDirection:"column", gap:14, position:"sticky", top:60 }}>
 
           {/* PRODUTOS AFILIADOS */}
@@ -1374,7 +1373,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                 <div style={{ width:6, height:6, borderRadius:"50%", background:"#FF7A2E", boxShadow:"0 0 6px #FF7A2E" }}/>
                 <span style={{ fontSize:12, fontWeight:700, color:c1(isDark) }}>Produtos em Destaque</span>
               </div>
-              <p style={{ fontSize:9, color:c3(isDark), lineHeight:1.4 }}>SeleÃ§Ã£o da Liza Â· Mercado Livre</p>
+              <p style={{ fontSize:9, color:c3(isDark), lineHeight:1.4 }}>Seleção da Liza · Mercado Livre</p>
               <p style={{ fontSize:7.5, color:c3(isDark)+"88", marginTop:2 }}>*Links de afiliado</p>
             </div>
             {PRODUTOS_AFILIADOS.map(p => (
@@ -1390,7 +1389,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                   <p style={{ fontSize:11, fontWeight:600, color:c1(isDark), lineHeight:1.3, marginBottom:3,
                     overflow:"hidden", display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical" }}>{p.nome}</p>
                   <div style={{ display:"flex", alignItems:"center", gap:4, marginBottom:3 }}>
-                    <span style={{ fontSize:9, color:"#FF7A2E", fontWeight:700 }}>â­ {p.estrelas}</span>
+                    <span style={{ fontSize:9, color:"#FF7A2E", fontWeight:700 }}>⭐ {p.estrelas}</span>
                     <span style={{ fontSize:8, color:c3(isDark) }}>({p.vendas})</span>
                   </div>
                   <div style={{ display:"flex", alignItems:"baseline", gap:5 }}>
@@ -1401,7 +1400,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
               </motion.a>
             ))}
             <div style={{ padding:"10px 14px", borderTop:`1px solid ${glassB}` }}>
-              <a href="#" style={{ display:"block", textAlign:"center", fontSize:11, fontWeight:700, color:T.acc, textDecoration:"none" }}>Ver mais produtos â†’</a>
+              <a href="#" style={{ display:"block", textAlign:"center", fontSize:11, fontWeight:700, color:T.acc, textDecoration:"none" }}>Ver mais produtos →</a>
             </div>
           </div>
 
@@ -1413,7 +1412,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                 <div style={{ width:6, height:6, borderRadius:"50%", background:"#C26D8C", boxShadow:"0 0 6px #C26D8C" }}/>
                 <span style={{ fontWeight:700, fontSize:12, color:c1(isDark) }}>Agenda</span>
               </div>
-              <span style={{ fontSize:10, color:T.acc, fontWeight:600, cursor:"pointer" }}>Ver tudo â†’</span>
+              <span style={{ fontSize:10, color:T.acc, fontWeight:600, cursor:"pointer" }}>Ver tudo →</span>
             </div>
             <div style={{ padding:"8px 10px", display:"flex", flexDirection:"column", gap:6 }}>
               {agenda.slice(0,3).map(ev => {
@@ -1430,7 +1429,7 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                         display:"flex", alignItems:"center", justifyContent:"center", overflow:"hidden" }}>
                         {ev.foto
                           ? <img src={ev.foto} alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }}/>
-                          : <span style={{ fontSize:20 }}>{ev.tipo==="mentoria_individual"?"ðŸŽ¯":ev.tipo==="mentoria_grupo"?"ðŸ‘¥":"ðŸŽª"}</span>
+                          : <span style={{ fontSize:20 }}>{ev.tipo==="mentoria_individual"?"🎯":ev.tipo==="mentoria_grupo"?"👥":"🎪"}</span>
                         }
                         <div style={{ position:"absolute", bottom:2, left:2, padding:"1px 4px", borderRadius:3,
                           background:"rgba(0,0,0,0.55)", backdropFilter:"blur(4px)" }}>
@@ -1448,26 +1447,26 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
                         </div>
                       </div>
                     </div>
-                    {/* Footer aÃ§Ãµes compacto */}
+                    {/* Footer ações compacto */}
                     <div style={{ padding:"5px 8px", borderTop:`1px solid ${glassB}`, display:"flex", alignItems:"center", gap:4 }}>
                       {ev.inscrito ? (
                         <>
-                          <span style={{ fontSize:8, fontWeight:700, color:"#52B87A" }}>âœ“ Inscrito</span>
+                          <span style={{ fontSize:8, fontWeight:700, color:"#52B87A" }}>✓ Inscrito</span>
                           <div style={{ flex:1 }}/>
                           <button onClick={() => toggleSino(ev.id)}
                             style={{ padding:"2px 6px", borderRadius:5, border:`1px solid ${ev.sino?"#7A5CCF40":glassB}`,
                               background:ev.sino?"#7A5CCF10":"transparent", cursor:"pointer", fontSize:10 }}>
-                            {ev.sino?"ðŸ””":"ðŸ”•"}
+                            {ev.sino?"🔔":"🔕"}
                           </button>
                           <button onClick={() => toggleEmail(ev.id)}
                             style={{ padding:"2px 6px", borderRadius:5, border:`1px solid ${ev.email?"#6B8FC740":glassB}`,
                               background:ev.email?"#6B8FC710":"transparent", cursor:"pointer", fontSize:10 }}>
-                            âœ‰ï¸
+                            ✉️
                           </button>
                         </>
                       ) : (
                         <>
-                          <span style={{ fontSize:8, color:c3(isDark), flex:1 }}>DisponÃ­vel</span>
+                          <span style={{ fontSize:8, color:c3(isDark), flex:1 }}>Disponível</span>
                           <button onClick={() => inscrever(ev.id)}
                             style={{ padding:"3px 10px", borderRadius:6, border:"none",
                               background:`linear-gradient(135deg,${ev.color},${ev.color}cc)`,
@@ -1492,15 +1491,15 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
   );
 }
 
-// â•â•â• PAGE: UNIVERSOS â•â•â•
+// ═══ PAGE: UNIVERSOS ═══
 function PageUniversos({ isDark }) {
   const ativos = UV.filter(u => u.progress > 0);
   const bloq = UV.filter(u => u.progress === 0);
   return (
     <motion.div key="universos" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} style={{ overflowY:"auto", flex:1, padding:"28px 28px 40px" }}>
       <h1 style={{ fontWeight:900, fontSize:26, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:4 }}>Meus Universos</h1>
-      <p style={{ fontSize:13, color:c2(isDark), marginBottom:24 }}>Acompanhe o seu progresso e descubra novas dimensÃµes.</p>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:14 }}>ðŸª Em Progresso</h2>
+      <p style={{ fontSize:13, color:c2(isDark), marginBottom:24 }}>Acompanhe o seu progresso e descubra novas dimensões.</p>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:14 }}>🪐 Em Progresso</h2>
       <div style={{ display:"flex", flexDirection:"column", gap:14, marginBottom:28 }}>
         {ativos.map(u => (
           <div key={u.id} style={{ borderRadius:20, padding:20, background:cd(isDark), border:`1px solid ${cb(isDark)}`, display:"flex", gap:18, alignItems:"center" }}>
@@ -1518,7 +1517,7 @@ function PageUniversos({ isDark }) {
           </div>
         ))}
       </div>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:14 }}>ðŸ”’ Inexplorados</h2>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:14 }}>🔒 Inexplorados</h2>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:14 }}>
         {bloq.map(u => (
           <div key={u.id} style={{ borderRadius:20, padding:20, background:cd(isDark), border:`1px solid ${cb(isDark)}`, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center" }}>
@@ -1533,16 +1532,16 @@ function PageUniversos({ isDark }) {
   );
 }
 
-// â•â•â• PAGE: CÃ‰REBRO â•â•â•
+// ═══ PAGE: CÉREBRO ═══
 function PageCerebro({ isDark }) {
   return (
     <motion.div key="cerebro" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} style={{ overflowY:"auto", flex:1, padding:"28px 28px 40px" }}>
       <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 12px", borderRadius:8, background:"rgba(244,63,94,0.08)", border:"1px solid rgba(244,63,94,0.2)", color:"#F43F5E", marginBottom:12 }}>
         <Icon3D iconKey="brain" size={16} color="#F43F5E"/>
-        <span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em" }}>InteligÃªncia Comportamental</span>
+        <span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em" }}>Inteligência Comportamental</span>
       </div>
       <h1 style={{ fontWeight:900, fontSize:26, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:4 }}>Matriz Cognitiva ICONZA</h1>
-      <p style={{ fontSize:13, color:c2(isDark), marginBottom:24 }}>A nossa IA mapeia as suas aptidÃµes com base nas interaÃ§Ãµes.</p>
+      <p style={{ fontSize:13, color:c2(isDark), marginBottom:24 }}>A nossa IA mapeia as suas aptidões com base nas interações.</p>
       <div style={{ borderRadius:20, padding:18, background:cd(isDark), border:`1px solid ${cb(isDark)}`, marginBottom:18, display:"flex", gap:14, alignItems:"center" }}>
         <div style={{ width:48, height:48, borderRadius:22, background:"linear-gradient(135deg,#F43F5E,#8B5CF6)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
           <Icon3D iconKey="brain2" size={32}/>
@@ -1553,7 +1552,7 @@ function PageCerebro({ isDark }) {
         </div>
       </div>
       <div style={{ borderRadius:20, padding:18, background:cd(isDark), border:`1px solid ${cb(isDark)}`, marginBottom:18 }}>
-        <h3 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:18 }}>Desempenho por Ãrea</h3>
+        <h3 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:18 }}>Desempenho por Área</h3>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", height:130, gap:10, padding:"0 4px" }}>
           {BRAIN.map((s, i) => (
             <div key={i} style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
@@ -1591,10 +1590,10 @@ function PageCerebro({ isDark }) {
   );
 }
 
-// â•â•â• PAGE: ICONPLAY â•â•â•
+// ═══ PAGE: ICONPLAY ═══
 function PageIconplay({ isDark }) {
   const top = [{r:1,nome:"Liza Rutyon",role:"UI/UX Designer",color:"#C26D8C",score:9850},{r:2,nome:"Kai Mendes",role:"Motion Designer",color:"#6B8FC7",score:8420},{r:3,nome:"Amara Silva",role:"Brand Designer",color:"#52B87A",score:7900}];
-  const talents = [{nome:"Pedro Costa",service:"Editor de VÃ­deo",universo:"iconmind",emoji:"ðŸŽ¬"},{nome:"Nia Rodrigues",service:"Consultora de Imagem",universo:"iconetnia",emoji:"ðŸ‘—"},{nome:"JoÃ£o Lima",service:"Food Stylist",universo:"iconfood",emoji:"ðŸ½ï¸"}];
+  const talents = [{nome:"Pedro Costa",service:"Editor de Vídeo",universo:"iconmind",emoji:"🎬"},{nome:"Nia Rodrigues",service:"Consultora de Imagem",universo:"iconetnia",emoji:"👗"},{nome:"João Lima",service:"Food Stylist",universo:"iconfood",emoji:"🍽️"}];
   return (
     <motion.div key="iconplay" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} style={{ overflowY:"auto", flex:1, padding:"28px 28px 40px" }}>
       <div style={{ borderRadius:20, padding:24, background:isDark?"#18191C":"white", border:`1px solid ${cb(isDark)}`, marginBottom:24, position:"relative", overflow:"hidden" }}>
@@ -1602,13 +1601,13 @@ function PageIconplay({ isDark }) {
         <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"5px 12px", borderRadius:8, background:"rgba(139,92,246,0.1)", border:"1px solid rgba(139,92,246,0.2)", color:"#8B5CF6", marginBottom:12, position:"relative" }}>
           <Icon3D iconKey="trophy" size={16} color="#8B5CF6"/><span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em" }}>ICONPLAY</span>
         </div>
-        <h1 style={{ fontWeight:900, fontSize:22, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:8, position:"relative" }}>Prove o seu talento e ganhe um PortfÃ³lio exclusivo.</h1>
-        <p style={{ fontSize:13, color:c2(isDark), marginBottom:16, position:"relative" }}>Os melhores classificados ganham um website portfÃ³lio profissional.</p>
+        <h1 style={{ fontWeight:900, fontSize:22, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:8, position:"relative" }}>Prove o seu talento e ganhe um Portfólio exclusivo.</h1>
+        <p style={{ fontSize:13, color:c2(isDark), marginBottom:16, position:"relative" }}>Os melhores classificados ganham um website portfólio profissional.</p>
         <button style={{ padding:"11px 22px", borderRadius:10, border:"none", background:"linear-gradient(135deg,#8B5CF6,#6B8FC7)", color:"white", fontWeight:700, fontSize:13, cursor:"pointer", boxShadow:"0 4px 14px rgba(139,92,246,0.3)", display:"flex", alignItems:"center", gap:8, position:"relative" }}>
           <Icon3D iconKey="trophy" size={16} color="white"/> Ver Desafios Ativos
         </button>
       </div>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>â­ Top Criadores</h2>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>⭐ Top Criadores</h2>
       <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:24 }}>
         {top.map((d, i) => (
           <div key={i} style={{ display:"flex", alignItems:"center", gap:12, padding:14, borderRadius:22, background:cd(isDark), border:`1px solid ${cb(isDark)}` }}>
@@ -1622,7 +1621,7 @@ function PageIconplay({ isDark }) {
           </div>
         ))}
       </div>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>ðŸ’¼ Hub de Talentos</h2>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>💼 Hub de Talentos</h2>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
         {talents.map((t, i) => { const uv = UV.find(x => x.id===t.universo); return (
           <div key={i} style={{ borderRadius:22, padding:16, background:cd(isDark), border:`1px solid ${cb(isDark)}`, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center" }}>
@@ -1637,11 +1636,11 @@ function PageIconplay({ isDark }) {
   );
 }
 
-// â•â•â• PAGE: EU APOIO â•â•â•
+// ═══ PAGE: EU APOIO ═══
 function PageApoio({ isDark }) {
   const [amount, setAmount] = useState("");
   const supporters = [{r:1,nome:"Amara Silva",color:"#52B87A",amount:"R$ 1.250"},{r:2,nome:"Kai Mendes",color:"#6B8FC7",amount:"R$ 890"}];
-  const wish = [{nome:"Microfone Shure",price:"R$ 850",emoji:"ðŸŽ™ï¸"},{nome:"Ring Light",price:"R$ 320",emoji:"ðŸ’¡"},{nome:"HD Externo 2TB",price:"R$ 450",emoji:"ðŸ’¾"},{nome:"Cadeira Gamer",price:"R$ 1.200",emoji:"ðŸª‘"}];
+  const wish = [{nome:"Microfone Shure",price:"R$ 850",emoji:"🎙️"},{nome:"Ring Light",price:"R$ 320",emoji:"💡"},{nome:"HD Externo 2TB",price:"R$ 450",emoji:"💾"},{nome:"Cadeira Gamer",price:"R$ 1.200",emoji:"🪑"}];
   return (
     <motion.div key="apoio" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} style={{ overflowY:"auto", flex:1, padding:"28px 28px 40px" }}>
       <div style={{ borderRadius:20, padding:24, background:cd(isDark), border:`1px solid ${cb(isDark)}`, marginBottom:24, position:"relative", overflow:"hidden" }}>
@@ -1649,7 +1648,7 @@ function PageApoio({ isDark }) {
         <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"5px 12px", borderRadius:8, background:"rgba(224,161,27,0.1)", color:"#E0A11B", marginBottom:12, position:"relative" }}>
           <Icon3D iconKey="heart" size={16} color="#E0A11B"/><span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em" }}>Apoie o Projeto</span>
         </div>
-        <h1 style={{ fontWeight:900, fontSize:22, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:16, position:"relative" }}>FaÃ§a parte da nossa expansÃ£o.</h1>
+        <h1 style={{ fontWeight:900, fontSize:22, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:16, position:"relative" }}>Faça parte da nossa expansão.</h1>
         <div style={{ display:"flex", gap:8, marginBottom:10, position:"relative" }}>
           {["25","50","100","200"].map(v => (
             <button key={v} onClick={() => setAmount(v)} style={{ flex:1, padding:"8px", borderRadius:8, border:`1px solid ${amount===v?"#E0A11B":cb(isDark)}`, background:amount===v?"#E0A11B":"transparent", color:amount===v?"white":c2(isDark), fontWeight:700, fontSize:12, cursor:"pointer", transition:"all 0.2s" }}>R${v}</button>
@@ -1661,7 +1660,7 @@ function PageApoio({ isDark }) {
         </div>
         <button style={{ width:"100%", padding:"13px", borderRadius:10, border:"none", background:"#E0A11B", color:"white", fontWeight:900, fontSize:14, cursor:"pointer", boxShadow:"0 4px 16px rgba(224,161,27,0.35)", position:"relative" }}>Apoiar Agora</button>
       </div>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>ðŸ… Top Colaboradores</h2>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>🏅 Top Colaboradores</h2>
       <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:24 }}>
         {supporters.map((s, i) => (
           <div key={i} style={{ display:"flex", alignItems:"center", gap:12, padding:14, borderRadius:22, background:cd(isDark), border:`1px solid ${cb(isDark)}` }}>
@@ -1672,7 +1671,7 @@ function PageApoio({ isDark }) {
           </div>
         ))}
       </div>
-      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>ðŸŽ Lista de Desejos</h2>
+      <h2 style={{ fontWeight:700, fontSize:14, color:c1(isDark), marginBottom:12 }}>🎁 Lista de Desejos</h2>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
         {wish.map((item, i) => (
           <div key={i} style={{ padding:14, borderRadius:22, background:cd(isDark), border:`1px solid ${cb(isDark)}`, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center" }}>
@@ -1686,7 +1685,7 @@ function PageApoio({ isDark }) {
   );
 }
 
-// â•â•â• PAGE: PERFIL â€” com Conquistas, HistÃ³rico, TÃ­tulos â•â•â•
+// ═══ PAGE: PERFIL — com Conquistas, Histórico, Títulos ═══
 function PagePerfil({ isDark }) {
   const [tab, setTab] = useState("mural");
   const ui = UV.find(u => u.id === "iconmind");
@@ -1697,8 +1696,8 @@ function PagePerfil({ isDark }) {
   const tabs = [
     { id:"mural",      label:"Mural"      },
     { id:"conquistas", label:"Conquistas" },
-    { id:"historico",  label:"HistÃ³rico"  },
-    { id:"titulos",    label:"TÃ­tulos"    },
+    { id:"historico",  label:"Histórico"  },
+    { id:"titulos",    label:"Títulos"    },
   ];
 
   return (
@@ -1708,7 +1707,7 @@ function PagePerfil({ isDark }) {
         <div style={{ position:"absolute", width:250, height:250, borderRadius:"50%", top:-80, right:-40, background:ui.color, opacity:0.2, filter:"blur(80px)" }}/>
         <div style={{ position:"absolute", top:16, right:20, display:"flex", alignItems:"center", gap:6, padding:"5px 12px", borderRadius:10, background:"rgba(255,255,255,0.1)", backdropFilter:"blur(10px)", border:"1px solid rgba(255,255,255,0.15)" }}>
           <Icon3D iconKey="star" size={14}/>
-          <span style={{ fontSize:10, fontWeight:700, color:"white" }}>NÃ­vel 12</span>
+          <span style={{ fontSize:10, fontWeight:700, color:"white" }}>Nível 12</span>
         </div>
       </div>
 
@@ -1719,25 +1718,25 @@ function PagePerfil({ isDark }) {
             <div style={{ width:80, height:80, borderRadius:22, background:"linear-gradient(135deg,#D4688A,#7A5CCF)", display:"flex", alignItems:"center", justifyContent:"center", color:"white", fontSize:28, fontWeight:900, border:`4px solid ${isDark?T.bgD:T.bg}`, boxShadow:"0 8px 24px rgba(212,104,138,0.4)" }}>L</div>
             <div style={{ position:"absolute", bottom:2, right:2, width:14, height:14, borderRadius:"50%", background:"#52B87A", border:`2px solid ${isDark?T.bgD:T.bg}` }}/>
           </div>
-          <button style={{ padding:"7px 16px", borderRadius:10, border:`1px solid ${cb(isDark)}`, background:cd(isDark), color:c2(isDark), fontSize:12, fontWeight:600, cursor:"pointer" }}>âœŽ Editar</button>
+          <button style={{ padding:"7px 16px", borderRadius:10, border:`1px solid ${cb(isDark)}`, background:cd(isDark), color:c2(isDark), fontSize:12, fontWeight:600, cursor:"pointer" }}>✎ Editar</button>
         </div>
 
-        {/* Nome + tÃ­tulo ativo */}
+        {/* Nome + título ativo */}
         <div style={{ marginBottom:14 }}>
           <div style={{ display:"flex", alignItems:"center", gap:8, flexWrap:"wrap", marginBottom:4 }}>
             <h2 style={{ fontWeight:900, fontSize:20, color:c1(isDark), letterSpacing:"-0.03em" }}>Liza Rutyon</h2>
-            <span style={{ padding:"2px 8px", borderRadius:6, background:"rgba(91,143,212,0.12)", color:"#6B8FC7", fontSize:9, fontWeight:700 }}>âœ“ Verificado</span>
+            <span style={{ padding:"2px 8px", borderRadius:6, background:"rgba(91,143,212,0.12)", color:"#6B8FC7", fontSize:9, fontWeight:700 }}>✓ Verificado</span>
             <span style={{ padding:"2px 8px", borderRadius:6, background:"linear-gradient(90deg,#7A5CCF,#6B8FC7)", color:"white", fontSize:9, fontWeight:900 }}>PRO</span>
           </div>
           <p style={{ fontSize:12, color:c3(isDark), marginBottom:4 }}>@lizaruty</p>
-          {/* TÃ­tulo ativo em destaque */}
+          {/* Título ativo em destaque */}
           {tituloAtivo && (
             <div style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"4px 10px", borderRadius:8, background:tituloAtivo.color+"14", border:`1px solid ${tituloAtivo.color}30`, marginBottom:8 }}>
-              <span style={{ fontSize:14 }}>âœ¦</span>
+              <span style={{ fontSize:14 }}>✦</span>
               <span style={{ fontSize:12, fontWeight:700, color:tituloAtivo.color }}>{tituloAtivo.label}</span>
             </div>
           )}
-          <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5 }}>Criadora de conteÃºdo, aprendiz eterna e apaixonada por arte, cultura e autoconhecimento.</p>
+          <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5 }}>Criadora de conteúdo, aprendiz eterna e apaixonada por arte, cultura e autoconhecimento.</p>
         </div>
 
         {/* XP */}
@@ -1746,7 +1745,7 @@ function PagePerfil({ isDark }) {
             <div style={{ width:34, height:34, borderRadius:10, background:"linear-gradient(135deg,#E0A11B,#E8711A)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
               <Icon3D iconKey="star" size={18}/>
             </div>
-            <p style={{ fontSize:12, fontWeight:650, color:c1(isDark) }}>NÃ­vel 12 Â· <span style={{ color:"#E0A11B" }}>{xpPct}% para o NÃ­vel 13</span></p>
+            <p style={{ fontSize:12, fontWeight:650, color:c1(isDark) }}>Nível 12 · <span style={{ color:"#E0A11B" }}>{xpPct}% para o Nível 13</span></p>
           </div>
           <div style={{ display:"flex", justifyContent:"space-between", fontSize:10, color:c3(isDark), marginBottom:6 }}><span>2.840 XP</span><span>3.200 XP</span></div>
           <div style={{ height:7, borderRadius:4, background:isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.07)" }}>
@@ -1755,7 +1754,7 @@ function PagePerfil({ isDark }) {
           </div>
         </div>
 
-        {/* Emblemas rÃ¡pidos */}
+        {/* Emblemas rápidos */}
         <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:12, overflowX:"auto", paddingBottom:4 }}>
           <span style={{ fontSize:10, fontWeight:600, color:c3(isDark), flexShrink:0 }}>Emblemas</span>
           {unlocked.map(c => (
@@ -1771,7 +1770,7 @@ function PagePerfil({ isDark }) {
 
         {/* Meta pills */}
         <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:16 }}>
-          {["ðŸ“ Duque de Caxias","ðŸ—“ Jan 2026","ðŸ”¥ 7 dias","ðŸ“š 17 aulas"].map((m, i) => (
+          {["📍 Duque de Caxias","🗓 Jan 2026","🔥 7 dias","📚 17 aulas"].map((m, i) => (
             <span key={i} style={{ padding:"5px 10px", borderRadius:20, background:isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.04)", color:c2(isDark), fontSize:11, border:`1px solid ${cb(isDark)}` }}>{m}</span>
           ))}
         </div>
@@ -1801,7 +1800,7 @@ function PagePerfil({ isDark }) {
                     </div>
                     <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5, marginBottom:10 }}>{post.texto}</p>
                     <div style={{ display:"flex", gap:14, paddingTop:10, borderTop:`1px solid ${cb(isDark)}` }}>
-                      <span style={{ fontSize:12, color:c3(isDark), cursor:"pointer" }}>â¤ï¸ {post.likes}</span>
+                      <span style={{ fontSize:12, color:c3(isDark), cursor:"pointer" }}>❤️ {post.likes}</span>
                       <div style={{ marginLeft:"auto" }}><Tag label={post.universo.replace("icon","").toUpperCase()} color={uv.color}/></div>
                     </div>
                   </div>
@@ -1835,8 +1834,8 @@ function PagePerfil({ isDark }) {
                           {c.desbloqueada && <span style={{ fontSize:9, fontWeight:700, color:c.color, padding:"1px 6px", borderRadius:4, background:c.color+"14" }}>+{c.xp} XP</span>}
                         </div>
                         <p style={{ fontSize:11, color:c3(isDark), marginBottom:2 }}>{c.desc}</p>
-                        {c.desbloqueada && c.data && <span style={{ fontSize:9, color:c3(isDark) }}>ðŸ—“ {c.data}</span>}
-                        {!c.desbloqueada && <span style={{ fontSize:9, color:c3(isDark) }}>ðŸ”’ Ainda nÃ£o desbloqueada</span>}
+                        {c.desbloqueada && c.data && <span style={{ fontSize:9, color:c3(isDark) }}>🗓 {c.data}</span>}
+                        {!c.desbloqueada && <span style={{ fontSize:9, color:c3(isDark) }}>🔒 Ainda não desbloqueada</span>}
                       </div>
                     </motion.div>
                   ))}
@@ -1844,7 +1843,7 @@ function PagePerfil({ isDark }) {
               </div>
             )}
 
-            {/* ABA: HISTÃ“RICO */}
+            {/* ABA: HISTÓRICO */}
             {tab === "historico" && (
               <div>
                 <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:16 }}>
@@ -1856,7 +1855,7 @@ function PagePerfil({ isDark }) {
                     <motion.div key={h.id} initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:i*0.06 }}
                       style={{ display:"flex", alignItems:"flex-start", gap:14, padding:"16px 16px", borderRadius:12, background:i%2===0?cd(isDark):"transparent", border:`1px solid ${i%2===0?cb(isDark):"transparent"}` }}>
                       <div style={{ width:36, height:36, borderRadius:10, background:uv.color+"18", display:"flex", alignItems:"center", justifyContent:"center", fontSize:16, flexShrink:0 }}>
-                        {h.tipo==="aula"?"â–¶ï¸":h.tipo==="conquista"?"â­":h.tipo==="social"?"ðŸ’¬":"ðŸ“Š"}
+                        {h.tipo==="aula"?"▶️":h.tipo==="conquista"?"⭐":h.tipo==="social"?"💬":"📊"}
                       </div>
                       <div style={{ flex:1, minWidth:0 }}>
                         <p style={{ fontSize:12.5, color:c1(isDark), lineHeight:1.4, marginBottom:2 }}>{h.desc}</p>
@@ -1869,22 +1868,22 @@ function PagePerfil({ isDark }) {
               </div>
             )}
 
-            {/* ABA: TÃTULOS */}
+            {/* ABA: TÍTULOS */}
             {tab === "titulos" && (
               <div>
-                <p style={{ fontSize:12, color:c2(isDark), marginBottom:16 }}>O tÃ­tulo ativo aparece no teu perfil pÃºblico e na sidebar.</p>
+                <p style={{ fontSize:12, color:c2(isDark), marginBottom:16 }}>O título ativo aparece no teu perfil público e na sidebar.</p>
                 <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                   {TITULOS.map(t => (
                     <motion.div key={t.id} initial={{ opacity:0, y:6 }} animate={{ opacity:1, y:0 }}
                       style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 16px", borderRadius:22, background:cd(isDark),
                         border:`1px solid ${t.ativo ? t.color+"50" : cb(isDark)}`,
                         opacity: t.desbloqueado ? 1 : 0.45, boxShadow: t.ativo ? `0 0 0 2px ${t.color}30` : "none" }}>
-                      <div style={{ width:44, height:44, borderRadius:12, background:t.color+"18", display:"flex", alignItems:"center", justifyContent:"center", fontSize:22, flexShrink:0 }}>âœ¦</div>
+                      <div style={{ width:44, height:44, borderRadius:12, background:t.color+"18", display:"flex", alignItems:"center", justifyContent:"center", fontSize:22, flexShrink:0 }}>✦</div>
                       <div style={{ flex:1, minWidth:0 }}>
                         <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:3 }}>
                           <span style={{ fontWeight:700, fontSize:13, color:t.desbloqueado?c1(isDark):c3(isDark) }}>{t.label}</span>
                           {t.ativo && <span style={{ fontSize:9, fontWeight:900, color:t.color, padding:"1px 6px", borderRadius:4, background:t.color+"14" }}>ATIVO</span>}
-                          {!t.desbloqueado && <span style={{ fontSize:9, color:c3(isDark) }}>ðŸ”’</span>}
+                          {!t.desbloqueado && <span style={{ fontSize:9, color:c3(isDark) }}>🔒</span>}
                         </div>
                         <p style={{ fontSize:11, color:c3(isDark) }}>{t.desc}</p>
                       </div>
@@ -1904,7 +1903,7 @@ function PagePerfil({ isDark }) {
   );
 }
 
-// â•â•â• PAGE: CONFIGURAÃ‡Ã•ES â•â•â•
+// ═══ PAGE: CONFIGURAÇÕES ═══
 function PageConfiguracoes({ isDark, setIsDark }) {
   const [tab, setTab] = useState("notificacoes");
   const [notif, setNotif] = useState(false);
@@ -1912,7 +1911,7 @@ function PageConfiguracoes({ isDark, setIsDark }) {
     <motion.div key="config" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} style={{ overflowY:"auto", flex:1, padding:"28px 28px 40px" }}>
       <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20 }}>
         <NavIcon iconKey="settings" color="#8E99A8" isActive={true} size={18}/>
-        <h1 style={{ fontWeight:900, fontSize:26, color:c1(isDark), letterSpacing:"-0.03em" }}>DefiniÃ§Ãµes</h1>
+        <h1 style={{ fontWeight:900, fontSize:26, color:c1(isDark), letterSpacing:"-0.03em" }}>Definições</h1>
       </div>
       <div style={{ display:"flex", borderBottom:`1px solid ${cb(isDark)}`, marginBottom:24 }}>
         {["notificacoes","seguranca","geral"].map(t => (
@@ -1926,8 +1925,8 @@ function PageConfiguracoes({ isDark, setIsDark }) {
               <div style={{ position:"absolute", top:0, left:0, width:5, height:"100%", background:"#52B87A", borderRadius:"16px 0 0 16px" }}/>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:14, paddingLeft:10 }}>
                 <div>
-                  <h3 style={{ fontWeight:700, fontSize:16, color:c1(isDark), marginBottom:8 }}>ðŸ’¬ Alertas via WhatsApp</h3>
-                  <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5, maxWidth:340 }}>Receba confirmaÃ§Ãµes de inscriÃ§Ã£o e lembretes de progresso diretamente no seu telemÃ³vel.</p>
+                  <h3 style={{ fontWeight:700, fontSize:16, color:c1(isDark), marginBottom:8 }}>💬 Alertas via WhatsApp</h3>
+                  <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5, maxWidth:340 }}>Receba confirmações de inscrição e lembretes de progresso diretamente no seu telemóvel.</p>
                 </div>
                 <Toggle on={notif} onToggle={() => setNotif(!notif)} color="#52B87A"/>
               </div>
@@ -1935,7 +1934,7 @@ function PageConfiguracoes({ isDark, setIsDark }) {
                 {notif && (
                   <motion.div initial={{ height:0, opacity:0 }} animate={{ height:"auto", opacity:1 }} exit={{ height:0, opacity:0 }}
                     style={{ marginTop:16, paddingTop:16, borderTop:"1px solid rgba(82,184,122,0.15)", paddingLeft:10 }}>
-                    <label style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.1em", color:c3(isDark), display:"block", marginBottom:8 }}>NÃºmero de TelemÃ³vel</label>
+                    <label style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.1em", color:c3(isDark), display:"block", marginBottom:8 }}>Número de Telemóvel</label>
                     <div style={{ display:"flex", gap:10 }}>
                       <input type="tel" placeholder="+55 11 91234-5678" style={{ flex:1, padding:"12px 14px", borderRadius:10, border:`1px solid ${cb(isDark)}`, background:isDark?"#232428":"#F8F7F5", color:c1(isDark), fontSize:13, outline:"none" }}/>
                       <button style={{ padding:"12px 16px", borderRadius:10, border:"none", background:"#52B87A", color:"white", fontWeight:700, fontSize:13, cursor:"pointer" }}>Testar</button>
@@ -1949,9 +1948,9 @@ function PageConfiguracoes({ isDark, setIsDark }) {
             <div style={{ borderRadius:20, padding:22, background:isDark?"rgba(82,184,122,0.07)":"rgba(82,184,122,0.05)", border:"1px solid rgba(82,184,122,0.2)", position:"relative", overflow:"hidden" }}>
               <div style={{ position:"absolute", top:0, left:0, width:5, height:"100%", background:"#52B87A", borderRadius:"16px 0 0 16px" }}/>
               <div style={{ paddingLeft:10 }}>
-                <h3 style={{ fontWeight:700, fontSize:16, color:c1(isDark), marginBottom:8 }}>ðŸ” Esqueceu-se da senha?</h3>
-                <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5, marginBottom:16 }}>Ative a recuperaÃ§Ã£o inteligente via <strong>WhatsApp</strong> e receba um cÃ³digo mÃ¡gico diretamente no seu telemÃ³vel.</p>
-                <button style={{ padding:"12px 20px", borderRadius:10, border:"none", background:"#52B87A", color:"white", fontWeight:700, fontSize:13, cursor:"pointer", boxShadow:"0 4px 12px rgba(82,184,122,0.3)" }}>ðŸ’¬ Ativar RecuperaÃ§Ã£o por WhatsApp</button>
+                <h3 style={{ fontWeight:700, fontSize:16, color:c1(isDark), marginBottom:8 }}>🔐 Esqueceu-se da senha?</h3>
+                <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.5, marginBottom:16 }}>Ative a recuperação inteligente via <strong>WhatsApp</strong> e receba um código mágico diretamente no seu telemóvel.</p>
+                <button style={{ padding:"12px 20px", borderRadius:10, border:"none", background:"#52B87A", color:"white", fontWeight:700, fontSize:13, cursor:"pointer", boxShadow:"0 4px 12px rgba(82,184,122,0.3)" }}>💬 Ativar Recuperação por WhatsApp</button>
               </div>
             </div>
           )}
@@ -1959,7 +1958,7 @@ function PageConfiguracoes({ isDark, setIsDark }) {
             <div style={{ borderRadius:20, padding:22, background:cd(isDark), border:`1px solid ${cb(isDark)}` }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                 <div>
-                  <h3 style={{ fontWeight:650, fontSize:15, color:c1(isDark), marginBottom:4 }}>{isDark ? "ðŸŒ™ Modo Escuro ativo" : "â˜€ï¸ Modo Claro ativo"}</h3>
+                  <h3 style={{ fontWeight:650, fontSize:15, color:c1(isDark), marginBottom:4 }}>{isDark ? "🌙 Modo Escuro ativo" : "☀️ Modo Claro ativo"}</h3>
                   <p style={{ fontSize:12, color:c3(isDark) }}>Alterne entre os temas da interface</p>
                 </div>
                 <Toggle on={isDark} onToggle={() => setIsDark(!isDark)} color={T.acc}/>
@@ -1972,13 +1971,13 @@ function PageConfiguracoes({ isDark, setIsDark }) {
   );
 }
 
-// â•â•â• PAGE: EM CONSTRUÃ‡ÃƒO PREMIUM â•â•â•
+// ═══ PAGE: EM CONSTRUÇÃO PREMIUM ═══
 function PageEmConstrucao({ isDark, label, iconKey, color, descricao }) {
   const recursos = {
-    ia: ["Mentor virtual personalizado","RecomendaÃ§Ãµes por comportamento","CriaÃ§Ã£o de trilhas de aprendizagem","AnÃ¡lise cognitiva em tempo real"],
-    cursos: ["Videoaulas por universo","Podcasts temÃ¡ticos","Workshops ao vivo","Certificados de conclusÃ£o"],
-    colecoes: ["Salve aulas favoritas","Organize por tema","Compartilhe coleÃ§Ãµes","ReferÃªncias e ferramentas"],
-    marketplace: ["Cursos premium","Mentorias 1:1","Templates criativos","ServiÃ§os de criadores"],
+    ia: ["Mentor virtual personalizado","Recomendações por comportamento","Criação de trilhas de aprendizagem","Análise cognitiva em tempo real"],
+    cursos: ["Videoaulas por universo","Podcasts temáticos","Workshops ao vivo","Certificados de conclusão"],
+    colecoes: ["Salve aulas favoritas","Organize por tema","Compartilhe coleções","Referências e ferramentas"],
+    marketplace: ["Cursos premium","Mentorias 1:1","Templates criativos","Serviços de criadores"],
   };
   const items = recursos[iconKey] || [];
   return (
@@ -1988,10 +1987,10 @@ function PageEmConstrucao({ isDark, label, iconKey, color, descricao }) {
           <Icon3D iconKey={iconKey} size={36} color={color}/>
         </div>
         <h2 style={{ fontWeight:900, fontSize:24, color:c1(isDark), letterSpacing:"-0.03em", marginBottom:8 }}>{label}</h2>
-        <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.6, marginBottom:24 }}>{descricao || "Esta secÃ§Ã£o estÃ¡ a ser construÃ­da com cuidado. Volte em breve!"}</p>
+        <p style={{ fontSize:13, color:c2(isDark), lineHeight:1.6, marginBottom:24 }}>{descricao || "Esta secção está a ser construída com cuidado. Volte em breve!"}</p>
         {items.length > 0 && (
           <div>
-            <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.1em", color:c3(isDark), marginBottom:14 }}>O que estÃ¡ a chegar</p>
+            <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.1em", color:c3(isDark), marginBottom:14 }}>O que está a chegar</p>
             <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
               {items.map((item, i) => (
                 <motion.div key={i} initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:i*0.08 }}
@@ -2004,7 +2003,7 @@ function PageEmConstrucao({ isDark, label, iconKey, color, descricao }) {
           </div>
         )}
         <div style={{ marginTop:28, padding:"16px 20px", borderRadius:22, background:color+"08", border:`1px dashed ${color}40`, textAlign:"center" }}>
-          <p style={{ fontSize:12, color:c2(isDark), marginBottom:10 }}>Quer ser notificada quando lanÃ§ar?</p>
+          <p style={{ fontSize:12, color:c2(isDark), marginBottom:10 }}>Quer ser notificada quando lançar?</p>
           <button style={{ padding:"10px 24px", borderRadius:10, border:"none", background:color, color:"white", fontWeight:700, fontSize:13, cursor:"pointer" }}>Avisar-me</button>
         </div>
       </div>
@@ -2012,7 +2011,7 @@ function PageEmConstrucao({ isDark, label, iconKey, color, descricao }) {
   );
 }
 
-// â•â•â• ROOT APP â•â•â•
+// ═══ ROOT APP ═══
 export default function App() {
   const [page, setPage] = useState("inicio");
   const [isDark, setIsDark] = useState(false);
@@ -2034,10 +2033,10 @@ export default function App() {
       case "apoio":         return <PageApoio isDark={isDark}/>;
       case "perfil":        return <PagePerfil isDark={isDark}/>;
       case "configuracoes": return <PageConfiguracoes isDark={isDark} setIsDark={setIsDark}/>;
-      case "ia":            return <PageEmConstrucao isDark={isDark} label="IA do ICONZA" iconKey="ia" color="#C26D8C" descricao="O centro de inteligÃªncia do ecossistema ICONZA. Um mentor virtual que aprende com o seu comportamento e cria trilhas personalizadas."/>;
-      case "cursos":        return <PageEmConstrucao isDark={isDark} label="Cursos" iconKey="cursos" color="#52B87A" descricao="Biblioteca completa de conteÃºdos dos universos â€” videoaulas, podcasts, ebooks e workshops ao vivo."/>;
-      case "colecoes":      return <PageEmConstrucao isDark={isDark} label="ColeÃ§Ãµes" iconKey="colecoes" color="#6B8FC7" descricao="O seu espaÃ§o de organizaÃ§Ã£o pessoal. Salve aulas, ferramentas, referÃªncias e crie coleÃ§Ãµes temÃ¡ticas."/>;
-      case "marketplace":   return <PageEmConstrucao isDark={isDark} label="Marketplace" iconKey="marketplace" color="#D97832" descricao="A economia criativa do ICONZA. Cursos premium, mentorias, templates e serviÃ§os dos melhores criadores."/>;
+      case "ia":            return <PageEmConstrucao isDark={isDark} label="IA do ICONZA" iconKey="ia" color="#C26D8C" descricao="O centro de inteligência do ecossistema ICONZA. Um mentor virtual que aprende com o seu comportamento e cria trilhas personalizadas."/>;
+      case "cursos":        return <PageEmConstrucao isDark={isDark} label="Cursos" iconKey="cursos" color="#52B87A" descricao="Biblioteca completa de conteúdos dos universos — videoaulas, podcasts, ebooks e workshops ao vivo."/>;
+      case "colecoes":      return <PageEmConstrucao isDark={isDark} label="Coleções" iconKey="colecoes" color="#6B8FC7" descricao="O seu espaço de organização pessoal. Salve aulas, ferramentas, referências e crie coleções temáticas."/>;
+      case "marketplace":   return <PageEmConstrucao isDark={isDark} label="Marketplace" iconKey="marketplace" color="#D97832" descricao="A economia criativa do ICONZA. Cursos premium, mentorias, templates e serviços dos melhores criadores."/>;
       default: return <PageInicio isDark={isDark} notifs={notifs} onAbrirNotif={() => setNotifOpen(o => !o)}/>;
     }
   };
@@ -2055,7 +2054,7 @@ export default function App() {
       {/* PAINEL */}
       {introComplete && (
         <>
-          {/* Sidebar sÃ³ em desktop */}
+          {/* Sidebar só em desktop */}
           {!isMobile && (
             <Sidebar page={page} setPage={setPage} isDark={isDark}
               notifCount={notifCount}
@@ -2063,7 +2062,7 @@ export default function App() {
           )}
 
           <div style={{ flex:1, display:"flex", flexDirection:"column", minWidth:0, overflowX:"hidden" }}>
-            {/* TopBar â€” desktop: zoom + dark; mobile: logo + dark + notif */}
+            {/* TopBar — desktop: zoom + dark; mobile: logo + dark + notif */}
             {isMobile ? (
               <div style={{ height:52, display:"flex", alignItems:"center", padding:"0 16px", gap:10,
                 background: isDark?"rgba(14,14,16,0.85)":"rgba(255,255,255,0.85)",
@@ -2073,7 +2072,7 @@ export default function App() {
                 <span style={{ fontWeight:900, fontSize:16, color:c1(isDark), letterSpacing:"-0.04em", flex:1 }}>ICONZA</span>
                 <motion.button onClick={() => setIsDark(d=>!d)} whileTap={{scale:0.88}}
                   style={{ width:34,height:34,borderRadius:9,border:`1px solid ${isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)"}`,background:"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:16 }}>
-                  {isDark?"â˜€ï¸":"ðŸŒ™"}
+                  {isDark?"☀️":"🌙"}
                 </motion.button>
                 <motion.button whileTap={{scale:0.88}} onClick={() => setNotifOpen(o=>!o)}
                   style={{ position:"relative",width:34,height:34,borderRadius:9,border:`1px solid ${isDark?"rgba(255,255,255,0.1)":"rgba(0,0,0,0.1)"}`,background:"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer" }}>
@@ -2086,7 +2085,7 @@ export default function App() {
                 notifCount={notifCount} onAbrirNotif={() => setNotifOpen(o=>!o)} sidebarCollapsed={sidebarCollapsed}/>
             )}
 
-            {/* ConteÃºdo com zoom (sÃ³ desktop) */}
+            {/* Conteúdo com zoom (só desktop) */}
             <div style={{ flex:1, transformOrigin:"top left",
               transform: isMobile ? "none" : `scale(${zoom/100})`,
               width: isMobile ? "100%" : `${10000/zoom}%`,
@@ -2121,7 +2120,7 @@ export default function App() {
             </nav>
           )}
 
-          {/* PAINEL NOTIFICAÃ‡Ã•ES */}
+          {/* PAINEL NOTIFICAÇÕES */}
           <AnimatePresence>
             {notifOpen && (
               <PainelNotificacoes isDark={isDark} notifs={notifs} onLer={marcarLida} onClose={() => setNotifOpen(false)}/>
