@@ -21,3 +21,31 @@ export const c2 = (d: boolean): string => (d ? T.t2d : T.t2);
 export const c3 = (d: boolean): string => (d ? T.t3d : T.t3);
 export const cd = (d: boolean): string => (d ? T.cardD : T.card);
 export const cb = (d: boolean): string => (d ? T.bD : "transparent");
+
+export type SolidIconSize = "small" | "md" | "lg";
+
+/** Escala proporcional para SolidIcon3D (círculo + ícone interno). */
+export const SOLID_ICON_DIMENSIONS: Record<SolidIconSize, { circle: number; icon: number }> = {
+  small: { circle: 44, icon: 18 },
+  md: { circle: 52, icon: 22 },
+  lg: { circle: 60, icon: 24 },
+};
+
+/** Escurece um hex sólido para a base 3D (sem transparência). */
+export function darkenHex(hex: string, factor = 0.78): string {
+  const normalized = hex.replace("#", "");
+  const value =
+    normalized.length === 3
+      ? normalized
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : normalized.slice(0, 6);
+
+  const channel = (start: number) =>
+    Math.round(parseInt(value.slice(start, start + 2), 16) * factor)
+      .toString(16)
+      .padStart(2, "0");
+
+  return `#${channel(0)}${channel(2)}${channel(4)}`;
+}

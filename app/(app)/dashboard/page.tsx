@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SolidIcon3D } from "./components/solid-icon-3d";
 
 function useIsMobile() {
   const [m, setM] = useState(typeof window !== "undefined" && window.innerWidth < 768);
@@ -1183,50 +1184,26 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
           {
             label:"Dias de Foco",
             value:7,
-            iconColor:"#F97316",
-            bgColor:"rgba(249,115,22,0.1)",
-            svg: (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-              </svg>
-            ),
+            accentColor:"#F97316",
+            iconKey:"fire",
           },
           {
             label:"Tempo Total",
             value:"5.4h",
-            iconColor:"#EAB308",
-            bgColor:"rgba(234,179,8,0.1)",
-            svg: (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EAB308" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-            ),
+            accentColor:"#EAB308",
+            iconKey:"bolt",
           },
           {
             label:"XP Acumulado",
             value:"1.2k",
-            iconColor:"#6366F1",
-            bgColor:"rgba(99,102,241,0.1)",
-            svg: (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                <polyline points="16 7 22 7 22 13"/>
-              </svg>
-            ),
+            accentColor:"#6366F1",
+            iconKey:"star",
           },
           {
             label:"Conexões",
             value:24,
-            iconColor:"#10B981",
-            bgColor:"rgba(16,185,129,0.1)",
-            svg: (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
-                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
-                <path d="M15 13a4 4 0 0 0-3-6"/>
-                <path d="M9 13a4 4 0 0 1 3-6"/>
-              </svg>
-            ),
+            accentColor:"#10B981",
+            iconKey:"users",
           },
         ].map((s, i) => (
           <motion.div
@@ -1236,18 +1213,13 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
             transition={{ delay:i * 0.08, duration:0.5, ease:[0.22, 1, 0.36, 1] }}
             style={{ display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", padding:"0 8px" }}
           >
-            <div style={{
-              width:52,
-              height:52,
-              borderRadius:"50%",
-              background:s.bgColor,
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"center",
-              marginBottom:14,
-            }}>
-              {s.svg}
-            </div>
+            <SolidIcon3D
+              iconKey={s.iconKey}
+              accentColor={s.accentColor}
+              size="small"
+              ariaLabel={s.label}
+              style={{ marginBottom: 14 }}
+            />
 
             <span style={{
               display:"block",
