@@ -1219,32 +1219,33 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
               display:"flex",
               alignItems:"center",
               justifyContent:"center",
-              marginBottom:14,
-              height:44,
+              marginBottom:10,
+              minHeight:72,
             }}>
-              <Icon3D iconKey={s.iconKey} size={32} />
+              <Icon3D iconKey={s.iconKey} size={72} />
             </div>
 
             <span style={{
               display:"block",
-              fontSize:32,
-              fontWeight:300,
+              fontSize:22,
+              fontWeight:400,
               color:c1(isDark),
-              letterSpacing:"-0.04em",
-              lineHeight:1,
-              marginBottom:6,
+              letterSpacing:"-0.03em",
+              lineHeight:1.1,
+              marginBottom:5,
             }}>
               {s.value}
             </span>
 
             <span style={{
               display:"block",
-              fontSize:9,
+              fontSize:8,
               fontWeight:600,
               color:c3(isDark),
-              letterSpacing:"0.16em",
+              letterSpacing:"0.14em",
               textTransform:"uppercase",
               opacity:0.7,
+              lineHeight:1.3,
             }}>
               {s.label}
             </span>
