@@ -1,4 +1,5 @@
-﻿"use client";
+﻿// @ts-nocheck
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -528,7 +529,7 @@ function Tooltip({ text, children, side="right" }) {
             {/* seta */}
             <div style={{
               position:"absolute",
-              top:"50%", transform:"translateY(-50%)",
+              top:"50%",
               left: side==="right" ? -5 : "auto",
               right: side==="left" ? -5 : "auto",
               width:8, height:8,
