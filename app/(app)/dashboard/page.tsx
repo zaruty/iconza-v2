@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { GlassIcon3D, glassIconInnerSize } from "./components/glass-icon-3d";
 
 function useIsMobile() {
   const [m, setM] = useState(typeof window !== "undefined" && window.innerWidth < 768);
@@ -668,16 +669,6 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
             ? (collapsed ? item.color+"18" : item.color+"18")
             : "transparent";
 
-          // Fundo do container do ícone: ativo = cor 28%, inativo = branco 6% (só expandida)
-          const iconBg = isActive
-            ? `linear-gradient(135deg,${item.color}40,${item.color}22)`
-            : (!collapsed ? "rgba(255,255,255,0.06)" : "transparent");
-
-          // Sombra do ícone ativo
-          const iconShadow = isActive
-            ? `0 0 12px ${item.color}55, inset 0 1px 0 rgba(255,255,255,0.18)`
-            : "none";
-
           const btn = (
             <motion.button key={item.id}
               onClick={(e) => { e.stopPropagation(); setPage(item.id); }}
@@ -693,16 +684,15 @@ function Sidebar({ page, setPage, isDark, notifCount, collapsed, setCollapsed })
                 background: btnBg,
                 transition:"background 0.15s",
               }}>
-              {/* Ícone — contraste elevado no estado expandido */}
-              <div style={{
-                width:32, height:32, borderRadius:9,
-                display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0,
-                background: iconBg,
-                boxShadow: iconShadow,
-                transition:"all 0.2s",
-              }}>
-                <Icon3D iconKey={item.iconKey} size={isActive ? 18 : 17} color={iconColor}/>
-              </div>
+              <GlassIcon3D
+                accentColor={item.color}
+                isActive={isActive}
+                isDark={isDark}
+                size="md"
+                depth="raised"
+              >
+                <Icon3D iconKey={item.iconKey} size={glassIconInnerSize("md")} color={iconColor}/>
+              </GlassIcon3D>
 
               <AnimatePresence>
                 {!collapsed && (
