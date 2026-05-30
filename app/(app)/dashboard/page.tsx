@@ -1180,48 +1180,98 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
         gap:0,
       }}>
         {[
-          { label:"Dias de Foco",  value:7,      iconColor:"#F97316", bgColor:"rgba(249,115,22,0.1)",
-            svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c0 0-4 4-4 8a4 4 0 0 0 8 0c0-2-1-4-1-6"/><path d="M12 22c-2 0-4-1.3-4-3 0-2 2-3 4-3s4 1 4 3c0 1.7-2 3-4 3z"/></svg> },
-          { label:"Tempo Total",   value:"5.4h", iconColor:"#EAB308", bgColor:"rgba(234,179,8,0.1)",
-            svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EAB308" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> },
-          { label:"XP Acumulado",  value:"1.2k", iconColor:"#6366F1", bgColor:"rgba(99,102,241,0.1)",
-            svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> },
-          { label:"ConexÃµes",      value:24,     iconColor:"#10B981", bgColor:"rgba(16,185,129,0.1)",
-            svg: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M14.5 17a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M2 12c0-2.8 2.2-5 5-5"/><path d="M22 12c0 2.8-2.2 5-5 5"/><path d="M7 7l5 5-5 5"/><path d="M17 7l-5 5 5 5"/></svg> },
-        ].map((s,i) => (
-          <motion.div key={i}
-            initial={{ opacity:0, y:12 }}
+          {
+            label:"Dias de Foco",
+            value:7,
+            iconColor:"#F97316",
+            bgColor:"rgba(249,115,22,0.1)",
+            svg: (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+              </svg>
+            ),
+          },
+          {
+            label:"Tempo Total",
+            value:"5.4h",
+            iconColor:"#EAB308",
+            bgColor:"rgba(234,179,8,0.1)",
+            svg: (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EAB308" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            ),
+          },
+          {
+            label:"XP Acumulado",
+            value:"1.2k",
+            iconColor:"#6366F1",
+            bgColor:"rgba(99,102,241,0.1)",
+            svg: (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                <polyline points="16 7 22 7 22 13"/>
+              </svg>
+            ),
+          },
+          {
+            label:"Conexões",
+            value:24,
+            iconColor:"#10B981",
+            bgColor:"rgba(16,185,129,0.1)",
+            svg: (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+                <path d="M15 13a4 4 0 0 0-3-6"/>
+                <path d="M9 13a4 4 0 0 1 3-6"/>
+              </svg>
+            ),
+          },
+        ].map((s, i) => (
+          <motion.div
+            key={s.label}
+            initial={{ opacity:0, y:10 }}
             animate={{ opacity:1, y:0 }}
-            transition={{ delay:i*0.1, duration:0.6, ease:[0.22,1,0.36,1] }}
-            whileHover={{ y:-2, transition:{ duration:0.2 } }}
-            style={{ display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", padding:"0 8px" }}>
-
-            {/* CÃ­rculo Ã­cone â€” bg muito suave, Ã­cone colorido strokeWidth 1.5 */}
+            transition={{ delay:i * 0.08, duration:0.5, ease:[0.22, 1, 0.36, 1] }}
+            style={{ display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", padding:"0 8px" }}
+          >
             <div style={{
-              width:56, height:56, borderRadius:"50%",
-              background: isDark ? "rgba(255,255,255,0.07)" : s.bgColor,
-              display:"flex", alignItems:"center", justifyContent:"center",
-              marginBottom:16,
-              transition:"background 0.3s",
+              width:52,
+              height:52,
+              borderRadius:"50%",
+              background:s.bgColor,
+              display:"flex",
+              alignItems:"center",
+              justifyContent:"center",
+              marginBottom:14,
             }}>
               {s.svg}
             </div>
 
-            {/* Valor â€” font-light, grande, elegante */}
             <span style={{
               display:"block",
-              fontSize:34, fontWeight:300, color:c1(isDark),
-              letterSpacing:"-0.04em", lineHeight:1, marginBottom:8,
-            }}>{s.value}</span>
+              fontSize:32,
+              fontWeight:300,
+              color:c1(isDark),
+              letterSpacing:"-0.04em",
+              lineHeight:1,
+              marginBottom:6,
+            }}>
+              {s.value}
+            </span>
 
-            {/* Label â€” uppercase, tracking-wide, muted */}
             <span style={{
               display:"block",
-              fontSize:9, fontWeight:600,
+              fontSize:9,
+              fontWeight:600,
               color:c3(isDark),
-              letterSpacing:"0.18em", textTransform:"uppercase",
-              opacity:0.65,
-            }}>{s.label}</span>
+              letterSpacing:"0.16em",
+              textTransform:"uppercase",
+              opacity:0.7,
+            }}>
+              {s.label}
+            </span>
           </motion.div>
         ))}
       </div>
