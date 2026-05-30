@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { BottomNav } from "@/app/components/app/BottomNav";
 
-const BARE_ROUTES = ["/onboarding", "/onboarding/step/2"] as const;
+const BARE_ROUTES = ["/onboarding", "/onboarding/step/2", "/dashboard"] as const;
 
 function isBareRoute(pathname: string) {
   return (BARE_ROUTES as readonly string[]).includes(pathname);
