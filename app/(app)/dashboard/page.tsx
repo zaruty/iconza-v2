@@ -1183,8 +1183,9 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
       <div style={{
         padding:"0 28px 36px",
         display:"grid",
-        gridTemplateColumns:"repeat(4,minmax(0,1fr))",
+        gridTemplateColumns:"repeat(4, 1fr)",
         gap:0,
+        justifyItems:"center",
       }}>
         {[
           {
@@ -1213,14 +1214,29 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
             initial={{ opacity:0, y:10 }}
             animate={{ opacity:1, y:0 }}
             transition={{ delay:i * 0.08, duration:0.5, ease:[0.22, 1, 0.36, 1] }}
-            style={{ display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", padding:"0 8px" }}
+            style={{
+              display:"flex",
+              flexDirection:"column",
+              alignItems:"center",
+              textAlign:"center",
+              padding:"0 8px",
+              width:"100%",
+              overflow:"visible",
+            }}
           >
             <div style={{
               display:"flex",
               alignItems:"center",
               justifyContent:"center",
-              marginBottom:14,
+              width:56,
+              height:56,
+              minWidth:56,
               minHeight:56,
+              flexShrink:0,
+              marginBottom:14,
+              padding:0,
+              border:"none",
+              overflow:"visible",
             }}>
               <Icon3D iconKey={s.iconKey} size={56} />
             </div>
