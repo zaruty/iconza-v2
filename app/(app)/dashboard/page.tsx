@@ -1190,25 +1190,21 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
           {
             label:"Dias de Foco",
             value:7,
-            accentColor:"#F97316",
             iconKey:"fire",
           },
           {
             label:"Tempo Total",
             value:"5.4h",
-            accentColor:"#EAB308",
             iconKey:"bolt",
           },
           {
             label:"XP Acumulado",
             value:"1.2k",
-            accentColor:"#6366F1",
             iconKey:"star",
           },
           {
             label:"Conexões",
             value:24,
-            accentColor:"#10B981",
             iconKey:"users",
           },
         ].map((s, i) => (
@@ -1219,13 +1215,15 @@ function PageInicio({ isDark, notifs, onAbrirNotif }) {
             transition={{ delay:i * 0.08, duration:0.5, ease:[0.22, 1, 0.36, 1] }}
             style={{ display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", padding:"0 8px" }}
           >
-            <SolidIcon3D
-              iconKey={s.iconKey}
-              accentColor={s.accentColor}
-              size="small"
-              ariaLabel={s.label}
-              style={{ marginBottom: 14 }}
-            />
+            <div style={{
+              display:"flex",
+              alignItems:"center",
+              justifyContent:"center",
+              marginBottom:14,
+              height:44,
+            }}>
+              <Icon3D iconKey={s.iconKey} size={32} />
+            </div>
 
             <span style={{
               display:"block",
