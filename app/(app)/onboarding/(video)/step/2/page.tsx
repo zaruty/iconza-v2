@@ -24,10 +24,5 @@ export default async function OnboardingStep2Page() {
     );
   }
 
-  return (
-    <OnboardingWelcomeStep
-      src={videoUrl}
-      continueHref="/onboarding/step/3"
-    />
-  );
+  return <OnboardingWelcomeStep src={videoUrl} />;
 }
