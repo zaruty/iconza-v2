@@ -11,7 +11,7 @@ const MOCK_ADMIN = {
     id: "admin_001",
     email: "admin@iconza.com",
     name: "Administrador ICONZA",
-    role: "superadmin" as const,
+    role: "admin" as const,
   },
 };
 

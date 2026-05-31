@@ -1,22 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AdminSession } from "@/app/lib/admin/types";
-import { getAdminSession } from "@/app/lib/admin/session";
+import type { AdminUser } from "@/app/lib/admin/types";
+import { getAdminClientUser } from "@/app/lib/admin/supabase-auth";
 import { AdminHeader } from "./admin-header";
 import { AdminSidebar } from "./admin-sidebar";
 
 const SIDEBAR_COLLAPSED_KEY = "iconza-admin-sidebar-collapsed";
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<AdminSession | null>(null);
+  const [session, setSession] = useState<AdminUser | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
-    setSession(getAdminSession());
+    let cancelled = false;
+
+    async function loadSession() {
+      const adminUser = await getAdminClientUser();
+      if (!cancelled) setSession(adminUser);
+    }
+
+    void loadSession();
+
     const stored = localStorage.getItem(SIDEBAR_COLLAPSED_KEY);
     if (stored === "true") setSidebarCollapsed(true);
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function handleToggleCollapse() {

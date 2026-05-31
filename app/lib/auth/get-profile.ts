@@ -10,7 +10,9 @@ export async function getProfile(
 
   const { data, error } = await client
     .from("profiles")
-    .select("id, email, nome_completo, telefone, pais, cidade, avatar_url, created_at, updated_at")
+    .select(
+      "id, email, nome_completo, telefone, pais, cidade, role, avatar_url, created_at, updated_at",
+    )
     .eq("id", userId)
     .maybeSingle();
 

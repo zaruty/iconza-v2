@@ -1,4 +1,7 @@
-export type AdminRole = "superadmin" | "editor" | "analyst";
+import type { PanelRole } from "@/app/lib/auth/profile-types";
+
+/** Role administrativa exposta no painel ADM (exclui student). */
+export type AdminRole = PanelRole;
 
 export interface AdminUser {
   id: string;
@@ -17,6 +20,8 @@ export interface AdminAuthResult {
   success: boolean;
   error?: string;
   session?: AdminSession;
+  /** Utilizador autenticado mas sem role CMS — redirecionar para home. */
+  denied?: boolean;
 }
 
 export interface AdminSignInInput {

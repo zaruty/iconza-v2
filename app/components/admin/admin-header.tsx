@@ -3,13 +3,13 @@
 import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import type { AdminSession } from "@/app/lib/admin/types";
-import { signOutAdmin } from "@/app/lib/admin/mock-auth";
+import type { AdminUser } from "@/app/lib/admin/types";
+import { signOutAdmin } from "@/app/lib/admin/supabase-auth";
 import { ThemeToggle } from "@/app/components/theme/theme-toggle";
 import { useAdminTheme } from "./admin-theme-provider";
 
 type AdminHeaderProps = {
-  session: AdminSession;
+  session: AdminUser;
   onMenuOpen: () => void;
 };
 
@@ -22,6 +22,7 @@ export function AdminHeader({ session, onMenuOpen }: AdminHeaderProps) {
     setSigningOut(true);
     await signOutAdmin();
     router.replace("/admin/login");
+    router.refresh();
   }
 
   return (
@@ -44,11 +45,11 @@ export function AdminHeader({ session, onMenuOpen }: AdminHeaderProps) {
         <ThemeToggle theme={theme} onToggle={toggleTheme} />
         <div className="admin-user-chip">
           <span className="admin-user-chip__avatar" aria-hidden>
-            {session.user.name.charAt(0).toUpperCase()}
+            {session.name.charAt(0).toUpperCase()}
           </span>
           <div className="admin-user-chip__meta">
-            <span className="admin-user-chip__name font-subtitle">{session.user.name}</span>
-            <span className="admin-user-chip__role font-subtitle">{session.user.role}</span>
+            <span className="admin-user-chip__name font-subtitle">{session.name}</span>
+            <span className="admin-user-chip__role font-subtitle">{session.role}</span>
           </div>
         </div>
         <button

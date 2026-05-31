@@ -19,5 +19,23 @@ export type {
   AdminModuleStatus,
 } from "./modules";
 
-export { signInAdmin, signOutAdmin } from "./mock-auth";
-export { clearAdminSession, getAdminSession, saveAdminSession } from "./session";
+export { AGENT_IDS, isAgentId } from "./agents";
+export type { AgentId } from "./agents";
+
+export { ADMIN_ROUTES, adminOAuthCallbackUrl } from "./routes";
+
+export {
+  getAdminClientUser,
+  profileToAdminUser,
+  resetAdminPassword,
+  signInAdmin,
+  signInAdminWithGoogle,
+  signOutAdmin,
+} from "./supabase-auth";
+
+export {
+  getAdminPanelUser,
+  requireAdminPanelUser,
+  requireCmsEditor,
+  requirePlatformAdmin,
+} from "./require-admin";

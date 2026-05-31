@@ -3,23 +3,50 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  AuthDivider,
+  AuthFooterLink,
+  GoogleButton,
+} from "@/app/components/auth/auth-controls";
 import { ThemeToggle } from "@/app/components/theme/theme-toggle";
 import { useAdminTheme } from "@/app/components/admin/admin-theme-provider";
-import { getAdminSession } from "@/app/lib/admin/session";
-import { signInAdmin } from "@/app/lib/admin/mock-auth";
+import { ADMIN_ROUTES } from "@/app/lib/admin/routes";
+import {
+  getAdminClientUser,
+  signInAdmin,
+  signInAdminWithGoogle,
+} from "@/app/lib/admin/supabase-auth";
 
 export function AdminLoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
   const [error, setError] = useState("");
 
+  const isBusy = loading || googleLoading || checkingSession;
+
   useEffect(() => {
-    if (getAdminSession()) {
-      router.replace("/admin/dashboard");
+    let cancelled = false;
+
+    async function checkExistingSession() {
+      const adminUser = await getAdminClientUser();
+      if (cancelled) return;
+
+      if (adminUser) {
+        router.replace(ADMIN_ROUTES.dashboard);
+        return;
+      }
+
+      setCheckingSession(false);
     }
+
+    void checkExistingSession();
+    return () => {
+      cancelled = true;
+    };
   }, [router]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -27,87 +54,120 @@ export function AdminLoginForm() {
     setError("");
     setLoading(true);
 
-    const result = await signInAdmin({ email, password, remember });
+    const result = await signInAdmin({ email, password });
     setLoading(false);
 
     if (!result.success) {
+      if (result.denied) {
+        router.replace(ADMIN_ROUTES.home);
+        return;
+      }
       setError(result.error ?? "Não foi possível autenticar.");
       return;
     }
 
-    router.push("/admin/dashboard");
+    router.push(ADMIN_ROUTES.dashboard);
+    router.refresh();
+  }
+
+  async function handleGoogle() {
+    setError("");
+    setGoogleLoading(true);
+
+    const result = await signInAdminWithGoogle();
+    setGoogleLoading(false);
+
+    if (!result.success) {
+      setError(result.error ?? "Não foi possível conectar com Google.");
+    }
+  }
+
+  if (checkingSession) {
+    return (
+      <div className="admin-loading" aria-label="Verificando sessão">
+        <span className="admin-spinner admin-spinner--lg" aria-hidden />
+      </div>
+    );
   }
 
   return (
-    <form className="admin-login-form" onSubmit={handleSubmit} noValidate>
-      {error ? (
-        <p className="admin-alert admin-alert--error" role="alert">
-          {error}
+    <>
+      <GoogleButton loading={googleLoading} onClick={handleGoogle} />
+
+      <AuthDivider />
+
+      <form className="admin-login-form" onSubmit={handleSubmit} noValidate>
+        {error ? (
+          <p className="admin-alert admin-alert--error" role="alert">
+            {error}
+          </p>
+        ) : null}
+
+        <div className="admin-field">
+          <label htmlFor="admin-email" className="admin-field__label">
+            E-mail administrativo
+          </label>
+          <input
+            id="admin-email"
+            name="email"
+            type="email"
+            autoComplete="username"
+            placeholder="apoiozaruty@gmail.com"
+            className="admin-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isBusy}
+            required
+          />
+        </div>
+
+        <div className="admin-field">
+          <div className="admin-field__row">
+            <label htmlFor="admin-password" className="admin-field__label">
+              Senha
+            </label>
+            <Link
+              href={ADMIN_ROUTES.recoverPassword}
+              className="admin-link font-subtitle"
+            >
+              Esqueci a senha
+            </Link>
+          </div>
+          <input
+            id="admin-password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            placeholder="••••••••"
+            className="admin-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isBusy}
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="admin-btn admin-btn--primary"
+          disabled={isBusy}
+        >
+          {loading ? (
+            <>
+              <span className="admin-spinner" aria-hidden />
+              Autenticando...
+            </>
+          ) : (
+            "Entrar no painel"
+          )}
+        </button>
+
+        <p className="admin-login-footnote font-subtitle">
+          Acesso restrito a contas com role administrativa (admin, editor ou
+          founder).
         </p>
-      ) : null}
-
-      <div className="admin-field">
-        <label htmlFor="admin-email" className="admin-field__label">
-          E-mail administrativo
-        </label>
-        <input
-          id="admin-email"
-          name="email"
-          type="email"
-          autoComplete="username"
-          placeholder="admin@iconza.com"
-          className="admin-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={loading}
-          required
-        />
-      </div>
-
-      <div className="admin-field">
-        <label htmlFor="admin-password" className="admin-field__label">
-          Senha
-        </label>
-        <input
-          id="admin-password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          placeholder="••••••••"
-          className="admin-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
-          required
-        />
-      </div>
-
-      <label className="admin-checkbox">
-        <input
-          type="checkbox"
-          checked={remember}
-          onChange={(e) => setRemember(e.target.checked)}
-          disabled={loading}
-        />
-        <span>Lembrar acesso neste dispositivo</span>
-      </label>
-
-      <button type="submit" className="admin-btn admin-btn--primary" disabled={loading}>
-        {loading ? (
-          <>
-            <span className="admin-spinner" aria-hidden />
-            Autenticando...
-          </>
-        ) : (
-          "Entrar no painel"
-        )}
-      </button>
-
-      <p className="admin-login-footnote font-subtitle">
-        Acesso restrito. Ambiente mock — substituir por auth server-side em
-        produção.
-      </p>
-    </form>
+      </form>
+    </>
   );
 }
 
@@ -150,7 +210,7 @@ export function AdminLoginShell({ children }: { children: React.ReactNode }) {
                 Acesso admin
               </h2>
               <p className="admin-login-card__subtitle font-subtitle">
-                Entre com credenciais administrativas
+                Entre com Google ou credenciais administrativas
               </p>
             </div>
             {children}
