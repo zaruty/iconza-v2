@@ -76,7 +76,8 @@ export function AdminLoginForm() {
     setError("");
     setGoogleLoading(true);
 
-    const result = await signInAdminWithGoogle();
+    const redirectTo = `${window.location.origin}/auth/callback?next=${ADMIN_ROUTES.dashboard}`;
+    const result = await signInAdminWithGoogle(redirectTo);
     setGoogleLoading(false);
 
     if (!result.success) {

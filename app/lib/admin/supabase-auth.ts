@@ -3,7 +3,7 @@ import { getProfile } from "@/app/lib/auth/get-profile";
 import { isCmsEditorRole } from "@/app/lib/auth/profile-types";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { AdminAuthResult, AdminSignInInput, AdminUser } from "./types";
-import { ADMIN_ROUTES, adminOAuthCallbackUrl } from "./routes";
+import { ADMIN_ROUTES } from "./routes";
 
 function mapAuthError(message: string): string {
   const normalized = message.toLowerCase();
@@ -83,13 +83,15 @@ export async function signInAdmin(
   return { success: true };
 }
 
-export async function signInAdminWithGoogle(): Promise<AdminAuthResult> {
+export async function signInAdminWithGoogle(
+  redirectTo: string,
+): Promise<AdminAuthResult> {
   const supabase = createClient();
 
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: adminOAuthCallbackUrl(window.location.origin),
+      redirectTo,
     },
   });
 
