@@ -282,6 +282,39 @@
   box-shadow: 0 0 0 3px var(--admin-accent-focus);
 }
 
+.admin-input-wrap {
+  position: relative;
+}
+
+.admin-input--password {
+  padding-right: 2.75rem;
+}
+
+.admin-input-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--admin-duration) var(--admin-ease);
+}
+
+.admin-input-toggle:hover:not(:disabled) {
+  color: var(--admin-text);
+}
+
+.admin-input-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .admin-checkbox {
   display: flex;
   align-items: center;

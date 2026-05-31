@@ -2,6 +2,7 @@ export const ADMIN_ROUTES = {
   login: "/admin/login",
   dashboard: "/admin/dashboard",
   recoverPassword: "/admin/recuperar-senha",
+  resetPassword: "/admin/redefinir-senha",
   home: "/",
 } as const;
 

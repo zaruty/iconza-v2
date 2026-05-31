@@ -110,7 +110,7 @@ export async function resetAdminPassword(email: string): Promise<AdminAuthResult
     return { success: false, error: "Informe um e-mail válido." };
   }
 
-  const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(ADMIN_ROUTES.dashboard)}`;
+  const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(ADMIN_ROUTES.resetPassword)}`;
 
   const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
     redirectTo,
@@ -120,6 +120,32 @@ export async function resetAdminPassword(email: string): Promise<AdminAuthResult
     return {
       success: false,
       error: "Não foi possível enviar o link de recuperação.",
+    };
+  }
+
+  return { success: true };
+}
+
+export async function getAdminRecoverySession(): Promise<boolean> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return Boolean(user);
+}
+
+export async function updateAdminPassword(
+  password: string,
+): Promise<AdminAuthResult> {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    return {
+      success: false,
+      error: "Não foi possível redefinir a senha.",
     };
   }
 

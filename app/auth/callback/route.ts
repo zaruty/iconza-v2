@@ -5,7 +5,11 @@ import { ADMIN_ROUTES } from "@/app/lib/admin/routes";
 import { createClient } from "@/app/lib/supabase/server";
 
 function isAdminCallback(next: string) {
-  return next === ADMIN_ROUTES.dashboard || next.startsWith("/admin/dashboard");
+  return (
+    next === ADMIN_ROUTES.dashboard ||
+    next.startsWith("/admin/dashboard") ||
+    next === ADMIN_ROUTES.resetPassword
+  );
 }
 
 export async function GET(request: Request) {
