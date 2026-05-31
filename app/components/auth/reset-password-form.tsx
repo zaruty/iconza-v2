@@ -7,6 +7,7 @@ import {
   SubmitButton,
 } from "@/app/components/auth/auth-controls";
 import { AuthInput } from "@/app/components/auth/auth-input";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 import { resetPassword } from "@/app/lib/auth/mock-auth";
 
 export function ResetPasswordForm() {
@@ -59,7 +60,7 @@ export function ResetPasswordForm() {
 
       <p className="auth-footer font-subtitle">
         Lembrou a senha?{" "}
-        <AuthFooterLink href="/login">Voltar ao login</AuthFooterLink>
+        <AuthFooterLink href={APP_ROUTES.login}>Voltar ao login</AuthFooterLink>
       </p>
     </>
   );

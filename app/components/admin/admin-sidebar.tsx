@@ -12,6 +12,7 @@ import {
   type AdminSidebarNavItem,
   type AdminSidebarSubItem,
 } from "@/app/lib/admin/sidebar-nav";
+import { ADMIN_ROUTES, HOME } from "@/app/lib/admin/routes";
 import type { AdminCategoryColorKey } from "@/app/lib/admin/category-colors";
 import { sidebarSectionToCategory } from "@/app/lib/admin/category-colors";
 import { AdminNavIcon } from "./admin-icons";
@@ -63,7 +64,7 @@ function SidebarLink({
 
   return (
     <Link
-      href={disabled ? "/admin/dashboard" : href}
+      href={disabled ? ADMIN_ROUTES.dashboard : href}
       className={className}
       data-category={category}
       aria-current={active ? "page" : undefined}
@@ -163,7 +164,7 @@ function SubLink({
 
   return (
     <Link
-      href={disabled ? "/admin/dashboard" : child.href}
+      href={disabled ? ADMIN_ROUTES.dashboard : child.href}
       className={`admin-nav__sublink ${active ? "is-active" : ""} ${disabled ? "is-disabled" : ""}`}
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
@@ -196,7 +197,7 @@ export function AdminSidebar({
       >
         <div className="admin-sidebar__head">
           <Link
-            href="/admin/dashboard"
+            href={ADMIN_ROUTES.dashboard}
             className={`admin-brand admin-brand--compact ${collapsed ? "admin-brand--icon-only" : ""}`}
             onClick={onClose}
           >
@@ -257,7 +258,7 @@ export function AdminSidebar({
                 return (
                   <SidebarLink
                     key={item.id}
-                    href={item.href ?? "/admin/dashboard"}
+                    href={item.href ?? ADMIN_ROUTES.dashboard}
                     label={item.label}
                     icon={item.icon}
                     active={active}
@@ -278,7 +279,7 @@ export function AdminSidebar({
           <div className="admin-sidebar__foot font-subtitle">
             <p>
               Experiência do usuário separada em{" "}
-              <Link href="/">iconza.com</Link>
+              <Link href={HOME}>iconza.com</Link>
             </p>
           </div>
         ) : null}

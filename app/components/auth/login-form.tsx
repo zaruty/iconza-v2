@@ -10,6 +10,7 @@ import {
   SubmitButton,
 } from "@/app/components/auth/auth-controls";
 import { AuthInput } from "@/app/components/auth/auth-input";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 import { signInWithEmail, signInWithGoogle } from "@/app/lib/auth";
 
 export function LoginForm() {
@@ -35,7 +36,7 @@ export function LoginForm() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push(APP_ROUTES.dashboard);
     router.refresh();
   }
 
@@ -85,7 +86,7 @@ export function LoginForm() {
         />
 
         <div className="flex justify-end">
-          <AuthFooterLink href="/recuperar-senha">
+          <AuthFooterLink href={APP_ROUTES.recoverPassword}>
             Esqueceu a senha?
           </AuthFooterLink>
         </div>
@@ -95,7 +96,7 @@ export function LoginForm() {
 
       <p className="auth-footer font-subtitle">
         Ainda não tem conta?{" "}
-        <AuthFooterLink href="/cadastro">Criar conta</AuthFooterLink>
+        <AuthFooterLink href={APP_ROUTES.cadastro}>Criar conta</AuthFooterLink>
       </p>
     </>
   );

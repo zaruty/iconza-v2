@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 import { AuthAtmosphere } from "./auth-atmosphere";
 import { CustomCursor } from "../custom-cursor";
 import { IconzaLogo } from "../iconza-logo";
@@ -17,7 +18,7 @@ export function AuthShell({ title, subtitle, children }: AuthShellProps) {
 
       <div className="site-content auth-viewport-min relative z-10 flex flex-col items-center justify-center px-4 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[max(2.5rem,calc(3.25rem+env(safe-area-inset-top,0px)))] sm:px-6 sm:py-10">
         <Link
-          href="/"
+          href={APP_ROUTES.home}
           className="auth-brand group mb-8 flex min-h-[44px] items-center gap-2.5 transition-opacity hover:opacity-85"
         >
           <IconzaLogo className="h-6 w-8 text-white/75 transition-colors group-hover:text-white/95" />

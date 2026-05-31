@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useUser } from "@/app/lib/auth/use-user";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 
 export function ProfileActions() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export function ProfileActions() {
   async function handleSignOut() {
     setSigningOut(true);
     await signOut();
-    router.push("/login");
+    router.push(APP_ROUTES.login);
     router.refresh();
   }
 

@@ -2,11 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { BottomNav } from "@/app/components/app/BottomNav";
-
-const BARE_ROUTES = ["/onboarding", "/onboarding/step/2", "/dashboard"] as const;
+import { APP_BARE_ROUTES } from "@/app/lib/app/routes";
 
 function isBareRoute(pathname: string) {
-  return (BARE_ROUTES as readonly string[]).includes(pathname);
+  return (APP_BARE_ROUTES as readonly string[]).includes(pathname);
 }
 
 export function AppChrome({ children }: { children: React.ReactNode }) {

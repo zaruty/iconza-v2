@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { hrefToNavColorKey } from "@/app/lib/app/nav-colors";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 
 type NavItem = {
   href: string;
@@ -20,16 +21,16 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/dashboard", label: "Início", icon: Home },
-  { href: "/perfil", label: "Perfil", icon: User },
-  { href: "/explorar", label: "Explorar", icon: Compass },
-  { href: "/universos", label: "Universos", icon: Orbit },
-  { href: "/conquistas", label: "Conquistas", icon: Trophy },
-  { href: "/configuracoes", label: "Configurações", icon: Settings },
+  { href: APP_ROUTES.dashboard, label: "Início", icon: Home },
+  { href: APP_ROUTES.perfil, label: "Perfil", icon: User },
+  { href: APP_ROUTES.explorar, label: "Explorar", icon: Compass },
+  { href: APP_ROUTES.universos, label: "Universos", icon: Orbit },
+  { href: APP_ROUTES.conquistas, label: "Conquistas", icon: Trophy },
+  { href: APP_ROUTES.configuracoes, label: "Configurações", icon: Settings },
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/dashboard") return pathname === "/dashboard";
+  if (href === APP_ROUTES.dashboard) return pathname === APP_ROUTES.dashboard;
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 

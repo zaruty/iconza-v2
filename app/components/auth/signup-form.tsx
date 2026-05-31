@@ -10,6 +10,7 @@ import {
   SubmitButton,
 } from "@/app/components/auth/auth-controls";
 import { AuthInput } from "@/app/components/auth/auth-input";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 import { signInWithGoogle, signUpWithEmail } from "@/app/lib/auth";
 
 export function SignUpForm() {
@@ -42,7 +43,7 @@ export function SignUpForm() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push(APP_ROUTES.dashboard);
   }
 
   async function handleGoogle() {
@@ -119,7 +120,7 @@ export function SignUpForm() {
 
       <p className="auth-footer font-subtitle">
         Já possui conta?{" "}
-        <AuthFooterLink href="/login">Entrar</AuthFooterLink>
+        <AuthFooterLink href={APP_ROUTES.login}>Entrar</AuthFooterLink>
       </p>
     </>
   );

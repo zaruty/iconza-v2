@@ -4,6 +4,7 @@ import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { AdminUser } from "@/app/lib/admin/types";
+import { ADMIN_ROUTES } from "@/app/lib/admin/routes";
 import { signOutAdmin } from "@/app/lib/admin/supabase-auth";
 import { ThemeToggle } from "@/app/components/theme/theme-toggle";
 import { useAdminTheme } from "./admin-theme-provider";
@@ -21,7 +22,7 @@ export function AdminHeader({ session, onMenuOpen }: AdminHeaderProps) {
   async function handleSignOut() {
     setSigningOut(true);
     await signOutAdmin();
-    router.replace("/admin/login");
+    router.replace(ADMIN_ROUTES.login);
     router.refresh();
   }
 

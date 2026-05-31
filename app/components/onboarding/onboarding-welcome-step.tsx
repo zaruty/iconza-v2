@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingVideoPlayer } from "@/app/components/onboarding/onboarding-video-player";
+import { APP_ROUTES } from "@/app/lib/app/routes";
 import { completeOnboarding } from "@/app/lib/onboarding/actions";
 
 type OnboardingWelcomeStepProps = {
@@ -36,7 +37,7 @@ export function OnboardingWelcomeStep({
       return;
     }
 
-    router.push("/dashboard");
+    router.push(APP_ROUTES.dashboard);
     router.refresh();
   }
 

@@ -11,7 +11,7 @@ import {
 } from "@/app/components/auth/auth-controls";
 import { ThemeToggle } from "@/app/components/theme/theme-toggle";
 import { useAdminTheme } from "@/app/components/admin/admin-theme-provider";
-import { ADMIN_ROUTES } from "@/app/lib/admin/routes";
+import { ADMIN_ROUTES, HOME } from "@/app/lib/admin/routes";
 import {
   getAdminClientUser,
   signInAdmin,
@@ -194,7 +194,7 @@ export function AdminLoginShell({ children }: { children: React.ReactNode }) {
       </div>
       <div className="admin-login-grid">
         <aside className="admin-login-aside">
-          <Link href="/" className="admin-brand">
+          <Link href={HOME} className="admin-brand">
             <span className="admin-brand__mark" aria-hidden />
             <span className="admin-brand__text font-subtitle">ICONZA</span>
           </Link>
@@ -214,7 +214,7 @@ export function AdminLoginShell({ children }: { children: React.ReactNode }) {
 
         <section className="admin-login-panel">
           <div className="admin-login-card">
-            <Link href="/" className="admin-brand admin-brand--mobile-only">
+            <Link href={HOME} className="admin-brand admin-brand--mobile-only">
               <span className="admin-brand__mark" aria-hidden />
               <span className="admin-brand__text font-subtitle">ICONZA</span>
             </Link>
