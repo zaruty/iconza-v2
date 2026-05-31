@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { createClient } from "@/app/lib/supabase/server";
 import { getProfile } from "@/app/lib/auth/get-profile";
 import {
@@ -8,6 +9,7 @@ import {
   type Profile,
   type ProfileRole,
 } from "@/app/lib/auth/profile-types";
+import { ADMIN_ROUTES } from "./routes";
 import type { AdminUser } from "./types";
 
 export class AdminAuthError extends Error {
@@ -58,10 +60,21 @@ export async function getAdminPanelUser(): Promise<AdminUser | null> {
 }
 
 export async function requireAdminPanelUser(): Promise<AdminUser> {
-  const profile = await getAuthenticatedProfile();
+  const supabase = await createClient();
 
-  if (!isPanelRole(profile.role)) {
-    throw new AdminAuthError("Acesso restrito ao painel administrativo.");
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    redirect(ADMIN_ROUTES.login);
+  }
+
+  const profile = await getProfile(user.id, supabase);
+
+  if (!profile || !isPanelRole(profile.role)) {
+    redirect(ADMIN_ROUTES.login);
   }
 
   return profileToAdminUser(profile, profile.role);
