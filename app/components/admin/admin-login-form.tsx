@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -21,6 +22,7 @@ export function AdminLoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [checkingSession, setCheckingSession] = useState(true);
@@ -133,18 +135,29 @@ export function AdminLoginForm() {
               Esqueci a senha
             </Link>
           </div>
-          <input
-            id="admin-password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="••••••••"
-            className="admin-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isBusy}
-            required
-          />
+          <div className="admin-input-wrap">
+            <input
+              id="admin-password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              placeholder="••••••••"
+              className="admin-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isBusy}
+              required
+            />
+            <button
+              type="button"
+              className="admin-input-toggle"
+              onClick={() => setShowPassword((v) => !v)}
+              tabIndex={-1}
+              aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+            >
+              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
         </div>
 
         <button

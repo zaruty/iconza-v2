@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getProfile } from "@/app/lib/auth/get-profile";
-import { isCmsEditorRole } from "@/app/lib/auth/profile-types";
+import { isCmsEditorRole, isPanelRole } from "@/app/lib/auth/profile-types";
 import { ADMIN_ROUTES } from "@/app/lib/admin/routes";
 import { createClient } from "@/app/lib/supabase/server";
 
@@ -29,8 +29,12 @@ export async function GET(request: Request) {
 
         if (user) {
           const profile = await getProfile(user.id, supabase);
+          const isRecoveryFlow = next === ADMIN_ROUTES.resetPassword;
+          const roleAllowed = isRecoveryFlow
+            ? profile && isPanelRole(profile.role)
+            : profile && isCmsEditorRole(profile.role);
 
-          if (!profile || !isCmsEditorRole(profile.role)) {
+          if (!roleAllowed) {
             await supabase.auth.signOut();
             return NextResponse.redirect(`${origin}${ADMIN_ROUTES.home}`);
           }
