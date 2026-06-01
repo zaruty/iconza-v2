@@ -17,9 +17,22 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/dashboard";
 
+  console.log("[auth/callback] request", {
+    next,
+    hasCode: Boolean(code),
+    isAdminCallback: isAdminCallback(next),
+  });
+
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (error) {
+      console.log("[auth/callback] exchangeCodeForSession error", {
+        next,
+        message: error.message,
+      });
+    }
 
     if (!error) {
       if (isAdminCallback(next)) {
@@ -34,10 +47,20 @@ export async function GET(request: Request) {
             ? profile && isPanelRole(profile.role)
             : profile && isCmsEditorRole(profile.role);
 
+          console.log("[auth/callback] admin role check", {
+            next,
+            userId: user.id,
+            profile,
+            isRecoveryFlow,
+            roleAllowed,
+          });
+
           if (!roleAllowed) {
             await supabase.auth.signOut();
             return NextResponse.redirect(`${origin}${ADMIN_ROUTES.home}`);
           }
+        } else {
+          console.log("[auth/callback] admin callback without user", { next });
         }
 
         return NextResponse.redirect(`${origin}${next}`);
